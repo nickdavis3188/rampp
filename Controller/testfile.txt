@@ -1,0 +1,12 @@
+the index of 0 has value of "book"
+the index of 0 has value of "blue cover"
+the index of 0 has value of "200.98"
+the index of 0 has value of "23"
+the index of 0 has value of 4622.54
+RequisitionNumber:"43566"
+ from:"me"
+ Subject:"new stuf"
+ Date:"2022-05-26"
+ Summary:"for restoking"
+ DatePrepared:"2022-05-26"
+ Total:4622.54

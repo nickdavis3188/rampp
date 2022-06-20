@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <input type="tel" required>
+    <img src="../../Controller/logoutController.php" alt="" srcset="">
+
+    <input type="" required />
+    <button type="button" id="back">
+        hello
+    </button>
+   <script>
+       document.querySelectorAll("li").forEach((e)=>{
+            e.addEventListener("click",(ee)=>{
+                console.log(ee.attributes)
+            })
+       })
+   </script>
+</body>
+</html>
+
+<br/>
+
+
+<div class="container-flued">
+  <div class="table-responsive">
+    <table id="data-table-basic" class="customers">
+      <thead>
+        <tr>
+          <th>S/N</th>
+          <th>R NO</th>
+          <th>Requisitioner</th>
+          <th>For</th>
+          <th>Date Created</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>PR-169</td>
+          <td>Nick Davis Software Developer</td>
+          <td>Administrative Use</td>
+          <td>11/05/2022</td>
+          <td>
+          <div class="dropdown ">
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="#" class="badge badge-pill badge-success" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#viewModal">Approve/Decline</a>                    
+            </div>                               
+          </div>
+          </td>
+        </tr>                        
+      </tbody>                    
+    </table>
+  </div>
+</div>
+<br/>
+
+
+
+   <!-- <span class="text-info">Pending</span> -->
+   <form action="" method="post">
+      <input name="preqNo" type="hidden" class="form-control prno" id="exampleInputUsername1">
+      <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Approve Or Decline</label>
+              <select name="sex" class="form-control form-control" id="exampleFormControlSelect1">
+                <option value="">__Sellect__</option>
+                <option value="approve">Approve</option>
+                <option value="decline">Decline</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="exampleTextarea1">Remark (optional)</label>
+              <textarea class="form-control summ" id="exampleTextarea1" rows="2"></textarea>
+            </div> 
+          </div>
+      </div>
+    </form>

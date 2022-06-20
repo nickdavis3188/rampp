@@ -1,0 +1,26 @@
+{
+    "RequisitionNumber":"234",
+    "from":"me",
+    "Subject":"new order",
+    "Date":"2022-05-18",
+    "item":[
+        {
+            "ItemName":"book",
+            "Description":"hard copy",
+            "UnitPrice":"200.45",
+            "Qty":"23",
+            "SubTotal":4610.35
+        },
+        {
+            "ItemName":"coffe ",
+            "Description":"green tea",
+            "UnitPrice":"100.97",
+            "Qty":"23",
+            "SubTotal":2322.31
+        }
+    ],
+    "Summary":"to restock the Wearhouse",
+    "PreparedBy":"me",
+    "DatePrepared":"2022-05-11",
+    "Total":6932.66
+}
