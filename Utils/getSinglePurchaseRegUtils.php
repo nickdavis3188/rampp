@@ -46,9 +46,13 @@
      $mansig = $items[0]['mansig'];
      $mandsig = $items[0]['mandsig'];
      $supsig = $items[0]['supsig'];
+    //  supdate	mandate	manddate
+     $mandate = $items[0]['mandate'];
+     $manddate = $items[0]['manddate'];
+     $supdate = $items[0]['supdate'];
    
 
-    echo json_encode( array(array("preqno" =>$preqno ,"from"=>$from,"subject"=>$subject,"dateprepared"=>$dateprepared,"total"=>$total,"supapprove"=>$supapprove,"manapprove"=>$manapprove,"mandapprove"=>$mandapprove,'summary'=>$summary,'manremark'=>$manremark,'mandremark'=>$mandremark,'supremark'=>$supremark,'mansig'=>$mansig,'mandsig'=>$mandsig,'supsig'=>$supsig),$items2));
+    echo json_encode( array(array("preqno" =>$preqno ,"from"=>$from,"subject"=>$subject,"dateprepared"=>$dateprepared,"total"=>$total,"supapprove"=>$supapprove,"manapprove"=>$manapprove,"mandapprove"=>$mandapprove,'summary'=>$summary,'manremark'=>$manremark,'mandremark'=>$mandremark,'supremark'=>$supremark,'mansig'=>$mansig,'mandsig'=>$mandsig,'supsig'=>$supsig,'supdate'=>$supdate,'mandate'=>$mandate,'manddate'=>$manddate),$items2));
      
     
 

@@ -157,7 +157,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">View/Delete Vendor Quote</h4>
+                  <h4 class="font-weight-bold mb-0">Manage Vendor Quote</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -242,7 +242,7 @@ i{
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                   <div class="modal-header gbgn">
-                    <h5 class="modal-title" id="exampleModalLabel">User Info</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">vendor Quote</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body gbgn">
@@ -260,53 +260,56 @@ i{
                                     
                                     <!-- head -->
                                     <tr>
-                                        <td rowspan="2" colspan="5">
+                                        <td rowspan="2" colspan="3">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                             <img src="../../Upload/logo.jpeg"/ style="width:200px">
-                                            </div>
-                                            <div class="col-md-6">
-                                            <h5 style="color: #02679a;">vendor Quote</h5>
+                                            </div> -->
+                                            <div class="col-12">
+                                            <h5 style="color:#02679a;font-size:25px">vendor Quote</h5>
                                             <div>
                                         </div>
                                         </td>                      
+                                        <td rowspan="2" colspan="2">
+                                        <div class="row">
+                                            <div class="col-12"><span style="color: #02679a;">Request Id: </span>&nbsp;&nbsp;<span class="reqid"></span></div>
+                                           
+                                        </div>                                      
+                                        </td>                     
                                                               
                                     </tr>
                                     <tr>                    
                                     
                                     </tr>
                                     <!--End head -->
+                                    <!-- <div class="col-6"><span style="color:#02679a"> REQUISITIONER: </span>&nbsp;&nbsp;<span class="reqner"></span></div> -->
                                     <tr>
+                                       
                                         <td colspan="3">
-                                        <div class="row">
-                                            <div class="col-3"><span style="color: #02679a;">Request Id:  </span></div>
-                                            <div class="col-9"><p class="reqid"></p></div>
-                                        </div>                                      
+                                            <div class="row">
+                                            <div class="col-12"><span style="color: #02679a;">Date: </span>&nbsp;&nbsp;<span class="date"></span></div>
+                                         
+                                            </div>  
                                         </td>
                                         <td colspan="2">
                                         <div class="row">
-                                            <div class="col-3"><span style="color: #02679a;"> Request Name:  </span></div>
-                                            <div class="col-9"><p class="for"></p></div>
+                                            <div class="col-12"><span style="color: #02679a;"> Request Name: </span>&nbsp;&nbsp;<span class="for"></span></div>
+                                            
                                         </div>  
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">
+                                        <td colspan="3">
                                             <div class="row">
-                                            <div class="col-3"><span style="color: #02679a;"> Creator:  </span></div>
-                                            <div class="col-9"><p class="from"></p></div>
+                                            <div class="col-12"><span style="color: #02679a;"> Creator: </span>&nbsp;&nbsp;<span class="from"></span></div>
+                                          
                                             </div>  
                                         </td>
-                                        <td colspan="1">
-                                            <div class="row">
-                                            <div class="col-2"><span style="color: #02679a;">Date:  </span></div>
-                                            <div class="col-10"><p class="date"></p></div>
-                                            </div>  
-                                        </td>
+                                       
                                         <td colspan="2">
                                             <div class="row">
-                                            <div class="col-3"><span style="color: #02679a;">Vendor:  </span></div>
-                                            <div class="col-9"><p class="vendor"></p></div>
+                                            <div class="col-12"><span style="color: #02679a;">Vendor: </span>&nbsp;&nbsp;<span class="vendor"></span></div>
+                                           
                                             </div>  
                                         </td>
                                       

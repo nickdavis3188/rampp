@@ -128,11 +128,7 @@ td, th{
                 <div>
                   <h4 class="font-weight-bold mb-0">Comparative Table</h4>
                 </div>
-                <!-- <div>
-                    <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                      <i class="ti-clipboard btn-icon-prepend"></i>Report
-                    </button>
-                </div> -->
+            
               </div>
             </div>
           </div>
@@ -169,11 +165,9 @@ td, th{
                 <tr>
                     <td rowspan="2" colspan="5">
                     <div class="row">
-                        <div class="col-md-6">
-                        <img src="../../Upload/logo.jpeg"/ style="width:200px">
-                        </div>
-                        <div class="col-md-6">
-                        <h5 style="color: #02679a;">Comparative Table</h5>
+                      
+                        <div class="col-12">
+                        <h5 style="color:#02679a;font-size:25px">Comparative Table</h5>
                         <div>
                     </div>
                     </td>                      
@@ -183,17 +177,18 @@ td, th{
                 
                 </tr>
                 <!--End head -->
+                
                 <tr>
                     <td colspan="3">
                     <div class="row">
-                        <div class="col-3"><span style="color: #02679a;">Request Id:  </span></div>
-                        <div class="col-9"><p class="reqid"></p></div>
+                        <div class="col-3"><span style="color: #02679a;">Request Id: </span>&nbsp;&nbsp;&nbsp; <span class="reqid"> </span></div>
+                      
                     </div>                                      
                     </td>
                     <td colspan="2">
                     <div class="row">
-                        <div class="col-3"><span style="color: #02679a;"> Request Name:  </span></div>
-                        <div class="col-9"><p class="for"></p></div>
+                        <div class="col-3"><span style="color: #02679a;"> Request Name: </span>&nbsp;&nbsp;&nbsp; <span class="for"> </span></div>
+                  
                     </div>  
                     </td>
                 </tr>
@@ -410,8 +405,11 @@ td, th{
               
             }
           }
-
+          
+          
 //////////////
+          // console.log("vvdate array",vvdata)
+          let vvdataItem = vvdata[0].itemPrice
         data[3].forEach((element,ind) => {
             let list1 = document.createElement("tr");
             list1.innerHTML = `       
@@ -439,26 +437,34 @@ td, th{
 
 
 ///LOOPING ROWS AND COLUMNS FOR EACH VENDOR UNIT PRICE ALSO CALCULATE THE LOWEST PRICE FOR EACH ITEM FROM EACH VENDOR
-        let lpoArr = []        
 
-          for (let b = 0; b < arr.length; b++) {
+          
+        let lpoArr = []   
+        let lpoArr1 = []    
+        vvdataItem.forEach(element => {
+          lpoArr1.push(lpoArr1.length+1)
+        });
+          lpoArr1.sort()
+          for (let b = 0; b < lpoArr1.length; b++) {
               let incr = 0
               let rowar = []
-            while (incr < vvdata.length) {//loop for each obj //each item to get each row
+             
+              // let vda = vvdata[0].itemPrice.length
+            while (incr < vvdata.length){//loop for each obj //each item to get each row
               // console.log("eachlog",vvdata[incr])
               let main1 = vvdata[incr].itemPrice
-              for (let i = 0; i < main1.length; i++) {//loop for items in each obj
-                if (parseInt(main1[i].itemNumber) == arr[b]) {//check for rach row
+              for (let i = 0; i < main1.length; i++){//loop for items in each obj
+                if (parseInt(main1[i].itemNumber) == lpoArr1[b]){//check for rach row
                   rowar.push(main1[i])
-                }           
+                }
               }
-              
               incr++
             }
+            // console.log("VendoeRowForEachItem",rowar)
             let higherPrice = 1000000000000000000
             let higherItem = []
             let trr1 = document.createElement("tr");
-            rowar.forEach(element1 => {           
+            rowar.forEach(element1 => {
               let td = document.createElement("td");
               td.innerText =  Number(element1.vendorUnitPrice) != 0? "#"+Number(element1.vendorUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):"N/A"
               trr1.appendChild(td);              
@@ -466,11 +472,9 @@ td, th{
                 higherPrice = parseInt(element1.vendorUnitPrice)
                 if (higherItem.length > 0) {
                   higherItem = []
-                  higherItem.push(element1)
-                 
+                  higherItem.push(element1)          
                 }else{
                   higherItem.push(element1)
-                 
                 }
               }
             // count++
@@ -489,13 +493,11 @@ td, th{
                                                                                  
             })          
             rowar = []//empty the row array
-            incr = 0 //initialize new incr for each vendor
-           
-            
+            incr = 0 //initialize new incr for each vendor       
           }
-// ROW AND COLUMN LOOPING ENDS HEAR
-          // get a unique vendor id from chip option
-
+              // ROW AND COLUMN LOOPING ENDS HEAR
+              // get a unique vendor id from chip option
+            // console.log("lpoArr",lpoArr)
               let uniqueVen = [];
               let uniqueChars = [];
               lpoArr.forEach((c) => {
@@ -562,7 +564,7 @@ td, th{
                 body: mydata,
                 headers: {"Content-Type": "application/json; charset=utf-8"}
                 }).then(res=>res.json()).then(function(data55) {
-                  console.log("sendNot",data55)             
+                  // console.log("sendNot",data55)             
                 })
 
               }
@@ -573,7 +575,7 @@ td, th{
         }).catch(err=>{
           if (err) {
             alert("Error:"+err)
-            console.log("error",err)
+            // console.log("error",err)
          
           }
         })
@@ -582,7 +584,7 @@ td, th{
  
 function printP(ins){
   let reqno = document.querySelector(".reqid"); 
-  window.open(window.location.origin+"/Rampp/View/comparativeTablePrint.html?reqno="+Number(reqno.innerText), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
+  window.open(window.location.origin+"/Rampp/View/comparativeTablePrint.html?reqno="+Number(reqno.innerText), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=1600,height=800")
 }
   
    

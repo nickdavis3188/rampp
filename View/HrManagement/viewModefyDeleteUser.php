@@ -158,7 +158,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">View/ Modify/ Delete New Personnel Record</h4>
+                  <h4 class="font-weight-bold mb-0">Manage system users</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -265,12 +265,12 @@ i{
 		<div class="row align-items-center flex-row-reverse">
     <div class="col-lg-4">
 				<div class="about-avatar">
-					<img src="../../Upload/avatar7.png" alt="avater" width="100%">
+					<img class="prf" src="../../Upload/avatar7.png" alt="avater" width="100%">
 				</div>
 			</div>
 			<div class="col-lg-8">
 				<div class="about-text go-to">
-					<h3 class="dark-color">About Me</h3>
+					<h3 class="dark-color">User Info</h3>
 					<br/>
 					<div class="row about-list">
 						<div class="col-md-6">
@@ -313,7 +313,7 @@ i{
           <div class="row">
             <div class="col-md-12">
               <div class="media d-flex justify-content-center align-items-center">
-                <img src="../../Upload/avatar7.png" alt="avater" width="100px">
+                <img class="sig" src="../../Upload/avatar7.png" alt="avater" width="100px">
               </div>      
             </div>
           </div>
@@ -596,6 +596,8 @@ i{
     let password = document.querySelector(".vps"); 
     let office = document.querySelector(".voff"); 
     let role = document.querySelector(".vrl"); 
+    let prf = document.querySelector(".prf"); 
+    let sig = document.querySelector(".sig"); 
     
 
     let mydata = JSON.stringify({ "username":uname })
@@ -613,7 +615,9 @@ i{
      
       office.innerText = data.office
       role.innerText = data.privilege
-     
+      prf.src =data.profilepic? "../"+data.profilepic:"../../Upload/avatar7.png"
+      sig.src =data.signature? "../"+data.signature:""
+ 
       console.log("response",data)
     }).catch(err=>{
       if (err) {

@@ -22,7 +22,7 @@
    
 
   
-    $query1 = "INSERT INTO prequisitioninfo (`preqno`,`from`,`subject`,`date`,`summary`,`total`,`supapprove`,`manapprove`,`mandapprove`,`reqfrom`) VALUES ('$RequisitionNumber','$from','$Subject','$Date','$Summary','$Total','Pending','Pending','Pending','$uname')";
+    $query1 = "INSERT INTO prequisitioninfo (`preqno`,`from`,`subject`,`date`,`summary`,`total`,`supapprove`,`manapprove`,`mandapprove`,`reqfrom`,`compappsup`,`compappman`,`compappmand`) VALUES ('$RequisitionNumber','$from','$Subject','$Date','$Summary','$Total','Pending','Pending','Pending','$uname','Pending','Pending','Pending')";
 
     $results = mysql_query($query1);
     $noofrows = mysql_affected_rows();

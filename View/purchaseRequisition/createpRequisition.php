@@ -77,7 +77,7 @@
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0 card-title">Create Requisition</h4>
+                  <h4 class="font-weight-bold mb-0 card-title">Create Purchase Requisition</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -99,7 +99,7 @@
                         <div class="form-group row">
                         <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Requisition Number</label>
                         <div class="col-sm-9">
-                          <input type="number" class="form-control regn" id="exampleInputUsername2" value="<?php echo $UserUtils->getrqNo(); ?>">
+                          <input readonly type="number" class="form-control regn" id="exampleInputUsername2" value="<?php echo $UserUtils->getrqNo(); ?>">
                         </div>
                         </div>
                         <div class="form-group row">
@@ -168,48 +168,34 @@
                     </div>
                     <div class="table-responsive">
                       <table id="customers">
+                        <thead>
                       <tr>
-                          <th class=" text-left" >S/N</th>
-                          <th class=" text-left" >Product Name</th>
-                          <th class=" text-left" >Description</th>
-                          <th class=" text-left" >UM</th>
-                          <th class=" text-left" >Unit Price</th>
-                          <th class=" text-left" >Quantity</th>
-                          <th class=" text-left" >Sub Total</th>
-                          <th class=" text-left" >Action</th>
+                          <th class=" text-center" width="5%" >S/N</th>
+                          <th class=" text-left" width="20%">Product Name</th>
+                          <th class=" text-left" width="30%">Description</th>
+                          <th class=" text-center" width="5%">UM</th>
+                          <th class=" text-left" width="10%">Unit Price</th>
+                          <th class=" text-center" width="10%">Quantity</th>
+                          <th class=" text-left" width="10%">Sub Total</th>
+                          <th class=" text-left" width="10%">Action</th>
                       </tr>
+                      </thead>
                       <tbody id="tbodyy">
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <th class=' text-center' style="color:#02679a;">NO ITEM LISTED</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                      </div>
-                      
+                        <tr>                    
+                          <th class=' text-center' style="color:#02679a;" colspan="8">NO ITEM LISTED</th>                  
+                        </tr>                 
                       </tbody>
-                        
+                        <tfooter>     
+
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <th style="color: #02679a;">Total Amount</th>
-                          <td></td>
+                            <th colspan="5"></th>
+                            <th class="text-right" style="color:#02679a;">Total</th>                                    
+                            <th id="total">#0.00</th>
+                            <th></th>
                         </tr>
-                        <tr>
-                            <td colspan="1">Total:</td>                    
-                            <td></td>
-                            <td></td>                       
-                            <td></td>
-                            <td id="total" >#0.00</td>
-                            <td></td>
-                          </tr>
                           
                       </tr>
-                    
+                    </tfooter>
                       </table>
                     </div>
                     <br>
@@ -349,14 +335,14 @@
 
           list.innerHTML = `
            
-              <td class=" text-left" >${ind+1}</td>
+              <td class=" text-center" >${ind+1}</td>
               <td class=" text-left" >${item.ItemName}</td>
               <td class=" text-left" >${item.Description}</td>
-              <td class=" text-left" >${item.um}</td>
+              <td class=" text-center" >${item.um}</td>
               <td class=" text-left" >#${Number(item.UnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>                      
-              <td class=" text-left" >${item.Qty}</td>   
+              <td class=" text-center" >${item.Qty}</td>   
               <td class=" text-left" >#${Number(item.SubTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>                    
-              <td class="iext-center">                                                                       
+              <td class="text-center">                                                                       
                   <i class="ti-trash text-danger btn-icon-append deli" style="font-size: 24px" onClick="remove(${ind})" >                                                                         
               </td>
           `;

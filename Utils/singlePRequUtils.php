@@ -32,9 +32,12 @@
      $csupsig = $items[0]['csupsig'];
      $cmansig = $items[0]['cmansig'];
      $cmandsig = $items[0]['cmandsig'];
-   
-
-    echo json_encode(array("preqno" =>$preqno,"compappsup"=>$compappsup,"compappman"=>$compappman,"compappmand"=>$compappmand,'compremman'=>$compremman,'compremmand'=>$compremmand,'compremsup'=>$compremsup,'cmansig'=>$cmansig,'cmandsig'=>$cmandsig,'csupsig'=>$csupsig));
+    
+     $supcappdate = $items[0]['supcappdate'];
+     $mandcappdate = $items[0]['mandcappdate'];
+     $mancappdate = $items[0]['mancappdate'];
+     
+    echo json_encode(array("preqno" =>$preqno,"compappsup"=>$compappsup,"compappman"=>$compappman,"compappmand"=>$compappmand,'compremman'=>$compremman,'compremmand'=>$compremmand,'compremsup'=>$compremsup,'cmansig'=>$cmansig,'cmandsig'=>$cmandsig,'csupsig'=>$csupsig,'supdate'=>$supcappdate,'mandate'=>$mancappdate,'manddate'=>$mandcappdate));
      
     
 

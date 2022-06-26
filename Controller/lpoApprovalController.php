@@ -17,6 +17,7 @@
             $remark = $_POST['remark'];
             $prno2 = $_POST['preqNo'];
             $lpono = $_POST['lpono'];
+            $date = $_POST['date'];
             // echo $prno;
         
             $approver =  $_SESSION['userName'];
@@ -27,30 +28,30 @@
                 $items11[] = $row11;
             }
             $sigman11 = $items11[0]['signature'];
-            $sigman11 = $items11;
+         
             if ($items11[0]['signature']) {
-                $query = "UPDATE `lpouniquevendor`  SET approveman='$status',remman='$remark',sigman='$sigman11' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
+                $query = "UPDATE `lpouniquevendor`  SET approveman='$status',remman='$remark',sigman='$sigman11',mandate='$date' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
                 $results = mysql_query($query);
                 $noofrows = mysql_affected_rows();
                 if ($noofrows == 1)
                 {
-                    header("Location: ../View/Procurement/lpomanApprove.php?msg= Approval Successful");        
+                    header("Location: ../View/Procurement/lpoManApproval.php?msg= Approval Successful");        
                 }
                 else
                 {
-                    header("Location: ../View/Procurement/lpomanApprove.php?fail= Error:".mysql_error()); 
+                    header("Location: ../View/Procurement/lpoManApproval.php?fail= Error:".mysql_error()); 
                 }
             } else {
-                $query = "UPDATE `lpouniquevendor`  SET approveman='$status',remman='$remark' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
+                $query = "UPDATE `lpouniquevendor`  SET approveman='$status',remman='$remark',mandate='$date' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
                 $results = mysql_query($query);
                 $noofrows = mysql_affected_rows();
                 if ($noofrows == 1)
                 {
-                    header("Location: ../View/Procurement/lpomanApprove.php?msg= Approval Successful");        
+                    header("Location: ../View/Procurement/lpoManApproval.php?msg= Approval Successful");        
                 }
                 else
                 {
-                    header("Location: ../View/Procurement/lpomanApprove.php?fail= Error:".mysql_error()); 
+                    header("Location: ../View/Procurement/lpoManApproval.php?fail= Error:".mysql_error()); 
                 }
             }
             
@@ -60,6 +61,7 @@
             $remark1 = $_POST['remark'];
             $prno2 = $_POST['preqNo'];
             $lpono = $_POST['lpono'];
+            $date = $_POST['date'];
 
             $items12 = array();
             $approver =  $_SESSION['userName'];
@@ -72,7 +74,7 @@
             if ($items12[0]['signature'])
             {
               
-                $query1 = "UPDATE `lpouniquevendor`  SET approvemand='$status1',remmand='$remark1',sigmand='$sigman12' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
+                $query1 = "UPDATE `lpouniquevendor`  SET approvemand='$status1',remmand='$remark1',sigmand='$sigman12',manddate='$date' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
                 $results1 = mysql_query($query1);
                 $noofrows1 = mysql_affected_rows();
                 if ($noofrows1 == 1)
@@ -86,7 +88,7 @@
                       
             }else {
                
-                $query1 = "UPDATE `lpouniquevendor`  SET approvemand='$status1',remmand='$remark1' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
+                $query1 = "UPDATE `lpouniquevendor`  SET approvemand='$status1',remmand='$remark1',manddate='$date' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
                 $results1 = mysql_query($query1);
                 $noofrows1 = mysql_affected_rows();
                 if ($noofrows1 == 1)
@@ -104,12 +106,13 @@
             $remark2 = $_POST['remark'];
             $prno2 = $_POST['preqNo'];
             $lpono = $_POST['lpono'];
+            $date = $_POST['date'];
 
      
 
             $items22 = array();
             $approver22 =  $_SESSION['userName'];
-            $query22 = "SELECT `signature` FROM users WHERE uname='$approver'";
+            $query22 = "SELECT `signature` FROM users WHERE uname='$approver22'";
             $results22 = mysql_query($query22);
             while($row22 = mysql_fetch_array($results22)){
                 $items22[] = $row22;
@@ -117,12 +120,12 @@
             $sigman22 = $items22[0]['signature'];
             if ($sigman22)
             {
-                $query2 = "UPDATE `lpouniquevendor`  SET approvesup='$status2',remsup='$remark2',sigsup	='$sigman22' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
+                $query2 = "UPDATE `lpouniquevendor`  SET approvesup='$status2',remsup='$remark2',sigsup	='$sigman22',supdate='$date' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono '";
                 $results2 = mysql_query($query2);
                 $noofrows2 = mysql_affected_rows();
                 if ($noofrows2 == 1)
                 {
-                    header("Location: ../View/Procurement/lpoSupApprove.php.php?msg= Approval Successful");        
+                    header("Location: ../View/Procurement/lpoSupApprove.php?msg= Approval Successful");        
                 }
                 else
                 {
@@ -130,7 +133,7 @@
                 }
                       
             }else {
-                $query2 = "UPDATE `lpouniquevendor`  SET approvesup='$status2',remsup='$remark2' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono'";
+                $query2 = "UPDATE `lpouniquevendor`  SET approvesup='$status2',remsup='$remark2',supdate='$date' WHERE `purchaseId` ='$prno2' AND `lpono`='$lpono'";
                 $results2 = mysql_query($query2);
                 $noofrows2 = mysql_affected_rows();
                 if ($noofrows2 == 1)

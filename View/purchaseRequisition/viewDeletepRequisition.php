@@ -157,7 +157,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">View/ Modify/ Delete New Personnel Record</h4>
+                  <h4 class="font-weight-bold mb-0">Manage Purchase Requisition</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -248,7 +248,7 @@ i{
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                   <div class="modal-header gbgn">
-                    <h5 class="modal-title" id="exampleModalLabel">User Info</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">P-Requisition Info</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body gbgn">
@@ -281,27 +281,27 @@ i{
                                     <tr>
                                       <td rowspan="2" colspan="2">
                                         <div class="row">
-                                          <div class="col-md-6">
+                                          <!-- <div class="col-md-6">
                                             <img src="../../Upload/logo.jpeg" style="width:200px">
-                                          </div>
-                                          <div class="col-md-6">
-                                            <h5 style="color:#02679a">Purchase Requisition</h5>
+                                          </div> -->
+                                          <div class="col-12">
+                                            <h5 style="color:#02679a;font-size:25px">Purchase Requisition</h5>
                                           <div>
                                         </div>
                                       </td>                      
                                       <td colspan="3">
                                         <div class="row">
                                           
-                                          <div class="col-3"><span style="color:#02679a"> P-REGNO:</span></div>
-                                          <div class="col-9"><p class="reqno"> </p></div>
+                                          <div class="col-12"><span style="color:#02679a"> PR-NO: </span> &nbsp;&nbsp;&nbsp; <span class="reqno"> </span></div>
+                                          <!-- <div class="col-9"></div> -->
                                         </div>                                
                                       </td>                        
                                     </tr>
                                     <tr>                    
                                       <td colspan="3">
                                         <div class="row">
-                                          <div class="col-3"><span style="color:#02679a"> DATE:  </span></div>
-                                          <div class="col-9"><p class="dprep"></p></div>
+                                          <div class="col-12"><span style="color:#02679a"> DATE: </span>&nbsp;&nbsp;<span class="dprep"></span></div>
+                                          <!-- <div class="col-9"></div> -->
                                         </div>                                        
                                       </td>
                                     </tr>
@@ -309,22 +309,22 @@ i{
                                     <tr>
                                       <td colspan="3">
                                         <div class="row">
-                                          <div class="col-2"><span style="color:#02679a"> For:  </span></div>
-                                          <div class="col-10"><p class="frrr"></p></div>
+                                          <div class="col-2"><span style="color:#02679a"> For: </span>&nbsp;&nbsp;<span class="frrr"></span></div>
+                                          <!-- <div class="col-10"><p class="frrr"></p></div> -->
                                         </div>                                      
                                       </td>
                                       <td colspan="2">
                                         <div class="row">
-                                          <div class="col-6"><span style="color:#02679a"> REQUISITIONER:  </span></div>
-                                          <div class="col-6"><p class="reqner"></p></div>
+                                          <div class="col-6"><span style="color:#02679a"> REQUISITIONER: </span>&nbsp;&nbsp;<span class="reqner"></span></div>
+                                          <!-- <div class="col-6"><p class="reqner"></p></div> -->
                                         </div>  
                                       </td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">
                                           <div class="row">
-                                            <div class="col-2"><span style="color:#02679a"> SUMMARY:  </span></div>
-                                            <div class="col-10"><p class="summ"></p></div>
+                                            <div class="col-2"><span style="color:#02679a"> SUMMARY: </span>&nbsp;&nbsp;<span class="summ"></span></div>
+                                            <!-- <div class="col-10"><p class="summ"></p></div> -->
                                           </div>  
                                         </td>
                                         <!-- <td colspan="3">
@@ -337,22 +337,22 @@ i{
                                 <table class="table table-bordered">
                                   <thead>
                                     <tr>
-                                      <th>
+                                      <th  width="5%">
                                         SN
                                       </th>
-                                      <th>
+                                      <th width="25%">
                                         Item Name
                                       </th>
-                                      <th>
+                                      <th width="35%">
                                         Desc
                                       </th>
-                                      <th>
+                                      <th width="5%">
                                         Qty
                                       </th>
-                                      <th>
+                                      <th  width="15%">
                                         Unit Price
                                       </th>
-                                      <th>
+                                      <th  width="15%">
                                         SubTotal
                                       </th>
                                     </tr>
@@ -363,10 +363,12 @@ i{
                                     <td colspan="4">
                                       
                                     </td>
-                                    <td colspan="2">
+                                    <td class="text-right">
+                                      <span style="color:#02679a"> GRAND TOTAL  </span>
+                                    </td>
+                                    <td>
                                       <div class="row">
-                                          <div class="col-3"><span style="color:#02679a"> GRAND TOTAL:  </span></div>
-                                          <div class="col-9"><p class="tot"></p></div>
+                                          <div class="col-12"> <b><p class="tot"> </p></b></div>
                                       </div>                                 
                                     </td>
                                     
@@ -378,28 +380,29 @@ i{
                               <hr>
                               <div class="row">
                               <div class="col-4">
-                                <div class="sups">
+                                <div class="sups text-center">
                                     <p class="text-info">Pending</p>
 
                                 </div>
-                                <hr>
-                                Supervisor     
+                              
+                                   
                             </div>
                             <div class="col-4">
-                                <div calss="mns">
+                                <div class="mns text-center">
                                     <p class="text-info">Pending</p>
                                 </div>
-                                <hr>
-                                Manager
+                                
+                               
                             </div>
-                            <div class="col-4 mnds">
-                                <div class="mnds">
+                            <div class="col-4">
+                                <div class="mnds text-center">
                                     <p class="text-info">Pending</p>
                                 </div>
-                                <hr>
-                                Managing Director
+                                
+                               
                             </div>
                               </div>
+                              <hr>
                             </div>
                           </div>
                         </div>
@@ -599,15 +602,15 @@ function printP(ins){
             child = manStatus.lastElementChild;
         }
         if (data[0].manapprove == "Pending") {
-          manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">${data[0].manremark}</p>` 
+          manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
         } else if(data[0].manapprove == "decline") {
-          manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p style="color:#02679a">${data[0].manremark}</p>`         
+          manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data[0].manremark}</p><br/><p class="text-danger">${data[0].mandate}</p>`         
         }else{
           if (data[0].mansig) {
-            manStatus.innerHTML = `<img src="../${data[0].mansig}" width="100px"/><br/><p class="text-success">${data[0].manremark}</p>` 
+            manStatus.innerHTML = `<img src="../${data[0].mansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${data[0].mandate}</p>` 
             
           } else {
-            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">${data[0].manremark}</p>`
+            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><br/><p class="text-success">Manager</p><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${data[0].mandate}</p>`
           }
         }
       }
@@ -618,14 +621,14 @@ function printP(ins){
             child = manDStatus.lastElementChild;
         }
         if (data[0].mandapprove == "Pending") {
-          manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">${data[0].mandremark}</p>` 
+          manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
         } else if(data[0].mandapprove == "decline") {
-          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p style="color:#02679a">${data[0].mandremark }</p>`         
+          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p style="color:#02679a">${data[0].mandremark }</p><br/><p class="text-danger">${data[0].manddate}</p>`         
         }else{
           if (data[0].mandsig) {
-            manDStatus.innerHTML = `<img src="../${data[0].mandsig}" width="100px"/><br/><p class="text-success">${data[0].mandremark}</p>` 
+            manDStatus.innerHTML = `<img src="../${data[0].mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${data[0].manddate}</p>` 
           } else {
-            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">${data[0].mandremark}</p>`   
+            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${data[0].manddate}</p>`   
           }
         }
       }
@@ -637,14 +640,14 @@ function printP(ins){
             child = supStatus.lastElementChild;
         }
         if (data[0].supapprove == "Pending") {
-          supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">${data[0].supremark }</p>` 
+          supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
         } else if(data[0].supapprove == "decline") {
-          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p style="color:#02679a">${data[0].supremark}</p>`         
+          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data[0].supremark}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
         }else{
           if (data[0].supsig) {
-            supStatus.innerHTML = `<img src="../${data[0].supsig}" width="100px"/><br/><p class="text-success">${data[0].supremark}</p>`          
+            supStatus.innerHTML = `<img src="../${data[0].supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>`          
           } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">${data[0].supremark}</p>` 
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>` 
           }
         }
       }

@@ -15,8 +15,6 @@
   font-size:16px;
   border-collapse: collapse;
   width: 100%;
-  border-bottom:
-
 }
 
 #customers td, #customers th {
@@ -98,17 +96,16 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">LpoNo</label>
-                                <input name="lpono" type="text" class="form-control Lno" id="exampleInputUsername1" value="<?php echo $random3; ?>">
+                                <input readonly name="lpono" type="text" class="form-control Lno" id="exampleInputUsername1" value="<?php echo $random3; ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">RegNo</label>
-                                <input name="reqno"  type="text" class="form-control Rno" id="exampleInputUsername1"
+                                <input readonly name="reqno"  type="text" class="form-control Rno" id="exampleInputUsername1"
                                  value="<?php  echo $_REQUEST["reqno"] ?>" disabled>
                             </div>
-                        </div>
-                      
+                        </div>                   
                     </div>
 
                     <div class="form-group row">
@@ -122,7 +119,7 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Vendor</label>
-                              <input type="text" class="form-control venname" id="exampleInputUsername1" disabled>
+                              <input readonly type="text" class="form-control venname" id="exampleInputUsername1" disabled>
                           </div>    
                         </div>
                       
@@ -141,30 +138,18 @@
                             </tr>
                             <tbody id="tbodyy">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <th class=' text-center' style="color:#02679a;">NO ITEM LISTED</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                  <tr>                    
+                                    <th class=' text-center' style="color:#02679a;" colspan="8">NO ITEM LISTED</th>                  
+                                  </tr>
                                 </tr>                   
                             </tbody>            
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <th style="color: #02679a;">Total Amount</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="1">Total:</td>                    
-                                    <td></td>
-                                    <td></td>                       
-                                    <td></td>
-                                    <td id="total" >#0.00</td>
-                                    <td></td>
-                                </tr>
+                            <tfooter>     
+                              <tr>
+                                <th colspan="4"></th>
+                                  <th class="text-right" style="color:#02679a;">Total</th>                                    
+                                  <th id="total">#0.00</th>                             
+                              </tr>                        
+                            </tfooter>
                         </table>
                     </div>
                         <br>
@@ -181,21 +166,20 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                             <label for="exampleFormControlSelect1">Disc Value</label>
-                            <input name="amountword" type="number" class="form-control descval" id="exampleInputUsername1">
+                            <input name="amountword" type="number" class="form-control descval" id="exampleInputUsername1" value="0">
                           </div> 
                         </div>                     
                         <div class="col-sm-2">
                             <label for="exampleFormControlSelect1">Add Vat(Required)</label>
                             <select name="vat" class="form-control form-control-sm vat" id="exampleFormControlSelect1" onChange="changeVat(this)">
+                              <option value="No" selected>No</option> 
                                 <option value="Yes">Yes</option>
-                                <option value="No">No</option> 
-                            </select>
-                            
+                            </select>                       
                         </div>
                         <div class="col-sm-4">
                           <div class="form-group">
                             <label for="exampleFormControlSelect1">Vat Value</label>
-                            <input name="amountword" type="number" class="form-control vatval" id="exampleInputUsername1">
+                            <input name="amountword" type="number" class="form-control vatval" id="exampleInputUsername1" value="0">
                           </div> 
                         </div>                     
                     </div>
@@ -307,6 +291,7 @@
 let par = new URLSearchParams(window.location.search)
 if (par.has("id")&& par.has("reqno")) {
         let vatvalue = document.querySelector(".vatval");  
+        let vat = document.querySelector(".vat");  
         let grandTotal = document.querySelector("#total"); 
         let vname = document.querySelector(".venname"); 
         let tbodyy = document.querySelector("#tbodyy"); 
@@ -344,7 +329,7 @@ if (par.has("id")&& par.has("reqno")) {
                 tbodyy.appendChild(list);
             })
             grandTotal.setAttribute("ammount",totalar.reduce((a,b)=>a+b,0))
-            let fivePercentAdded = (5/100) * totalar.reduce((a,b)=>a+b,0)
+            let fivePercentAdded = vat.value == "Yes"?(5/100) * totalar.reduce((a,b)=>a+b,0):0
             vatvalue.value =  fivePercentAdded
             grandTotal.innerHTML = "#"+totalar.reduce((a,b)=>a+b,0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 
@@ -368,22 +353,38 @@ if (par.has("id")&& par.has("reqno")) {
         if (params.value == "Yes") {
             let fivePercentAdded = (5/100) * totalvalue
             vatvalue.value = fivePercentAdded
-            
+            let vatPrice = fivePercentAdded+totalvalue
+            grandTotal.innerHTML =  "#"+vatPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+            grandTotal.setAttribute("ammount",vatPrice)
         } else {
-            vatvalue.value = ""
+          let vatPrice2 = totalvalue - Number(vatvalue.value)
+          vatvalue.value = 0
+          grandTotal.setAttribute("ammount",vatPrice2)
+          grandTotal.innerHTML =  "#"+vatPrice2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
         }
-
     }
 
     function changeDisc(params) {
         console.log(params.value)
         let grandTotal = document.querySelector("#total"); 
-        let descountvalue = document.querySelector(".descval");
-        let totalvalue = Number(grandTotal.getAttribute("ammount"))
+        let discountValue = document.querySelector(".descval");
+        let totalValue = Number(grandTotal.getAttribute("ammount"))
 
-        let discountedValue = (Number(params.value)/100) * totalvalue
+        if (params.value) {
 
-        descountvalue.value = discountedValue
+          let discount = (Number(params.value)/100) * totalValue
+          discountValue.value = discount
+          let discountedValue = totalValue - discount
+          grandTotal.setAttribute("ammount",discountedValue)       
+          grandTotal.innerHTML =  "#"+discountedValue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
+        } else if(params.value == ""){
+
+          let discountedValue2 = totalValue + Number(discountValue.value)
+          discountValue.value = 0
+          grandTotal.setAttribute("ammount",discountedValue2)       
+          grandTotal.innerHTML =  "#"+discountedValue2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')     
+        }
 
     }
 

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../www/css/responsive.css">
+    <link rel="stylesheet" href="../www/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../www/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../www/css/style1.css">
+    <link rel="shortcut icon" href="../www/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../www/css/s1.css">
+    <link rel="shortcut icon" href="../www/css/dataTable.css" />
+    <link rel="stylesheet" href="../www/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../www/css/jquery.dataTables.min.css">
+    <title>LPO</title>
+</head>
+<body>
+
+
+    <div class="container">
+     
+        <div class="table-responsive pt-3">
+            <table class="table table-bordered">
+                <tbody>
+                
+                <!-- head -->
+                <tr>
+                    <td rowspan="2" colspan="2">
+                    <div class="row">
+                        <!-- <div class="col-md-6">
+                        <img src="../../Upload/logo.jpeg" style="width:200px">
+                        </div> -->
+                        <div class="col-12">
+                        <h5 style="color:#02679a;font-size:25px">Local Purchase Request</h5>
+                        <div>
+                    </div>
+                    </td>                      
+                    <td colspan="3">
+                    <div class="row">
+                  
+                        <div class="col-3"><span style="color:#02679a"> LPONO:</span>&nbsp;&nbsp;<span class="lreqno"></span></div>
+                        <!-- <div class="col-9"><p class="lreqno"> </p></div> -->
+                    </div>                                
+                    </td>                        
+                </tr>
+                <tr>                    
+                    <td colspan="3">
+                    <div class="row">
+                        <div class="col-3"><span style="color:#02679a"> P-RegNo:</span>&nbsp;&nbsp;<span class="preqno"></span></div>
+                        <!-- <div class="col-9"><p class="preqno"></p></div> -->
+                    </div>                                        
+                    </td>
+                </tr>
+                <!--End head -->
+                <tr>
+                    <td colspan="3">
+                    <div class="row">
+                        <div class="col-2"><span style="color:#02679a"> To:</span>&nbsp;&nbsp;<span class="to"></span></div>
+                        <!-- <div class="col-10"><p class="to"></p></div> -->
+                    </div>                                      
+                    </td>
+                    <td colspan="2">
+                    <div class="row">
+                        <div class="col-3"><span style="color:#02679a">DATE:</span>&nbsp;&nbsp;<span class="ldate"></span></div>
+                        <!-- <div class="col-9"><p class="ldate"></p></div> -->
+                    </div>  
+                    </td>
+                </tr>
+             
+                
+                </tbody>
+            </table>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>
+                    SN
+                    </th>
+                    <th>
+                    Item Name
+                    </th>
+                    <th>
+                    Desc
+                    </th>
+                    <th>
+                    Qty
+                    </th>
+                    <th>
+                    Unit Price
+                    </th>
+                    <th>
+                    Total
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="tbb">                                   
+                </tbody>
+                <tr>
+                    <td colspan="4"></td>                          
+                    <td class="text-right">
+                      <span style="color:#02679a">Discount<span class="dis"></span></span>                              
+                    </td>
+                    <td>
+                      <b><p class="disc"></p></b>
+                    </td>                          
+                
+                </tr>
+                <tr>
+                  <td colspan="4"></td> 
+                    <td class="text-right">
+                     <span style="color:#02679a">Vat <span class="vt"></span> </span>                             
+                    </td>
+                    <td>
+                      <b><p class="vat"></p></b>
+                    </td> 
+                
+                </tr>
+                <tr>
+                  <td colspan="4"></td> 
+                    <td class="text-right">
+                      <span style="color:#02679a"> GRAND TOTAL</span>                               
+                    </td>
+                    <td>
+                     <b><p class="tot"></p></b> 
+                    </td> 
+                </tr>
+            </table>
+        </div>
+        <br>
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-4">
+                <div class="sups text-center">
+                    <p class="text-info">Pending</p>
+                    <p class="text-info">Supervisor</p>
+
+                </div>       
+            </div>
+            <div class="col-4">
+                <div class="mns text-center">
+                    <p class="text-info">Pending</p>
+                    <p class="text-info">Manager</p>
+                </div>   
+            </div>
+            <div class="col-4">
+                <div class="mnds text-center">
+                    <p class="text-info">Pending</p>
+                    <p class="text-info">Managing Director</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <script>
+        let par = new URLSearchParams(window.location.search)
+    if (par.has("v") && par.has("p")) {
+        let lponum = document.querySelector(".lreqno"); 
+        let prno = document.querySelector(".preqno"); 
+        let vendor = document.querySelector(".to"); 
+        let date = document.querySelector(".ldate"); 
+        let tbodyy = document.querySelector("#tbb");  
+        let descount = document.querySelector(".disc"); 
+        let vat = document.querySelector(".vat");
+        let gtotal = document.querySelector(".tot"); 
+        let disc = document.querySelector(".dis"); 
+        let vt = document.querySelector(".vt"); 
+        let manStatus = document.querySelector(".mns"); 
+        let manDStatus = document.querySelector(".mnds"); 
+        let supStatus = document.querySelector(".sups"); 
+       
+    
+    
+        let mydata = JSON.stringify({ "venid":par.get("v"),"pregno":par.get("p")})
+        fetch("../Utils/chipitemanduniqvendorUtils.php", {
+        method: 'POST',
+        body: mydata,
+        headers: {"Content-Type": "application/json; charset=utf-8"}
+        }).then(res=>res.json()).then(function(data) {
+    
+            lponum.innerText = data[1][0].lpono
+            prno.innerText = data[1][0].purchaseId
+            vendor.innerText = data[1][0].venname
+            date.innerText = data[1][0].lpodate
+            descount.innerText = "#"+Number(data[1][0].discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+            vat.innerText = "#"+Number(data[1][0].vat).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
+            gtotal.innerText = "#"+Number(data[1][0].grandtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
+            disc.innerText = data[1][0].disc+"%"
+            vt.innerText = data[1][0].vt+"%"
+         
+            if (data[0].length < 1) {
+                let list1 = document.createElement("tr");
+                let hypertest = `      
+                    <td colspan="6" class="test-center">NO DATA AVILABLE</td>                   
+                `;
+                list1.innerHTML = hypertest
+                tbodyy.appendChild(list1)
+            } else {
+            
+                let child = tbodyy.lastElementChild; 
+                while (child) {
+                    tbodyy.removeChild(child);
+                    child = tbodyy.lastElementChild;
+                }
+                data[0].forEach((element,ind) => {
+    
+                    let list2 = document.createElement("tr");
+                    list2.innerHTML = `       
+                        <td>${ind+1}</td>
+                        <td>${element.itemName}</td>
+                        <td>${element.itemDescription}</td>
+                        <td>${element.itemQuantity}</td>   
+                        <td># ${ Number(element.vendorUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>                      
+                        <td># ${(Number(element.itemQuantity)*Number(element.vendorUnitPrice)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>                    
+                    `;
+                    tbodyy.appendChild(list2);
+                    
+                }) 
+          }
+        //   console.log("response",manStatus,manDStatus,supStatus)
+    
+    
+    
+         
+        let manstat = ()=>{
+        let child = manStatus.lastElementChild; 
+        while (child) {
+            manStatus.removeChild(child);
+            child = manStatus.lastElementChild;
+        }
+        if (data[1][0].approveman == "Pending") {
+            manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
+        } else if(data[1][0].approveman == "decline") {
+            manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[1][0].remman}</p><br/><p class="text-danger">${data[1][0].mandate}</p>`         
+        }else{
+          if (data[1][0].sigman) {
+            manStatus.innerHTML = `<img src="${data[1][0].sigman}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${data[1][0].mandate}</p>` 
+            
+          } else {
+            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${data[1][0].mandate}</p>`
+          }
+        }
+      }
+
+      let mandstat = ()=>{
+        let child = manDStatus.lastElementChild; 
+        while (child) {
+            manDStatus.removeChild(child);
+            child = manDStatus.lastElementChild;
+        }
+        if (data[1][0].approvemand == "Pending") {
+            manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
+        } else if(data[1][0].approvemand == "decline") {
+            manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[1][0].remmand }</p><br/><p class="text-danger">${data[1][0].mandate}</p>`         
+        }else{
+          if (data[1][0].sigmand) {
+            manDStatus.innerHTML = `<img src="${data[1][0].sigmand}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${data[1][0].mandate}</p>` 
+          } else {
+            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${data[1][0].mandate}</p>`   
+          }
+        }
+      }
+
+
+      let supstat = ()=>{
+        let child = supStatus.lastElementChild; 
+        while (child) {
+            supStatus.removeChild(child);
+            child = supStatus.lastElementChild;
+        }
+        if (data[1][0].approvesup == "Pending") {
+            supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
+        } else if(data[1][0].approvesup == "decline") {
+            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-success">Supervisor</p><br/><p class="text-danger">${data[1][0].remsup}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
+        }else{
+          if (data[1][0].sigsup) {
+            supStatus.innerHTML = `<img src="${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>`          
+          } else {
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>` 
+          }
+        }
+      }
+  
+          manstat()
+          mandstat()
+          supstat()
+
+          window.print()
+        }).catch(err=>{
+          if (err) {
+            alert("Error:"+err)
+            console.log("error",err)
+         
+          }
+        })
+
+    }
+        // function viewFunc(v,p){
+        // }
+        
+    
+       </script>
+</body>
+</html>

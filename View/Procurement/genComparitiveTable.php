@@ -15,7 +15,7 @@
      $conn->connect();
 
      $UserUtils = new GeneralController();
-     $data = $UserUtils-> getAllApprovedByMd();
+     $data = $UserUtils-> getAllApprovedByMdCC();
       
 ?>
 <!-- HEADER -->

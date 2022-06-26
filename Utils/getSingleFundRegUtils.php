@@ -37,8 +37,12 @@
     $mansig = $items[0]['mansig'];
     $mandsig = $items[0]['mandsig'];
     $supsig = $items[0]['supsig'];
+   
+     $mandate = $items[0]['mandate'];
+     $manddate = $items[0]['manddate'];
+     $supdate = $items[0]['supdate'];
 
-    echo json_encode( array("fregno" =>$fregno ,"from"=>$from,"subject"=>$subject,"ammount"=>$ammount,"ammountword"=>$ammountword,"mandsatus"=>$mandsatus,"manstatus"=>$manstatus,"supstatus"=>$supstatus,'datecreated'=>$datecreated,'file'=>$file,'justification'=>$justification,'to'=>$to,'manremark'=>$manremark,'mandremark'=>$mandremark,'supremark'=>$supremark,'mansig'=>$mansig,'mandsig'=>$mandsig,'supsig'=>$supsig));
+    echo json_encode( array("fregno" =>$fregno ,"from"=>$from,"subject"=>$subject,"ammount"=>$ammount,"ammountword"=>$ammountword,"mandsatus"=>$mandsatus,"manstatus"=>$manstatus,"supstatus"=>$supstatus,'datecreated'=>$datecreated,'file'=>$file,'justification'=>$justification,'to'=>$to,'manremark'=>$manremark,'mandremark'=>$mandremark,'supremark'=>$supremark,'mansig'=>$mansig,'mandsig'=>$mandsig,'supsig'=>$supsig,'supdate'=>$supdate,'mandate'=>$mandate,'manddate'=>$manddate));
       
 
 ?>

@@ -11,11 +11,12 @@
   <link rel="stylesheet" href="../../www/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../www/vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="../../www/css/style1.css">
-  <link rel="shortcut icon" href="../../www/images/favicon.png" />
+  <!-- <link rel="shortcut icon" href="../../www/images/favicon.png" /> -->
   <link rel="stylesheet" href="../../www/css/s1.css">
   <link rel="shortcut icon" href="../../www/css/dataTable.css" />
   <link rel="stylesheet" href="../../www/css/fontawesome.min.css">
   <link rel="stylesheet" href="../../www/css/jquery.dataTables.min.css">
+  <link rel="shortcut icon" href="../../www/images/icon.png" type="image/x-icon">
   <!-- <link rel="stylesheet" href="../../www/vendors/base/vendor.bundle.base.css"> -->
   <!-- endinject -->
   <!-- plugin css for this page -->

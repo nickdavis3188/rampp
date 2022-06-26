@@ -229,24 +229,7 @@
           btn.appendChild(newSpan);
 
     }
-    function loading33(btn) {
-      // var submitButtons = document.querySelector('#sub')
-      
-        console.log("B Iam clicked",btn)
-          var child = btn.lastElementChild; 
-          while (child) {
-              btn.removeChild(child);
-              child = btn.lastElementChild;
-          }
-
-          btn.innerText = "Restocking ..."
-          let newSpan = document.createElement("span");
-          newSpan.classList.add("spinner-border")
-          newSpan.classList.add("spinner-border-sm")
-
-          btn.appendChild(newSpan);
-
-    }
+   
 
   
   

@@ -12,6 +12,7 @@
         $itemId = $_POST["id"];
         $date = $_POST["date"];
         $reason = $_POST["reason"];
+        $reason1 = mysql_real_escape_string($reason);
         $dec = 2;
 
         $items = array();
@@ -29,7 +30,7 @@
                 
             $query = "INSERT INTO inventryhistory
             (`inid`,`date`,`restock`,`reduce`,`reason`,`increasby`,`reduceby`) VALUES
-             ('$itemId','$date','0','$dec','$reason','0','$itemNumber')";
+             ('$itemId','$date','0','$dec','$reason1','0','$itemNumber')";
             $results = mysql_query($query);
             $noofrows = mysql_affected_rows();
     

@@ -72,8 +72,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="exampleInputUsername1">Requisision Number</label>
-                                <input name="reqno"  type="text" class="form-control" id="exampleInputUsername1" value="<?php echo $UserUtils->getFunNp(); ?>">
+                                <label for="exampleInputUsername1">Requisition Number</label>
+                                <input readonly name="reqno"  type="text" class="form-control" id="exampleInputUsername1" value="<?php echo $UserUtils->getFunNp(); ?>" >
                             </div>
                         </div>
                       
@@ -83,14 +83,14 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">From</label>
-                              <input name="from" type="text" class="form-control" id="exampleInputUsername1"  value="<?php echo $_SESSION['firstName']." ".$_SESSION['lastName'] ?>" disabled>
+                              <input readonly name="from" type="text" class="form-control" id="exampleInputUsername1"  value="<?php echo $_SESSION['firstName']." ".$_SESSION['lastName'] ?>">
                           </div>    
                            
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Date</label>
-                              <input name="" type="date" class="form-control" id="exampleInputUsername1" value="<?php echo date('Y-m-d');?>">
+                              <input name="date" type="date" class="form-control" id="exampleInputUsername1" value="<?php echo date('Y-m-d');?>">
                           </div>    
                         </div>
                       
@@ -121,7 +121,7 @@
                         </div>
                         <div class="col-sm-6">
                         <div class="mb-3 form-group">
-                              <label for="formFile" class="form-label">Default file input example</label>
+                              <label for="formFile" class="form-label">Supporting Document</label>
                               <input 
                               name="document"
                               class="form-control" type="file" id="formFile"style="background:#02679a;color:white;">

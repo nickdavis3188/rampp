@@ -54,7 +54,7 @@
             <div class="collapse" id="ui-basic2">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link size" href= <?php echo($hr["addPresonnel"])  ?>>Add Personnel</a></li>
-                <li class="nav-item"> <a class="nav-link size" href= <?php echo($hr["viewModefyDelete"]) ?>>View/Modify/Delete</a></li>
+                <li class="nav-item"> <a class="nav-link size" href= <?php echo($hr["viewModefyDelete"]) ?>>Manage Personnel</a></li>
                 <li class="nav-item"> <a class="nav-link size" href= <?php echo($hr["newUser"])  ?>>Add System User</a></li>
                 <li class="nav-item"> <a class="nav-link size" href= <?php echo($hr["manageNewUser"]) ?>>Manage System Users</a></li>
               </ul>

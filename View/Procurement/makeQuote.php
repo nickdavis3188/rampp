@@ -182,53 +182,55 @@ i{
                 
                 <!-- head -->
                 <tr>
-                    <td rowspan="2" colspan="5">
+                    <td rowspan="2" colspan="3">
                     <div class="row">
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                         <img src="../../Upload/logo.jpeg"/ style="width:200px">
-                        </div>
-                        <div class="col-md-6">
-                        <h5 style="color: #02679a;">Add vendor Quote</h5>
+                        </div> -->
+                        <div class="col-12">
+                        <h5 style="color:#02679a;font-size:25px">Add vendor Quote</h5>
                         <div>
                     </div>
-                    </td>                      
+                    </td>  
+                    <td rowspan="2" colspan="2">
+                    <div class="row">
+                        <div class="col-12"><span style="color: #02679a;">Request Id: </span>&nbsp;&nbsp;<span class="reqid"></span></div>
+                       
+                    </div>                                      
+                    </td>                    
                                            
                 </tr>
                 <tr>                    
                 
                 </tr>
-                <!--End head -->
+                 <!-- <div class="col-12"><span style="color: #02679a;">Request Id: </span>&nbsp;&nbsp;<span class="reqid"></span></div> -->
                 <tr>
+                  
                     <td colspan="3">
                     <div class="row">
-                        <div class="col-3"><span style="color: #02679a;">Request Id:  </span></div>
-                        <div class="col-9"><p class="reqid"></p></div>
-                    </div>                                      
+                        <div class="col-12"><span style="color: #02679a;"> Request Name: </span>&nbsp;&nbsp;<span class="for"></span></div>
+                    
+                    </div>  
                     </td>
                     <td colspan="2">
-                    <div class="row">
-                        <div class="col-3"><span style="color: #02679a;"> Request Name:  </span></div>
-                        <div class="col-9"><p class="for"></p></div>
-                    </div>  
+                        <div class="row">
+                        <div class="col-12"><span style="color: #02679a;">Date: </span>&nbsp;&nbsp;<span class="date"></span></div>
+                     
+                        </div>  
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <div class="row">
-                        <div class="col-3"><span style="color: #02679a;"> Creatro:  </span></div>
-                        <div class="col-9"><p class="from"></p></div>
+                        <div class="col-12"><span style="color: #02679a;"> Creatro: </span>&nbsp;&nbsp;<span class="from"></span></div>
+                   
                         </div>  
                     </td>
-                    <td colspan="1">
-                        <div class="row">
-                        <div class="col-2"><span style="color: #02679a;">Date:  </span></div>
-                        <div class="col-10"><p class="date"></p></div>
-                        </div>  
-                    </td>
+                  
                     <td colspan="2">
                         <div class="row">
-                        <div class="col-3"><span style="color: #02679a;">Vendor:  </span></div>
-                        <div class="col-9"><p class="vendor"></p></div>
+                        <div class="col-12"><span style="color: #02679a;">Vendor: </span>&nbsp;&nbsp;<span class="vendor"></span></div>
+                  
                         </div>  
                     </td>
                    

@@ -159,7 +159,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">View/ Modify/ Delete New Personnel Record</h4>
+                  <h4 class="font-weight-bold mb-0">Manage Inventory</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -214,7 +214,7 @@ i{
                 <i class="ti-pencil-alt btn-icon-append dropbtn" data-bs-toggle="modal" data-bs-target="#editModal" onClick="editFunc('<?php echo $value['id'] ?>')"></i>
               </span>
               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Restock">
-                <i class="ti-import btn-icon-append dropbtn text-warning" data-bs-toggle="modal" data-bs-target="#restockModal" onClick="restock2('<?php echo $value['id'] ?>')"></i>
+                <i class="ti-plus btn-icon-append dropbtn text-warning" data-bs-toggle="modal" data-bs-target="#restockModal" onClick="restock2('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
               </span>
               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Delete">
                 <i class="ti-trash btn-icon-append dropbtn text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick="restock('<?php echo $value['id'] ?>')"></i>
@@ -225,8 +225,11 @@ i{
                <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Edit">
                 <i class="ti-pencil-alt btn-icon-append dropbtn" data-bs-toggle="modal" data-bs-target="#editModal" onClick="editFunc('<?php echo $value['id'] ?>')"></i>
               </span>
+              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Restock">
+                <i class="ti-plus btn-icon-append dropbtn text-warning" data-bs-toggle="modal" data-bs-target="#restockModal" onClick="restock2('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
+              </span>
               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Reduce">
-                <i class="ti-arrow-top-right btn-icon-append dropbtn text-secondary" data-bs-toggle="modal" data-bs-target="#reduceModal" onClick="reduce2('<?php echo $value['id'] ?>')"></i>
+                <i class="ti-minus btn-icon-append dropbtn text-secondary" data-bs-toggle="modal" data-bs-target="#reduceModal" onClick="reduce2('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
               </span>
               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Delete">
                 <i class="ti-trash btn-icon-append dropbtn text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick="deleteId1('<?php echo $value['id'] ?>')"></i>
@@ -273,7 +276,7 @@ i{
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header gbgn">
-        <h5 class="modal-title" id="exampleModalLabel">Product Info</h5>
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Product Info</h5> -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body gbgn">
@@ -291,7 +294,7 @@ i{
 			</div> -->
 			<div class="col-12">
 				<div class="about-text go-to">
-					<h3 class="dark-color">About Product</h3>
+					<h3 class="dark-color">Product Info</h3>
 					<br/>
 					<div class="row about-list">
 						<div class="col-md-6">
@@ -543,12 +546,11 @@ i{
 
 <div class="modal fade" id="restockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered ">
-    <div class="modal-header gbgn">
-      Restock
-    </div>
+     <h4 class="card-title"></h4>
     <div class="modal-content ">
     <form action="../../Utils/restockInventory.php" method="post">
       <div class="modal-header gbgn">
+        <p>Restock <Span id="itd" style="color:#02679a;"></Span></p>     
       </div>
       <div class="modal-body gbgn">
         <div class="form-group row">
@@ -559,7 +561,7 @@ i{
               <div class="col-sm-6">
                   <div class="form-group">
                       <label for="exampleInputUsername1">Quantity Added</label>
-                      <input name="qtyadded" type="number" class="form-control" id="exampleInputUsername1" >
+                      <input name="qtyadded" type="number" class="form-control rs" id="exampleInputUsername1" required >
                   </div>
               </div>
               <div class="col-sm-6">
@@ -586,12 +588,12 @@ i{
 </div>
 <div class="modal fade" id="reduceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered ">
-    <div class="modal-header gbgn">
-      Reduce
-    </div>
+    <h4 class="card-title"></h4>
     <div class="modal-content ">
     <form action="../../Utils/reducedInventry.php" method="post">
       <div class="modal-header gbgn">
+        <p>Reduce <Span id="itdr" style="color:#02679a;"></Span></p>
+        
       </div>
       <div class="modal-body gbgn">
         <div class="form-group row">
@@ -600,8 +602,8 @@ i{
           <div class="form-group row">
               <div class="col-sm-6">
                   <div class="form-group">
-                      <label for="exampleInputUsername1">Quantity Added</label>
-                      <input name="qtyadded" type="number" class="form-control" id="exampleInputUsername1" >
+                      <label for="exampleInputUsername1">Quantity Reduced</label>
+                      <input name="qtyadded" type="number" class="form-control rd" id="exampleInputUsername1" required>
                   </div>
               </div>
               <div class="col-sm-6">
@@ -831,15 +833,61 @@ i{
     // console.log(par)
     myid.value = par
   }
-function restock2(pars) {
+function restock2(pars,name) {
   let myid2 = document.querySelector(".delid2"); 
+  let itd = document.querySelector("#itd"); 
   myid2.value = pars
+  itd.innerHTML = name
 }
-function reduce2(pars) {
+function reduce2(pars,name) {
   let myid3 = document.querySelector(".delid3"); 
+  let itdr = document.querySelector("#itdr"); 
   myid3.value = pars
+  itdr.innerHTML = name
 }
 
+
+
+function loading33(btn) {
+      var rs = document.querySelector('.rs')
+      if (rs.value != "") {
+        console.log("B Iam clicked",btn)
+          var child = btn.lastElementChild; 
+          while (child) {
+              btn.removeChild(child);
+              child = btn.lastElementChild;
+          }
+  
+          btn.innerText = "Restocking ..."
+          let newSpan = document.createElement("span");
+          newSpan.classList.add("spinner-border")
+          newSpan.classList.add("spinner-border-sm")
+  
+          btn.appendChild(newSpan);
+        
+      } 
+
+    }
+    function loading44(btn) {
+      var rd = document.querySelector('.rd')
+      if (rd.value != "") {
+        console.log("B Iam clicked",btn)
+          var child = btn.lastElementChild; 
+          while (child) {
+              btn.removeChild(child);
+              child = btn.lastElementChild;
+          }
+  
+          btn.innerText = "Reducing ..."
+          let newSpan = document.createElement("span");
+          newSpan.classList.add("spinner-border")
+          newSpan.classList.add("spinner-border-sm")
+  
+          btn.appendChild(newSpan);
+        
+      }
+
+    }
 </script>
 
 

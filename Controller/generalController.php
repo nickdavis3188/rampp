@@ -83,6 +83,33 @@ class GeneralController{
         }
     }
 
+    function updatequote($id){
+
+        $items = array();
+
+        $query ="SELECT quoted FROM prequisitioninfo WHERE preqno='$id'";
+
+        $results = mysql_query($query);
+
+        while($row = mysql_fetch_array($results)){
+            $items[] = $row;
+        }
+      
+        if (count($items) == 1) {
+            $incr = $items[0]["quoted"]+1;
+            $query3 = "UPDATE `prequisitioninfo`  SET quoted='$incr' WHERE preqno='$id'";
+            $results3 = mysql_query($query3);
+            $noofrows3 = mysql_affected_rows();
+            if ($noofrows3 == 1){
+                return "True";
+            }else{
+                return mysql_error();
+            }
+        }else{
+            return "can't increment quote";
+        }
+
+    }
     function sendLpoCheck($id){
   
         $query3 = "UPDATE `lpouniquevendor`  SET lpocreated='Yes' WHERE vendorId ='$id'";
@@ -159,6 +186,31 @@ class GeneralController{
         }
         return $items;
     }
+    function getAllApprovedByMdk(){
+  
+        $items = array();
+
+        $query ="SELECT * FROM prequisitioninfo WHERE csupapprove <> 'approve' AND mandapprove = 'approve'";
+        $results = mysql_query($query);
+
+        while($row = mysql_fetch_array($results)){
+            $items[] = $row;
+        }
+        return $items;
+    }
+
+    function getAllApprovedByMdCC(){
+  
+        $items = array();
+
+        $query ="SELECT * FROM prequisitioninfo WHERE quoted <>'0' AND mandapprove = 'approve'";
+        $results = mysql_query($query);
+
+        while($row = mysql_fetch_array($results)){
+            $items[] = $row;
+        }
+        return $items;
+    }
     function getAllApprovedByMd(){
   
         $items = array();
@@ -212,7 +264,7 @@ class GeneralController{
    
         $items = array();
 
-        $query ="SELECT `fregno`, `from`,`datecreated`, `ammount`,`ammountword`,`subject`, `file`, `justification`, `manstatus`,`mandsatus`,`supstatus`,`to`,`reqfrom` FROM fundrequisition";
+        $query ="SELECT * FROM fundrequisition";
         $results = mysql_query($query);
 
         while($row = mysql_fetch_array($results)){

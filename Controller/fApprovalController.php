@@ -14,6 +14,7 @@
             $status = $_POST['approval'];
             $remark = $_POST['remark'];
             $prno = $_POST['freqNo'];
+            $date = $_POST['date'];
             echo $prno;
         
             $approver =  $_SESSION['userName'];
@@ -23,10 +24,11 @@
             while($row11 = mysql_fetch_array($results11)){
                 $items11[] = $row11;
             }
+
             $sigman11 = $items11[0]['signature'];
-            $sigman11 = $items11;
+                
             if ($items11[0]['signature']) {
-                $query = "UPDATE `fundrequisition`  SET manstatus='$status',manremark='$remark',mansig='$sigman11' WHERE `fregno` ='$prno'";
+                $query = "UPDATE `fundrequisition`  SET manstatus='$status',manremark='$remark',mansig='$sigman11',mandate='$date' WHERE `fregno` ='$prno'";
                 $results = mysql_query($query);
                 $noofrows = mysql_affected_rows();
                 if ($noofrows == 1)
@@ -38,7 +40,7 @@
                     header("Location: ../View/FundRequisision/fapprovalByMan.php?fail= Error:".mysql_error()); 
                 }
             } else {
-                $query = "UPDATE `fundrequisition`  SET manstatus='$status',manremark='$remark' WHERE `fregno` ='$prno'";
+                $query = "UPDATE `fundrequisition`  SET manstatus='$status',manremark='$remark',mandate='$date' WHERE `fregno` ='$prno'";
                 $results = mysql_query($query);
                 $noofrows = mysql_affected_rows();
                 if ($noofrows == 1)
@@ -56,6 +58,7 @@
             $status1 = $_POST['approval'];
             $remark1 = $_POST['remark'];
             $prno1 = $_POST['freqNo'];
+            $date = $_POST['date'];
 
             $items12 = array();
             $approver =  $_SESSION['userName'];
@@ -68,7 +71,7 @@
             if ($items12[0]['signature'])
             {
               
-                $query1 = "UPDATE `fundrequisition`  SET mandsatus='$status1',mandremark='$remark1',mandsig='$sigman12' WHERE `fregno` ='$prno1'";
+                $query1 = "UPDATE `fundrequisition`  SET mandsatus='$status1',mandremark='$remark1',mandsig='$sigman12',manddate='$date' WHERE `fregno` ='$prno1'";
                 $results1 = mysql_query($query1);
                 $noofrows1 = mysql_affected_rows();
                 if ($noofrows1 == 1)
@@ -82,7 +85,7 @@
                       
             }else {
                
-                $query1 = "UPDATE `fundrequisition`  SET mandsatus='$status1',mandremark='$remark1' WHERE `fregno` ='$prno1'";
+                $query1 = "UPDATE `fundrequisition`  SET mandsatus='$status1',mandremark='$remark1',manddate='$date' WHERE `fregno` ='$prno1'";
                 $results1 = mysql_query($query1);
                 $noofrows1 = mysql_affected_rows();
                 if ($noofrows1 == 1)
@@ -99,9 +102,11 @@
             $status2 = $_POST['approval'];
             $remark2 = $_POST['remark'];
             $prno2 = $_POST['freqNo'];
+            $date = $_POST['date'];
+
             $items22 = array();
             $approver22 =  $_SESSION['userName'];
-            $query22 = "SELECT `signature` FROM users WHERE uname='$approver'";
+            $query22 = "SELECT `signature` FROM users WHERE uname='$approver22'";
             $results22 = mysql_query($query22);
             while($row22 = mysql_fetch_array($results22)){
                 $items22[] = $row22;
@@ -109,7 +114,7 @@
             $sigman22 = $items22[0]['signature'];
             if ($sigman22)
             {
-                $query2 = "UPDATE `fundrequisition`  SET supstatus='$status2',supremark='$remark2',supsig='$sigman22' WHERE `fregno` ='$prno2'";
+                $query2 = "UPDATE `fundrequisition`  SET supstatus='$status2',supremark='$remark2',supsig='$sigman22',supdate='$date'  WHERE `fregno` ='$prno2'";
                 $results2 = mysql_query($query2);
                 $noofrows2 = mysql_affected_rows();
                 if ($noofrows2 == 1)
@@ -122,7 +127,7 @@
                 }
                       
             }else {
-                $query2 = "UPDATE `fundrequisition`  SET supstatus='$status2',supremark='$remark2' WHERE `fregno` ='$prno2'";
+                $query2 = "UPDATE `fundrequisition`  SET supstatus='$status2',supremark='$remark2',supdate='$date'  WHERE `fregno` ='$prno2'";
                 $results2 = mysql_query($query2);
                 $noofrows2 = mysql_affected_rows();
                 if ($noofrows2 == 1)

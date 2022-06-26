@@ -1,8 +1,13 @@
 <?php
     include("../Utils/vendorQuoteArrayUtills.php");
     include("../Env/env.php");
+    require("generalController.php");
     require("../Connection/dbConnection.php");
+
+    $genController = new GeneralController();
+
     $post = (array) json_decode(file_get_contents('php://input'),false);
+
  
     $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
      $conn->connect();
@@ -26,7 +31,13 @@
      {
         $res = uploadArray1($jsonData);
         if ($res == "True") {
-           echo json_encode(array("status"=>"success"));             
+            $updateq =  $genController->updatequote($jsonData2 );
+            if ($updateq) {
+               echo json_encode(array("status"=>"success"));             
+            }else {
+               echo json_encode(array("status"=>"faild","message"=>"Error:".$updateq));
+            }
+
         }else{
            echo json_encode(array("status"=>"faild","message"=>"cannot submit the Quote"));
         }

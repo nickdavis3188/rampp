@@ -240,27 +240,27 @@ i{
                                     <tr>
                                       <td rowspan="2" colspan="2">
                                         <div class="row">
-                                          <div class="col-md-6">
-                                            <img src="../../Upload/logo.jpeg"/ style="width:200px">
-                                          </div>
-                                          <div class="col-md-6">
-                                            <h5 style="color: #02679a;">Purchase Requisition</h5>
+                                          <!-- <div class="col-md-6">
+                                            <img src="../../Upload/logo.jpeg" style="width:200px">
+                                          </div> -->
+                                          <div class="col-12">
+                                            <h5 style="color:#02679a;font-size:25px">Purchase Requisition</h5>
                                           <div>
                                         </div>
                                       </td>                      
                                       <td colspan="3">
                                         <div class="row">
                                           
-                                          <div class="col-3"><span style="color: #02679a;"> P-REGNO:</span></div>
-                                          <div class="col-9"><p class="reqno"> </p></div>
+                                          <div class="col-12"><span style="color:#02679a"> PR-NO: </span> &nbsp;&nbsp;&nbsp; <span class="reqno"> </span></div>
+                                          <!-- <div class="col-9"></div> -->
                                         </div>                                
                                       </td>                        
                                     </tr>
                                     <tr>                    
                                       <td colspan="3">
                                         <div class="row">
-                                          <div class="col-3"><span style="color: #02679a;"> DATE:  </span></div>
-                                          <div class="col-9"><p class="dprep"></p></div>
+                                          <div class="col-12"><span style="color:#02679a"> DATE: </span>&nbsp;&nbsp;<span class="dprep"></span></div>
+                                          <!-- <div class="col-9"></div> -->
                                         </div>                                        
                                       </td>
                                     </tr>
@@ -268,26 +268,26 @@ i{
                                     <tr>
                                       <td colspan="3">
                                         <div class="row">
-                                          <div class="col-2"><span style="color: #02679a;"> For:  </span></div>
-                                          <div class="col-10"><p class="frrr"></p></div>
+                                          <div class="col-2"><span style="color:#02679a"> For: </span>&nbsp;&nbsp;<span class="frrr"></span></div>
+                                          <!-- <div class="col-10"><p class="frrr"></p></div> -->
                                         </div>                                      
                                       </td>
                                       <td colspan="2">
                                         <div class="row">
-                                          <div class="col-6"><span style="color: #02679a;"> REQUISITIONER:  </span></div>
-                                          <div class="col-6"><p class="reqner"></p></div>
+                                          <div class="col-6"><span style="color:#02679a"> REQUISITIONER: </span>&nbsp;&nbsp;<span class="reqner"></span></div>
+                                          <!-- <div class="col-6"><p class="reqner"></p></div> -->
                                         </div>  
                                       </td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">
                                           <div class="row">
-                                            <div class="col-2"><span style="color: #02679a;"> SUMMARY:  </span></div>
-                                            <div class="col-10"><p class="summ"></p></div>
+                                            <div class="col-2"><span style="color:#02679a"> SUMMARY: </span>&nbsp;&nbsp;<span class="summ"></span></div>
+                                            <!-- <div class="col-10"><p class="summ"></p></div> -->
                                           </div>  
                                         </td>
                                         <!-- <td colspan="3">
-                                          <span style="color: #02679a;">For: </span><span >Restock</span>
+                                          <span style="color:#02679a">For: </span><span >Restock</span>
                                         </td> -->
                                     </tr>
                                   
@@ -296,22 +296,22 @@ i{
                                 <table class="table table-bordered">
                                   <thead>
                                     <tr>
-                                      <th>
+                                      <th  width="5%">
                                         SN
                                       </th>
-                                      <th>
+                                      <th width="25%">
                                         Item Name
                                       </th>
-                                      <th>
+                                      <th width="35%">
                                         Desc
                                       </th>
-                                      <th>
+                                      <th width="5%">
                                         Qty
                                       </th>
-                                      <th>
+                                      <th  width="15%">
                                         Unit Price
                                       </th>
-                                      <th>
+                                      <th  width="15%">
                                         SubTotal
                                       </th>
                                     </tr>
@@ -319,13 +319,12 @@ i{
                                   <tbody id="tbb">                                   
                                   </tbody>
                                   <tr>
-                                    <td colspan="4">
+                                    <td colspan="5">
                                       
                                     </td>
-                                    <td colspan="2">
+                                    <td>
                                       <div class="row">
-                                          <div class="col-3"><span style="color: #02679a;"> GRAND TOTAL:  </span></div>
-                                          <div class="col-9"><p class="tot"></p></div>
+                                          <div class="col-12"><span style="color:#02679a"> GRAND TOTAL  </span> <br> <b><p class="tot"> </p></b> </div>
                                       </div>                                 
                                     </td>
                                     
@@ -347,6 +346,7 @@ i{
                                   <div class="col-4">
                                     <form action="../../Controller/pApproveController.php" method="post">
                                       <input name="preqNo" type="hidden" class="form-control prno" id="exampleInputUsername1">
+                                      <input name="date" type="hidden" class="form-control prno" id="exampleInputUsername1"  value="<?php echo date('Y-m-d');?>">
                                       <div class="row">
                                           <div class="col-12">
                                             <div class="form-group">
@@ -545,48 +545,48 @@ i{
       }
 
 
-      let manstat = ()=>{
-        let child = manStatus.lastElementChild; 
-        while (child) {
-          manStatus.removeChild(child);
-            child = manStatus.lastElementChild;
-        }
-        if (data[0].manapprove == "Pending") {
-          manStatus.innerHTML = `<p class="text-warning">Pending</p>` 
-        } else if(data[0].manapprove == "decline") {
-          manStatus.innerHTML = `<p style="color: #02679a;">Decline</p>`         
-        }else{
-          if (data[0].mansig) {
-            manStatus.innerHTML = `<img src="../${data[0].mansig}" width="100px"/>` 
-            
-          } else {
-            manStatus.innerHTML = `<p class="text-success">Approve</p>`
-          }
-        }
-      }
-      
-      let supstat = ()=>{
-        let child = supStatus.lastElementChild; 
-        while (child) {
-          supStatus.removeChild(child);
-            child = supStatus.lastElementChild;
-        }
-        if (data[0].supapprove == "Pending") {
-          supStatus.innerHTML = `<p class="text-warning">Pending</p>` 
-        } else if(data[0].supapprove == "decline") {
-          supStatus.innerHTML = `<p style="color: #02679a;">Decline</p>`         
-        }else{
-          if (data[0].mansig) {
-            supStatus.innerHTML = `<img src="../${data[0].mansig}" width="100px"/>`          
-          } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p>` 
-          }
-        }
-      }
-  
-      manstat()
-     
-      supstat()
+              let manstat = ()=>{
+                let child = manStatus.lastElementChild; 
+                while (child) {
+                  manStatus.removeChild(child);
+                    child = manStatus.lastElementChild;
+                }
+                if (data[0].manapprove == "Pending") {
+                  manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
+                } else if(data[0].manapprove == "decline") {
+                  manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data[0].manremark}</p><br/><p class="text-danger">${data[0].mandate}</p>`         
+                }else{
+                  if (data[0].mansig) {
+                    manStatus.innerHTML = `<img src="../${data[0].mansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${data[0].mandate}</p>` 
+                    
+                  } else {
+                    manStatus.innerHTML = `<p class="text-success">Approve</p><br/><br/><p class="text-success">Manager</p><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${data[0].mandate}</p>`
+                  }
+                }
+              }
+
+
+              let supstat = ()=>{
+                let child = supStatus.lastElementChild; 
+                while (child) {
+                  supStatus.removeChild(child);
+                    child = supStatus.lastElementChild;
+                }
+                if (data[0].supapprove == "Pending") {
+                  supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
+                } else if(data[0].supapprove == "decline") {
+                  supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data[0].supremark}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
+                }else{
+                  if (data[0].supsig) {
+                    supStatus.innerHTML = `<img src="../${data[0].supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>`          
+                  } else {
+                    supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>` 
+                  }
+                }
+              }
+          
+              manstat()
+              supstat()
     
     }).catch(err=>{
       if (err) {

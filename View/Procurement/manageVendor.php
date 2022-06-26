@@ -157,7 +157,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">View/ Modify/ Delete Vendor</h4>
+                  <h4 class="font-weight-bold mb-0">Manage Vendor</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -251,7 +251,7 @@ i{
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header gbgn">
-        <h5 class="modal-title" id="exampleModalLabel">User Info</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Vendor Info</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body gbgn">

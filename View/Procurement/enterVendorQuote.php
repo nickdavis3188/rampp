@@ -15,7 +15,7 @@
      $conn->connect();
 
      $UserUtils = new GeneralController();
-     $data = $UserUtils-> getAllApprovedByMd();
+     $data = $UserUtils-> getAllApprovedByMdk();
       
 ?>
 <!-- HEADER -->
@@ -69,6 +69,7 @@
                               <select class="form-control form-control-lg reqno" id="exampleFormControlSelect1">
                                   <?php
                                   foreach ($data as $index => $value) {  
+                                    
                                   ?>
                                     <option value="<?php echo $value['preqno'] ?>"><?php echo $value['subject'] ?></option>
                                   <?php

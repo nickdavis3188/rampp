@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../www/css/bootstrap.min.css">
     <link rel="stylesheet" href="../www/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="../www/css/style1.css">
-    <link rel="shortcut icon" href="../www/images/favicon.png" />
+    <link rel="shortcut icon" href="../www/images/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../www/css/s1.css">
     <link rel="shortcut icon" href="../www/css/dataTable.css" />
     <link rel="stylesheet" href="../www/css/fontawesome.min.css">
@@ -30,64 +30,64 @@
 <br/>
 
 
-        <div class="container">
+        <div style="width:95%;height: 100vh;margin: auto;">
             <!-- <div class="container"> -->
           
             <!-- body -->
             <div class="table-responsive pt-3">
-                <table class="table ">
-                    <tbody>
+              <table class="table ">
+                <tbody>
+              
+                  <!-- head -->
+                  <tr>
+                    <td rowspan="2" colspan="5">
+                      <div class="row">
+                        <div class="col-12">
+                          <h5 style="color:#02679a;font-size:25px">Comparative Table</h5>
+                          <div>
+                          </div>
+                          </td>
                         
-                        <!-- head -->
-                        <tr>
-                            <td rowspan="2" colspan="5">
-                            <div class="row">
-                                <div class="col-md-6">
-                                <img src="../Upload/logo.jpeg"/ style="width:200px">
-                                </div>
-                                <div class="col-md-6">
-                                <h5 style="color: #02679a;">Comparative Table</h5>
-                                <div>
-                            </div>
-                            </td>                      
-                                                
-                        </tr>
-                        <tr>                    
+                          </tr>
+                          <tr>
                         
-                        </tr>
-                        <!--End head -->
-                        <tr>
-                            <td colspan="3">
+                          </tr>
+                          <!--End head -->
+                  
+                  <tr>
+                    <td colspan="3">
+                      <div class="row">
+                          <div class="col-3"><span style="color: #02679a;">Request Id: </span>&nbsp;&nbsp;&nbsp; <span class="reqid"> </span>
+                          </div>
+                          
+                          </div>
+                          </td>
+                          <td colspan="2">
                             <div class="row">
-                                <div class="col-3"><span style="color: #02679a;">Request Id:  </span></div>
-                                <div class="col-9"><p class="reqid"></p></div>
-                            </div>                                      
-                            </td>
-                            <td colspan="2">
-                            <div class="row">
-                                <div class="col-3"><span style="color: #02679a;"> Request Name:  </span></div>
-                                <div class="col-9"><p class="for"></p></div>
-                            </div>  
-                            </td>
-                        </tr>
+                          <div class="col-3"><span style="color: #02679a;"> Request Name: </span>&nbsp;&nbsp;&nbsp; <span class="for"> </span>
+                          </div>
+                          
+                          </div>
+                          </td>
+                          </tr>
                             
-                    </tbody>
-                </table>
-            </div>
-            <br>
-            <div class="table-responsive pt-3">
-                <table class="table">
+                  </tbody>
+                  </table>
+              <div class="table-responsive pt-3">
+                <table class="table" id="customers">
                     <tr>
-                        <th class="text-center"  ><span style="color: #02679a;"> Items Details</span></th>              
+                        <th class="text-center"><span style="color: #02679a;"> Items Details</span></th>
+                        <th class="text-center"><span style="color: #02679a;">Vendors Involve</span></th>
+                        <th class="text-center"><span style="color: #02679a;">Cheapest Option</span></th>
                     </tr>
                     <tr>
                         <td>
                             <table class="table">
                                 <tr>
-                                    <th>Item Name</th>
-                                    <th>Desc</th>
-                                    <th>Qty</th>
-                                    <th>UM</th>
+                                    <th class="th">Item Name</th>
+                                    <th class="th">Desc</th>
+                                    <th class="th">Qty</th>
+                                    <th class="th">UM</th>
                                 </tr>
                                 <tbody class="itbod">
                                
@@ -95,57 +95,35 @@
                                 </tbody>
                             </table>
                         </td>
-                    </tr>
-                </table>
-            </div>
-            <br>
-            <div class="table-responsive pt-3">
-                
-              <table class="table">
-                <tr>
-                    <th class="text-center"  ><span style="color: #02679a;">Vendors Involve</span></th>                
-                </tr>
-                <tr>
-                    <td>
-                        <table class="table">
-                          <thead class="hed">
-                         
-                          </thead>
-                          <tbody class="bod">
-                           
-                          </tbody>
-                        </table>
-                    </td>          
-                </tr>
-              </table>
-            </div>
-            <br>
-            <div class="table-responsive pt-3">
-                
-                <table class="table">
-                    <tr>
-                        <th class="text-center"  ><span style="color: #02679a;">Cheapest Option</span></th>               
-                    </tr>
-                    <tr>
+                        <td>
+                          <table class="table">
+                            <thead class="hed">
+                        
+                            </thead>
+                            <tbody class="bod">
+                        
+                            </tbody>
+                          </table>
+                        </td>
                         <td>
                             <table class="table">
                                 <tr>
-                                    <th>Unit Price</th>
-                                    <th>Total</th>
-                                    <th>Vendor</th>
+                                    <th class="th">Unit Price</th>
+                                    <th class="th">Total</th>
+                                    <th class="th">Vendor</th>
                                 </tr>
                                 <tbody class="chipbody">
-                            
+                              
                                 </tbody>
                                 
                             </table>
-                        </td>          
+                        </td>
                     </tr>
+                
                 </table>
+              </div>
             </div>
-
-            
-        </div>  
+              <br>
 <!-- body -->
 <br/>
 <br/>
@@ -203,6 +181,7 @@
           }
 
 //////////////
+          let vvdataItem = vvdata[0].itemPrice
         data[3].forEach((element,ind) => {
             let list1 = document.createElement("tr");
             list1.innerHTML = `       
@@ -230,16 +209,20 @@
 
 
 ///LOOPING ROWS AND COLUMNS FOR EACH VENDOR UNIT PRICE ALSO CALCULATE THE LOWEST PRICE FOR EACH ITEM FROM EACH VENDOR
-        let lpoArr = []        
+        // let lpoArr = []        
+          let lpoArr = []    
+          vvdataItem.forEach(element => {
+            lpoArr.push(lpoArr.length + 1)
+          });
 
-          for (let b = 0; b < arr.length; b++) {
+          for (let b = 0; b < lpoArr.length; b++) {
               let incr = 0
               let rowar = []
             while (incr < vvdata.length) {//loop for each obj //each item to get each row
               // console.log("eachlog",vvdata[incr])
               let main1 = vvdata[incr].itemPrice
               for (let i = 0; i < main1.length; i++) {//loop for items in each obj
-                if (parseInt(main1[i].itemNumber) == arr[b]) {//check for rach row
+                if (parseInt(main1[i].itemNumber) == lpoArr[b]) {//check for rach row
                   rowar.push(main1[i])
                 }           
               }

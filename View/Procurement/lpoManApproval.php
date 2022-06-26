@@ -240,27 +240,27 @@ i{
                             <tr>
                                 <td rowspan="2" colspan="2">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                     <img src="../../Upload/logo.jpeg" style="width:200px">
-                                    </div>
-                                    <div class="col-md-6">
-                                    <h5 style="color:#02679a">Local Purchase Request</h5>
+                                    </div> -->
+                                    <div class="col-12">
+                                    <h5 style="color:#02679a;font-size:25px">Local Purchase Request</h5>
                                     <div>
                                 </div>
                                 </td>                      
                                 <td colspan="3">
                                 <div class="row">
-                                    
-                                    <div class="col-3"><span style="color:#02679a"> LPONO:</span></div>
-                                    <div class="col-9"><p class="lreqno"> </p></div>
+                              
+                                    <div class="col-3"><span style="color:#02679a"> LPONO:</span>&nbsp;&nbsp;<span class="lreqno"></span></div>
+                                    <!-- <div class="col-9"><p class="lreqno"> </p></div> -->
                                 </div>                                
                                 </td>                        
                             </tr>
                             <tr>                    
                                 <td colspan="3">
                                 <div class="row">
-                                    <div class="col-3"><span style="color:#02679a"> P-RegNo:  </span></div>
-                                    <div class="col-9"><p class="preqno"></p></div>
+                                    <div class="col-3"><span style="color:#02679a"> P-RegNo:</span>&nbsp;&nbsp;<span class="preqno"></span></div>
+                                    <!-- <div class="col-9"><p class="preqno"></p></div> -->
                                 </div>                                        
                                 </td>
                             </tr>
@@ -268,14 +268,14 @@ i{
                             <tr>
                                 <td colspan="3">
                                 <div class="row">
-                                    <div class="col-2"><span style="color:#02679a"> To:  </span></div>
-                                    <div class="col-10"><p class="to"></p></div>
+                                    <div class="col-2"><span style="color:#02679a"> To:</span>&nbsp;&nbsp;<span class="to"></span></div>
+                                    <!-- <div class="col-10"><p class="to"></p></div> -->
                                 </div>                                      
                                 </td>
                                 <td colspan="2">
                                 <div class="row">
-                                    <div class="col-3"><span style="color:#02679a">DATE:  </span></div>
-                                    <div class="col-9"><p class="ldate"></p></div>
+                                    <div class="col-3"><span style="color:#02679a">DATE:</span>&nbsp;&nbsp;<span class="ldate"></span></div>
+                                    <!-- <div class="col-9"><p class="ldate"></p></div> -->
                                 </div>  
                                 </td>
                             </tr>
@@ -309,40 +309,33 @@ i{
                             <tbody id="tbb">                                   
                             </tbody>
                             <tr>
-                                <td colspan="4">
-                                    
+                                <td colspan="4"></td>                          
+                                <td class="text-right">
+                                  <span style="color:#02679a">Discount<span class="dis"></span></span>                              
                                 </td>
-                                <td colspan="2">
-                                    <div class="row">
-                                        <div class="col-4"><span style="color:#02679a">Discount <span class="dis"></span>:  </span></div>
-                                        <div class="col-7"><p class="disc"></p></div>
-                                    </div>                                 
-                                </td>
+                                <td>
+                                  <b><p class="disc"></p></b>
+                                </td>                          
                             
                             </tr>
                             <tr>
-                                <td colspan="4">
-                                    
+                              <td colspan="4"></td> 
+                                <td class="text-right">
+                                 <span style="color:#02679a">Vat <span class="vt"></span> </span>                             
                                 </td>
-                                <td colspan="2">
-                                    <div class="row">
-                                        <div class="col-3"><span style="color:#02679a">Vat <span class="vt"></span>:  </span></div>
-                                        <div class="col-9"><p class="vat"></p></div>
-                                    </div>                                 
-                                </td>
+                                <td>
+                                  <b><p class="vat"></p></b>
+                                </td> 
                             
                             </tr>
                             <tr>
-                                <td colspan="4">
-                                    
+                              <td colspan="4"></td> 
+                                <td class="text-right">
+                                  <span style="color:#02679a"> GRAND TOTAL</span>                               
                                 </td>
-                                <td colspan="2">
-                                    <div class="row">
-                                        <div class="col-3"><span style="color:#02679a"> GRAND TOTAL:  </span></div>
-                                        <div class="col-9"><p class="tot"></p></div>
-                                    </div>                                 
-                                </td>
-                            
+                                <td>
+                                 <b><p class="tot"></p></b> 
+                                </td> 
                             </tr>
                         </table>
                         </div>
@@ -351,18 +344,17 @@ i{
                         <hr>
                         <div class="row">
                             <div class="col-4">
-                            <div class="sups">
+                            <div class="sups text-center">
                                     <p class="text-info">Pending</p>
 
                                 </div>
-                                <hr>
-                                Supervisor                   
+                                              
                             </div>
                             <div class="col-4">
                                 <form action="../../Controller/lpoApprovalController.php" method="post">
                                     <input name="preqNo" type="hidden" class="form-control prno" id="exampleInputUsername1">
                                     <input name="lpono" type="hidden" class="form-control lpono" id="exampleInputUsername1">
-                                    
+                                    <input name="date" type="hidden" class="form-control prno" id="exampleInputUsername1"  value="<?php echo date('Y-m-d');?>">
                                     <div class="row">
                                         <div class="col-12">
                                         <div class="form-group">
@@ -388,11 +380,10 @@ i{
                                 </form>
                             </div>
                             <div class="col-4">
-                                <div class="mnds">
+                                <div class="mnds text-center">
                                     <p class="text-info">Pending</p>
                                 </div>
-                                <hr>
-                                Managing Director
+                               
                             </div>
                         </div>
                     </div>
@@ -521,10 +512,15 @@ i{
                               <br>
                               <hr>
                               <div class="row">
+                              <div class="col-4 sups text-center">
+                                    <p class="text-warning">Pending</p>
+                                    <p class="text-warning">Supervisor</p>
+                                </div>
                                 <div class="col-4">
                                    <form action="../../Controller/lpoApprovalController.php" method="post">
                                     <input name="preqNo" type="hidden" class="form-control prno" id="exampleInputUsername1">
                                     <input name="lpono" type="hidden" class="form-control lpono" id="exampleInputUsername1">
+                                    <input name="date" type="hidden" class="form-control prno" id="exampleInputUsername1"  value="<?php echo date('Y-m-d');?>">
                                     <div class="row">
                                         <div class="col-12">
                                           <div class="form-group">
@@ -548,12 +544,10 @@ i{
                                       Approve
                                     </button> 
                                   </form>                    
-                                </div>
-                                <div class="col-4 mns">
+                                </div>                            
+                                <div class="col-4 mnds text-center">
                                     <p class="text-warning">Pending</p>
-                                </div>
-                                <div class="col-4 mnds">
-                                    <p class="text-warning">Pending</p>
+                                    <p class="text-warning">Managing Director</p>
                                 </div>
                               </div>
                             </div>
@@ -738,7 +732,7 @@ function viewFunc(v,p,ln){
     //   console.log("response",manStatus,manDStatus,supStatus)
 
 
-
+  
     
     let supstat = ()=>{
         let child = supStatus.lastElementChild; 
@@ -747,14 +741,14 @@ function viewFunc(v,p,ln){
             child = supStatus.lastElementChild;
         }
         if (data[1][0].approvesup == "Pending") {
-            supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">${data[1][0].remsup }</p>` 
+            supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
         } else if(data[1][0].approvesup == "decline") {
-            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p style="color:#02679a">${data[1][0].remsup}</p>`         
+            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p class="text-danger">${data[1][0].remsup}</p><br/><p class="text-danger">${data[1][0].supdate}</p>`         
         }else{
           if (data[1][0].sigsup) {
-            supStatus.innerHTML = `<img src="../${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">${data[1][0].remsup}</p>`          
+            supStatus.innerHTML = `<img src="../${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>`          
           } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">${data[1][0].remsup}</p>` 
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>` 
           }
         }
       }
@@ -766,14 +760,14 @@ function viewFunc(v,p,ln){
             child = manDStatus.lastElementChild;
         }
         if (data[1][0].approvemand == "Pending") {
-            manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">${data[1][0].remmand}</p>` 
+            manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
         } else if(data[1][0].approvemand == "decline") {
-            manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p style="color:#02679a">${data[1][0].remmand }</p>`         
+            manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[1][0].remmand}</p><br/><p class="text-danger">${data[1][0].manddate}</p>`         
         }else{
           if (data[1][0].sigmand) {
-            manDStatus.innerHTML = `<img src="../${data[1][0].sigmand}" width="100px"/><br/><p class="text-success">${data[1][0].remmand}</p>` 
+            manDStatus.innerHTML = `<img src="../${data[1][0].sigmand}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${data[1][0].manddate}</p>` 
           } else {
-            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">${data[1][0].remmand}</p>`   
+            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${data[1][0].manddate}</p>`   
           }
         }
       }
