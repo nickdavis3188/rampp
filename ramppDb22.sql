@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2022 at 08:05 PM
+-- Generation Time: Jun 28, 2022 at 11:01 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.4
 
@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`) VALUES
-('Drink', ' Champion', 160, 10, 300, 150, '1', 6, 450, 2),
+('Drink', ' Champion', 16, 20, 300, 150, '1', 6, 450, 2),
 ('Funiture', ' Table', 30, 5, 2700, 0, '1', 7, 0, 1);
 
 -- --------------------------------------------------------
@@ -319,7 +319,8 @@ INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `i
 (7, '2022-06-22', 0, 2, '', 0, 0),
 (7, '2022-06-22', 0, 2, 'it''s too much', 0, 10),
 (6, '2022-06-22', 2, 0, 'it''s too low', 10, 0),
-(7, '2022-06-22', 0, 2, 'it''s too much', 0, 10);
+(7, '2022-06-22', 0, 2, 'it''s too much', 0, 10),
+(6, '2022-06-28', 2, 0, 'it was too low', 40, 0);
 
 -- --------------------------------------------------------
 
@@ -380,18 +381,19 @@ CREATE TABLE IF NOT EXISTS `lpouniquevendor` (
   `vt` int(100) NOT NULL,
   `mandate` date NOT NULL,
   `manddate` date NOT NULL,
-  `supdate` date NOT NULL
+  `supdate` date NOT NULL,
+  `subtotal` int(200) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lpouniquevendor`
 --
 
-INSERT INTO `lpouniquevendor` (`purchaseId`, `vendorId`, `venname`, `discount`, `vat`, `grandtotal`, `lpocreated`, `approvesup`, `approveman`, `approvemand`, `remsup`, `remman`, `remmand`, `sigsup`, `sigman`, `sigmand`, `mountwords`, `lpono`, `lpodate`, `disc`, `vt`, `mandate`, `manddate`, `supdate`) VALUES
-(3456, 9, 'BUNN REGENCY', 60, '72', 1512, 'Yes', 'approve', 'approve', 'approve', 'good to go', 'nice', 'move on', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'One thousand five hundred and twelve Naira', 3913, '2022-06-26', 4, 5, '2022-06-26', '2022-06-26', '2022-06-26'),
-(3456, 8, 'WOERKA NIG CO LTD', 0, 'No', 0, 'No', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '', 0, '0000-00-00', 0, 0, '0000-00-00', '0000-00-00', '0000-00-00'),
-(3457, 6, 'MAC MORRIS INTL CO LTD', 0, 'No', 0, 'No', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '', 0, '0000-00-00', 0, 0, '0000-00-00', '0000-00-00', '0000-00-00'),
-(3457, 9, 'BUNN REGENCY', 0, 'No', 0, 'No', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '', 0, '0000-00-00', 0, 0, '0000-00-00', '0000-00-00', '0000-00-00');
+INSERT INTO `lpouniquevendor` (`purchaseId`, `vendorId`, `venname`, `discount`, `vat`, `grandtotal`, `lpocreated`, `approvesup`, `approveman`, `approvemand`, `remsup`, `remman`, `remmand`, `sigsup`, `sigman`, `sigmand`, `mountwords`, `lpono`, `lpodate`, `disc`, `vt`, `mandate`, `manddate`, `supdate`, `subtotal`) VALUES
+(3456, 9, 'BUNN REGENCY', 60, '72', 1512, 'Yes', 'approve', 'approve', 'approve', 'good to go', 'nice', 'move on', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'One thousand five hundred and twelve Naira', 3913, '2022-06-26', 4, 5, '2022-06-26', '2022-06-26', '2022-06-26', 1500),
+(3456, 8, 'WOERKA NIG CO LTD', 60, '147', 3087, 'Yes', 'approve', 'approve', 'approve', 'go on', 'nice one', 'ok', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'three thousand eighty seven naira only', 8482, '2022-06-28', 2, 5, '2022-06-28', '2022-06-28', '2022-06-28', 3000),
+(3457, 6, 'MAC MORRIS INTL CO LTD', 0, 'No', 0, 'No', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '', 0, '0000-00-00', 0, 0, '0000-00-00', '0000-00-00', '0000-00-00', 0),
+(3457, 9, 'BUNN REGENCY', 0, 'No', 0, 'No', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '', 0, '0000-00-00', 0, 0, '0000-00-00', '0000-00-00', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -487,7 +489,11 @@ INSERT INTO `preqitem` (`itemname`, `description`, `unitprice`, `qty`, `subtotal
 ('Lexus', ' New Car Jeep', 14000000, 2, 28000000, 12348, ''),
 ('Shoe', 'Adidas', 4500, 3, 13500, 3457, 'par'),
 ('T-shirt', 'Gooshe', 3000, 4, 12000, 3457, 'lng'),
-('Belt', 'rollex', 1500, 3, 4500, 3457, 'pic');
+('Belt', 'rollex', 1500, 3, 4500, 3457, 'pic'),
+('Shoe ', 'Addidas', 9500, 2, 19000, 3458, 'pr'),
+('T-shirt', 'Field make', 4600, 3, 13800, 3458, 'pic'),
+('Trouser ', 'Jeans ', 3000, 3, 9000, 3458, 'pic'),
+('Inner Wears ', 'singlet and boxers ', 2600, 3, 7800, 3458, 'pak');
 
 -- --------------------------------------------------------
 
@@ -566,7 +572,8 @@ CREATE TABLE IF NOT EXISTS `prequisitioninfo` (
 
 INSERT INTO `prequisitioninfo` (`preqno`, `from`, `subject`, `date`, `summary`, `total`, `supapprove`, `manapprove`, `mandapprove`, `manremark`, `mandremark`, `supremark`, `mansig`, `mandsig`, `supsig`, `reqfrom`, `compappsup`, `compappman`, `compappmand`, `compremsup`, `compremman`, `compremmand`, `csupsig`, `cmansig`, `cmandsig`, `supdate`, `mandate`, `manddate`, `quoted`, `csupapprove`, `supcappdate`, `mandcappdate`, `mancappdate`) VALUES
 (3456, 'nick davis', 'saturday stuff', '2022-06-01', 'for clube', 45000, 'approve', 'approve', 'approve', '', '', '', '', '', '', 'adnindavis', 'approve', 'approve', 'approve', '', '', '', '', '', '', '0000-00-00', '0000-00-00', '0000-00-00', 4, 'approve', '0000-00-00', '0000-00-00', '0000-00-00'),
-(3457, 'nick davis', 'December Budget', '2022-06-22', 'to restock my wordrob ', 30000, 'approve', 'approve', 'approve', 'good collection', 'good stuff', 'nice items', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '../Upload/62b2f22ac5b1d3.95862652.png', 'adnindavis', 'approve', 'approve', 'approve', 'fegrgreg', 'hellouh', 'jtjtjjrrr', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '2022-06-22', '2022-06-22', '2022-06-22', 2, '', '2022-06-25', '2022-06-25', '2022-06-25');
+(3457, 'nick davis', 'December Budget', '2022-06-22', 'to restock my wordrob ', 30000, 'approve', 'approve', 'approve', 'good collection', 'good stuff', 'nice items', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '../Upload/62b2f22ac5b1d3.95862652.png', 'adnindavis', 'approve', 'approve', 'approve', 'fegrgreg', 'hellouh', 'jtjtjjrrr', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '2022-06-22', '2022-06-22', '2022-06-22', 2, '', '2022-06-25', '2022-06-25', '2022-06-25'),
+(3458, 'nick davis', 'My Personal needs', '2022-06-27', 'This are just for my personal needs', 49600, 'approve', 'approve', 'decline', 'Good', 'this is crazy ', 'Nice', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '../Upload/62b2f22ac5b1d3.95862652.png', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-06-27', '2022-06-27', '2022-06-27', 0, '', '0000-00-00', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -890,9 +897,9 @@ INSERT INTO `users` (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `
 ('nick', 'davis', 'adnindavis', 'davis3188', 'Admin', 'admindavis@gmail.com', 'C.G. bar', '09036103607', 'male', 'manager', '', ''),
 ('victor', 'joe', 'victty', 'victor12345', 'Admin', 'vict@gmail.com', 'GRA', '93680877977', 'male', 'manager', '../Upload/629496a9685d63.12393436.jpg', '../Upload/629496a9685b95.08288872.jpg'),
 ('Nick', 'Dann', 'dann', 'dann123', 'Admin', 'nickdann@email.com', 'USA', '345281353546', 'male', 'supervisor', '../Upload/62975c0161d9d1.74152793.jpg', '../Upload/62975c01432fc2.68271303.jpeg'),
-('Joe', 'Lu', 'joelu', 'joelu123', 'Admin', 'joelu@gmail.com', 'CANADA', '23545367842', 'male', 'Supervisor', '../Upload/62b2f22ada0ba0.26121542.', '../Upload/62b2f22ac5b1d3.95862652.png'),
-('Davis', 'Sa', 'davissa', 'davissa123', 'Admin', 'davissa@gmail.com', 'USA', '03889584', 'male', 'Manager', '../Upload/62b2f29123e897.29334946.', '../Upload/62b2f29123e749.48953053.png'),
-('Nick', 'do', 'nickdo', 'nickdo123', 'Admin', 'nickdo@gmail.com', 'UK', '848739822', 'male', 'Managing Director', '../Upload/62b2f2d43a04a7.54870956.', '../Upload/62b2f2d43a0354.47316097.png');
+('Joe', 'Lu', 'joelu', 'joelu123', 'Supervisor', 'joelu@gmail.com', 'CANADA', '23545367842', 'male', 'Supervisor', '../Upload/62b2f22ada0ba0.26121542.', '../Upload/62b2f22ac5b1d3.95862652.png'),
+('Davis', 'Sa', 'davissa', 'davissa123', 'Manager', 'davissa@gmail.com', 'USA', '03889584', 'male', 'Manager', '../Upload/62b2f29123e897.29334946.', '../Upload/62b2f29123e749.48953053.png'),
+('Nick', 'do', 'nickdo', 'nickdo123', 'Managing Director', 'nickdo@gmail.com', 'UK', '848739822', 'male', 'Managing Director', '../Upload/62b2f2d43a04a7.54870956.', '../Upload/62b2f2d43a0354.47316097.png');
 
 -- --------------------------------------------------------
 
