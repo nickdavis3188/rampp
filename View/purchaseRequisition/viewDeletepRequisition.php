@@ -604,7 +604,7 @@ function printP(ins){
         if (data[0].manapprove == "Pending") {
           manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
         } else if(data[0].manapprove == "decline") {
-          manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data[0].manremark}</p><br/><p class="text-danger">${data[0].mandate}</p>`         
+          manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[0].manremark}</p><br/><p class="text-danger">${data[0].mandate}</p>`         
         }else{
           if (data[0].mansig) {
             manStatus.innerHTML = `<img src="../${data[0].mansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${data[0].mandate}</p>` 
@@ -623,7 +623,7 @@ function printP(ins){
         if (data[0].mandapprove == "Pending") {
           manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
         } else if(data[0].mandapprove == "decline") {
-          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p style="color:#02679a">${data[0].mandremark }</p><br/><p class="text-danger">${data[0].manddate}</p>`         
+          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[0].mandremark }</p><br/><p class="text-danger">${data[0].manddate}</p>`         
         }else{
           if (data[0].mandsig) {
             manDStatus.innerHTML = `<img src="../${data[0].mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${data[0].manddate}</p>` 
@@ -642,7 +642,7 @@ function printP(ins){
         if (data[0].supapprove == "Pending") {
           supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
         } else if(data[0].supapprove == "decline") {
-          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data[0].supremark}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
+          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p class="text-danger">${data[0].supremark}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
         }else{
           if (data[0].supsig) {
             supStatus.innerHTML = `<img src="../${data[0].supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>`          

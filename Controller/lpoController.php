@@ -10,6 +10,7 @@
      $discount = $post["data"]->discount;
      $vat = $post["data"]->vat;
      $grandtotal = $post["data"]->grandTotal;
+     $subtotal = $post["data"]->subtotal;
      $lpocreated = $post["data"]->lpocreated;
      $purchaseId = $post["data"]->purchaseId;
      $vendorId = $post["data"]->vendorId;
@@ -21,7 +22,7 @@
 
    
      
-    $query = "UPDATE lpouniquevendor SET discount='$discount', vat='$vat',grandtotal= '$grandtotal', lpocreated= '$lpocreated',mountwords='$amountWords',lpono='$lpono',lpodate='$lpodate',disc='$disc',vt='$vt' WHERE purchaseId= '$purchaseId' AND vendorId='$vendorId'";
+    $query = "UPDATE lpouniquevendor SET subtotal='$subtotal', discount='$discount', vat='$vat',grandtotal= '$grandtotal', lpocreated= '$lpocreated',mountwords='$amountWords',lpono='$lpono',lpodate='$lpodate',disc='$disc',vt='$vt' WHERE purchaseId= '$purchaseId' AND vendorId='$vendorId'";
      
     $results = mysql_query($query);
     $noofrows = mysql_affected_rows();

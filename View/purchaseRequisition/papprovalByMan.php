@@ -223,7 +223,7 @@ i{
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                   <div class="modal-header gbgn">
-                    <h5 class="modal-title" id="exampleModalLabel">User Info</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">P-Req Info</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body gbgn">
@@ -336,9 +336,9 @@ i{
                               <br>
                               <hr>
                               <div class="row">
-                              <div class="col-4 sups">
+                                  <div class="col-4 sups text-center">
                                     
-                                    </div>
+                                  </div>
                                 
                                   <div class="col-4">
                                     <form action="../../Controller/pApproveController.php" method="post">
@@ -369,7 +369,7 @@ i{
                                       </button> 
                                     </form>
                                   </div>
-                                  <div class="col-4 mnds">
+                                  <div class="col-4 mnds text-center">
                                   
                                   </div>
                               </div>
@@ -510,7 +510,7 @@ i{
         subj.innerText = data[0].subject
         from.innerText = data[0].from
         summ.innerText = data[0].summary
-        total.innerText = data[0].total
+        total.innerText = "# "+Number(data[0].total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
      
 
       if (data[1].length < 1) {
@@ -535,8 +535,8 @@ i{
                   <td>${element.itemname}</td>
                   <td>${element.description}</td>
                   <td>${element.qty}</td>   
-                  <td>${element.unitprice}</td>                      
-                  <td>${element.subtotal}</td>                    
+                  <td>${"# "+Number(element.unitprice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>                      
+                  <td>${"# "+Number(element.subtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>                    
               `;
               tbodyy.appendChild(list2);
               
@@ -553,7 +553,7 @@ i{
         if (data[0].mandapprove == "Pending") {
           manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
         } else if(data[0].mandapprove == "decline") {
-          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p style="color:#02679a">${data[0].mandremark }</p><br/><p class="text-danger">${data[0].manddate}</p>`         
+          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[0].mandremark }</p><br/><p class="text-danger">${data[0].manddate}</p>`         
         }else{
           if (data[0].mandsig) {
             manDStatus.innerHTML = `<img src="../${data[0].mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${data[0].manddate}</p>` 
@@ -572,7 +572,7 @@ i{
         if (data[0].supapprove == "Pending") {
           supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
         } else if(data[0].supapprove == "decline") {
-          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data[0].supremark}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
+          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p class="text-danger">${data[0].supremark}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
         }else{
           if (data[0].supsig) {
             supStatus.innerHTML = `<img src="../${data[0].supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>`          

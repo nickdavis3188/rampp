@@ -19,6 +19,7 @@
     }
 
 
+
      $itemss = array();
      
      $querys ="SELECT * FROM  preqitem WHERE preqno =".$post["pRegNo"]."";
@@ -53,10 +54,30 @@
    
      $preqno = $items[0]['preqno'];
      $subject = $items[0]['subject'];
+     $supcappdate = $items[0]['supcappdate'];
+     $mandcappdate = $items[0]['mandcappdate'];
+     $mancappdate = $items[0]['mancappdate'];
+     $compappsup = $items[0]['compappsup'];
+     $compappman = $items[0]['compappman'];
+
+     $compappmand = $items[0]['compappmand'];
+
+     $compremsup = $items[0]['compremsup'];
+
+     $compremman = $items[0]['compremman'];
+
+     $compremmand = $items[0]['compremmand'];
+
+     $csupsig = $items[0]['csupsig'];
+
+     $cmansig = $items[0]['cmansig'];
+
+     $cmandsig = $items[0]['cmandsig'];
+     
 
    
 
-    echo json_encode( array(array("preqno" =>$preqno ,"subject"=>$subject,),$items1,$items2,$itemss));
+    echo json_encode( array(array("preqno" =>$preqno ,"subject"=>$subject,"supcappdate"=>$supcappdate,"mandcappdate"=>$mandcappdate,"mancappdate"=>$mancappdate,"compappsup"=>$compappsup,"compappman"=>$compappman,"compappmand"=>$compappmand,"compremsup"=>$compremsup,"compremman"=>$compremman,"compremmand"=>$compremmand,"csupsig"=>$csupsig,"cmansig"=>$cmansig,"cmandsig"=>$cmandsig),$items1,$items2,$itemss));
      
     
 

@@ -248,7 +248,29 @@ td, th{
           </div>
         
             <br>
-            <br>
+         
+            <hr>
+            <div class="row">
+              <div class="col-4">
+                  <div class="sups text-center">
+                      <p class="text-info">Pending</p>
+                      <p class="text-info">Supervisor</p>
+                  </div>  
+              </div>
+              <div class="col-4">
+                <div class="mns text-center">
+                  <p class="text-info">Pending</p>
+                  <p class="text-info">Manager</p>
+                </div>   
+              </div>
+              <div class="col-4">
+                <div class="mnds text-center">
+                  <p class="text-info">Pending</p>
+                  <p class="text-info">Managing Director</p>
+                </div>  
+              </div>
+            </div>
+            <hr>
       
         <!-- </div> -->
           </div>
@@ -366,6 +388,9 @@ td, th{
       let bod = document.querySelector(".bod"); 
       let chipbody = document.querySelector(".chipbody"); 
     let tbodyy = document.querySelector(".itbod");
+    let manStatus = document.querySelector(".mns"); 
+    let manDStatus = document.querySelector(".mnds"); 
+    let supStatus = document.querySelector(".sups"); 
 
      
         
@@ -378,7 +403,7 @@ td, th{
 
           reqno.innerText = data[0].preqno
           subj.innerText = data[0].subject
-
+    
 
 
          
@@ -571,7 +596,73 @@ td, th{
             }
           })
         
-        
+        // approvals
+  
+
+
+
+            let manstat = ()=>{
+            let child = manStatus.lastElementChild; 
+            while (child) {
+                manStatus.removeChild(child);
+                child = manStatus.lastElementChild;
+            }
+            if (data[0].compappman == "Pending") {
+                manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
+            } else if(data[0].compappman == "decline") {
+                manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[0].compremman}</p><br/><p class="text-danger">${data[0].mancappdate}</p>`         
+            }else{
+              if (data[0].cmansig) {
+                manStatus.innerHTML = `<img src="../${data[0].cmansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].compremman}</p><br/><p class="text-success">${data[0].mancappdate}</p>` 
+                
+              } else {
+                manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].compremman}</p><br/><p class="text-success">${data[0].mancappdate}</p>`
+              }
+            }
+          }
+
+
+          let mandstat = ()=>{
+            let child = manDStatus.lastElementChild; 
+            while (child) {
+                manDStatus.removeChild(child);
+                child = manDStatus.lastElementChild;
+            }
+            if (data[0].compappmand == "Pending") {
+                manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
+            } else if(data[0].compappmand == "decline") {
+                manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[0].compremmand }</p><br/><p class="text-danger">${data[0].mandcappdate}</p>`         
+            }else{
+              if (data[0].cmandsig) {
+                manDStatus.innerHTML = `<img src="../${data[0].cmandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].compremmand}</p><br/><p class="text-success">${data[0].mandcappdate}</p>` 
+              } else {
+                manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].compremmand}</p><br/><p class="text-success">${data[0].mandcappdate}</p>`   
+              }
+            }
+          }
+
+          let supstat = ()=>{
+            let child = supStatus.lastElementChild; 
+            while (child) {
+                supStatus.removeChild(child);
+                child = supStatus.lastElementChild;
+            }
+            if (data[0].compappsup == "Pending") {
+                supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
+            } else if(data[0].compappsup == "decline") {
+                supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-success">Supervisor</p><br/><p class="text-danger">${data[0].compremsup}</p><br/><p class="text-danger">${data[0].supcappdate}</p>`         
+            }else{
+              if (data[0].csupsig) {
+                supStatus.innerHTML = `<img src="../${data[0].csupsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].compremsup}</p><br/><p class="text-success">${data[0].supcappdate}</p>`          
+              } else {
+                supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].compremsup}</p><br/><p class="text-success">${data[0].supcappdate}</p>` 
+              }
+            }
+          }
+      
+          manstat()
+          mandstat()
+          supstat()
         }).catch(err=>{
           if (err) {
             alert("Error:"+err)

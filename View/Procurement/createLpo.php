@@ -146,8 +146,13 @@
                             <tfooter>     
                               <tr>
                                 <th colspan="4"></th>
-                                  <th class="text-right" style="color:#02679a;">Total</th>                                    
-                                  <th id="total">#0.00</th>                             
+                                <th class="text-right" style="color:#02679a;">Sub Total</th>                                    
+                                <th id="subtotal">#0.00</th>                             
+                              </tr>                        
+                              <tr>
+                                <th colspan="4"></th>
+                                <th class="text-right" style="color:#02679a;">Grand Total</th>                                    
+                                <th id="total">#0.00</th>                             
                               </tr>                        
                             </tfooter>
                         </table>
@@ -292,6 +297,7 @@ let par = new URLSearchParams(window.location.search)
 if (par.has("id")&& par.has("reqno")) {
         let vatvalue = document.querySelector(".vatval");  
         let vat = document.querySelector(".vat");  
+        let subTotal = document.querySelector("#subtotal"); 
         let grandTotal = document.querySelector("#total"); 
         let vname = document.querySelector(".venname"); 
         let tbodyy = document.querySelector("#tbodyy"); 
@@ -329,8 +335,10 @@ if (par.has("id")&& par.has("reqno")) {
                 tbodyy.appendChild(list);
             })
             grandTotal.setAttribute("ammount",totalar.reduce((a,b)=>a+b,0))
+            subTotal.setAttribute("subtotal",totalar.reduce((a,b)=>a+b,0))
             let fivePercentAdded = vat.value == "Yes"?(5/100) * totalar.reduce((a,b)=>a+b,0):0
             vatvalue.value =  fivePercentAdded
+            subTotal.innerHTML = "#"+totalar.reduce((a,b)=>a+b,0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
             grandTotal.innerHTML = "#"+totalar.reduce((a,b)=>a+b,0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 
 
@@ -416,6 +424,7 @@ if (par.has("id")&& par.has("reqno")) {
         let descountvalue = document.querySelector(".descval"); 
       
         let grandTotal = document.querySelector("#total"); 
+        let subTotal = document.querySelector("#subtotal"); 
         let vname = document.querySelector(".venname"); 
         let descount = document.querySelector(".desc"); 
         // let ele3 = document.querySelector(".venI"); 
@@ -423,6 +432,7 @@ if (par.has("id")&& par.has("reqno")) {
         let mainData = {
             discount:descountvalue.value == ""?0:descountvalue.value,
             vat:vatvalue.value == ""?0:vatvalue.value,
+            subtotal:Number(subTotal.getAttribute("subtotal")),
             grandTotal:Number(grandTotal.getAttribute("ammount")),
             lpocreated:"Yes",
             purchaseId:reqno.value,

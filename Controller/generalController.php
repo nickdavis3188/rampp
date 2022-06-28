@@ -199,6 +199,55 @@ class GeneralController{
         return $items;
     }
 
+    function getAllInventory(){
+  
+        $items = array();
+
+        $query ="SELECT * FROM  inventory WHERE quantityadded < minnimumlevle" ;
+        $results = mysql_query($query);
+
+        while($row = mysql_fetch_array($results)){
+            $items[] = $row;
+        }
+        return $items;
+    }
+    function getAllInventoryCat(){
+  
+        $items = array();
+
+        $query ="SELECT * FROM category" ;
+        $results = mysql_query($query);
+
+        while($row = mysql_fetch_array($results)){
+            $items[] = $row;
+        }
+        return count($items);
+    }
+    function getAllInventoryPro(){
+  
+        $items = array();
+
+        $query ="SELECT * FROM  inventory" ;
+        $results = mysql_query($query);
+
+        while($row = mysql_fetch_array($results)){
+            $items[] = $row;
+        }
+        return count($items);
+    }
+    function getAllInventoryLow(){
+  
+        $items = array();
+
+        $query ="SELECT * FROM  inventory WHERE quantityadded < minnimumlevle";
+        $results = mysql_query($query);
+
+        while($row = mysql_fetch_array($results)){
+            $items[] = $row;
+        }
+        return count($items);
+    }
+
     function getAllApprovedByMdCC(){
   
         $items = array();

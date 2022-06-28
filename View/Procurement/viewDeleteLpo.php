@@ -380,6 +380,15 @@ i{
                             <tr>
                               <td colspan="4"></td> 
                                 <td class="text-right">
+                                  <span style="color:#02679a"> SUB TOTAL</span>                               
+                                </td>
+                                <td>
+                                 <b><p class="subtot"></p></b> 
+                                </td> 
+                            </tr>
+                            <tr>
+                              <td colspan="4"></td> 
+                                <td class="text-right">
                                   <span style="color:#02679a"> GRAND TOTAL</span>                               
                                 </td>
                                 <td>
@@ -549,6 +558,7 @@ i{
     let tbodyy = document.querySelector("#tbb");  
     let descount = document.querySelector(".disc"); 
     let vat = document.querySelector(".vat");
+    let stotal = document.querySelector(".subtot"); 
     let gtotal = document.querySelector(".tot"); 
     let disc = document.querySelector(".dis"); 
     let vt = document.querySelector(".vt"); 
@@ -572,6 +582,7 @@ i{
         date.innerText = data[1][0].lpodate
         descount.innerText = "#"+Number(data[1][0].discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
         vat.innerText = "#"+Number(data[1][0].vat).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
+        stotal.innerText = "#"+Number(data[1][0].subtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
         gtotal.innerText = "#"+Number(data[1][0].grandtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
         disc.innerText = data[1][0].disc+"%"
         vt.innerText = data[1][0].vt+"%"

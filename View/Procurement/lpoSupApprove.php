@@ -244,7 +244,7 @@ i{
                                     <img src="../../Upload/logo.jpeg" style="width:200px">
                                     </div> -->
                                     <div class="col-12">
-                                    <h5 style="color:#02679a;font-size:25px">Local Purchase Request</h5>
+                                    <h5 style="color:#02679a;font-size:25px">Local Purchase Order</h5>
                                     <div>
                                 </div>
                                 </td>                      
@@ -327,6 +327,15 @@ i{
                                   <b><p class="vat"></p></b>
                                 </td> 
                             
+                            </tr>
+                            <tr>
+                              <td colspan="4"></td> 
+                                <td class="text-right">
+                                  <span style="color:#02679a"> SUB TOTAL</span>                               
+                                </td>
+                                <td>
+                                 <b><p class="subtot"></p></b> 
+                                </td> 
                             </tr>
                             <tr>
                               <td colspan="4"></td> 
@@ -506,6 +515,7 @@ function viewFunc(v,p,ln){
     let descount = document.querySelector(".disc"); 
     let vat = document.querySelector(".vat");
     let gtotal = document.querySelector(".tot"); 
+    let stotal = document.querySelector(".subtot"); 
     let disc = document.querySelector(".dis"); 
     let vt = document.querySelector(".vt"); 
     let manStatus = document.querySelector(".mns"); 
@@ -530,6 +540,7 @@ function viewFunc(v,p,ln){
         descount.innerText = "#"+Number(data[1][0].discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
         vat.innerText = "#"+Number(data[1][0].vat).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
         gtotal.innerText = "#"+Number(data[1][0].grandtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
+        stotal.innerText = "#"+Number(data[1][0].subtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
         disc.innerText = data[1][0].disc+"%"
         vt.innerText = data[1][0].vt+"%"
         // print.setAttribute("vid",v)

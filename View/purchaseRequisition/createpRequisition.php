@@ -22,8 +22,6 @@
   font-size:16px;
   border-collapse: collapse;
   width: 100%;
-  border-bottom:
-
 }
 
 #customers td, #customers th {
