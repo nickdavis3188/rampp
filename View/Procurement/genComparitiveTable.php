@@ -10,12 +10,11 @@
      require("../../Controller/generalController.php");
      include("../../Env/env.php");
      require("../../Connection/dbConnection.php");
-   
-     $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-     $conn->connect();
+
+     $conn = conString1();
 
      $UserUtils = new GeneralController();
-     $data = $UserUtils-> getAllApprovedByMdCC();
+     $data = $UserUtils-> getAllApprovedByMdCC($conn);
       
 ?>
 <!-- HEADER -->

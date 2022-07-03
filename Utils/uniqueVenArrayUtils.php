@@ -1,5 +1,5 @@
 <?php
-    function uploadArray4($data){
+    function uploadArray4($conn,$data){
         
         
         foreach ($data as $index => $value) {     
@@ -9,19 +9,20 @@
         $numCount = 0;
         for ($i=0; $i < count($myArray) ; $i++) {
     
-            $v = "";
-            $k = "";
+            $v = array();
+            $k = array();
          
             foreach ($myArray[$i] as $key => $value) {
                 $k[] = $key;
                 $v[] = "'".$value."'";
             }
-            $k = implode(",",$k);
-            $v = implode(",",$v);
+
+            $kr = implode(",",$k);
+            $vr = implode(",",$v);
       
-            $query = "INSERT INTO lpouniquevendor ($k) VALUES($v)";
-            $results = mysql_query($query);
-            $noofrows = mysql_affected_rows();
+            $query = "INSERT INTO lpouniquevendor ($kr) VALUES($vr)";
+            $results = mysqli_query($conn,$query);
+            $noofrows = mysqli_affected_rows($conn);
         
             if($noofrows==1)
             {     

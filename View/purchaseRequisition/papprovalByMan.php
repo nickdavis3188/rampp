@@ -11,11 +11,11 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils-> getAllManUnApproveP();
+      $data1 = $UserUtils-> getAllManUnApproveP($conn);
     
 ?>
 <!-- HEADER -->
@@ -195,7 +195,7 @@ i{
                     <td><?php echo $value["preqno"] ?></td>
                     <td><?php echo $value["from"] ?></td>
                     <td><?php echo $value["subject"] ?></td>
-                    <td><?php echo $value["date"] ?></td>
+                    <td><?php echo date('d/m/y',strtotime($value["date"])) ?></td>
                     <td>
                     <div>
                       <div class="d-flex justify-content-between align-items-center">
@@ -497,6 +497,16 @@ i{
     let manDStatus = document.querySelector(".mnds"); 
     let supStatus = document.querySelector(".sups"); 
  
+   
+    const dateFormat = (date)=>{
+      var today = new Date(date);
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+      var yyyy = today.getFullYear();
+
+      today = mm + '/' + dd + '/' + yyyy;
+      return today
+    }
 
     let mydata = JSON.stringify({ "pRegNo":tag })
     fetch("../../Utils/getSinglePurchaseRegUtils.php", {
@@ -506,7 +516,7 @@ i{
     }).then(res=>res.json()).then(function(data) {
         reqno.innerText = data[0].preqno
         appro.value = data[0].preqno
-        dateprep.innerText = data[0].dateprepared
+        dateprep.innerText = dateFormat(data[0].dateprepared)
         subj.innerText = data[0].subject
         from.innerText = data[0].from
         summ.innerText = data[0].summary
@@ -553,12 +563,12 @@ i{
         if (data[0].mandapprove == "Pending") {
           manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
         } else if(data[0].mandapprove == "decline") {
-          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[0].mandremark }</p><br/><p class="text-danger">${data[0].manddate}</p>`         
+          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[0].mandremark }</p><br/><p class="text-danger">${dateFormat(data[0].manddate)}</p>`         
         }else{
           if (data[0].mandsig) {
-            manDStatus.innerHTML = `<img src="../${data[0].mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${data[0].manddate}</p>` 
+            manDStatus.innerHTML = `<img src="../${data[0].mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${dateFormat(data[0].manddate)}</p>` 
           } else {
-            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${data[0].manddate}</p>`   
+            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${dateFormat(data[0].manddate)}</p>`   
           }
         }
       }
@@ -572,12 +582,12 @@ i{
         if (data[0].supapprove == "Pending") {
           supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
         } else if(data[0].supapprove == "decline") {
-          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p class="text-danger">${data[0].supremark}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
+          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p class="text-danger">${data[0].supremark}</p><br/><p class="text-danger">${dateFormat(data[0].supdate)}</p>`         
         }else{
           if (data[0].supsig) {
-            supStatus.innerHTML = `<img src="../${data[0].supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>`          
+            supStatus.innerHTML = `<img src="../${data[0].supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${dateFormat(data[0].supdate)}</p>`          
           } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>` 
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${dateFormat(data[0].supdate)}</p>` 
           }
         }
       }

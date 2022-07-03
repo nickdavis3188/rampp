@@ -4,8 +4,7 @@
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
 
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-    $conn->connect();
+    $con = conString1();
     
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -18,11 +17,11 @@
         if ($username & $password)
         {
             $query = "select fname, lname, uname, privilege from users where uname='$username' and pword ='$password'";
-            $results = mysql_query($query);
-            $noofrows = mysql_num_rows($results);
+            $results = mysqli_query($con,$query);
+            $noofrows = mysqli_num_rows($results);
             if ($noofrows==1)
             {
-                while($row = mysql_fetch_array($results))
+                while($row = mysqli_fetch_array($results))
                 { 
                     $_SESSION['validuser'] = $username;
                     $_SESSION['privilege']= $row[3];

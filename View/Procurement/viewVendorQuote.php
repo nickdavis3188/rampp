@@ -10,12 +10,11 @@
       require("../../Controller/generalController.php");
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
-    
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+ 
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils-> vendorQuoteTableDisplay();
+      $data1 = $UserUtils-> vendorQuoteTableDisplay($conn);
       // $data = $UserUtils-> getAllDepartment();
 ?>
 <!-- HEADER -->
@@ -482,7 +481,15 @@ i{
   let tbodyy = document.querySelector("#tbb"); 
     let total = document.querySelector(".tot");   
     
+    const dateFormat = (date)=>{
+      var today = new Date(date);
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+      var yyyy = today.getFullYear();
 
+      today = mm + '/' + dd + '/' + yyyy;
+      return today
+    }
     let mydata = JSON.stringify({ "venid":tag,"pregNo":tag2 })
     fetch("../../Utils/getSingleVendorQuoteUtils.php", {
     method: 'POST',
@@ -494,7 +501,7 @@ i{
     subj.innerText = data[0].for
     from.innerText = data[0].from
     vendor.innerText = data[0].vname
-    date.innerText = data[0].date
+    date.innerText = dateFormat(data[0].date)
   
 
       if (data[1].length < 1) {

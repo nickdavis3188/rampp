@@ -11,11 +11,10 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils-> getAllManDUnApproveC();
+      $data1 = $UserUtils-> getAllManDUnApproveC($conn);
     
 ?>
 <!-- HEADER -->
@@ -25,6 +24,12 @@
 .table, .th, .td {
     border: 1px solid;
     }
+    .table .td {
+  border: solid 1px #666 !important;
+  width: 110px !important;
+  word-wrap: break-word !important;
+  font-size: xx-small !important;
+}
 
 .dropbtn {
   /* background-color: #28a745; */
@@ -199,7 +204,7 @@ i{
                     <td><?php echo $value["preqno"] ?></td>
                     <td><?php echo $value["from"] ?></td>
                     <td><?php echo $value["subject"] ?></td>
-                    <td><?php echo $value["date"] ?></td>
+                    <td><?php echo date('d/m/y',strtotime($value["date"])) ?></td>
                     <td>
                     <div>
                       <div class="d-flex justify-content-between align-items-center">
@@ -290,10 +295,10 @@ i{
                                                     <td class="td">
                                                         <table class="table">
                                                             <tr>
-                                                                <th class="th">Item Name</th>
-                                                                <th class="th">Desc</th>
-                                                                <th class="th">Qty</th>
-                                                                <th class="th">UM</th>
+                                                                <th class="td">Item Name</th>
+                                                                <th class="td">Desc</th>
+                                                                <th class="td">Qty</th>
+                                                                <th class="td">UM</th>
                                                             </tr>
                                                             <tbody class="itbod">
                                                           
@@ -314,9 +319,9 @@ i{
                                                     <td class="td">
                                                         <table class="table">
                                                             <tr>
-                                                                <th class="th">Unit Price</th>
-                                                                <th class="th">Total</th>
-                                                                <th class="th">Vendor</th>
+                                                                <th class="td">Unit Price</th>
+                                                                <th class="td">Total</th>
+                                                                <th class="td">Vendor</th>
                                                             </tr>
                                                             <tbody class="chipbody">
                                                           
@@ -336,11 +341,11 @@ i{
                               <br>
                               <hr>
                               <div class="row">
-                              <div class="col-4 sups text-center">
+                              <div class="col-4 sups text-center" style="line-height: 9px;font-size: xx-small;">
                                  
                                   
                                  </div>
-                                <div class="col-4 mns text-center">
+                                <div class="col-4 mns text-center" style="line-height: 9px;font-size: xx-small;">
                                 
                                 </div>
                                 
@@ -556,10 +561,10 @@ function viewFunc(params) {
             data[3].forEach((element,ind) => {
                 let list1 = document.createElement("tr");
                 list1.innerHTML = `       
-                    <td style="border: 1px solid;">${element.itemname}</td>
-                    <td style="border: 1px solid;">${element.description}</td>
-                    <td style="border: 1px solid;">${element.qty}</td>   
-                    <td># ${element.um}</td>                                                              
+                    <td class="td" style="border: 1px solid;">${element.itemname}</td>
+                    <td class="td" style="border: 1px solid;">${element.description}</td>
+                    <td class="td" style="border: 1px solid;">${element.qty}</td>   
+                    <td class="td"># ${element.um}</td>                                                              
                     `;
                     tbodyy.appendChild(list1);
                 
@@ -568,7 +573,8 @@ function viewFunc(params) {
             let count = 0
             let trr = document.createElement("tr");
             vvdata.forEach(element1 => {
-              let thr = document.createElement("th");
+              let thr = document.createElement("td");
+              thr.classList.add("td")
               thr.style.border = "1px solid"
               thr.innerText =element1.venname 
               trr.appendChild(thr);              
@@ -606,6 +612,7 @@ function viewFunc(params) {
                 let trr1 = document.createElement("tr");
                 rowar.forEach(element1 => {
                   let td = document.createElement("td");
+                  td.classList.add("td")
                   td.style.border = "1px solid"
                   td.innerText =  Number(element1.vendorUnitPrice) != 0? "#"+Number(element1.vendorUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):"N/A"
                   trr1.appendChild(td);              
@@ -627,9 +634,9 @@ function viewFunc(params) {
                 higherItem.forEach((element4,ind) => {
                 let list1 = document.createElement("tr");
                 list1.innerHTML = `       
-                    <td style="border: 1px solid;">${"#"+Number(element4.vendorUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
-                    <td style="border: 1px solid;">${"#"+(Number(element4.vendorUnitPrice)*Number(element4.itemQuantity)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
-                    <td style="border: 1px solid;">${element4.venname}</td>   
+                    <td class="td" style="border: 1px solid;">${"#"+Number(element4.vendorUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
+                    <td class="td" style="border: 1px solid;">${"#"+(Number(element4.vendorUnitPrice)*Number(element4.itemQuantity)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
+                    <td class="td" style="border: 1px solid;">${element4.venname}</td>   
                     `;
                     chipbody.appendChild(list1);
                     lpoArr.push(element4)
@@ -641,7 +648,17 @@ function viewFunc(params) {
                 
               }
   
+                   
     
+                const dateFormat = (date)=>{
+                  var today = new Date(date);
+                  var dd = String(today.getDate()).padStart(2, '0');
+                  var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+                  var yyyy = today.getFullYear();
+
+                  today = mm + '/' + dd + '/' + yyyy;
+                  return today
+                }
                 let manStatus = document.querySelector(".mns"); 
                 let supStatus = document.querySelector(".sups"); 
 
@@ -663,13 +680,13 @@ function viewFunc(params) {
                     if (data22.compappman  == "Pending") {
                       manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
                     } else if(data22.compappman  == "decline") {
-                      manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data22.compremman}</p><br/><p class="text-danger">${data22.mandate}</p>`         
+                      manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data22.compremman}</p><br/><p class="text-danger">${dateFormat(data22.mandate)}</p>`         
                     }else{
                       if (data22.cmansig) {
-                        manStatus.innerHTML = `<img src="../${data22.cmansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data22.compremman}</p><br/><p class="text-success">${data22.mandate}</p>` 
+                        manStatus.innerHTML = `<img src="../${data22.cmansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data22.compremman}</p><br/><p class="text-success">${dateFormat(data22.mandate)}</p>` 
                         
                       } else {
-                        manStatus.innerHTML = `<p class="text-success">Approve</p><br/><br/><p class="text-success">Manager</p><p class="text-success">${data22.compremman}</p><br/><p class="text-success">${data22.mandate}</p>`
+                        manStatus.innerHTML = `<p class="text-success">Approve</p><br/><br/><p class="text-success">Manager</p><p class="text-success">${data22.compremman}</p><br/><p class="text-success">${dateFormat(data22.mandate)}</p>`
                       }
                     }
                   }
@@ -683,12 +700,12 @@ function viewFunc(params) {
                       if (data22.compappsup == "Pending") {
                         supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
                       } else if(data22.compappsup == "decline") {
-                        supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data22.compremsup}</p><br/><p class="text-danger">${data22.supdate}</p>`         
+                        supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data22.compremsup}</p><br/><p class="text-danger">${dateFormat(data22.supdate)}</p>`         
                       }else{
                         if (data22.csupsig) {
-                          supStatus.innerHTML = `<img src="../${data22.csupsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data22.compremsup}</p><br/><p class="text-success">${data22.supdate}</p>`          
+                          supStatus.innerHTML = `<img src="../${data22.csupsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data22.compremsup}</p><br/><p class="text-success">${dateFormat(data22.supdate)}</p>`          
                         } else {
-                          supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data22.compremsup}</p><br/><p class="text-success">${data22.supdate}</p>` 
+                          supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data22.compremsup}</p><br/><p class="text-success">${dateFormat(data22.supdate)}</p>` 
                         }
                       }
                     }

@@ -11,11 +11,11 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+      
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils-> getAllManUnApproveP();
+      $data1 = $UserUtils-> getAllManUnApproveP($conn);
     
 ?>
 <!-- HEADER -->
@@ -393,6 +393,15 @@ i{
         let tbodyy = document.querySelector("#tbb"); 
          let total = document.querySelector(".tot");  
         
+         const dateFormat = (date)=>{
+              var today = new Date(date);
+              var dd = String(today.getDate()).padStart(2, '0');
+              var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+              var yyyy = today.getFullYear();
+
+              today = mm + '/' + dd + '/' + yyyy;
+              return today
+            }
         let mydata = JSON.stringify({"pRegNo":par.get("reqno"),"venId":par.get("id")})
         fetch("../../Utils/getPurchaseReqVendorQuote.php", {
         method: 'POST',
@@ -403,7 +412,7 @@ i{
             subj.innerText = data[0].subject
             from.innerText = data[0].from
             vendor.innerText =data[2][0].compname
-            date.innerText = data[0].dateprepared
+            date.innerText = dateFormat(data[0].dateprepared)
             // total.innerText = "# "+Number(data[0].total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
          console.log(data)
     

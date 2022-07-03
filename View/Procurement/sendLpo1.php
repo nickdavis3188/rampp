@@ -11,11 +11,11 @@
      include("../../Env/env.php");
      require("../../Connection/dbConnection.php");
    
-     $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-     $conn->connect();
+    
+     $conn = conString1();
 
      $UserUtils = new GeneralController();
-     $data = $UserUtils-> getAllApprovedByMd();
+     $data = $UserUtils-> getAllApprovedByMd($conn);
       
 ?>
 <!-- HEADER -->
@@ -195,7 +195,7 @@
 
     
     let mydata = JSON.stringify({ "requisitionData":reqno.value })
-        fetch("../../Utils/getVendorForLpo.php", {
+        fetch("../../Utils/getAVendorForLpo.php", {
         method: 'POST',
         body: mydata,
         headers: {"Content-Type": "application/json; charset=utf-8"}

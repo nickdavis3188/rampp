@@ -11,11 +11,11 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+     
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils-> getAllManDUnApprlpo();
+      $data1 = $UserUtils-> getAllManDUnApprlpo($conn);
     
 ?>
 <!-- HEADER -->
@@ -193,7 +193,7 @@ i{
             <td><?php echo $index + 1 ?></td>
             <td><?php echo $value["purchaseId"] ?></td>
             <td><?php echo $value["venname"] ?></td>
-            <td><?php echo $value["lpodate"] ?></td>
+            <td><?php echo date('d/m/y',strtotime($value["lpodate"])) ?></td>
             <td>
                     <div>
                       <div class="d-flex justify-content-between align-items-center">
@@ -525,7 +525,15 @@ function viewFunc(v,p,ln){
     let lpono = document.querySelector(".lno"); 
     let supStatus = document.querySelector(".sups");  
     
-   
+    const dateFormat = (date)=>{
+      var today = new Date(date);
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+      var yyyy = today.getFullYear();
+
+      today = mm + '/' + dd + '/' + yyyy;
+      return today
+    }
 
 
     let mydata = JSON.stringify({ "venid":v,"pregno":p})
@@ -539,7 +547,7 @@ function viewFunc(v,p,ln){
         lponum.innerText = data[1][0].lpono
         prno.innerText = data[1][0].purchaseId
         vendor.innerText = data[1][0].venname
-        date.innerText = data[1][0].lpodate
+        date.innerText = dateFormat(data[1][0].lpodate)
         descount.innerText = "#"+Number(data[1][0].discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
         vat.innerText = "#"+Number(data[1][0].vat).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
         gtotal.innerText = "#"+Number(data[1][0].grandtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
@@ -592,12 +600,12 @@ function viewFunc(v,p,ln){
         if (data[1][0].approvesup == "Pending") {
             supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
         } else if(data[1][0].approvesup == "decline") {
-            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p class="text-danger">${data[1][0].remsup}</p><br/><p class="text-danger">${data[1][0].supdate}</p>`         
+            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p class="text-danger">${data[1][0].remsup}</p><br/><p class="text-danger">${dateFormat(data[1][0].supdate)}</p>`         
         }else{
           if (data[1][0].sigsup) {
-            supStatus.innerHTML = `<img src="../${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>`          
+            supStatus.innerHTML = `<img src="../${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${dateFormat(data[1][0].supdate)}</p>`          
           } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>` 
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${dateFormat(data[1][0].supdate)}</p>` 
           }
         }
       }
@@ -612,13 +620,13 @@ function viewFunc(v,p,ln){
         if (data[1][0].approveman == "Pending") {
             manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>`
         } else if(data[1][0].approveman == "decline") {
-            manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[1][0].remman}</p><br/><p class="text-danger">${data[1][0].mandate}</p>`         
+            manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[1][0].remman}</p><br/><p class="text-danger">${dateFormat(data[1][0].mandate)}</p>`         
         }else{
           if (data[1][0].sigman) {
-            manStatus.innerHTML = `<img src="../${data[1][0].sigman}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${data[1][0].mandate}</p>` 
+            manStatus.innerHTML = `<img src="../${data[1][0].sigman}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>` 
             
           } else {
-            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${data[1][0].mandate}</p>`
+            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>`
           }
         }
       }

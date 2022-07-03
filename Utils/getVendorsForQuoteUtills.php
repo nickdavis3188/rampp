@@ -4,16 +4,15 @@
     require("../Connection/dbConnection.php");
     $post = (array) json_decode(file_get_contents('php://input'),false);
  
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-     $conn->connect();
+     $conn = conString1();
      $jsonData = $post["requisitionData"];
      
      $items = array();
      
      $query ="SELECT * FROM  prequisitionconfirm WHERE pregno =".$post["requisitionData"]."";
-     $results = mysql_query($query);
+     $results = mysqli_query($conn,$query);
      
-     while($row = mysql_fetch_array($results)){
+     while($row = mysqli_fetch_array($results)){
         $items[] = $row;
     }
     
@@ -23,9 +22,9 @@
         $items2 = array();
      
         $query2 ="SELECT * FROM  vendors";
-        $results2 = mysql_query($query2);
+        $results2 = mysqli_query($conn,$query2);
         
-        while($row2 = mysql_fetch_array($results2)){
+        while($row2 = mysqli_fetch_array($results2)){
             $items2[] = $row2;
        }
 
@@ -43,9 +42,9 @@
         FROM prequisitionconfirm
         WHERE pregno = '$jsonData'
         )";
-        $results3 = mysql_query($query3);
+        $results3 = mysqli_query($conn,$query3);
         
-        while($row3 = mysql_fetch_array($results3)){
+        while($row3 = mysqli_fetch_array($results3)){
             $items3[] = $row3;
         }
    

@@ -96,7 +96,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">LpoNo</label>
-                                <input readonly name="lpono" type="text" class="form-control Lno" id="exampleInputUsername1" value="<?php echo $random3; ?>">
+                                <input  name="lpono" type="text" class="form-control Lno" id="exampleInputUsername1" value="<?php echo $random3; ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -164,7 +164,7 @@
                         <div class="col-sm-2">
                         <div class="form-group">
                               <label for="exampleInputUsername1">Discount % </label>
-                              <input name="dis" type="number" class="form-control desc" id="exampleInputUsername1" onChange="changeDisc(this)">
+                              <input value="0" name="dis" type="number" class="form-control desc" id="exampleInputUsername1" onchange="changeDisc(this)">
                           </div>
                          
                         </div>
@@ -301,6 +301,9 @@ if (par.has("id")&& par.has("reqno")) {
         let grandTotal = document.querySelector("#total"); 
         let vname = document.querySelector(".venname"); 
         let tbodyy = document.querySelector("#tbodyy"); 
+
+
+
         let mydata = JSON.stringify({ "pRegNo":par.get("reqno"),"venid":par.get("id") })
         fetch("../../Utils/getChipItemUtils.php", {
         method: 'PUT',
@@ -336,8 +339,8 @@ if (par.has("id")&& par.has("reqno")) {
             })
             grandTotal.setAttribute("ammount",totalar.reduce((a,b)=>a+b,0))
             subTotal.setAttribute("subtotal",totalar.reduce((a,b)=>a+b,0))
-            let fivePercentAdded = vat.value == "Yes"?(5/100) * totalar.reduce((a,b)=>a+b,0):0
-            vatvalue.value =  fivePercentAdded
+            // let fivePercentAdded = vat.value == "Yes"?(5/100) * totalar.reduce((a,b)=>a+b,0):0
+            // vatvalue.value =  fivePercentAdded
             subTotal.innerHTML = "#"+totalar.reduce((a,b)=>a+b,0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
             grandTotal.innerHTML = "#"+totalar.reduce((a,b)=>a+b,0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 
@@ -353,49 +356,48 @@ if (par.has("id")&& par.has("reqno")) {
     }
 
     function changeVat(params) {
-        console.log(params.value)
-        let grandTotal = document.querySelector("#total"); 
-        let vatvalue = document.querySelector(".vatval");  
-        let totalvalue = Number(grandTotal.getAttribute("ammount"))
-
-        if (params.value == "Yes") {
-            let fivePercentAdded = (5/100) * totalvalue
-            vatvalue.value = fivePercentAdded
-            let vatPrice = fivePercentAdded+totalvalue
-            grandTotal.innerHTML =  "#"+vatPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-            grandTotal.setAttribute("ammount",vatPrice)
-        } else {
-          let vatPrice2 = totalvalue - Number(vatvalue.value)
-          vatvalue.value = 0
-          grandTotal.setAttribute("ammount",vatPrice2)
-          grandTotal.innerHTML =  "#"+vatPrice2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-        }
+      let vatvalue = document.querySelector(".vatval"); 
+      let grandTotal = document.querySelector("#total"); 
+      let subTotal = document.querySelector("#subtotal"); 
+      
+      if (params.value == "Yes") {
+        let subtotalValue = Number(subTotal.getAttribute("subtotal"))
+        let totalvalue = Number(grandTotal.getAttribute("ammount"))  
+        let fivePercentAdded = (7.5/100) * Number(subtotalValue)
+        vatvalue.value = fivePercentAdded
+        let added = Number(totalvalue) + fivePercentAdded
+        grandTotal.setAttribute("ammount",added)
+        grandTotal.innerHTML =  "#"+added.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+      }else{
+        let totalvalue2 = Number(grandTotal.getAttribute("ammount"))
+        // console.log(totalvalue,vatvalue)
+        let vatvalue2 = document.querySelector(".vatval").value; 
+        let subb = Number(totalvalue2) - Number(vatvalue2)
+        vatvalue.value = 0
+        grandTotal.setAttribute("ammount",subb)
+        grandTotal.innerHTML =  "#"+subb.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+      }
     }
 
     function changeDisc(params) {
-        console.log(params.value)
-        let grandTotal = document.querySelector("#total"); 
-        let discountValue = document.querySelector(".descval");
-        let totalValue = Number(grandTotal.getAttribute("ammount"))
+      let discountValue = document.querySelector(".descval");
+      let grandTotal = document.querySelector("#total"); 
+      let subTotal = document.querySelector("#subtotal"); 
+      let subtotalValue = Number(subTotal.getAttribute("subtotal"))
+      let totalvalue = Number(grandTotal.getAttribute("ammount")) 
 
-        if (params.value) {
-
-          let discount = (Number(params.value)/100) * totalValue
-          discountValue.value = discount
-          let discountedValue = totalValue - discount
-          grandTotal.setAttribute("ammount",discountedValue)       
-          grandTotal.innerHTML =  "#"+discountedValue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-
-        } else if(params.value == ""){
-
-          let discountedValue2 = totalValue + Number(discountValue.value)
-          discountValue.value = 0
-          grandTotal.setAttribute("ammount",discountedValue2)       
-          grandTotal.innerHTML =  "#"+discountedValue2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')     
-        }
-
+      let checkParams = params.value?Number(params.value):0;
+      let previousValue = Number(totalvalue) + Number(discountValue.value)
+      grandTotal.setAttribute("ammount",previousValue)
+      grandTotal.innerHTML =  "#"+previousValue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+      let discount = (checkParams/100) * Number(subtotalValue)
+      discountValue.value = discount
+      let totalvalue2 = Number(grandTotal.getAttribute("ammount")) 
+      let discountedValue = Number(totalvalue2) - discount
+      grandTotal.setAttribute("ammount",discountedValue)
+      grandTotal.innerHTML =  "#"+discountedValue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
     }
-
+    
 
     function loading11(par) {
 

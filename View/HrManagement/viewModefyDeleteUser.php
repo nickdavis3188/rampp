@@ -11,11 +11,10 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data = $UserUtils-> usersTableDisplay();
+      $data = $UserUtils-> usersTableDisplay($conn);
 
       
 ?>

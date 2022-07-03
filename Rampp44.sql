@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 28, 2022 at 11:01 AM
+-- Generation Time: Jul 03, 2022 at 11:03 PM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.4
 
@@ -284,8 +284,8 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`) VALUES
-('Drink', ' Champion', 16, 20, 300, 150, '1', 6, 450, 2),
-('Funiture', ' Table', 30, 5, 2700, 0, '1', 7, 0, 1);
+('Drink', ' Champion', 18, 20, 20, 150, '1', 6, 450, 2),
+('Funiture', ' Table', 26, 5, 2700, 0, '1', 7, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -320,7 +320,10 @@ INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `i
 (7, '2022-06-22', 0, 2, 'it''s too much', 0, 10),
 (6, '2022-06-22', 2, 0, 'it''s too low', 10, 0),
 (7, '2022-06-22', 0, 2, 'it''s too much', 0, 10),
-(6, '2022-06-28', 2, 0, 'it was too low', 40, 0);
+(6, '2022-06-28', 2, 0, 'it was too low', 40, 0),
+(7, '2022-06-30', 0, 2, 'it''s too much ', 0, 3),
+(6, '2022-07-01', 2, 0, '', 1, 0),
+(7, '2022-07-01', 0, 2, 'I just feel like doing this', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -382,18 +385,19 @@ CREATE TABLE IF NOT EXISTS `lpouniquevendor` (
   `mandate` date NOT NULL,
   `manddate` date NOT NULL,
   `supdate` date NOT NULL,
-  `subtotal` int(200) NOT NULL
+  `subtotal` int(200) NOT NULL,
+  `lposent` int(10) NOT NULL,
+  UNIQUE KEY `lpono` (`lpono`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lpouniquevendor`
 --
 
-INSERT INTO `lpouniquevendor` (`purchaseId`, `vendorId`, `venname`, `discount`, `vat`, `grandtotal`, `lpocreated`, `approvesup`, `approveman`, `approvemand`, `remsup`, `remman`, `remmand`, `sigsup`, `sigman`, `sigmand`, `mountwords`, `lpono`, `lpodate`, `disc`, `vt`, `mandate`, `manddate`, `supdate`, `subtotal`) VALUES
-(3456, 9, 'BUNN REGENCY', 60, '72', 1512, 'Yes', 'approve', 'approve', 'approve', 'good to go', 'nice', 'move on', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'One thousand five hundred and twelve Naira', 3913, '2022-06-26', 4, 5, '2022-06-26', '2022-06-26', '2022-06-26', 1500),
-(3456, 8, 'WOERKA NIG CO LTD', 60, '147', 3087, 'Yes', 'approve', 'approve', 'approve', 'go on', 'nice one', 'ok', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'three thousand eighty seven naira only', 8482, '2022-06-28', 2, 5, '2022-06-28', '2022-06-28', '2022-06-28', 3000),
-(3457, 6, 'MAC MORRIS INTL CO LTD', 0, 'No', 0, 'No', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '', 0, '0000-00-00', 0, 0, '0000-00-00', '0000-00-00', '0000-00-00', 0),
-(3457, 9, 'BUNN REGENCY', 0, 'No', 0, 'No', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '', 0, '0000-00-00', 0, 0, '0000-00-00', '0000-00-00', '0000-00-00', 0);
+INSERT INTO `lpouniquevendor` (`purchaseId`, `vendorId`, `venname`, `discount`, `vat`, `grandtotal`, `lpocreated`, `approvesup`, `approveman`, `approvemand`, `remsup`, `remman`, `remmand`, `sigsup`, `sigman`, `sigmand`, `mountwords`, `lpono`, `lpodate`, `disc`, `vt`, `mandate`, `manddate`, `supdate`, `subtotal`, `lposent`) VALUES
+(3456, 9, 'BUNN REGENCY', 60, '72', 1512, 'Yes', 'approve', 'approve', 'approve', 'good to go', 'nice', 'move on', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'One thousand five hundred and twelve Naira', 3913, '2022-06-26', 4, 5, '2022-06-26', '2022-06-26', '2022-06-26', 1500, 0),
+(3456, 8, 'WOERKA NIG CO LTD', 60, '147', 3087, 'Yes', 'approve', 'approve', 'approve', 'go on', 'nice one', 'ok', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'three thousand eighty seven naira only', 8482, '2022-06-28', 2, 5, '2022-06-28', '2022-06-28', '2022-06-28', 3000, 0),
+(3457, 9, 'BUNN REGENCY', 600, '2250', 31650, 'Yes', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', 'thirty one thousand six hundred and fifty naira only', 3382, '2022-07-03', 2, 5, '0000-00-00', '0000-00-00', '0000-00-00', 30000, 0);
 
 -- --------------------------------------------------------
 
@@ -886,20 +890,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   `designation` varchar(200) NOT NULL,
   `profilepic` varchar(200) NOT NULL,
   `signature` varchar(200) NOT NULL,
-  PRIMARY KEY (`uname`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id` int(200) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uname` (`uname`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `profilepic`, `signature`) VALUES
-('nick', 'davis', 'adnindavis', 'davis3188', 'Admin', 'admindavis@gmail.com', 'C.G. bar', '09036103607', 'male', 'manager', '', ''),
-('victor', 'joe', 'victty', 'victor12345', 'Admin', 'vict@gmail.com', 'GRA', '93680877977', 'male', 'manager', '../Upload/629496a9685d63.12393436.jpg', '../Upload/629496a9685b95.08288872.jpg'),
-('Nick', 'Dann', 'dann', 'dann123', 'Admin', 'nickdann@email.com', 'USA', '345281353546', 'male', 'supervisor', '../Upload/62975c0161d9d1.74152793.jpg', '../Upload/62975c01432fc2.68271303.jpeg'),
-('Joe', 'Lu', 'joelu', 'joelu123', 'Supervisor', 'joelu@gmail.com', 'CANADA', '23545367842', 'male', 'Supervisor', '../Upload/62b2f22ada0ba0.26121542.', '../Upload/62b2f22ac5b1d3.95862652.png'),
-('Davis', 'Sa', 'davissa', 'davissa123', 'Manager', 'davissa@gmail.com', 'USA', '03889584', 'male', 'Manager', '../Upload/62b2f29123e897.29334946.', '../Upload/62b2f29123e749.48953053.png'),
-('Nick', 'do', 'nickdo', 'nickdo123', 'Managing Director', 'nickdo@gmail.com', 'UK', '848739822', 'male', 'Managing Director', '../Upload/62b2f2d43a04a7.54870956.', '../Upload/62b2f2d43a0354.47316097.png');
+INSERT INTO `users` (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `profilepic`, `signature`, `id`) VALUES
+('nick', 'davis', 'adnindavis', 'davis3188', 'Admin', 'admindavis@gmail.com', 'C.G. bar', '09036103607', 'male', 'manager', '', '', 1),
+('victor', 'joe', 'victty', 'victor12345', 'Admin', 'vict@gmail.com', 'GRA', '93680877977', 'male', 'manager', '../Upload/629496a9685d63.12393436.jpg', '../Upload/629496a9685b95.08288872.jpg', 2),
+('Nick', 'Dann', 'dann', 'dann123', 'Admin', 'nickdann@email.com', 'USA', '345281353546', 'male', 'supervisor', '../Upload/62975c0161d9d1.74152793.jpg', '../Upload/62975c01432fc2.68271303.jpeg', 3),
+('Joe', 'Lu', 'joelu', 'joelu123', 'Supervisor', 'joelu1@gmail.com', 'CANADA', '23545367842', 'male', 'Supervisor', '../Upload/62b2f22ada0ba0.26121542.', '../Upload/62b2f22ac5b1d3.95862652.png', 4),
+('Davis', 'Sa', 'davissa', 'davissa123', 'Manager', 'davissa@gmail.com', 'USA', '03889584', 'male', 'Manager', '../Upload/62b2f29123e897.29334946.', '../Upload/62b2f29123e749.48953053.png', 5),
+('Nick', 'do', 'nickdo', 'nickdo123', 'Managing Director', 'nickdo@gmail.com', 'UK', '848739822', 'male', 'Managing Director', '../Upload/62b2f2d43a04a7.54870956.', '../Upload/62b2f2d43a0354.47316097.png', 6);
 
 -- --------------------------------------------------------
 
@@ -975,7 +981,6 @@ INSERT INTO `vendors` (`id`, `vcode`, `compname`, `address`, `phone`, `email`, `
 (12, 'VEN00012', 'PROMPT MULTI LINK VENTURES ', '', '2348183889112', 'info@bualogistics.com', '', '', '0200836923', 'FIRST BANK OF NIGERIA PLC', '', ''),
 (13, 'VEN00013', 'NAS AUTO LINK ', '', '2348035030325', 'info@bualogistics.com', '', '', '1011599460', 'ZENITH BANK PLC', '', ''),
 (14, 'VEN00014', 'NNAYCON  BUSINESS CONCERNS LTD', '', '2348054308170', 'info@bualogistics.com', '', '', '1016928186', 'ZENITH BANK PLC', '', ''),
-(15, 'VEN00015', 'JOHNTECH AUTO', '', '2348033256665', 'info@bualogistics.com', '', '', '0047645155', 'ACCESS BANK', '', ''),
 (16, 'VEN00016', 'TDE GLOBAL VENTURE', '', '2348054026344', 'info@bualogistics.com', '', '', '2095753793', 'UNITED BANK FOR AFRICA PLC', '', ''),
 (17, 'VEN00017', 'LET YOUR GLORY COME INTL', '', '2347089571750', 'info@bualogistics.com', '', '', '4032022130', 'ECO BANK NIGERIA PLC', '', ''),
 (18, 'VEN00018', 'DIVINE JOE VENAS GLOBAL LINK', '', '2348056771117', 'info@bualogistics.com', '', '', '2091482556', 'UNITED BANK FOR AFRICA PLC', '', ''),

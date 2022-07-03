@@ -3,7 +3,7 @@
 class GeneralController{
     
 
-    function createUser()
+    function createUser($conn)
     {
 
         $fname = $_REQUEST['firstName'];
@@ -13,8 +13,8 @@ class GeneralController{
         $privilege = $_REQUEST['privilege'];
         
         $query = "insert into users (fname,lname,uname,pword,privilege)values('$fname','$lname','$uname','$pword','$privilege')";
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
         if($noofrows==1)
         {
             echo ("The system user ".$fname." ".$lname. "'s account has been successfully created. <br>");
@@ -22,18 +22,18 @@ class GeneralController{
         }
         else
         {
-            echo ("The user can not be added at the moment. Try again with a different username <br>".mysql_error());
+            echo ("The user can not be added at the moment. Try again with a different username <br>".mysqli_error($conn));
             echo ("<br><br><a href=".getenv('HTTP_REFERER')." >Go Back</a>");
         }
 
     }
 
-    function deleteUser1()
+    function deleteUser1($conn)
     {
         $duser = $_REQUEST['duser'];
         $query = "delete from users where fname ='"."$duser"."'";
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
         if ($noofrows==1)
         {
         echo ("The user account has been successfully deleted...<br>");
@@ -47,12 +47,12 @@ class GeneralController{
          }
     }
 
-    function userRegistration($fname,$lname,$email,$phone,$address,$office,$signature,$sex,$profilepic,$userName,$password,$previlage){
+    function userRegistration($conn,$fname,$lname,$email,$phone,$address,$office,$signature,$sex,$profilepic,$userName,$password,$previlage){
     
         $query = "INSERT INTO users (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `profilepic`, `signature`) VALUES ('$fname', '$lname', '$userName', '$password', '$previlage', '$email', '$address', '$phone', '$sex', '$office', '$profilepic', '$signature')";
         
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
 
         if($noofrows==1)
         {
@@ -61,16 +61,16 @@ class GeneralController{
         }
         else
         {
-            header("Location: ../View/HrManagement/addUser.php?fail= Error:".mysql_error());          
+            header("Location: ../View/HrManagement/addUser.php?fail= Error:".mysqli_error($conn));          
         }
     }
-    function fundreqest($fregno,$from,$datecreated,$ammount,$ammountword,$subject,$file,$justification,$manstatus,$mandsatus,$supstatus,$to){
+    function fundreqest($conn,$fregno,$from,$datecreated,$ammount,$ammountword,$subject,$file,$justification,$manstatus,$mandsatus,$supstatus,$to){
         
         
         
         $query = "INSERT INTO fundrequisition (`fregno`, `from` ,`datecreated`, `ammount`,`ammountword`,`subject`, `file`, `justification`, `manstatus`,`mandsatus`,`supstatus`,`to`,`reqfrom`)VALUES ('$fregno',' $from','$datecreated','$ammount','$ammountword','$subject','$file','$justification','$manstatus','$mandsatus','$supstatus','$to')";
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
 
         if($noofrows==1)
         {
@@ -79,58 +79,58 @@ class GeneralController{
         }
         else
         {
-            header("Location: ../View/FundRequisision/createFundRequisition.php?fail= Error:".mysql_error());          
+            header("Location: ../View/FundRequisision/createFundRequisition.php?fail= Error:".mysqli_error($conn));          
         }
     }
 
-    function updatequote($id){
+    function updatequote($conn,$id){
 
         $items = array();
 
         $query ="SELECT quoted FROM prequisitioninfo WHERE preqno='$id'";
 
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
       
         if (count($items) == 1) {
             $incr = $items[0]["quoted"]+1;
             $query3 = "UPDATE `prequisitioninfo`  SET quoted='$incr' WHERE preqno='$id'";
-            $results3 = mysql_query($query3);
-            $noofrows3 = mysql_affected_rows();
+            $results3 = mysqli_query($conn,$query3);
+            $noofrows3 = mysqli_affected_rows($conn);
             if ($noofrows3 == 1){
                 return "True";
             }else{
-                return mysql_error();
+                return mysqli_error($conn);
             }
         }else{
             return "can't increment quote";
         }
 
     }
-    function sendLpoCheck($id){
+    function sendLpoCheck($conn,$id){
   
         $query3 = "UPDATE `lpouniquevendor`  SET lpocreated='Yes' WHERE vendorId ='$id'";
-        $results3 = mysql_query($query3);
-        $noofrows3 = mysql_affected_rows();
+        $results3 = mysqli_query($conn,$query3);
+        $noofrows3 = mysqli_affected_rows($conn);
         if ($noofrows3 == 1){
             return "True";
         }else{
-            return mysql_error();
+            return mysqli_error($conn);
         }
     }
 
-    function getrqNo(){
+    function getrqNo($conn){
   
         $items = array();
 
         $query ="SELECT * FROM prequisitioninfo";
 
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
       
@@ -143,14 +143,14 @@ class GeneralController{
         // return $items;
     }
 
-    function getFunNp(){
+    function getFunNp($conn){
   
         $items = array();
 
         $query ="SELECT * FROM  fundrequisition";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         if (count($items) == 0) {
@@ -161,388 +161,457 @@ class GeneralController{
         }
         // return $items;
     }
-    function getAllCategory(){
+    function getAllCategory($conn){
   
         $items = array();
 
         $query ="SELECT * FROM category";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
 
-    function getAllApprovedByMdLpo(){
+    function getAllApprovedByMdLpo($conn){
   
         $items = array();
 
         $query ="SELECT * FROM  prequisitionconfirm WHERE lpo <> '1'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function getAllApprovedByMdk(){
+    function getAllApprovedByMdk($conn){
   
         $items = array();
 
         $query ="SELECT * FROM prequisitioninfo WHERE csupapprove <> 'approve' AND mandapprove = 'approve'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
 
-    function getAllInventory(){
+    function getAllInventory($conn){
   
-        $items = array();
+        // $items = array();
 
         $query ="SELECT * FROM  inventory WHERE quantityadded < minnimumlevle" ;
-        $results = mysql_query($query);
-
-        while($row = mysql_fetch_array($results)){
-            $items[] = $row;
-        }
-        return $items;
+        $result = ($conn->query($query));
+        //declare array to store the data of database
+        $row = array(); 
+      
+        if ($result->num_rows > 0) 
+        {
+            // fetch all data from db into array 
+            $row = $result->fetch_all(MYSQLI_ASSOC); 
+            return $row;
+        } 
     }
-    function getAllInventoryCat(){
+    // str_slice(string $str, int $start [, int $end])
+    function str_slice() {
+        $args = func_get_args();
+        switch (count($args)) {
+            case 1:
+                return $args[0];
+            case 2:
+                $str        = $args[0];
+                $str_length = strlen($str);
+                $start      = $args[1];
+                if ($start < 0) {
+                    if ($start >= - $str_length) {
+                        $start = $str_length - abs($start);
+                    } else {
+                        $start = 0;
+                    }
+                }
+                else if ($start >= $str_length) {
+                    $start = $str_length;
+                }
+                $length = $str_length - $start;
+                return substr($str, $start, $length);
+            case 3:
+                $str        = $args[0];
+                $str_length = strlen($str);
+                $start      = $args[1];
+                $end        = $args[2];
+                if ($start >= $str_length) {
+                    return "";
+                }
+                if ($start < 0) {
+                    if ($start < - $str_length) {
+                        $start = 0;
+                    } else {
+                        $start = $str_length - abs($start);
+                    }
+                }
+                if ($end <= $start) {
+                    return "";
+                }
+                if ($end > $str_length) {
+                    $end = $str_length;
+                }
+                $length = $end - $start;
+                return substr($str, $start, $length);
+        }
+        return null;
+    }
+    function getProfileDetails($conn,$username){
+        $query ="SELECT * FROM users WHERE uname='$username'" ;
+        $result = ($conn->query($query));
+        //declare array to store the data of database
+        $row = array(); 
+      
+        if ($result->num_rows > 0) 
+        {
+            // fetch all data from db into array 
+            $row = $result->fetch_all(MYSQLI_ASSOC); 
+            return $row;
+        } 
+    }
+    function getAllInventoryCat($conn){
   
         $items = array();
 
         $query ="SELECT * FROM category" ;
-        $results = mysql_query($query);
-
-        while($row = mysql_fetch_array($results)){
-            $items[] = $row;
-        }
-        return count($items);
+        $result = ($conn->query($query));
+        //declare array to store the data of database
+        $row = array(); 
+      
+        if ($result->num_rows > 0) 
+        {
+            // fetch all data from db into array 
+            $row = $result->fetch_all(MYSQLI_ASSOC); 
+            return count($row);
+        } 
     }
-    function getAllInventoryPro(){
+    function getAllInventoryPro($conn){
   
         $items = array();
 
         $query ="SELECT * FROM  inventory" ;
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return count($items);
     }
-    function getAllInventoryLow(){
+    function getAllInventoryLow($conn){
   
         $items = array();
 
         $query ="SELECT * FROM  inventory WHERE quantityadded < minnimumlevle";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return count($items);
     }
 
-    function getAllApprovedByMdCC(){
+    function getAllApprovedByMdCC($conn){
   
         $items = array();
 
         $query ="SELECT * FROM prequisitioninfo WHERE quoted <>'0' AND mandapprove = 'approve'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function getAllApprovedByMd(){
+    function getAllApprovedByMd($conn){
   
         $items = array();
 
         $query ="SELECT * FROM prequisitioninfo WHERE mandapprove = 'approve'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function getAllDepartment(){
+    function getAllDepartment($conn){
   
         $items = array();
 
         $query ="SELECT * FROM department";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function purchasePTableDisplay(){
+    function purchasePTableDisplay($conn){
  
         $items = array();
 
         $query ="SELECT `preqno`,`from`,`subject`,`date`,`summary`,`total`,`supapprove`,`manapprove`,`mandapprove`,`reqfrom` FROM prequisitioninfo";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function inventoryTableDisplay(){
+    function inventoryTableDisplay($conn){
  
         $items = array();
 
         $query ="SELECT * FROM inventory";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
 
-    function fundTableDisplay(){
+    function fundTableDisplay($conn){
    
         $items = array();
 
         $query ="SELECT * FROM fundrequisition";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function getVendorEmail($id){
+    function getVendorEmail($conn,$id){
 
         $items = array();
 
         $query ="SELECT `email` FROM vendors WHERE id = '$id'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function usersTableDisplay(){
+    function usersTableDisplay($conn){
 
         $items = array();
 
         $query ="SELECT * FROM users";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function lpoTableDisplay(){
+    function lpoTableDisplay($conn){
 
         $items = array();
 
         $query ="SELECT * FROM  lpouniquevendor WHERE lpocreated ='Yes'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function vendorTableDisplay(){
+    function vendorTableDisplay($conn){
 
         $items = array();
 
         $query ="SELECT * FROM vendors";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function vendorQuoteTableDisplay(){
+    function vendorQuoteTableDisplay($conn){
 
         $items = array();
 
         $query ="SELECT * FROM prequisitionconfirm";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function staffTableDisplay(){
+    function staffTableDisplay($conn){
 
         $items = array();
 
         $query ="SELECT fname,lname,sex,dept,stafftag FROM staff";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
     //lop
-    function getAllSubUnApprlpo(){
+    function getAllSubUnApprlpo($conn){
 
         $items = array();
 
         $query ="SELECT * FROM lpouniquevendor WHERE lpocreated ='Yes' AND approvesup='Pending' ";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function getAllManUnApprlpo(){
+    function getAllManUnApprlpo($conn){
 
         $items = array();
 
         $query ="SELECT * FROM lpouniquevendor WHERE lpocreated ='Yes' AND approvesup='approve' AND approveman='Pending' ";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function getAllManDUnApprlpo(){
+    function getAllManDUnApprlpo($conn){
 
         $items = array();
 
         $query ="SELECT * FROM lpouniquevendor WHERE lpocreated ='Yes' AND approveman='approve' AND approvemand='Pending' ";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
     //lpo
-    function getAllSubUnApproveC(){
+    function getAllSubUnApproveC($conn){
 
         $items = array();
 
-        $query ="SELECT * FROM prequisitioninfo WHERE compappsup='Pending'";
-        $results = mysql_query($query);
+        $query ="SELECT * FROM prequisitioninfo WHERE compappsup='Pending' AND quoted <>'0'";
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
 
-    function getAllManUnApproveC(){
+    function getAllManUnApproveC($conn){
 
         $items = array();
 
-        $query ="SELECT * FROM prequisitioninfo WHERE compappsup='approve' AND 	compappman='Pending'";
-        $results = mysql_query($query);
+        $query ="SELECT * FROM prequisitioninfo WHERE compappsup='approve' AND 	compappman='Pending' AND quoted <>'0'";
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
 
-    function getAllManDUnApproveC(){
+    function getAllManDUnApproveC($conn){
 
         $items = array();
 
-        $query ="SELECT * FROM prequisitioninfo WHERE compappman='approve' AND compappmand='Pending'";
-        $results = mysql_query($query);
+        $query ="SELECT * FROM prequisitioninfo WHERE compappman='approve' AND compappmand='Pending' AND quoted <>'0'";
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
     //CompTable
     // purchase Requisition supapprove	manapprove	mandapprove
-    function getAllSubUnApproveP(){
+    function getAllSubUnApproveP($conn){
 
         $items = array();
 
         $query ="SELECT * FROM prequisitioninfo WHERE supapprove='Pending'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function getAllManUnApproveP(){
+    function getAllManUnApproveP($conn){
 
         $items = array();
 
         $query ="SELECT * FROM prequisitioninfo WHERE supapprove='approve' AND manapprove='Pending'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
-    function getAllManDUnApproveP(){
+    function getAllManDUnApproveP($conn){
 
         $items = array();
 
         $query ="SELECT * FROM prequisitioninfo WHERE manapprove='approve' AND mandapprove='Pending'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
 
 //  FundRequisition fregno	from	datecreated	ammount	ammountword	subject	file	justification	manstatus	mandsatus	supstatus	manremark	mandremark	supremark	mansig	mandsig	supsig	to
-    function getAllManUnApproveF(){
+    function getAllManUnApproveF($conn){
 
         $items = array();
 
         $query ="SELECT * FROM `fundrequisition` WHERE supstatus='approve' AND manstatus='Pending'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
 
-    function getAllManDUnApproveF(){
+    function getAllManDUnApproveF($conn){
 
         $items = array();
 
         $query ="SELECT * FROM fundrequisition WHERE manstatus='approve' AND mandsatus='Pending'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;
     }
 
-    function getAllSubUnApproveF(){
+    function getAllSubUnApproveF($conn){
 
         $items = array();
 
         $query ="SELECT * FROM fundrequisition WHERE supstatus='Pending'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         return $items;

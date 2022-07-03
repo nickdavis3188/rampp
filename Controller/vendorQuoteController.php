@@ -4,13 +4,13 @@
     require("generalController.php");
     require("../Connection/dbConnection.php");
 
-    $genController = new GeneralController();
-
+    
     $post = (array) json_decode(file_get_contents('php://input'),false);
-
- 
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-     $conn->connect();
+    
+    
+   
+    $conn = conString1();
+    $genController = new GeneralController();
 
      $jsonData = $post["itemWithQuote"];
      $jsonData1 = $post["venid"];
@@ -24,14 +24,14 @@
    //   print_r($jsonData2."PiD");
        
      $query = "INSERT INTO prequisitionconfirm (`pregno`, `vendorid`,`for`,`vname`,`from`,`date`)VALUES ('$jsonData2','$jsonData1','$jsonData3','$jsonData4','$jsonData5','$jsonData6')";
-     $results = mysql_query($query);
-     $noofrows = mysql_affected_rows();
+     $results = mysqli_query($conn,$query);
+     $noofrows = mysqli_affected_rows($conn);
 
      if($noofrows==1)
      {
-        $res = uploadArray1($jsonData);
+        $res = uploadArray1($conn,$jsonData);
         if ($res == "True") {
-            $updateq =  $genController->updatequote($jsonData2 );
+            $updateq =  $genController->updatequote($conn,$jsonData2 );
             if ($updateq) {
                echo json_encode(array("status"=>"success"));             
             }else {
@@ -42,7 +42,7 @@
            echo json_encode(array("status"=>"faild","message"=>"cannot submit the Quote"));
         }
      }else{
-        echo json_encode(array("status"=>"faild","message"=>"Error:".mysql_error()));
+        echo json_encode(array("status"=>"faild","message"=>"Error:".mysqli_error($conn)));
      }
         
 

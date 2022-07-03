@@ -130,7 +130,7 @@
         <hr>
         <div class="row">
           <div class="col-4">
-            <div class="sups text-center">
+            <div class="sups text-center" style="line-height: 9px;font-size: x-small;">
                 <p class="text-info">Pending</p>
 
             </div>
@@ -138,14 +138,14 @@
               
         </div>
         <div class="col-4">
-            <div class="mns text-center">
+            <div class="mns text-center" style="line-height: 9px;font-size: x-small;">
                 <p class="text-info">Pending</p>
             </div>
             
           
         </div>
         <div class="col-4">
-          <div class="mnds text-center">
+          <div class="mnds text-center" style="line-height: 9px;font-size: x-small;">
                 <p class="text-info">Pending</p>
             </div>
             
@@ -208,7 +208,15 @@
        let manDStatus = document.querySelector(".mnds"); 
        let supStatus = document.querySelector(".sups"); 
      
-    
+       const dateFormat = (date)=>{
+          var today = new Date(date);
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+          var yyyy = today.getFullYear();
+
+          today = mm + '/' + dd + '/' + yyyy;
+          return today
+        }
    
        let mydata = JSON.stringify({ "pRegNo": id})
        fetch("../Utils/getSinglePurchaseRegUtils.php", {
@@ -218,7 +226,7 @@
        }).then(res=>res.json()).then(function(data) {
             console.log(data)
             reqno.innerText = data[0].preqno
-           dateprep.innerText = data[0].dateprepared
+           dateprep.innerText = dateFormat(data[0].dateprepared)
            subj.innerText = data[0].subject
            from.innerText = data[0].from
            summ.innerText = data[0].summary
@@ -264,15 +272,15 @@
             child = manStatus.lastElementChild;
         }
         if (data[0].manapprove == "Pending") {
-          manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p><br/><p class="text-warning">${data[0].manremark}</p><br/><p class="text-warning">${data[0].mandate}</p>` 
+          manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p><br/><p class="text-warning">${data[0].manremark}</p><br/><p class="text-warning">${dateFormat(data[0].mandate)}</p>` 
         } else if(data[0].manapprove == "decline") {
-          manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data[0].manremark}</p><br/><p class="text-danger">${data[0].mandate}</p>`         
+          manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data[0].manremark}</p><br/><p class="text-danger">${dateFormat(data[0].mandate)}</p>`         
         }else{
           if (data[0].mansig) {
-            manStatus.innerHTML = `<img src="${data[0].mansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${data[0].mandate}</p>` 
+            manStatus.innerHTML = `<img src="${data[0].mansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${dateFormat(data[0].mandate)}</p>` 
             
           } else {
-            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><br/><p class="text-success">Manager</p><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${data[0].mandate}</p>`
+            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><br/><p class="text-success">Manager</p><p class="text-success">${data[0].manremark}</p><br/><p class="text-success">${dateFormat(data[0].mandate)}</p>`
           }
         }
       }
@@ -283,14 +291,14 @@
             child = manDStatus.lastElementChild;
         }
         if (data[0].mandapprove == "Pending") {
-          manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p><br/><p class="text-warning">${data[0].mandremark}</p><br/><p class="text-warning">${data[0].manddate}</p>` 
+          manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p><br/><p class="text-warning">${data[0].mandremark}</p><br/><p class="text-warning">${dateFormat(data[0].manddate)}</p>` 
         } else if(data[0].mandapprove == "decline") {
-          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p style="color:#02679a">${data[0].mandremark}</p><br/><p class="text-danger">${data[0].manddate}</p>`         
+          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p style="color:#02679a">${data[0].mandremark}</p><br/><p class="text-danger">${dateFormat(data[0].manddate)}</p>`         
         }else{
           if (data[0].mandsig) {
-            manDStatus.innerHTML = `<img src="${data[0].mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${data[0].manddate}</p>` 
+            manDStatus.innerHTML = `<img src="${data[0].mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${dateFormat(data[0].manddate)}</p>` 
           } else {
-            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${data[0].manddate}</p>`   
+            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].mandremark}</p><br/><p class="text-success">${dateFormat(data[0].manddate)}</p>`   
           }
         }
       }
@@ -302,14 +310,14 @@
             child = supStatus.lastElementChild;
         }
         if (data[0].supapprove == "Pending") {
-          supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p><br/><p class="text-warning">${data[0].supremark}</p><br/><p class="text-warning">${data[0].supdate}</p>` 
+          supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p><br/><p class="text-warning">${data[0].supremark}</p><br/><p class="text-warning">${dateFormat(data[0].supdate)}</p>` 
         } else if(data[0].supapprove == "decline") {
-          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data[0].supremark}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
+          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data[0].supremark}</p><br/><p class="text-danger">${dateFormat(data[0].supdate)}</p>`         
         }else{
           if (data[0].supsig) {
-            supStatus.innerHTML = `<img src="${data[0].supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>`          
+            supStatus.innerHTML = `<img src="${data[0].supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${dateFormat(data[0].supdate)}</p>`          
           } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${data[0].supdate}</p>` 
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].supremark}</p><br/><p class="text-success">${dateFormat(data[0].supdate)}</p>` 
           }
         }
       }

@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../www/css/responsive.css">
+    <!-- <link rel="stylesheet" href="../www/css/responsive.css"> -->
     <link rel="stylesheet" href="../www/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../www/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../www/css/style1.css">
+    <!-- <link rel="stylesheet" href="../www/vendors/ti-icons/css/themify-icons.css"> -->
+    <!-- <link rel="stylesheet" href="../www/css/style1.css"> -->
     <link rel="shortcut icon" href="../www/images/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../www/css/s1.css">
-    <link rel="shortcut icon" href="../www/css/dataTable.css" />
+    <!-- <link rel="stylesheet" href="../www/css/s1.css"> -->
+    <!-- <link rel="shortcut icon" href="../www/css/dataTable.css" /> -->
     <link rel="stylesheet" href="../www/css/fontawesome.min.css">
-    <link rel="stylesheet" href="../www/css/jquery.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="../www/css/jquery.dataTables.min.css"> -->
     <style>
         /* Style The Dropdown Button */
-            table, th, td {
+            /* table, th, td {
             border: 1px solid;
-            }
-            table {
+            } */
+            /* table {
               table-layout: fixed;
               width: 150px;
               border: 1px solid black;
@@ -33,7 +33,14 @@
               padding: 10px 15px;
               vertical-align: middle;
               
-            }
+            } */
+
+            table td{
+                border: solid 1px #666 !important;
+                width: 110px !important;
+                word-wrap: break-word !important;
+                font-size: xx-small;
+              }
         </style>
     <title>comparativeTable</title>
 </head>
@@ -97,12 +104,13 @@
                     </tr>
                     <tr>
                         <td>
+                          <br>
                             <table class="table">
                                 <tr>
-                                    <th class="th">Item Name</th>
-                                    <th class="th">Desc</th>
-                                    <th class="th">Qty</th>
-                                    <th class="th">UM</th>
+                                    <td>Item Name</th>
+                                    <td>Desc</th>
+                                    <td>Qty</th>
+                                    <td>UM</th>
                                 </tr>
                                 <tbody class="itbod">
                                
@@ -110,7 +118,7 @@
                                 </tbody>
                             </table>
                         </td>
-                        <td>
+                        <td style="padding-top: 18px;">
                           <table class="table">
                             <thead class="hed">
                         
@@ -121,11 +129,12 @@
                           </table>
                         </td>
                         <td>
+                          <br>
                             <table class="table">
                                 <tr>
-                                    <th class="th">Unit Price</th>
-                                    <th class="th">Total</th>
-                                    <th class="th">Vendor</th>
+                                    <td>Unit Price</th>
+                                    <td>Total</th>
+                                    <td>Vendor</th>
                                 </tr>
                                 <tbody class="chipbody">
                               
@@ -142,19 +151,19 @@
               <hr>
               <div class="row">
                 <div class="col-4">
-                    <div class="sups text-center">
+                    <div class="sups text-center" style="line-height: 9px;font-size: x-small;">
                         <p class="text-info">Pending</p>
                         <p class="text-info">Supervisor</p>
                     </div>  
                 </div>
                 <div class="col-4">
-                  <div class="mns text-center">
+                  <div class="mns text-center" style="line-height: 9px;font-size: x-small;">
                     <p class="text-info">Pending</p>
                     <p class="text-info">Manager</p>
                   </div>   
                 </div>
                 <div class="col-4">
-                  <div class="mnds text-center">
+                  <div class="mnds text-center" style="line-height: 9px;font-size: x-small;">
                     <p class="text-info">Pending</p>
                     <p class="text-info">Managing Director</p>
                   </div>  
@@ -237,7 +246,7 @@
         let count = 0
         let trr = document.createElement("tr");
         vvdata.forEach(element1 => {
-          let thr = document.createElement("th");
+          let thr = document.createElement("td");
           thr.innerText =element1.venname 
           trr.appendChild(thr);              
           count++
@@ -310,7 +319,16 @@
 
              // approvals
   
+  
+             const dateFormat = (date)=>{
+                var today = new Date(date);
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+                var yyyy = today.getFullYear();
 
+                today = mm + '/' + dd + '/' + yyyy;
+                return today
+              }
 
 
              let manstat = ()=>{
@@ -322,13 +340,13 @@
             if (data[0].compappman == "Pending") {
                 manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
             } else if(data[0].compappman == "decline") {
-                manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[0].compremman}</p><br/><p class="text-danger">${data[0].mancappdate}</p>`         
+                manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[0].compremman}</p><br/><p class="text-danger">${dateFormat(data[0].mancappdate)}</p>`         
             }else{
               if (data[0].cmansig) {
-                manStatus.innerHTML = `<img src="${data[0].cmansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].compremman}</p><br/><p class="text-success">${data[0].mancappdate}</p>` 
+                manStatus.innerHTML = `<img src="${data[0].cmansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].compremman}</p><br/><p class="text-success">${dateFormat(data[0].mancappdate)}</p>` 
                 
               } else {
-                manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].compremman}</p><br/><p class="text-success">${data[0].mancappdate}</p>`
+                manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[0].compremman}</p><br/><p class="text-success">${dateFormat(data[0].mancappdate)}</p>`
               }
             }
           }
@@ -343,12 +361,12 @@
             if (data[0].compappmand == "Pending") {
                 manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
             } else if(data[0].compappmand == "decline") {
-                manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[0].compremmand }</p><br/><p class="text-danger">${data[0].mandcappdate}</p>`         
+                manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[0].compremmand }</p><br/><p class="text-danger">${dateFormat(data[0].mandcappdate)}</p>`         
             }else{
               if (data[0].cmandsig) {
-                manDStatus.innerHTML = `<img src="${data[0].cmandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].compremmand}</p><br/><p class="text-success">${data[0].mandcappdate}</p>` 
+                manDStatus.innerHTML = `<img src="${data[0].cmandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].compremmand}</p><br/><p class="text-success">${dateFormat(data[0].mandcappdate)}</p>` 
               } else {
-                manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].compremmand}</p><br/><p class="text-success">${data[0].mandcappdate}</p>`   
+                manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[0].compremmand}</p><br/><p class="text-success">${dateFormat(data[0].mandcappdate)}</p>`   
               }
             }
           }
@@ -362,12 +380,12 @@
             if (data[0].compappsup == "Pending") {
                 supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
             } else if(data[0].compappsup == "decline") {
-                supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-success">Supervisor</p><br/><p class="text-danger">${data[0].compremsup}</p><br/><p class="text-danger">${data[0].supcappdate}</p>`         
+                supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-success">Supervisor</p><br/><p class="text-danger">${data[0].compremsup}</p><br/><p class="text-danger">${dateFormat(data[0].supcappdate)}</p>`         
             }else{
               if (data[0].csupsig) {
-                supStatus.innerHTML = `<img src="${data[0].csupsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].compremsup}</p><br/><p class="text-success">${data[0].supcappdate}</p>`          
+                supStatus.innerHTML = `<img src="${data[0].csupsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].compremsup}</p><br/><p class="text-success">${dateFormat(data[0].supcappdate)}</p>`          
               } else {
-                supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].compremsup}</p><br/><p class="text-success">${data[0].supcappdate}</p>` 
+                supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[0].compremsup}</p><br/><p class="text-success">${dateFormat(data[0].supcappdate)}</p>` 
               }
             }
           }

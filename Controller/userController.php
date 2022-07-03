@@ -3,8 +3,8 @@
         include("../Env/env.php");
         require("../Connection/dbConnection.php");
     
-        $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-        $conn->connect();
+      
+        $conn = conString1();
         $genControll = new GeneralController();
 
     if (isset($_POST["submit"])) {
@@ -58,7 +58,7 @@
                     move_uploaded_file($fileTempName2,$destination2);
 
                     // save item to DB
-                    $genControll->userRegistration($firstName,$lastName,$email,$phone,$address,$office,$destination,$sex,$destination2,$userName,$password,$previlage);
+                    $genControll->userRegistration($conn,$firstName,$lastName,$email,$phone,$address,$office,$destination,$sex,$destination2,$userName,$password,$previlage);
 
                 }else{
                      header("Location: ../View/HrManagement/addUser.php?fail='File too large'");

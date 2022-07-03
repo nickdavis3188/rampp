@@ -11,11 +11,11 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+     
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils-> getAllSubUnApproveC();
+      $data1 = $UserUtils-> getAllSubUnApproveC($conn);
     
 ?>
 <!-- HEADER -->
@@ -24,7 +24,12 @@
   .table, .th, .td {
     border: 1px solid;
     }
-
+    .table .td {
+  border: solid 1px #666 !important;
+  width: 110px !important;
+  word-wrap: break-word !important;
+  font-size: xx-small !important;
+}
 
 /* Style The Dropdown Button */
 .dropbtn {
@@ -200,7 +205,7 @@ i{
                     <td><?php echo $value["preqno"] ?></td>
                     <td><?php echo $value["from"] ?></td>
                     <td><?php echo $value["subject"] ?></td>
-                    <td><?php echo $value["date"] ?></td>
+                    <td><?php echo date('d/m/y',strtotime($value["date"])) ?></td>
                     <td>
                     <div>
                       <div class="d-flex justify-content-between align-items-center">
@@ -292,10 +297,10 @@ i{
                                                     <td class="td">
                                                         <table class="table">
                                                             <tr>
-                                                                <th class="th">Item Name</th>
-                                                                <th class="th">Desc</th>
-                                                                <th class="th">Qty</th>
-                                                                <th class="th">UM</th>
+                                                                <th class="td">Item Name</th>
+                                                                <th class="td">Desc</th>
+                                                                <th class="td">Qty</th>
+                                                                <th class="td">UM</th>
                                                             </tr>
                                                             <tbody class="itbod">
                                                           
@@ -316,9 +321,9 @@ i{
                                                     <td class="td">
                                                         <table class="table">
                                                             <tr>
-                                                                <th class="th">Unit Price</th>
-                                                                <th class="th">Total</th>
-                                                                <th class="th">Vendor</th>
+                                                                <th class="td">Unit Price</th>
+                                                                <th class="td">Total</th>
+                                                                <th class="td">Vendor</th>
                                                             </tr>
                                                             <tbody class="chipbody">
                                                           
@@ -370,11 +375,11 @@ i{
                                     </button> 
                                   </form>                    
                                 </div>
-                                <div class="col-4 mns">
+                                <div class="col-4 mns"style="line-height: 9px;font-size: xx-small;" >
                                     <p class="text-warning">Pending</p>
                                     <p class="text-warning">Manager</p>
                                 </div>
-                                <div class="col-4 mnds">
+                                <div class="col-4 mnds"style="line-height: 9px;font-size: xx-small;" >
                                     <p class="text-warning">Pending</p>
                                     <p class="text-warning">Managing Director</p>
                                 </div>
@@ -574,8 +579,8 @@ function viewFunc(params) {
             let count = 0
             let trr = document.createElement("tr");
             vvdata.forEach(element1 => {
-              let thr = document.createElement("th");
-              thr.classList.add("th")
+              let thr = document.createElement("td");
+              thr.classList.add("td")
               thr.style.border = "1px solid"
               thr.innerText =element1.venname 
               trr.appendChild(thr);              

@@ -4,9 +4,9 @@
         include("../Env/env.php");
         require("../Connection/dbConnection.php");
     
-        $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-        $conn->connect();
-        $genControll = new GeneralController();
+       
+        $conn = conString1();
+        // $genControll = new GeneralController();
 
     if (isset($_POST["submitF"])) {
         if ($_FILES['document']["size"] != 0) {
@@ -24,9 +24,9 @@
             $dateCreate = $_POST['date'];
             $amount = $_POST['amount'];
             $amountword = $_POST['amountword'];
-            $subject = mysql_real_escape_string($_POST['subject']);
+            $subject = mysqli_real_escape_string($conn,$_POST['subject']);
             // $address = $_POST['address'];
-            $justification = mysql_real_escape_string($_POST['justification']);
+            $justification = mysqli_real_escape_string($conn,$_POST['justification']);
             $toO = $_POST['to'];
             $uname= $_SESSION['userName'];
     
@@ -54,8 +54,8 @@
                     $query = "INSERT INTO fundrequisition
                     (`fregno`, `from` ,`datecreated`, `ammount`,`ammountword`,`subject`, `file`, `justification`, `manstatus`,`mandsatus`,`supstatus`,`to`,`reqfrom`)VALUES
                     ('$reqno','$from','$dateCreate','$amount','$amountword','$subject','$destination','$justification','Pending','Pending','Pending','$toO','$uname')";
-                    $results = mysql_query($query);
-                    $noofrows = mysql_affected_rows();
+                    $results = mysqli_query($conn,$query);
+                    $noofrows = mysqli_affected_rows($conn);
             
                     if($noofrows==1)
                     {
@@ -64,7 +64,7 @@
                     }
                     else
                     {
-                        header("Location: ../View/FundRequisision/createFundRequisition.php?fail= Error:".mysql_error());          
+                        header("Location: ../View/FundRequisision/createFundRequisition.php?fail= Error:".mysqli_error($conn));          
                     }
                     // save item to DB
                 
@@ -83,16 +83,16 @@
             $dateCreate = $_POST['date'];
             $amount = $_POST['amount'];
             $amountword = $_POST['amountword'];
-            $subject = mysql_real_escape_string($_POST['subject']);
-            $justification = mysql_real_escape_string($_POST['justification']);
+            $subject = mysqli_real_escape_string($conn,$_POST['subject']);
+            $justification = mysqli_real_escape_string($conn,$_POST['justification']);
             $toO = $_POST['to'];
             $uname= $_SESSION['userName'];
     
             $query = "INSERT INTO fundrequisition
             (`fregno`, `from` ,`datecreated`, `ammount`,`ammountword`,`subject`, `file`, `justification`, `manstatus`,`mandsatus`,`supstatus`,`to`,`reqfrom`)VALUES
             ('$reqno','$from','$dateCreate','$amount','$amountword','$subject','','$justification','Pending','Pending','Pending','$toO','$uname')";
-            $results = mysql_query($query);
-            $noofrows = mysql_affected_rows();
+            $results = mysqli_query($conn,$query);
+            $noofrows = mysqli_affected_rows($conn);
     
             if($noofrows==1)
             {
@@ -101,7 +101,7 @@
             }
             else
             {
-                header("Location: ../View/FundRequisision/createFundRequisition.php?fail= Error:".mysql_error());          
+                header("Location: ../View/FundRequisision/createFundRequisition.php?fail= Error:".mysqli_error($conn));          
             }
          
         }     

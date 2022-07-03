@@ -2,8 +2,8 @@
     session_start();
     require("../Connection/dbConnection.php");
     include("../Env/env.php");
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-    $conn->connect();
+   
+    $conn = conString1();
 
     $fname = $_REQUEST['firstName'];
     $username = $_REQUEST['userName'];
@@ -11,11 +11,11 @@
     if ($username && $fname)
     {
         $query = "select pword from users where uname='$username' and fname ='$fname'";
-        $results = mysql_query($query);
-        $noofrows = mysql_num_rows($results);
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_num_rows($results);
         if ($noofrows==1)
         {
-            while($row = mysql_fetch_array($results))
+            while($row = mysqli_fetch_array($results))
             { 
                 
                 $password = $row[0];

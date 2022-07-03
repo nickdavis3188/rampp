@@ -3,21 +3,21 @@
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
 
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-    $conn->connect();
+   
+    $conn = conString1();
 
     if (isset($_GET['delete'])) {
        
         $query = "DELETE FROM staff WHERE stafftag ='" . $_GET["staftag"] . "'";
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
         if ($noofrows == 1)
         {
             header("Location: ../View/HrManagement/viewModefyDelete2.php?msg= Delete Successful");        
         }
         else
         {
-            header("Location: ../View/HrManagement/viewModefyDelete2.php?fail= Error:".mysql_error()); 
+            header("Location: ../View/HrManagement/viewModefyDelete2.php?fail= Error:".mysqli_error($conn)); 
         }
     }elseif (isset($_POST['updatestaff'])) {
         // print_r($_POST);
@@ -35,15 +35,15 @@
 
         $query = "UPDATE staff  SET fname='$firstname',lname='$lastname',premonth='$month',perannum='$annum',sex='$sex',phone='$phone',staffincentive='$insentive',address='$address',dept='$department' WHERE stafftag ='$stafftag'";
 
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
         if ($noofrows == 1)
         {
             header("Location: ../View/HrManagement/viewModefyDelete2.php?msg= Update Successful");        
         }
         else
         {
-            header("Location: ../View/HrManagement/viewModefyDelete2.php?fail= Error:".mysql_error()); 
+            header("Location: ../View/HrManagement/viewModefyDelete2.php?fail= Error:".mysqli_error($conn)); 
         }
     }
  

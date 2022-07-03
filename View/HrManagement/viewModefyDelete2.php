@@ -11,11 +11,11 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+      
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils-> staffTableDisplay();
+      $data1 = $UserUtils-> staffTableDisplay($conn);
       // $data = $UserUtils-> getAllDepartment();
 ?>
 <!-- HEADER -->

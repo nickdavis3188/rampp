@@ -10,8 +10,8 @@
      include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+     
+      $conn = conString1();
      $UserUtils = new GeneralController();
       
 ?>
@@ -97,7 +97,7 @@
                         <div class="form-group row">
                         <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Requisition Number</label>
                         <div class="col-sm-9">
-                          <input readonly type="number" class="form-control regn" id="exampleInputUsername2" value="<?php echo $UserUtils->getrqNo(); ?>">
+                          <input readonly type="number" class="form-control regn" id="exampleInputUsername2" value="<?php echo $UserUtils->getrqNo($conn); ?>">
                         </div>
                         </div>
                         <div class="form-group row">

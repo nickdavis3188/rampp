@@ -11,12 +11,11 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data = $UserUtils-> inventoryTableDisplay();
-      $cati = $UserUtils-> getAllCategory();
+      $data = $UserUtils-> inventoryTableDisplay($conn);
+      $cati = $UserUtils-> getAllCategory($conn);
 
       
 ?>
@@ -719,6 +718,7 @@ i{
 ?>
 
 <script>
+
  function viewFunc(id){
   let catname = document.querySelector(".cnv"); 
     let prudname = document.querySelector(".pnv"); 
@@ -746,7 +746,7 @@ i{
       profit.innerText = "# "+Number(data[0].profit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
       timeP.innerText = data[0].preparationtime+" Minutes"
       
-      console.log("response",data[1])
+      // console.log("response",data[1])
    
        //  display history
         let child = his.lastElementChild; 
@@ -755,6 +755,15 @@ i{
             child = his.lastElementChild;
         }
 
+        const dateFormat = (date)=>{
+            var today = new Date(date);
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+            var yyyy = today.getFullYear();
+
+            today = mm + '/' + dd + '/' + yyyy;
+            return today
+          }
         data[1].forEach(function(item,ind) {
         
             let statCheck = item.restock == 2?item.restock:item.reduceby
@@ -767,7 +776,7 @@ i{
                 <td class=" text-left" >${item.inid}</td>
                 <td class=" text-left" >${item.reason	}</td>
                 <td class=" text-left" >${statCheck}</td>
-                <td class=" text-left" >${item.date}</td>  
+                <td class=" text-left" >${dateFormat(item.date)}</td>  
                 ${statCheck2}
                 </td>
             `;
@@ -807,18 +816,18 @@ i{
     body: mydata,
     headers: {"Content-Type": "application/json; charset=utf-8"}
     }).then(res=>res.json()).then(function(data) {
-      catname.value = data.catname
-      prudname.value = data.productname
-      qty.value = data.quantityadded
-      minimumL.value = data.minnimumlevle
-      costPrice.value = data.minnimumlevle
-      sellingPrice.value = data.sellingprice
-      profit.value = data.profit
-      timeP.value = data.preparationtime
-      idd.value = id
+      // console.log("response",data[0])
+      catname.value = data[0].catname
+      prudname.value = data[0].productname
+      qty.value = data[0].quantityadded
+      minimumL.value = data[0].minnimumlevle
+      costPrice.value = data[0].minnimumlevle
+      sellingPrice.value = data[0].sellingprice
+      profit.value = data[0].profit
+      timeP.value = data[0].preparationtime
+      idd.value = data[0].id
   
    
-      console.log("response",data)
     }).catch(err=>{
       if (err) {
         alert("Error:"+err)

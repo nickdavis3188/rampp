@@ -11,11 +11,11 @@
       include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+
+      $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils-> lpoTableDisplay();
+      $data1 = $UserUtils-> lpoTableDisplay($conn);
       // $data = $UserUtils-> getAllDepartment();
 ?>
 <!-- HEADER -->
@@ -203,7 +203,7 @@ i{
             <td><?php echo $index + 1 ?></td>
             <td><?php echo $value["purchaseId"] ?></td>
             <td><?php echo $value["venname"] ?></td>
-            <td><?php echo $value["lpodate"] ?></td>
+            <td><?php echo date('d/m/y',strtotime($value["lpodate"])) ?></td>
             <td><?php echo $retVal2 ?></td>
             <td>
             <div class="dropdown ">
@@ -360,7 +360,7 @@ i{
                             <tr>
                                 <td colspan="4"></td>                          
                                 <td class="text-right">
-                                  <span style="color:#02679a">Discount<span class="dis"></span></span>                              
+                                  <span style="color:#02679a">Discount  <span class="dis"></span></span>                              
                                 </td>
                                 <td>
                                   <b><p class="disc"></p></b>
@@ -370,7 +370,7 @@ i{
                             <tr>
                               <td colspan="4"></td> 
                                 <td class="text-right">
-                                 <span style="color:#02679a">Vat <span class="vt"></span> </span>                             
+                                 <span style="color:#02679a">Vat  <span class="vt"></span> </span>                             
                                 </td>
                                 <td>
                                   <b><p class="vat"></p></b>
@@ -394,6 +394,14 @@ i{
                                 <td>
                                  <b><p class="tot"></p></b> 
                                 </td> 
+                            </tr>
+                            <tr>                          
+                              <td  class="text-right">
+                                <span style="color:#02679a">Amount In Words </span>                               
+                              </td>
+                              <td colspan="5">
+                                <b><p class="amw"></p></b> 
+                              </td> 
                             </tr>
                         </table>
                         </div>
@@ -566,7 +574,17 @@ i{
     let manDStatus = document.querySelector(".mnds"); 
     let supStatus = document.querySelector(".sups"); 
     let print = document.querySelector(".prt"); 
-   
+    let amw = document.querySelector(".amw"); 
+
+    const dateFormat = (date)=>{
+      var today = new Date(date);
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+      var yyyy = today.getFullYear();
+
+      today = mm + '/' + dd + '/' + yyyy;
+      return today
+    }
 
 
     let mydata = JSON.stringify({ "venid":v,"pregno":p})
@@ -576,18 +594,19 @@ i{
     headers: {"Content-Type": "application/json; charset=utf-8"}
     }).then(res=>res.json()).then(function(data) {
 
-        lponum.innerText = data[1][0].lpono
-        prno.innerText = data[1][0].purchaseId
-        vendor.innerText = data[1][0].venname
-        date.innerText = data[1][0].lpodate
-        descount.innerText = "#"+Number(data[1][0].discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+      amw.innerText = data[1][0].mountwords;
+        lponum.innerText = data[1][0].lpono;
+        prno.innerText = data[1][0].purchaseId;
+        vendor.innerText = data[1][0].venname;
+        date.innerText = dateFormat(data[1][0].lpodate);
+        descount.innerText = "#"+Number(data[1][0].discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
         vat.innerText = "#"+Number(data[1][0].vat).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
-        stotal.innerText = "#"+Number(data[1][0].subtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
-        gtotal.innerText = "#"+Number(data[1][0].grandtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
-        disc.innerText = data[1][0].disc+"%"
-        vt.innerText = data[1][0].vt+"%"
-        print.setAttribute("vid",v)
-        print.setAttribute("pid",p)
+        stotal.innerText = "#"+Number(data[1][0].subtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') ;
+        gtotal.innerText = "#"+Number(data[1][0].grandtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') ;
+        disc.innerText = data[1][0].disc+"%";
+        vt.innerText = data[1][0].vt+"%";
+        print.setAttribute("vid",v);
+        print.setAttribute("pid",p);
      
         if (data[0].length < 1) {
             let list1 = document.createElement("tr");
@@ -632,13 +651,13 @@ i{
         if (data[1][0].approveman == "Pending") {
             manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
         } else if(data[1][0].approveman == "decline") {
-            manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[1][0].remman}</p><br/><p class="text-danger">${data[1][0].mandate}</p>`         
+            manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[1][0].remman}</p><br/><p class="text-danger">${dateFormat(data[1][0].mandate)}</p>`         
         }else{
           if (data[1][0].sigman) {
-            manStatus.innerHTML = `<img src="../${data[1][0].sigman}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${data[1][0].mandate}</p>` 
+            manStatus.innerHTML = `<img src="../${data[1][0].sigman}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>` 
             
           } else {
-            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${data[1][0].mandate}</p>`
+            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>`
           }
         }
       }
@@ -652,12 +671,12 @@ i{
         if (data[1][0].approvemand == "Pending") {
             manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
         } else if(data[1][0].approvemand == "decline") {
-            manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[1][0].remmand }</p><br/><p class="text-danger">${data[1][0].mandate}</p>`         
+            manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[1][0].remmand }</p><br/><p class="text-danger">${dateFormat(data[1][0].mandate)}</p>`         
         }else{
           if (data[1][0].sigmand) {
-            manDStatus.innerHTML = `<img src="../${data[1][0].sigmand}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${data[1][0].mandate}</p>` 
+            manDStatus.innerHTML = `<img src="../${data[1][0].sigmand}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>` 
           } else {
-            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${data[1][0].mandate}</p>`   
+            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>`   
           }
         }
       }
@@ -672,12 +691,12 @@ i{
         if (data[1][0].approvesup == "Pending") {
             supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
         } else if(data[1][0].approvesup == "decline") {
-            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-success">Supervisor</p><br/><p class="text-danger">${data[1][0].remsup}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
+            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-success">Supervisor</p><br/><p class="text-danger">${data[1][0].remsup}</p><br/><p class="text-danger">${dateFormat(data[1][0].supdate)}</p>`         
         }else{
           if (data[1][0].sigsup) {
-            supStatus.innerHTML = `<img src="../${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>`          
+            supStatus.innerHTML = `<img src="../${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${dateFormat(data[1][0].supdate)}</p>`          
           } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>` 
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${dateFormat(data[1][0].supdate)}</p>` 
           }
         }
       }

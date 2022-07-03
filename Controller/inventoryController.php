@@ -3,8 +3,7 @@
       include("../Env/env.php");
       require("../Connection/dbConnection.php");
   
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+      $conn = conString1();
       $genControll = new GeneralController();
 
   if (isset($_POST["inventory"])) {
@@ -23,8 +22,8 @@
         $salable = $_POST['salable'];
         
         $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','$salable')";
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
     
         if($noofrows==1)
         {
@@ -33,12 +32,12 @@
         }
         else
         {
-            header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysql_error());          
+            header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysqli_error($conn));          
         }
     } else {
         $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','1')";
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
     
         if($noofrows==1)
         {
@@ -47,7 +46,7 @@
         }
         else
         {
-            header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysql_error());          
+            header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysqli_error($conn));          
         }
        
     }
@@ -57,8 +56,8 @@
     $catname = $_POST['catname'];
 
     $query = "INSERT INTO category (`catname`)VALUES ('$catname')";
-    $results = mysql_query($query);
-    $noofrows = mysql_affected_rows();
+    $results = mysqli_query($conn,$query);
+    $noofrows = mysqli_affected_rows($conn);
 
     if($noofrows==1)
     {
@@ -67,7 +66,7 @@
     }
     else
     {
-        header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysql_error());          
+        header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysqli_error($conn));          
     }
 
   }else{
@@ -76,15 +75,15 @@
         // $catname = $_POST['catname'];
         $query = "DELETE FROM category WHERE id ='" . $_POST["id"] . "'";
         
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
         if ($noofrows == 1)
         {
             header("Location: ../View/Inventory/addInventory.php?msg= Delete Successful");        
         }
         else
         {
-            header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysql_error()); 
+            header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysqli_error($conn)); 
         }
     }
   }

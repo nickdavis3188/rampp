@@ -28,7 +28,7 @@
        function invalid()
        {
            $result = false;
-           if (!preg_match("/^[a-zA-Z0-9]*$/",$userName)) {
+           if (!preg_match("/^[a-zA-Z0-9]*$/",$this->userName)) {
                $result = true;
            }else{
                $result = false;

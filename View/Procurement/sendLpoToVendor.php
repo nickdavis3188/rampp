@@ -11,11 +11,11 @@
      include("../../Env/env.php");
      require("../../Connection/dbConnection.php");
    
-     $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-     $conn->connect();
+     
+     $conn = conString1();
 
      $UserUtils = new GeneralController();
-     $data = $UserUtils-> getAllApprovedByMdLpo();
+     $data = $UserUtils-> getAllApprovedByMdLpo($conn);
       
 ?>
 <!-- HEADER -->
@@ -261,7 +261,7 @@
       par.appendChild(newSpan);
       // let vendorname =
       // console.log(ele3.value)
-      window.location = window.location.origin+"/Rampp/View/Procurement/createLpo.php?id="+ele3.value+"&reqno="+reqno1.value;
+      // window.location = window.location.origin+"/Rampp/View/Procurement/createLpo.php?id="+ele3.value+"&reqno="+reqno1.value;
       
     } else {
       

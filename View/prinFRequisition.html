@@ -111,20 +111,20 @@
         <hr>
         <div class="row ">
         <div class="col-4">
-          <div class="sups text-center">
+          <div class="sups text-center" style="line-height: 9px;font-size: x-small;">
               <p class="text-info">Pending</p>
 
         </div>
              
       </div>
       <div class="col-4">
-        <div class="mns text-center">
+        <div class="mns text-center" style="line-height: 9px;font-size: x-small;">
               <p class="text-info">Pending</p>
         </div>
           
       </div>
       <div class="col-4">
-          <div class="mnds text-center">
+          <div class="mnds text-center" style="line-height: 9px;font-size: x-small;">
               <p class="text-info">Pending</p>
           </div>                            
       </div>
@@ -185,7 +185,15 @@
         let justification = document.querySelector(".jus"); 
         let to = document.querySelector(".to"); 
       
-     
+        const dateFormat = (date)=>{
+          var today = new Date(date);
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+          var yyyy = today.getFullYear();
+
+          today = mm + '/' + dd + '/' + yyyy;
+          return today
+        }
     
         let mydata = JSON.stringify({ "fRegNo":id })
         fetch("../Utils/getSingleFundRegUtils.php", {
@@ -199,7 +207,7 @@
    
     
             reqno.innerText = data.fregno
-            dateprep.innerText = data.datecreated
+            dateprep.innerText = dateFormat(data.datecreated)
             subj.innerText = data.subject
             from.innerText = data.from
             // summ.innerText = data.summary
@@ -217,15 +225,15 @@
             child = manStatus.lastElementChild;
         }
         if (data.manstatus == "Pending") {
-          manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p><br/><p class="text-warning">${data.manremark}</p><br/><p class="text-warning">${data.mandate}</p>` 
+          manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p><br/><p class="text-warning">${data.manremark}</p><br/><p class="text-warning">${dateFormat(data.mandate)}</p>` 
         } else if(data.manstatus == "decline") {
-          manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data.manremark}</p><br/><p class="text-danger">${data.mandate}</p>`         
+          manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p style="color:#02679a">${data.manremark}</p><br/><p class="text-danger">${dateFormat(data.mandate)}</p>`         
         }else{
           if (data.mansig) {
-            manStatus.innerHTML = `<img src="${data.mansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data.manremark}</p><br/><p class="text-success">${data.mandate}</p>` 
+            manStatus.innerHTML = `<img src="${data.mansig}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data.manremark}</p><br/><p class="text-success">${dateFormat(data.mandate)}</p>` 
             
           } else {
-            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><br/><p class="text-success">Manager</p><p class="text-success">${data.manremark}</p><br/><p class="text-success">${data.mandate}</p>`
+            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><br/><p class="text-success">Manager</p><p class="text-success">${data.manremark}</p><br/><p class="text-success">${dateFormat(data.mandate)}</p>`
           }
         }
       }
@@ -237,14 +245,14 @@
             child = manDStatus.lastElementChild;
         }
         if (data.mandsatus == "Pending") {
-          manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p><br/><p class="text-warning">${data.mandremark}</p><br/><p class="text-warning">${data.manddate}</p>` 
+          manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p><br/><p class="text-warning">${data.mandremark}</p><br/><p class="text-warning">${dateFormat(data.manddate)}</p>` 
         } else if(data.mandsatus == "decline") {
-          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p style="color:#02679a">${data.mandremark }</p><br/><p class="text-danger">${data.manddate}</p>`         
+          manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p style="color:#02679a">${data.mandremark }</p><br/><p class="text-danger">${dateFormat(data.manddate)}</p>`         
         }else{
           if (data.mandsig) {
-            manDStatus.innerHTML = `<img src="${data.mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data.mandremark}</p><br/><p class="text-success">${data.manddate}</p>` 
+            manDStatus.innerHTML = `<img src="${data.mandsig}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data.mandremark}</p><br/><p class="text-success">${dateFormat(data.manddate)}</p>` 
           } else {
-            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data.mandremark}</p><br/><p class="text-success">${data.manddate}</p>`   
+            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data.mandremark}</p><br/><p class="text-success">${dateFormat(data.manddate)}</p>`   
           }
         }
       }
@@ -257,14 +265,14 @@
             child = supStatus.lastElementChild;
         }
         if (data.supstatus == "Pending") {
-          supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p><br/><p class="text-warning">${data.supremark }</p><br/><p class="text-warning">${data.supdate}</p>` 
+          supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p><br/><p class="text-warning">${data.supremark }</p><br/><p class="text-warning">${dateFormat(data.supdate)}</p>` 
         } else if(data.supstatus == "decline") {
-          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data.supremark }</p><br/><p class="text-danger">${data.supdate}</p>`         
+          supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Supervisor</p><br/><p style="color:#02679a">${data.supremark }</p><br/><p class="text-danger">${dateFormat(data.supdate)}</p>`         
         }else{
           if (data.supsig) {
-            supStatus.innerHTML = `<img src="${data.supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data.supremark }</p><br/><p class="text-success">${data.supdate}</p>`          
+            supStatus.innerHTML = `<img src="${data.supsig}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data.supremark }</p><br/><p class="text-success">${dateFormat(data.supdate)}</p>`          
           } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data.supremark }</p><br/><p class="text-success">${data.supdate}</p>` 
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data.supremark }</p><br/><p class="text-success">${dateFormat(data.supdate)}</p>` 
           }
         }
       }

@@ -3,8 +3,8 @@
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
 
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-    $conn->connect();
+   
+    $conn = conString1();
 
     if (isset($_POST['restock'])) {
 
@@ -12,15 +12,15 @@
         $itemId = $_POST["id"];
         $date = $_POST["date"];
         $reason = $_POST["reason"];
-        $reason1 = mysql_real_escape_string($reason);
+        $reason1 = mysqli_real_escape_string($conn,$reason);
         $res = 2;
 
         $items = array();
     
         $query ="SELECT * FROM inventory WHERE id='$itemId'";
-        $results = mysql_query($query);
+        $results = mysqli_query($conn,$query);
 
-        while($row = mysql_fetch_array($results)){
+        while($row = mysqli_fetch_array($results)){
             $items[] = $row;
         }
         
@@ -30,27 +30,27 @@
     
                
             $query = "INSERT INTO  inventryhistory (`inid`, `date` ,`restock`, `reduce`,`reason`,`increasby`,`reduceby`)VALUES ('$itemId',' $date','$res','0','$reason1','$itemNumber','0')";
-            $results = mysql_query($query);
-            $noofrows = mysql_affected_rows();
+            $results = mysqli_query($conn,$query);
+            $noofrows = mysqli_affected_rows($conn);
     
             if($noofrows==1)
             {
                
                 $query = "UPDATE inventory SET quantityadded= '$totalRestock' WHERE id='$itemId'";
-                $results = mysql_query($query);
-                $noofrows = mysql_affected_rows();
+                $results = mysqli_query($conn,$query);
+                $noofrows = mysqli_affected_rows($conn);
                 if ($noofrows == 1)
                 {
                     header("Location: ../View/Inventory/viewModefyDelete.php?msg= Restock Successful");        
                 }
                 else
                 {
-                    header("Location: ../View/Inventory/viewModefyDelete.php?fail= Error:".mysql_error()); 
+                    header("Location: ../View/Inventory/viewModefyDelete.php?fail= Error:".mysqli_error($conn)); 
                 }
             }
             else
             {
-                header("Location: ../View/Inventory/viewModefyDelete.php?fail= Error:".mysql_error());         
+                header("Location: ../View/Inventory/viewModefyDelete.php?fail= Error:".mysqli_error($conn));         
             }
          
         }else{

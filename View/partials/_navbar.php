@@ -36,7 +36,7 @@
                   </p>
                 </div>
               </a>
-              <a class="dropdown-item">
+              <a class=" dropdown-item" >
                 <div class="item-thumbnail">
                   <div class="item-icon bg-warning">
                     <i class="ti-settings mx-0"></i>
@@ -69,7 +69,7 @@
               <img src="../../www/images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="../settings/userSettings.php?modify=0">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
@@ -87,3 +87,4 @@
         </button>
       </div>
     </nav>
+   

@@ -4,17 +4,17 @@
     require("../Connection/dbConnection.php");
     $post = (array) json_decode(file_get_contents('php://input'),false);
  
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-     $conn->connect();
+
+     $conn = conString1();
      $jsonData = $post["pRegNo"];
      
      
      $items = array();
      
      $query ="SELECT * FROM prequisitioninfo WHERE preqno =".$post["pRegNo"]."";
-     $results = mysql_query($query);
+     $results = mysqli_query($conn,$query);
      
-     while($row = mysql_fetch_array($results)){
+     while($row = mysqli_fetch_array($results)){
          $items[] = $row;
     }
 
@@ -23,9 +23,9 @@
      $itemss = array();
      
      $querys ="SELECT * FROM  preqitem WHERE preqno =".$post["pRegNo"]."";
-     $resultss = mysql_query($querys);
+     $resultss = mysqli_query($conn,$querys);
      
-     while($rows = mysql_fetch_array($resultss)){
+     while($rows = mysqli_fetch_array($resultss)){
          $itemss[] = $rows;
     }
 
@@ -33,18 +33,18 @@
      $items1 = array();
      
      $query1 ="SELECT * FROM prequisitionconfirm WHERE pregno =".$post["pRegNo"]."";
-     $results1 = mysql_query($query1);
+     $results1 = mysqli_query($conn,$query1);
      
-     while($row1 = mysql_fetch_array($results1)){
+     while($row1 = mysqli_fetch_array($results1)){
          $items1[] = $row1;
     }
 
      $items2 = array();
      
      $query2 ="SELECT * FROM  vedorquote WHERE purchaseId =".$post["pRegNo"]."";
-     $results2 = mysql_query($query2);
+     $results2 = mysqli_query($conn,$query2);
      
-     while($row2 = mysql_fetch_array($results2)){
+     while($row2 = mysqli_fetch_array($results2)){
         $items2[] = $row2;
     }
 

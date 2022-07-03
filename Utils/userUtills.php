@@ -3,14 +3,14 @@
     {
          
 
-        function usersTableDisplay(){
+        function usersTableDisplay($conn){
 
             $items = array();
     
             $query ="SELECT fname,lname,sex,designation,uname FROM users";
-            $results = mysql_query($query);
+            $results = mysqli_query($conn,$query);
     
-            while($row = mysql_fetch_array($results)){
+            while($row = mysqli_fetch_array($results)){
                 $items[] = $row;
             }
             return $items;

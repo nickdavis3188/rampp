@@ -1,5 +1,5 @@
 <?php
-    function uploadArray1($data){
+    function uploadArray1($conn,$data){
         
         
         foreach ($data as $index => $value) {     
@@ -9,8 +9,8 @@
         $numCount = 0;
         for ($i=0; $i < count($myArray) ; $i++) {
     
-            $v = "";
-            $k = "";
+            $v = array();
+            $k = array();
          
             foreach ($myArray[$i] as $key => $value) {
                 $k[] = $key;
@@ -20,8 +20,8 @@
             $v = implode(",",$v);
       
             $query = "INSERT INTO vedorquote ($k) VALUES($v)";
-            $results = mysql_query($query);
-            $noofrows = mysql_affected_rows();
+            $results = mysqli_query($conn,$query);
+            $noofrows = mysqli_affected_rows($conn);
         
             if($noofrows==1)
             {     

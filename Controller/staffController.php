@@ -3,8 +3,8 @@
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
 
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-    $conn->connect();
+
+    $conn = conString1();
     $genControll = new GeneralController();
 
    if (isset($_POST["submtNewPersonnel"])) {
@@ -25,8 +25,8 @@
 
 
             
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
 
         if($noofrows==1)
         {
@@ -35,14 +35,14 @@
         }
         else
         {
-            header("Location: ../View/HrManagement/addPresonnel.php?fail= Error:".mysql_error());          
+            header("Location: ../View/HrManagement/addPresonnel.php?fail= Error:".mysqli_error($conn));          
         }
    }elseif(isset($_POST["dpt"])){
     $name = $_POST['name'];
 
     $query = "INSERT INTO department (`name`)VALUES ('$name')";
-    $results = mysql_query($query);
-    $noofrows = mysql_affected_rows();
+    $results = mysqli_query($conn,$query);
+    $noofrows = mysqli_affected_rows($conn);
 
     if($noofrows==1)
     {
@@ -51,7 +51,7 @@
     }
     else
     {
-        header("Location: ../View/HrManagement/addPresonnel.php?fail= Error:".mysql_error());          
+        header("Location: ../View/HrManagement/addPresonnel.php?fail= Error:".mysqli_error($conn));          
     }
 
   }else{
@@ -60,15 +60,15 @@
         // $catname = $_POST['catname'];
         $query = "DELETE FROM department WHERE id ='" . $_POST["id"] . "'";
         
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
         if ($noofrows == 1)
         {
             header("Location: ../View/HrManagement/addPresonnel.php?msg= Delete Successful");        
         }
         else
         {
-            header("Location: ../View/HrManagement/addPresonnel.php?fail= Error:".mysql_error()); 
+            header("Location: ../View/HrManagement/addPresonnel.php?fail= Error:".mysqli_error($conn)); 
         }
     }
   }

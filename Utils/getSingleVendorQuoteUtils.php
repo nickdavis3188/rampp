@@ -4,25 +4,25 @@
     require("../Connection/dbConnection.php");
     $post = (array) json_decode(file_get_contents('php://input'),false);
  
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-     $conn->connect();
+    
+     $conn = conString1();
     //  $jsonData = $post["pregno"];
      
      $items = array();
      
      $query ="SELECT * FROM  prequisitionconfirm WHERE vendorid =".$post["venid"]." AND  pregno =".$post["pregNo"]."";
-     $results = mysql_query($query);
+     $results = mysqli_query($conn,$query);
      
-     while($row = mysql_fetch_array($results)){
+     while($row = mysqli_fetch_array($results)){
          $items[] = $row;
     }
 
      $items2 = array();
      
      $query2 ="SELECT * FROM  vedorquote WHERE vendorId =".$post["venid"]." AND  purchaseId =".$post["pregNo"]."";
-     $results2 = mysql_query($query2);
+     $results2 = mysqli_query($conn,$query2);
      
-     while($row2 = mysql_fetch_array($results2)){
+     while($row2 = mysqli_fetch_array($results2)){
         $items2[] = $row2;
     }
     

@@ -10,8 +10,8 @@
      include("../../Env/env.php");
       require("../../Connection/dbConnection.php");
     
-      $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-      $conn->connect();
+     
+      $conn =conString1();
      $UserUtils = new GeneralController();
       
 ?>
@@ -73,7 +73,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Requisition Number</label>
-                                <input readonly name="reqno"  type="text" class="form-control" id="exampleInputUsername1" value="<?php echo $UserUtils->getFunNp(); ?>" >
+                                <input readonly name="reqno"  type="text" class="form-control" id="exampleInputUsername1" value="<?php echo $UserUtils->getFunNp($conn); ?>" >
                             </div>
                         </div>
                       

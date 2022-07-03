@@ -11,11 +11,11 @@
      include("../../Env/env.php");
      require("../../Connection/dbConnection.php");
    
-     $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-     $conn->connect();
+  
+     $conn = conString1();
 
      $UserUtils = new GeneralController();
-     $data = $UserUtils-> getAllApprovedByMd();
+     $data = $UserUtils-> getAllApprovedByMd($conn);
       
 ?>
 <!-- HEADER -->
@@ -88,7 +88,7 @@
                         </div>                     
                       </div>
                   
-                    <button id="mq" name="vendor" type="submit" class="btn btn-primary me-2  btn-block " style="background:#02679a;color:white;" onClick="loading11(this)" disabled>Make Quote</button>
+                    <button id="mq" name="vendor" type="submit" class="btn btn-primary me-2  btn-block " style="background:#02679a;color:white;" onClick="loading11(this)" disabled>Create LPO</button>
                     <!-- <button class="btn btn-light">Cancel</button> -->
                   <!-- </form> -->
                 </div>

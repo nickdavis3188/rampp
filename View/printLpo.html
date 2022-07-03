@@ -128,6 +128,14 @@
                      <b><p class="tot"></p></b> 
                     </td> 
                 </tr>
+                <tr>                          
+                  <td  class="text-right">
+                    <span style="color:#02679a">Amount In Words </span>                               
+                  </td>
+                  <td colspan="5">
+                    <b><p class="amw"></p></b> 
+                  </td> 
+                </tr>
             </table>
         </div>
         <br>
@@ -135,20 +143,20 @@
         <hr>
         <div class="row">
             <div class="col-4">
-                <div class="sups text-center">
+                <div class="sups text-center" style="line-height: 9px;font-size: x-small;">
                     <p class="text-info">Pending</p>
                     <p class="text-info">Supervisor</p>
 
                 </div>       
             </div>
             <div class="col-4">
-                <div class="mns text-center">
+                <div class="mns text-center" style="line-height: 9px;font-size: x-small;">
                     <p class="text-info">Pending</p>
                     <p class="text-info">Manager</p>
                 </div>   
             </div>
             <div class="col-4">
-                <div class="mnds text-center">
+                <div class="mnds text-center" style="line-height: 9px;font-size: x-small;">
                     <p class="text-info">Pending</p>
                     <p class="text-info">Managing Director</p>
                 </div>
@@ -177,8 +185,17 @@
         let manStatus = document.querySelector(".mns"); 
         let manDStatus = document.querySelector(".mnds"); 
         let supStatus = document.querySelector(".sups"); 
+        let amw = document.querySelector(".amw"); 
        
-    
+        const dateFormat = (date)=>{
+          var today = new Date(date);
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+          var yyyy = today.getFullYear();
+
+          today = mm + '/' + dd + '/' + yyyy;
+          return today
+        }
     
         let mydata = JSON.stringify({ "venid":par.get("v"),"pregno":par.get("p")})
         fetch("../Utils/chipitemanduniqvendorUtils.php", {
@@ -187,10 +204,11 @@
         headers: {"Content-Type": "application/json; charset=utf-8"}
         }).then(res=>res.json()).then(function(data) {
     
+            amw.innerText = data[1][0].mountwords;
             lponum.innerText = data[1][0].lpono
             prno.innerText = data[1][0].purchaseId
             vendor.innerText = data[1][0].venname
-            date.innerText = data[1][0].lpodate
+            date.innerText = dateFormat(data[1][0].lpodate)
             descount.innerText = "#"+Number(data[1][0].discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
             vat.innerText = "#"+Number(data[1][0].vat).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
             gtotal.innerText = "#"+Number(data[1][0].grandtotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') 
@@ -240,13 +258,13 @@
         if (data[1][0].approveman == "Pending") {
             manStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Manager</p>` 
         } else if(data[1][0].approveman == "decline") {
-            manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[1][0].remman}</p><br/><p class="text-danger">${data[1][0].mandate}</p>`         
+            manStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Manager</p><br/><p class="text-danger">${data[1][0].remman}</p><br/><p class="text-danger">${dateFormat(data[1][0].mandate)}</p>`         
         }else{
           if (data[1][0].sigman) {
-            manStatus.innerHTML = `<img src="${data[1][0].sigman}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${data[1][0].mandate}</p>` 
+            manStatus.innerHTML = `<img src="${data[1][0].sigman}" width="100px"/><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>` 
             
           } else {
-            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${data[1][0].mandate}</p>`
+            manStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Manager</p><br/><p class="text-success">${data[1][0].remman}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>`
           }
         }
       }
@@ -260,12 +278,12 @@
         if (data[1][0].approvemand == "Pending") {
             manDStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Managing Director</p>` 
         } else if(data[1][0].approvemand == "decline") {
-            manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[1][0].remmand }</p><br/><p class="text-danger">${data[1][0].mandate}</p>`         
+            manDStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-danger">Managing Director</p><br/><p class="text-danger">${data[1][0].remmand }</p><br/><p class="text-danger">${dateFormat(data[1][0].mandate)}</p>`         
         }else{
           if (data[1][0].sigmand) {
-            manDStatus.innerHTML = `<img src="${data[1][0].sigmand}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${data[1][0].mandate}</p>` 
+            manDStatus.innerHTML = `<img src="${data[1][0].sigmand}" width="100px"/><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>` 
           } else {
-            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${data[1][0].mandate}</p>`   
+            manDStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Managing Director</p><br/><p class="text-success">${data[1][0].remmand}</p><br/><p class="text-success">${dateFormat(data[1][0].mandate)}</p>`   
           }
         }
       }
@@ -280,12 +298,12 @@
         if (data[1][0].approvesup == "Pending") {
             supStatus.innerHTML = `<p class="text-warning">Pending</p><br/><p class="text-warning">Supervisor</p>` 
         } else if(data[1][0].approvesup == "decline") {
-            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-success">Supervisor</p><br/><p class="text-danger">${data[1][0].remsup}</p><br/><p class="text-danger">${data[0].supdate}</p>`         
+            supStatus.innerHTML = `<p class="text-danger">Decline</p><br/><p class="text-success">Supervisor</p><br/><p class="text-danger">${data[1][0].remsup}</p><br/><p class="text-danger">${dateFormat(data[1][0].supdate)}</p>`         
         }else{
           if (data[1][0].sigsup) {
-            supStatus.innerHTML = `<img src="${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>`          
+            supStatus.innerHTML = `<img src="${data[1][0].sigsup}" width="100px"/><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${dateFormat(data[1][0].supdate)}</p>`          
           } else {
-            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${data[1][0].supdate}</p>` 
+            supStatus.innerHTML = `<p class="text-success">Approve</p><br/><p class="text-success">Supervisor</p><br/><p class="text-success">${data[1][0].remsup}</p><br/><p class="text-success">${dateFormat(data[1][0].supdate)}</p>` 
           }
         }
       }

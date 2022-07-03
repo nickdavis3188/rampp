@@ -3,29 +3,29 @@
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
 
-    $conn = new DbConnection($databaseHost,$databaseUserName,$databasePassword,$databaseName);
-    $conn->connect();
+   
+    $conn = conString1();
 
     if (isset($_GET['delete'])) {
        
         $query = "DELETE FROM  prequisitionconfirm WHERE vendorid ='" . $_GET["vidd"] . "'";
-        $results = mysql_query($query);
-        $noofrows = mysql_affected_rows();
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
         if ($noofrows == 1)
         {
             $query1 = "DELETE FROM vedorquote WHERE vendorId ='" . $_GET["vidd"] . "'";
-            $results1 = mysql_query($query1);
-            $noofrows1 = mysql_affected_rows();
+            $results1 = mysqli_query($conn,$query1);
+            $noofrows1 = mysqli_affected_rows($conn);
             if ($noofrows1 >= 1)
             {
                 header("Location: ../View/Procurement/viewVendorQuote.php?msg= Delete Successful");        
             }else{
-                header("Location: ../View/Procurement/viewVendorQuote.php?fail= Error:".mysql_error()); 
+                header("Location: ../View/Procurement/viewVendorQuote.php?fail= Error:".mysqli_error($conn)); 
             }
         }
         else
         {
-            header("Location: ../View/Procurement/viewVendorQuote.php?fail= Error:".mysql_error()); 
+            header("Location: ../View/Procurement/viewVendorQuote.php?fail= Error:".mysqli_error($conn)); 
         }
     }
  
