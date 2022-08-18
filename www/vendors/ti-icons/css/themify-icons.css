@@ -40,6 +40,7 @@
 }
 .ti-trash:before {
 	content: "\e605";
+	font-size: x-large;
 }
 .ti-thought:before {
 	content: "\e606";

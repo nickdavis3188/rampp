@@ -120,6 +120,7 @@
                         </div>
                       </div>
                     </div>
+                   
                   </div>
                   <div class="table-responsive">
                     <table class="table table-hover">
@@ -137,6 +138,13 @@
                       </thead>
                       <tbody>
                         <?php
+                        if (count($data) == 0) { 
+                        ?>
+                        <tr>
+                          <td colspan="8" class="text-center">NO DATA</td>
+                        </tr>
+                        <?php
+                        }{
                           foreach ($data as $index => $value) {
             
                             $retVal = ($value["quantityadded"] > $value["minnimumlevle"]) ?"text-success" :"text-danger";
@@ -171,6 +179,7 @@
                         </tr>
                         <?php
                          
+                            }
                             }
                           ?>  
                         <!-- <tr>

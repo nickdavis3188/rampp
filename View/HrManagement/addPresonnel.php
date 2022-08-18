@@ -97,7 +97,7 @@
                       
                     </div>
                     <?php
-                        srand ((double) microtime() * 1000000);
+                        // srand ((double) microtime() * 1000000);
                         $random3 = rand(1000,9999);
                         ?>
 
@@ -111,7 +111,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Staff Incentive(%)</label>
-                                <input name="insentive" type="number" class="form-control" id="exampleInputUsername1">
+                                <input name="insentive" type="number" class="form-control" id="exampleInputUsername1" value="1" >
                             </div>
                         </div>                     
                     </div>
@@ -199,6 +199,7 @@
               </div>
             </div>
          </div>
+        
 
          <!--BODY -->
           <!-- models -->

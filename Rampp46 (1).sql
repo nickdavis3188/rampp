@@ -1,19 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
--- http://www.phpmyadmin.net
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 03, 2022 at 11:03 PM
--- Server version: 5.1.53
--- PHP Version: 5.3.4
+-- Host: 127.0.0.1:3306
+-- Generation Time: Aug 18, 2022 at 03:16 PM
+-- Server version: 5.7.36
+-- PHP Version: 8.1.0
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `rampp`
@@ -25,11 +27,12 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `category`
 --
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `catname` varchar(200) NOT NULL,
   `id` int(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
@@ -37,7 +40,38 @@ CREATE TABLE IF NOT EXISTS `category` (
 
 INSERT INTO `category` (`catname`, `id`) VALUES
 ('Drink', 2),
-('Funiture', 5);
+('Funiture', 5),
+('Soup', 6),
+('Noodle ', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customaudit`
+--
+
+DROP TABLE IF EXISTS `customaudit`;
+CREATE TABLE IF NOT EXISTS `customaudit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `expensesCapital` int(100) NOT NULL,
+  `expensesRecurrent` int(100) NOT NULL,
+  `expensesReinvestment` int(100) NOT NULL,
+  `stockCostValue` int(100) NOT NULL,
+  `stockSellingValue` int(100) NOT NULL,
+  `stockProfit` int(100) NOT NULL,
+  `totalBar` int(100) NOT NULL,
+  `totalKitchen` int(100) NOT NULL,
+  `salesProfit` int(100) NOT NULL,
+  `date` date NOT NULL DEFAULT '1111-11-11',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customaudit`
+--
+
+INSERT INTO `customaudit` (`id`, `expensesCapital`, `expensesRecurrent`, `expensesReinvestment`, `stockCostValue`, `stockSellingValue`, `stockProfit`, `totalBar`, `totalKitchen`, `salesProfit`, `date`) VALUES
+(1, 0, 0, 0, 308, 1099, 791, 518, 840, 931, '2022-08-18');
 
 -- --------------------------------------------------------
 
@@ -45,6 +79,7 @@ INSERT INTO `category` (`catname`, `id`) VALUES
 -- Table structure for table `dailyincentive`
 --
 
+DROP TABLE IF EXISTS `dailyincentive`;
 CREATE TABLE IF NOT EXISTS `dailyincentive` (
   `stafftag` varchar(10) NOT NULL,
   `staffincentive` varchar(20) NOT NULL,
@@ -79,6 +114,7 @@ INSERT INTO `dailyincentive` (`stafftag`, `staffincentive`, `fd`) VALUES
 -- Table structure for table `debtpaymenttable`
 --
 
+DROP TABLE IF EXISTS `debtpaymenttable`;
 CREATE TABLE IF NOT EXISTS `debtpaymenttable` (
   `customer` varchar(100) NOT NULL,
   `amountowed` double NOT NULL,
@@ -104,6 +140,7 @@ INSERT INTO `debtpaymenttable` (`customer`, `amountowed`, `fulldate`, `salesp`, 
 -- Table structure for table `debtsummary`
 --
 
+DROP TABLE IF EXISTS `debtsummary`;
 CREATE TABLE IF NOT EXISTS `debtsummary` (
   `customer` varchar(100) NOT NULL,
   `totaldebt` double NOT NULL,
@@ -123,6 +160,7 @@ INSERT INTO `debtsummary` (`customer`, `totaldebt`) VALUES
 -- Table structure for table `debttable`
 --
 
+DROP TABLE IF EXISTS `debttable`;
 CREATE TABLE IF NOT EXISTS `debttable` (
   `customer` varchar(100) NOT NULL,
   `amount` double NOT NULL,
@@ -144,14 +182,39 @@ INSERT INTO `debttable` (`customer`, `amount`, `fulldate`, `salesp`, `day`, `mon
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `deductions`
+--
+
+DROP TABLE IF EXISTS `deductions`;
+CREATE TABLE IF NOT EXISTS `deductions` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `staffId` int(10) NOT NULL,
+  `amount` int(100) NOT NULL,
+  `reason` varchar(300) NOT NULL,
+  `date` date NOT NULL DEFAULT '1111-11-11',
+  `issuerId` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `deductions`
+--
+
+INSERT INTO `deductions` (`id`, `staffId`, `amount`, `reason`, `date`, `issuerId`) VALUES
+(1, 1998, 200, 'Braking of kichen utensles (2 plates)', '2022-08-10', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `department`
 --
 
+DROP TABLE IF EXISTS `department`;
 CREATE TABLE IF NOT EXISTS `department` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `department`
@@ -167,23 +230,26 @@ INSERT INTO `department` (`id`, `name`) VALUES
 -- Table structure for table `expenses`
 --
 
+DROP TABLE IF EXISTS `expenses`;
 CREATE TABLE IF NOT EXISTS `expenses` (
-  `typeofexpense` varchar(100) NOT NULL,
-  `amount` double NOT NULL,
-  `description` varchar(500) NOT NULL,
-  `fulldate` date NOT NULL,
-  `salesp` varchar(100) NOT NULL,
-  `day` int(10) NOT NULL,
-  `month` int(10) NOT NULL,
-  `year` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `date` date NOT NULL DEFAULT '1111-11-11',
+  `expensesNo` int(10) NOT NULL AUTO_INCREMENT,
+  `staffId` int(10) NOT NULL,
+  `purchaser` varchar(200) NOT NULL,
+  `expensesType` varchar(200) NOT NULL,
+  `itemBought` varchar(200) NOT NULL,
+  `description` varchar(300) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `justification` varchar(400) DEFAULT NULL,
+  PRIMARY KEY (`expensesNo`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `expenses`
 --
 
-INSERT INTO `expenses` (`typeofexpense`, `amount`, `description`, `fulldate`, `salesp`, `day`, `month`, `year`) VALUES
-('Reinvestment', 45000, '5 Crates of Heineken', '2020-02-01', '1005', 1, 2, 2020);
+INSERT INTO `expenses` (`date`, `expensesNo`, `staffId`, `purchaser`, `expensesType`, `itemBought`, `description`, `amount`, `justification`) VALUES
+('2022-08-09', 1, 1, 'Davis', 'reinvestment', 'Crypto', 'crypto for investment', 2000, 'this investment is agenst next year ');
 
 -- --------------------------------------------------------
 
@@ -191,6 +257,7 @@ INSERT INTO `expenses` (`typeofexpense`, `amount`, `description`, `fulldate`, `s
 -- Table structure for table `fundrequisition`
 --
 
+DROP TABLE IF EXISTS `fundrequisition`;
 CREATE TABLE IF NOT EXISTS `fundrequisition` (
   `fregno` int(30) NOT NULL,
   `from` varchar(200) NOT NULL,
@@ -231,14 +298,10 @@ INSERT INTO `fundrequisition` (`fregno`, `from`, `datecreated`, `ammount`, `ammo
 -- Table structure for table `incentive`
 --
 
+DROP TABLE IF EXISTS `incentive`;
 CREATE TABLE IF NOT EXISTS `incentive` (
   `incntv` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `incentive`
---
-
 
 -- --------------------------------------------------------
 
@@ -246,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `incentive` (
 -- Table structure for table `incentives`
 --
 
+DROP TABLE IF EXISTS `incentives`;
 CREATE TABLE IF NOT EXISTS `incentives` (
   `stafftag` varchar(20) NOT NULL,
   `totalincentive` double NOT NULL
@@ -264,6 +328,7 @@ INSERT INTO `incentives` (`stafftag`, `totalincentive`) VALUES
 -- Table structure for table `inventory`
 --
 
+DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE IF NOT EXISTS `inventory` (
   `catname` varchar(100) NOT NULL,
   `productname` varchar(200) NOT NULL,
@@ -275,17 +340,24 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sellingprice` int(100) NOT NULL,
   `salable` int(11) NOT NULL,
+  `prepAt` varchar(100) NOT NULL,
+  `oderingunit` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `productname` (`productname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`) VALUES
-('Drink', ' Champion', 18, 20, 20, 150, '1', 6, 450, 2),
-('Funiture', ' Table', 26, 5, 2700, 0, '1', 7, 0, 1);
+INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`, `prepAt`, `oderingunit`) VALUES
+('Funiture', 'Saivite ', 50, 10, 1000, 0, 'noTime', 14, 0, 1, 'none', 'none'),
+('Drink', ' Malt', 71, 10, 270, 300, '1', 13, 570, 2, 'Bar', 'Bottle'),
+('Noodle ', ' spak', 49, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate '),
+('Funiture', 'Tabless', 5, 0, 10500, 0, 'noTime', 10, 0, 1, 'none', 'none'),
+('Soup', ' Ewedu', 46, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate '),
+('Funiture', 'Chair ', 50, 0, 10200, 0, 'noTime', 12, 0, 1, 'none', 'none'),
+('Drink', ' Pepsi', 42, 10, 170, 200, '1', 15, 370, 2, 'Bar', 'Bottle');
 
 -- --------------------------------------------------------
 
@@ -293,6 +365,7 @@ INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlev
 -- Table structure for table `inventryhistory`
 --
 
+DROP TABLE IF EXISTS `inventryhistory`;
 CREATE TABLE IF NOT EXISTS `inventryhistory` (
   `inid` int(200) NOT NULL,
   `date` date NOT NULL,
@@ -317,13 +390,34 @@ INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `i
 (7, '2022-06-21', 2, 0, '', 50, 0),
 (7, '2022-06-21', 0, 2, '', 0, 4),
 (7, '2022-06-22', 0, 2, '', 0, 0),
-(7, '2022-06-22', 0, 2, 'it''s too much', 0, 10),
-(6, '2022-06-22', 2, 0, 'it''s too low', 10, 0),
-(7, '2022-06-22', 0, 2, 'it''s too much', 0, 10),
+(7, '2022-06-22', 0, 2, 'it\'s too much', 0, 10),
+(6, '2022-06-22', 2, 0, 'it\'s too low', 10, 0),
+(7, '2022-06-22', 0, 2, 'it\'s too much', 0, 10),
 (6, '2022-06-28', 2, 0, 'it was too low', 40, 0),
-(7, '2022-06-30', 0, 2, 'it''s too much ', 0, 3),
+(7, '2022-06-30', 0, 2, 'it\'s too much ', 0, 3),
 (6, '2022-07-01', 2, 0, '', 1, 0),
-(7, '2022-07-01', 0, 2, 'I just feel like doing this', 0, 1);
+(7, '2022-07-01', 0, 2, 'I just feel like doing this', 0, 1),
+(13, '2022-08-01', 0, 2, 'Ordered', 0, 2),
+(11, '2022-08-01', 0, 2, 'Ordered', 0, 2),
+(11, '2022-08-02', 0, 2, 'Ordered', 0, 2),
+(13, '2022-08-02', 0, 2, 'Ordered', 0, 2),
+(15, '2022-08-02', 0, 2, 'Ordered', 0, 2),
+(11, '2022-08-02', 0, 2, 'Ordered', 0, 2),
+(11, '2022-08-02', 0, 2, 'Ordered', 0, 1),
+(15, '2022-08-02', 0, 2, 'Ordered', 0, 3),
+(13, '2022-08-02', 0, 2, 'Ordered', 0, 2),
+(13, '2022-08-03', 2, 0, 'Deleted Order', 2, 0),
+(11, '2022-08-03', 2, 0, 'Deleted Order', 1, 0),
+(15, '2022-08-03', 2, 0, 'Deleted Order', 3, 0),
+(11, '2022-08-03', 2, 0, 'Deleted Order', 2, 0),
+(13, '2022-08-03', 2, 0, 'Deleted Order', 2, 0),
+(15, '2022-08-03', 0, 2, 'Ordered', 0, 2),
+(11, '2022-08-03', 0, 2, 'Ordered', 0, 2),
+(11, '2022-08-03', 0, 2, 'Ordered', 0, 2),
+(15, '2022-08-03', 0, 2, 'Ordered', 0, 2),
+(13, '2022-08-03', 0, 2, 'Ordered', 0, 1),
+(15, '2022-08-04', 0, 2, 'Ordered', 0, 2),
+(9, '2022-08-04', 0, 2, 'Ordered', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -331,6 +425,7 @@ INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `i
 -- Table structure for table `lowerpricelpo`
 --
 
+DROP TABLE IF EXISTS `lowerpricelpo`;
 CREATE TABLE IF NOT EXISTS `lowerpricelpo` (
   `purchaseId` int(100) NOT NULL,
   `vendorId` int(100) NOT NULL,
@@ -360,6 +455,7 @@ INSERT INTO `lowerpricelpo` (`purchaseId`, `vendorId`, `itemName`, `itemDescript
 -- Table structure for table `lpouniquevendor`
 --
 
+DROP TABLE IF EXISTS `lpouniquevendor`;
 CREATE TABLE IF NOT EXISTS `lpouniquevendor` (
   `purchaseId` int(100) NOT NULL,
   `vendorId` int(100) NOT NULL,
@@ -405,6 +501,7 @@ INSERT INTO `lpouniquevendor` (`purchaseId`, `vendorId`, `venname`, `discount`, 
 -- Table structure for table `members`
 --
 
+DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `fullname` varchar(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
@@ -429,6 +526,7 @@ INSERT INTO `members` (`fullname`, `phone`, `altphone`, `address`, `email`, `bir
 -- Table structure for table `newpresonnel`
 --
 
+DROP TABLE IF EXISTS `newpresonnel`;
 CREATE TABLE IF NOT EXISTS `newpresonnel` (
   `fname` varchar(200) NOT NULL,
   `lname` varchar(200) NOT NULL,
@@ -450,19 +548,206 @@ INSERT INTO `newpresonnel` (`fname`, `lname`, `email`, `phone`, `address`, `offi
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+CREATE TABLE IF NOT EXISTS `notification` (
+  `oderid` int(70) NOT NULL,
+  `salerid` int(20) NOT NULL,
+  `printed` int(10) NOT NULL,
+  `k` int(10) NOT NULL,
+  `b` int(10) NOT NULL,
+  `kk` int(10) NOT NULL,
+  `bb` int(10) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`oderid`, `salerid`, `printed`, `k`, `b`, `kk`, `bb`) VALUES
+(3, 1, 0, 0, 1, 0, 1),
+(3, 1, 0, 0, 1, 0, 1),
+(4, 1, 0, 1, 1, 1, 0),
+(4, 1, 0, 1, 1, 1, 0),
+(4, 1, 0, 1, 1, 1, 0),
+(4, 1, 0, 1, 1, 0, 1),
+(4, 1, 0, 1, 1, 1, 0),
+(3, 1, 0, 0, 1, 0, 1),
+(3, 1, 0, 0, 1, 0, 1),
+(4, 1, 0, 1, 1, 0, 1),
+(4, 1, 0, 1, 1, 1, 0),
+(4, 1, 0, 1, 1, 1, 0),
+(4, 1, 0, 1, 1, 1, 0),
+(4, 1, 0, 1, 1, 1, 0),
+(4, 1, 0, 1, 1, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderditems`
+--
+
+DROP TABLE IF EXISTS `orderditems`;
+CREATE TABLE IF NOT EXISTS `orderditems` (
+  `productname` varchar(200) NOT NULL,
+  `price` int(100) NOT NULL,
+  `quantity` int(100) NOT NULL,
+  `amount` int(200) NOT NULL,
+  `preptime` int(60) NOT NULL,
+  `orderid` int(100) NOT NULL,
+  `productcat` varchar(200) NOT NULL,
+  `sn` int(200) NOT NULL,
+  `finish` int(10) NOT NULL,
+  `prepAt` varchar(100) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `dateOrderd` date DEFAULT NULL,
+  `productId` int(100) NOT NULL,
+  `profit` int(100) NOT NULL,
+  `costprice` int(100) DEFAULT NULL,
+  `sellingprice` int(100) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderditems`
+--
+
+INSERT INTO `orderditems` (`productname`, `price`, `quantity`, `amount`, `preptime`, `orderid`, `productcat`, `sn`, `finish`, `prepAt`, `description`, `dateOrderd`, `productId`, `profit`, `costprice`, `sellingprice`) VALUES
+(' Pepsi', 370, 2, 740, 1, 32, 'Drink', 1, 0, 'Bar', '2 Bottle', '2022-08-04', 15, 400, 170, 370),
+(' spak', 1200, 1, 1200, 2, 32, 'Noodle ', 2, 0, 'Kitchen', '1 Plate ', '2022-08-04', 9, 930, 270, 1200);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderingunit`
+--
+
+DROP TABLE IF EXISTS `orderingunit`;
+CREATE TABLE IF NOT EXISTS `orderingunit` (
+  `unit` varchar(200) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unit` (`unit`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderingunit`
+--
+
+INSERT INTO `orderingunit` (`unit`, `id`) VALUES
+('Bottle', 1),
+('Bottles ', 2),
+('Plate', 3),
+('Plates', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `sellerid` int(10) NOT NULL,
+  `orderid` int(10) NOT NULL,
+  `totaltime` int(30) NOT NULL,
+  `totalammount` int(200) NOT NULL,
+  `status` int(10) NOT NULL,
+  `orderdate` date NOT NULL,
+  `odertime` varchar(30) NOT NULL,
+  `hr` int(10) NOT NULL,
+  `min` int(10) NOT NULL,
+  `ampm` varchar(20) NOT NULL,
+  `br` int(20) NOT NULL,
+  `kch` int(20) NOT NULL,
+  `receipt` int(10) NOT NULL,
+  `k` int(10) NOT NULL,
+  `b` int(10) NOT NULL,
+  `bill` int(10) NOT NULL,
+  `kt` int(100) NOT NULL,
+  `bt` int(100) NOT NULL,
+  `totalProfit` int(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`sellerid`, `orderid`, `totaltime`, `totalammount`, `status`, `orderdate`, `odertime`, `hr`, `min`, `ampm`, `br`, `kch`, `receipt`, `k`, `b`, `bill`, `kt`, `bt`, `totalProfit`) VALUES
+(1, 32, 3, 1940, 0, '2022-08-04', '11:57 am ', 11, 57, 'am', 1, 1, 0, 0, 0, 0, 2, 1, 1330);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `paidincentive`
 --
 
+DROP TABLE IF EXISTS `paidincentive`;
 CREATE TABLE IF NOT EXISTS `paidincentive` (
   `staffid` varchar(20) NOT NULL,
   `incentive` varchar(20) NOT NULL,
   `paiddate` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `paidincentive`
+-- Table structure for table `payroll`
 --
 
+DROP TABLE IF EXISTS `payroll`;
+CREATE TABLE IF NOT EXISTS `payroll` (
+  `sn` int(10) NOT NULL,
+  `firstName` varchar(200) NOT NULL,
+  `lastName` varchar(200) NOT NULL,
+  `monthlySalary` int(100) NOT NULL,
+  `deduction` int(100) NOT NULL,
+  `salaryAdvance` int(100) NOT NULL,
+  `commission` int(100) NOT NULL,
+  `amountPayable` int(200) NOT NULL,
+  `date` date NOT NULL DEFAULT '1111-11-11'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payroll`
+--
+
+INSERT INTO `payroll` (`sn`, `firstName`, `lastName`, `monthlySalary`, `deduction`, `salaryAdvance`, `commission`, `amountPayable`, `date`) VALUES
+(1, 'John', ' doe', 20000, 200, 10000, 3, 9800, '2022-08-12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payrollinfo`
+--
+
+DROP TABLE IF EXISTS `payrollinfo`;
+CREATE TABLE IF NOT EXISTS `payrollinfo` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL DEFAULT '1111-11-11',
+  `createdby` int(10) NOT NULL,
+  `approve1` int(10) NOT NULL DEFAULT '1',
+  `approve2` int(10) NOT NULL DEFAULT '1',
+  `approve3` int(10) NOT NULL DEFAULT '1',
+  `remark1` varchar(200) DEFAULT NULL,
+  `remark2` varchar(200) DEFAULT NULL,
+  `remark3` varchar(200) DEFAULT NULL,
+  `sgnature1` varchar(300) DEFAULT NULL,
+  `sgnature2` varchar(300) DEFAULT NULL,
+  `sgnature3` varchar(300) DEFAULT NULL,
+  `approveDate1` date NOT NULL DEFAULT '1111-11-11',
+  `approveDate2` date NOT NULL DEFAULT '1111-11-11',
+  `approveDate3` date NOT NULL DEFAULT '1111-11-11',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payrollinfo`
+--
+
+INSERT INTO `payrollinfo` (`id`, `date`, `createdby`, `approve1`, `approve2`, `approve3`, `remark1`, `remark2`, `remark3`, `sgnature1`, `sgnature2`, `sgnature3`, `approveDate1`, `approveDate2`, `approveDate3`) VALUES
+(8, '2022-08-12', 1, 2, 2, 2, 'Good to go', 'Well Done', 'Ok, pls the accountant should send me the excel sheet thanks.', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '2022-08-12', '2022-08-12', '2022-08-12');
 
 -- --------------------------------------------------------
 
@@ -470,6 +755,7 @@ CREATE TABLE IF NOT EXISTS `paidincentive` (
 -- Table structure for table `preqitem`
 --
 
+DROP TABLE IF EXISTS `preqitem`;
 CREATE TABLE IF NOT EXISTS `preqitem` (
   `itemname` varchar(200) NOT NULL,
   `description` varchar(200) NOT NULL,
@@ -505,6 +791,7 @@ INSERT INTO `preqitem` (`itemname`, `description`, `unitprice`, `qty`, `subtotal
 -- Table structure for table `prequisitionconfirm`
 --
 
+DROP TABLE IF EXISTS `prequisitionconfirm`;
 CREATE TABLE IF NOT EXISTS `prequisitionconfirm` (
   `pregno` int(100) NOT NULL,
   `vendorid` varchar(200) NOT NULL,
@@ -533,11 +820,12 @@ INSERT INTO `prequisitionconfirm` (`pregno`, `vendorid`, `for`, `vname`, `from`,
 -- Table structure for table `prequisitioninfo`
 --
 
+DROP TABLE IF EXISTS `prequisitioninfo`;
 CREATE TABLE IF NOT EXISTS `prequisitioninfo` (
   `preqno` int(99) NOT NULL,
   `from` varchar(200) NOT NULL,
   `subject` varchar(200) NOT NULL,
-  `date` date NOT NULL,
+  `date` date NOT NULL DEFAULT '1111-11-11',
   `summary` varchar(200) NOT NULL,
   `total` int(99) NOT NULL,
   `supapprove` varchar(30) NOT NULL,
@@ -559,14 +847,14 @@ CREATE TABLE IF NOT EXISTS `prequisitioninfo` (
   `csupsig` varchar(200) NOT NULL,
   `cmansig` varchar(200) NOT NULL,
   `cmandsig` varchar(200) NOT NULL,
-  `supdate` date NOT NULL,
-  `mandate` date NOT NULL,
-  `manddate` date NOT NULL,
+  `supdate` date NOT NULL DEFAULT '1111-11-11',
+  `mandate` date NOT NULL DEFAULT '1111-11-11',
+  `manddate` date NOT NULL DEFAULT '1111-11-11',
   `quoted` int(100) NOT NULL,
   `csupapprove` varchar(200) NOT NULL,
-  `supcappdate` date NOT NULL,
-  `mandcappdate` date NOT NULL,
-  `mancappdate` date NOT NULL,
+  `supcappdate` date NOT NULL DEFAULT '1111-11-11',
+  `mandcappdate` date NOT NULL DEFAULT '1111-11-11',
+  `mancappdate` date NOT NULL DEFAULT '1111-11-01',
   PRIMARY KEY (`preqno`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -585,6 +873,7 @@ INSERT INTO `prequisitioninfo` (`preqno`, `from`, `subject`, `date`, `summary`, 
 -- Table structure for table `productcat`
 --
 
+DROP TABLE IF EXISTS `productcat`;
 CREATE TABLE IF NOT EXISTS `productcat` (
   `prodcat` varchar(100) NOT NULL,
   UNIQUE KEY `category` (`prodcat`)
@@ -607,6 +896,7 @@ INSERT INTO `productcat` (`prodcat`) VALUES
 -- Table structure for table `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `ptype` varchar(200) NOT NULL,
   `pname` varchar(200) NOT NULL,
@@ -692,9 +982,33 @@ INSERT INTO `products` (`ptype`, `pname`, `price`, `curlevel`, `minlevel`, `prof
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `salaryadvance`
+--
+
+DROP TABLE IF EXISTS `salaryadvance`;
+CREATE TABLE IF NOT EXISTS `salaryadvance` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `staffId` int(100) NOT NULL,
+  `amount` int(100) NOT NULL,
+  `date` date NOT NULL DEFAULT '1111-11-11',
+  `issuerId` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salaryadvance`
+--
+
+INSERT INTO `salaryadvance` (`id`, `staffId`, `amount`, `date`, `issuerId`) VALUES
+(1, 1998, 10000, '2022-08-10', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sales`
 --
 
+DROP TABLE IF EXISTS `sales`;
 CREATE TABLE IF NOT EXISTS `sales` (
   `day` int(10) NOT NULL,
   `month` int(10) NOT NULL,
@@ -776,6 +1090,7 @@ INSERT INTO `sales` (`day`, `month`, `year`, `stafftag`, `item1`, `price1`, `qty
 -- Table structure for table `salescounter`
 --
 
+DROP TABLE IF EXISTS `salescounter`;
 CREATE TABLE IF NOT EXISTS `salescounter` (
   `counter` int(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -793,6 +1108,7 @@ INSERT INTO `salescounter` (`counter`) VALUES
 -- Table structure for table `salesreport`
 --
 
+DROP TABLE IF EXISTS `salesreport`;
 CREATE TABLE IF NOT EXISTS `salesreport` (
   `item` varchar(100) NOT NULL,
   `qty` int(20) NOT NULL,
@@ -850,6 +1166,7 @@ INSERT INTO `salesreport` (`item`, `qty`, `total`, `fulldate`, `profit`) VALUES
 -- Table structure for table `staff`
 --
 
+DROP TABLE IF EXISTS `staff`;
 CREATE TABLE IF NOT EXISTS `staff` (
   `fname` varchar(100) NOT NULL,
   `lname` varchar(100) NOT NULL,
@@ -877,6 +1194,7 @@ INSERT INTO `staff` (`fname`, `lname`, `sex`, `address`, `phone`, `dept`, `staff
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `fname` varchar(100) NOT NULL,
   `lname` varchar(100) NOT NULL,
@@ -893,7 +1211,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(200) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uname` (`uname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -913,6 +1231,7 @@ INSERT INTO `users` (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `
 -- Table structure for table `vedorquote`
 --
 
+DROP TABLE IF EXISTS `vedorquote`;
 CREATE TABLE IF NOT EXISTS `vedorquote` (
   `purchaseId` int(20) NOT NULL,
   `vendorId` int(20) NOT NULL,
@@ -951,6 +1270,7 @@ INSERT INTO `vedorquote` (`purchaseId`, `vendorId`, `itemName`, `itemDescription
 -- Table structure for table `vendors`
 --
 
+DROP TABLE IF EXISTS `vendors`;
 CREATE TABLE IF NOT EXISTS `vendors` (
   `id` int(200) NOT NULL AUTO_INCREMENT,
   `vcode` varchar(100) NOT NULL,
@@ -965,7 +1285,7 @@ CREATE TABLE IF NOT EXISTS `vendors` (
   `bankcode` varchar(100) NOT NULL,
   `tin` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `vendors`
@@ -996,9 +1316,14 @@ INSERT INTO `vendors` (`id`, `vcode`, `compname`, `address`, `phone`, `email`, `
 (28, 'VEN00217-', 'ABACHE GODGIFT (WOODEN)', '', '09057353831', 'WALE@YAHOO.COM', '', '', '2111660579', 'ZENITH BANK', '057', ''),
 (29, 'VEN00218', 'YAKUBU BABA', '', '', 'BABA@YAHOO.COM', '', '', '5622012241', 'ECO BANK PLC', '070', ''),
 (30, 'VEN00092', 'EST CONSULT', '8, IYALODE AMOKE STREET, ALAKUKO, LAGOS STATE.', '08087234846', 'estconsult2@gmail.com', '', '', '0600109858', 'ECO BANK', '', '24996224'),
-(31, 'VEN00219', 'PROFESSIONAL TRADE''S SALES', 'OKPELLA', '', 'SEYI200@YAHOO.COM', '', '', '0601040417', 'ECOBANK PLC', '050', ''),
+(31, 'VEN00219', 'PROFESSIONAL TRADE\'S SALES', 'OKPELLA', '', 'SEYI200@YAHOO.COM', '', '', '0601040417', 'ECOBANK PLC', '050', ''),
 (32, 'VEN00153', 'MANOKEY NIG ENTS', '45,OTARU ROAD AUCHI EDO STATE', '08038291758', 'MANKEY@YAHOO.COM', '', '', '0047016800', 'ACCESS BANK PLC', '044', ''),
 (33, 'SAP3564', 'MATHIAS COLLINS', 'OKPELLA', '07078781827', 'COLLINGSM@YAHOO.COM', '', '', '0047514747', 'GTBANK PLC', '058', ''),
 (34, 'SAP5258', 'EMMANUEL UGBAJE', 'OKPELLA', '', 'UGBAJEE@YAHOO.COM', '', '', '2081139709', 'ZENITH BANK', '057', ''),
 (35, 'VEN00220', 'VINCENT HAPPINESS', 'OKPELLA', '', 'VINCENTH@YAHOO.COM', '', '', '0167942509', 'GTBANK PLC', '058', ''),
 (36, 'TAV001', 'TAVICOM SYSTEMS', '30 SANI ABACHA ROAD GRA PHASE 3, PORT HARCOURT', '08035840779', 'iamvictorpeters@gmail.com', 'Victor Peters', '08038984300', '0595864019', 'FCMB', 'BCODE', '2224563');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

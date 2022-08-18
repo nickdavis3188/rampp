@@ -86,7 +86,7 @@
             </div>
           </div>
           <?php
-            srand ((double) microtime() * 1000000);
+            // srand ((double) microtime() * 1000000);
             $random3 = rand(1000,9999);
             ?>
          <!--BODY -->

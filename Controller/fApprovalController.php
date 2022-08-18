@@ -12,7 +12,7 @@
         if (isset($_POST['man'])) {
 
             $status = $_POST['approval'];
-            $remark = $_POST['remark'];
+            $remark = mysqli_real_escape_string($conn,$_POST['remark']);
             $prno = $_POST['freqNo'];
             $date = $_POST['date'];
             echo $prno;

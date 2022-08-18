@@ -224,9 +224,7 @@
                   </p>
                   <div class="pr-2 sidesecond" id="ui-basicB" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">Create Payroll</a></li>
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">View Payroll</a></li>
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">Approved Payroll</a></li>                     
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["payrolAp1"]?>">Approval By SUP</a></li>                      
                     </ul>
                   </div>
                 </li>
@@ -239,13 +237,13 @@
                   </p>
                   <div class="pr-2 sidesecond" id="ui-basicC" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">View Report</a></li>
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">Customise Report</a></li>                   
-                    </ul>
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["auditReport"]?>">Gen Audit</a></li>                  
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["auditView22"]?>">View Audit</a></li>                  
+                    </ul>                                               
                   </div>
                 </li>
                 <!--  -->
-                <li class="nav-item"> <a class="nav-link size" href="#">Deductions</a></li>
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $accounts["sd"]?>">SalaryAdvance/Deductions</a></li>
               </ul>
             </div>
           </li>

@@ -239,7 +239,7 @@
                   </p>
                   <div class="pr-2 sidesecond" id="ui-basicC" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">View Report</a></li>
+                      <!-- <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">View Report</a></li> -->
                       <!-- <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">Customise Report</a></li>                    -->
                     </ul>
                   </div>

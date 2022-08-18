@@ -16,6 +16,7 @@
 
      $UserUtils = new GeneralController();
      $data = $UserUtils-> getAllCategory($conn);
+     $data2 = $UserUtils-> getAlloderingMeasurment($conn);
 ?>
 <!-- HEADER -->
 <body>
@@ -60,7 +61,7 @@
          <div class="col-md-8 grid-margin ">
               <div class="" >
                 <div class="">
-                  <h4 class="card-title">New Product form</h4>
+                  <!-- <h4 class="card-title">New Product form</h4> -->
                 
                   <form class="forms-sample" action="../../Controller/inventoryController.php" method="post">
                       <div class="form-group row">
@@ -98,34 +99,48 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="exampleInputUsername1">Minimum Level</label>
-                                <input name="minlevle" type="text" class="form-control" id="exampleInputUsername1" >
-                            </div>
-                        </div>
+                          <div class="form-group">
+                              <label for="exampleInputUsername1">Minimum Level</label>
+                              <input name="minlevle" type="text" class="form-control" id="exampleInputUsername1" >
+                          </div>
+                      </div>
+                      
+                       
                       
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6">                            
+                            <div class="form-check">
+                              <label class="form-check-label" style="background:#02679a;color:white;">
+                                <input value="2" name="salable" type="checkbox" class="form-check-input sel"  style="background:#02679a;color:white;" onchange="saleable(this)">
+                                Salable
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Cost Price</label>
                                 <input name="costp" type="text" class="form-control cp" id="exampleInputUsername1" >
                             </div>    
                         </div>
+                    </div>
+                      
+                    <div class="form-group row d-none dd">
+                      
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Selling Price</label>
                                 <input name="sallingp" type="text" class="form-control sp" id="exampleInputUsername1" onChange="calcProfit(this)">
                             </div>
                         </div>                     
-                    </div>
-                    <div class="form-group row">
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="exampleInputUsername1">Profit</label>
-                                <input name="profit" type="text" class="form-control pft" id="exampleInputUsername1">
-                            </div>    
+                          <div class="form-group">
+                              <label for="exampleInputUsername1">Profit</label>
+                              <input name="profit" type="text" class="form-control pft" id="exampleInputUsername1">
+                          </div>    
                         </div>
+                    </div>
+                    <div class="form-group row d-none dd">
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label for="exampleFormControlSelect1">Preparation Time</label>
@@ -140,22 +155,30 @@
                                 }                          
                               }
                               
-                              ?>
-                             
-                              </select>
+                              ?>                           
+                            </select>             
                           </div>    
                         </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                              
-                            <div class="form-check">
-                              <label class="form-check-label" style="background:#02679a;color:white;">
-                                <input value="2" name="salable" type="checkbox" class="form-check-input"  style="background:#02679a;color:white;">
-                                Salable
-                              </label>
-                            </div>
+                        <div class="col-sm-6">                                                
+                            <div class="form-group">
+                              <label for="exampleInputUsername1">Ordering Measurement</label>
+                              <input name="orderingUnit" type="text" class="form-control pft" id="exampleInputUsername1">
+                            </div>            
                         </div>
-                           
+                
+                    <!-- </div> -->
+                        <div class="form-group row d-none dd">
+                          
+                          <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="exampleFormControlSelect1">Prepared At</label>
+                                <select name="PrepAt"  class="form-control form-control" id="exampleFormControlSelect1">
+                                  <option selected>__Select__</option>                         
+                                  <option value="Kitchen">Kitchen</option>                         
+                                  <option value="Bar">Bar</option>                         
+                                </select>
+                            </div> 
+                          </div>                        
                         </div>
                       
                     </div>
@@ -203,6 +226,9 @@
                       <button name="delcategory" type="submit" class="btn btn-danger me-2" style="background:#dc3545;color:white;" onClick="deleting(this)">Delete</button>
                       <button class="btn btn-light">Cancel</button>
                   </form>
+                    <br/>
+                    
+                   
                 </div>
               </div>
             </div>
@@ -292,6 +318,23 @@
     let costPrice = document.querySelector(".cp"); 
 
     profit.value =  parseFloat(Number(sellingPrice.value - costPrice.value ).toFixed(2)) 
+  }
+
+  function saleable(inp){
+    if (inp.checked) {
+      // console.log("Yes")
+      // console.log(inp.checked)
+      let saleableOption = document.querySelectorAll(".dd"); 
+      saleableOption.forEach((v)=>v.classList.remove("d-none"))
+      console.log(saleableOption)
+      // saleableOption.classList.remove("d-none")
+    }else{
+      // console.log("No")
+      let saleableOption = document.querySelectorAll(".dd"); 
+      saleableOption.forEach((b)=>b.classList.add("d-none"))
+      console.log(saleableOption)
+      // saleableOption.classList.add("d-none")
+    }
   }
 </script>
 <!-- SCRIPT -->

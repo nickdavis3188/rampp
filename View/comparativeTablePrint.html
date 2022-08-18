@@ -41,6 +41,9 @@
                 word-wrap: break-word !important;
                 font-size: xx-small;
               }
+              .p{
+                padding:0 !important;
+              }
         </style>
     <title>comparativeTable</title>
 </head>
@@ -79,14 +82,14 @@
                   <tr>
                     <td colspan="3">
                       <div class="row">
-                          <div class="col-3"><span style="color: #02679a;">Request Id: </span>&nbsp;&nbsp;&nbsp; <span class="reqid"> </span>
+                          <div class="col-3"><span style="color: #02679a;font-size: small;" >Request Id: </span>&nbsp;&nbsp;&nbsp; <span class="reqid" style="font-size:small"> </span>
                           </div>
                           
                           </div>
                           </td>
                           <td colspan="2">
                             <div class="row">
-                          <div class="col-3"><span style="color: #02679a;"> Request Name: </span>&nbsp;&nbsp;&nbsp; <span class="for"> </span>
+                          <div class="col-3"><span style="color: #02679a;font-size: small;"> Request Name: </span>&nbsp;&nbsp;&nbsp; <span class="for" style="font-size:small"> </span>
                           </div>
                           
                           </div>
@@ -103,10 +106,9 @@
                         <th class="text-center"><span style="color: #02679a;">Cheapest Option</span></th>
                     </tr>
                     <tr>
-                        <td>
-                          <br>
-                            <table class="table">
-                                <tr>
+                        <td class="p" >
+                            <table class="table" style="text-align: center">
+                                <tr height="60px" style="font-weight:bold;">
                                     <td>Item Name</th>
                                     <td>Desc</th>
                                     <td>Qty</th>
@@ -118,9 +120,9 @@
                                 </tbody>
                             </table>
                         </td>
-                        <td style="padding-top: 18px;">
-                          <table class="table">
-                            <thead class="hed">
+                        <td  class="p">
+                          <table class="table" style="text-align: center">
+                            <thead class="hed" height="60px" style="font-weight:bold;">
                         
                             </thead>
                             <tbody class="bod">
@@ -128,10 +130,9 @@
                             </tbody>
                           </table>
                         </td>
-                        <td>
-                          <br>
-                            <table class="table">
-                                <tr>
+                        <td class="p" >
+                            <table class="table" style="text-align: center">
+                                <tr height="60px"  style="font-weight:bold;">
                                     <td>Unit Price</th>
                                     <td>Total</th>
                                     <td>Vendor</th>
@@ -151,19 +152,19 @@
               <hr>
               <div class="row">
                 <div class="col-4">
-                    <div class="sups text-center" style="line-height: 9px;font-size: x-small;">
+                    <div class="sups text-center" style="line-height: 9px;font-size:medium;">
                         <p class="text-info">Pending</p>
                         <p class="text-info">Supervisor</p>
                     </div>  
                 </div>
                 <div class="col-4">
-                  <div class="mns text-center" style="line-height: 9px;font-size: x-small;">
+                  <div class="mns text-center" style="line-height: 9px;font-size:medium;">
                     <p class="text-info">Pending</p>
                     <p class="text-info">Manager</p>
                   </div>   
                 </div>
                 <div class="col-4">
-                  <div class="mnds text-center" style="line-height: 9px;font-size: x-small;">
+                  <div class="mnds text-center" style="line-height: 9px;font-size:medium;">
                     <p class="text-info">Pending</p>
                     <p class="text-info">Managing Director</p>
                   </div>  

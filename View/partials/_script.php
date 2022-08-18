@@ -155,11 +155,16 @@
 
 
 
-
+  function chkInternetStatus() {
+    if(!window.navigator.onLine) {
+        alert("Oops! You're offline. Please check your network connection...");
+    }
+  }
     function loading(btn) {
       // var submitButtons = document.querySelector('#sub')
       
         console.log("B Iam clicked",btn)
+        chkInternetStatus()
           var child = btn.lastElementChild; 
           while (child) {
               btn.removeChild(child);
@@ -179,6 +184,7 @@
       // var submitButtons = document.querySelector('#sub')
       
         console.log("B Iam clicked",btn)
+        chkInternetStatus()
           var child = btn.lastElementChild; 
           while (child) {
               btn.removeChild(child);
@@ -197,6 +203,7 @@
       // var submitButtons = document.querySelector('#sub')
       
         console.log("B Iam clicked",btn)
+        chkInternetStatus()
           var child = btn.lastElementChild; 
           while (child) {
               btn.removeChild(child);
@@ -215,6 +222,7 @@
       // var submitButtons = document.querySelector('#sub')
       
         console.log("B Iam clicked",btn)
+        chkInternetStatus()
           var child = btn.lastElementChild; 
           while (child) {
               btn.removeChild(child);
@@ -230,7 +238,13 @@
 
     }
    
-
+    // setInterval(function(){
+    //   window.addEventListener("online", (event) => {
+    //     alert("No internet connection.")
+    //     // const statusDisplay = document.getElementById("status");
+    //     // statusDisplay.textContent = "Online";
+    //   });
+    // },10000)
   
   
   
