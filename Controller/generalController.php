@@ -40,10 +40,10 @@ class GeneralController
         }
     }
 
-    function userRegistration($conn, $fname, $lname, $email, $phone, $address, $office, $signature, $sex, $profilepic, $userName, $password, $previlage)
+    function userRegistration($conn, $fname, $lname, $email, $phone, $address, $office, $signature, $sex, $profilepic, $userName, $password, $previlage,$staffTag)
     {
 
-        $query = "INSERT INTO users (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `profilepic`, `signature`) VALUES ('$fname', '$lname', '$userName', '$password', '$previlage', '$email', '$address', '$phone', '$sex', '$office', '$profilepic', '$signature')";
+        $query = "INSERT INTO users (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `profilepic`, `signature`,`staffTag`) VALUES ('$fname', '$lname', '$userName', '$password', '$previlage', '$email', '$address', '$phone', '$sex', '$office', '$profilepic', '$signature','$staffTag')";
 
         $results = mysqli_query($conn, $query);
         $noofrows = mysqli_affected_rows($conn);
@@ -745,6 +745,19 @@ class GeneralController
         $items = array();
 
         $query = "SELECT fname,lname,sex,dept,stafftag FROM staff";
+        $results = mysqli_query($conn, $query);
+
+        while ($row = mysqli_fetch_array($results)) {
+            $items[] = $row;
+        }
+        return $items;
+    }
+    function staffT($conn)
+    {
+
+        $items = array();
+
+        $query = "SELECT * FROM staff";
         $results = mysqli_query($conn, $query);
 
         while ($row = mysqli_fetch_array($results)) {

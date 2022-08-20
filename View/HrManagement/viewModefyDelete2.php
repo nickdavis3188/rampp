@@ -285,6 +285,10 @@ i{
 								<label>Address:&nbsp;&nbsp;&nbsp; </label>
 								<p class="vads" style="color:#02679a;"></p>
 							</div>
+							<div class="media">
+								<label>Department:&nbsp;&nbsp;&nbsp; </label>
+								<p class="dept" style="color:#02679a;"></p>
+							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="media">
@@ -578,6 +582,7 @@ i{
     let password = document.querySelector(".vps"); 
     let month = document.querySelector(".vmonth"); 
     let annum = document.querySelector(".vannum"); 
+    let dept = document.querySelector(".dept"); 
     
 
     let mydata = JSON.stringify({ "stafftag":tag })
@@ -592,6 +597,7 @@ i{
       phone.innerText = data.phone
       address.innerText = data.address
       sex.innerText = data.sex
+      dept.innerText = data.department
      
       month.innerText = "# "+Number(data.month).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
       annum.innerText = "# "+Number(data.annum).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')

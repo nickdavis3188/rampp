@@ -8,11 +8,12 @@
      $conn = conString1();
      $jsonData1 = $post["dateTo"];
      $jsonData2 = $post["dateFrom"];
-    
+     $formattedfdate = date("Y-m-d", strtotime($jsonData2));
+     $formattedtdate = date("Y-m-d", strtotime($jsonData1));
      
      $items = array();
 
-        $query = "SELECT * FROM orderditems WHERE dateOrderd BETWEEN '$jsonData1' AND '$jsonData2'";
+        $query = "SELECT * FROM orderditems WHERE dateOrderd BETWEEN '$formattedfdate' AND '$formattedtdate' ORDER BY dateOrderd";
 
         $results = mysqli_query($conn, $query);
 

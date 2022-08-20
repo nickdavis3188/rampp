@@ -279,7 +279,7 @@ i{
                                                 <th>Monthly Salary</th>
                                                 <th>Deduction</th>
                                                 <th>Salary Advance</th>
-                                                <!-- <th>Commission</th>                                  -->
+                                                <th>Commission</th>                                 
                                                 <th>Amount Payable</th>                                 
                                                 <th>Date</th>                                 
                                             </tr>
@@ -544,10 +544,10 @@ function viewFunc(tag){
                   <td >${"# "+Number(item.monthlySalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
                   <td >${"# "+Number(item.deduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
                   <td >${"# "+Number(item.salaryAdvance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
+                  <td >${item.commission}</td>
                   <td >${"# "+Number(item.amountPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
                   <td>${dateFormat(item.date)}</td>                 
                   `;
-                  // <td >${item.commission}</td>
                 prltv.appendChild(list); 
           })
             

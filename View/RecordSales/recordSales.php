@@ -73,7 +73,7 @@
             <form >
               
                 <input hidden type="text" class="orid" value="<?php echo $orderId ?>">
-                <input hidden type="text" class="uid" value="<?php echo $_SESSION['id'] ?>">
+                <input hidden type="text" class="uid" value="<?php echo $_SESSION['staffTag'] ?>">
                 <input hidden type="date" class="datee" value="<?php echo date('Y-m-d');?>">
                 <div class="form-group row">
                     <div class="col-md-3">

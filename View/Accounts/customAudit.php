@@ -41,7 +41,7 @@
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">Audit Report</h4>
+                  <h4 class="font-weight-bold mb-0">Customize Audit Report</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -61,48 +61,39 @@
                         <div class="col-md-12 grid-margin">
                         <form >
                             <div class="form-group row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <label for="exampleFormControlSelect1">Select Date (From)</label>
                                     <input name="qty" type="date" class="form-control form-control-lg dtf" >                
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <label for="exampleFormControlSelect1">Select Date (To)</label>
                                     <input name="qty" type="date" class="form-control form-control-lg dtt" >                
                                 </div>
+                                <div class="col-sm-3">
+                                    <label for="exampleFormControlSelect1">Percentage to show</label>
+                                    <input type="number" class="form-control perc" id="exampleInputUsername1" style="height: 50px">               
+                                </div>
                                 
-                                <div class="col-sm-4" style="padding-top: 30px;">
-                                    <button type="button" class= "btn  text-white bg-pry btn-block" style="background-color: #02679a;" onclick="addItem(this)">
-                                    <i class="ti-search btn-icon-prepend text-white"></i> Search
+                                <div class="col-sm-3" style="padding-top: 30px;">
+                                    <button type="button" class= "btn text-white bg-pry btn-block" style="background-color: #02679a;" onclick="customize(this)">
+                                        customize
                                     </button>                                                       
                                 </div>                                                  
                             </div>
                             </form>
                         </div>
-                        <!-- <div class="col-md-12 grid-margin">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                <p class="font-weight-bold mb-0">Switch to your preferred report state </p>
-                                </div>
-                                <div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"  onchange="switchReport(this)">
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">Switch to customize report</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
               </div>
             </div>
              <!-- main -->
-            <div class="col-12 grid-margin mt-5 off" >
+             <div class="col-12 grid-margin mt-5 off" >
               <div class="" >
               <div class="row">
                       <div class="col-12 grid-margin ">
                         
                             <div class="container">   
-                                <div class="bod1">
+                                <div class="bod">
 
                                 </div>
                                
@@ -115,40 +106,7 @@
             </div>
              <!-- main -->
             <!-- customize -->
-            <!-- <div class="col-12 grid-margin mt-5 d-none onn">
-              <div class="" >
-                   
-                    <div class="row">
-                      <div class="col-12 grid-margin ">
-                        <div class="container d-flex justify-content-center">
-                            <div class ="row ">
-                                <div class="col-md-6">
-                                <div class="form-outline">
-                                    <label  for="exampleInputUsername1">Percentage to show</label>
-                                    <input type="number" class="form-control perc" id="exampleInputUsername1" />
-                                </div>
-                                </div>
-                                <div class="col-md-6" style="padding-top: 20px;">
-                                    <button type="button" class="btn btn-primary" style="background-color: #02679a; color:white;" onclick="customize(this)">customize</button>
-                                </div>
-                            </div>
-                            </div>
-                    
-                      </div>
-                      <div class="col-12 grid-margin ">
-                        
-                      <div class="container ">   
-                                <div class="bod">
-                            
-
-                                </div>
-                                
-                            </div>
-                         
-                      </div>
-                    </div>
-              </div>
-            </div> -->
+         
              <!-- customize -->
          </div>
 
@@ -343,7 +301,7 @@ function LoadingDisplay1(status,ele){
   }
  
 
- function customize(btn) {
+ function customize(btnn) {
   let dtf = document.querySelector(".dtf"); 
   let dtt = document.querySelector(".dtt"); 
   let tbodyy = document.querySelector(".bod"); 
@@ -354,8 +312,16 @@ function LoadingDisplay1(status,ele){
   if(dtt.value == "" || dtf.value == ""){
     alert("please confirm your input")  
   }else{
-       LoadingDisplay1("fail",btn)
+  
       //  console.log("I AM CLICKED",orid,uid)
+       var child = btnn.lastElementChild; 
+       while (child) {
+        btnn.removeChild(child);
+           child = btnn.lastElementChild;
+       }
+
+       btnn.innerText = "Customizing..."
+
        var child = tbodyy.lastElementChild; 
        while (child) {
        tbodyy.removeChild(child);
@@ -395,7 +361,13 @@ function LoadingDisplay1(status,ele){
             <hr>
             `
             tbodyy.innerHTML = itemDisplayed;
-            LoadingDisplay1("fail1234",btn)
+
+            var child = btnn.lastElementChild; 
+            while (child) {
+                btnn.removeChild(child);
+                child = btnn.lastElementChild;
+            }
+            btnn.innerText = "Customize"
 
             let savedData = {
                 'expensesCapital':data.data.expenses.capital,

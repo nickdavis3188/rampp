@@ -57,13 +57,52 @@
             <div class="col-12 grid-margin ">
               <div class="" >
                 <div class="">
-                
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                    <label for="exampleFormControlSelect1">Select Month:</label>
+                        <select id="month" class="form-control form-control-lg mnt" >
+                            <option value="1" selected>January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>              
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="exampleFormControlSelect1">Select Year</label>
+                        <select id="month" class="form-control form-control-lg yer" >
+                            <?php
+                                  for ($i=1990; $i <= date("Y") ; $i++) { 
+                                    if ($i == date("Y")) {                               
+                                      echo("<option selected='selected' value=$i> $i</option>"); 
+                                    }else{
+                                      echo("<option value=$i> $i </option>"); 
+                                    }                          
+                                  }
+                             ?>
+                                                   
+                        </select>                
+                    </div>
+                    
+                    <div class="col-sm-4" style="padding-top: 30px;">
+                      <button type="button" class= "btn  text-white bg-pry btn-block" style="background-color: #02679a;" onclick="loading11(this)">
+                        <i class="ti-reload btn-icon-prepend text-white"></i>  Generate PayRoll
+                      </button>
+                    </div>
+                </div>
+              </form>
                 
                   <!-- <form class="forms-sample" action="../../Controller/vendorController.php" method="post"> -->
                   <input name="issuerId" type="number" class="form-control creator" id="exampleInputUsername1" value="<?php echo $_SESSION['id'] ?>" hidden>
                   <input name="date" type="text" class="form-control dtt" id="exampleInputUsername1" value="<?php echo date('Y-m-d');?>" hidden>
-                    <button id="mq" name="vendor" type="submit" class="btn btn-primary me-2  btn-block " style="background:#02679a;color:white;" onClick="loading11(this)">Generate PayRoll For This Month</button>
-                    <br>
+                  
                     <br>
                     <p style="color:red;margin:auto;" class="test-center m errmsg"></p>
                     <!-- <button class="btn btn-light">Cancel</button> -->
@@ -83,7 +122,7 @@
                                 <th>Monthly Salary</th>
                                 <th>Deduction</th>
                                 <th>Salary Advance</th>
-                                <!-- <th>Commission</th>                                  -->
+                                <th>Commission</th>                                 
                                 <th>Amount Payable</th>                                 
                                 <th>Date</th>                                 
                             </tr>
@@ -134,6 +173,7 @@
                         echo $_REQUEST["msg"];                                                    
                   ?>
                 </div>
+             
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
               </div>
             </div>
@@ -184,6 +224,8 @@
     let errmsg = document.querySelector(".errmsg"); 
     let dtt = document.querySelector(".dtt"); 
     let creator = document.querySelector(".creator"); 
+    let yer = document.querySelector(".yer"); 
+    let mnt = document.querySelector(".mnt"); 
 
     var child = par.lastElementChild; 
     while (child) {
@@ -198,9 +240,7 @@
 
     par.appendChild(newSpan);
 
-    let cm= new Date().getMonth()+1
-    let cy= new Date().getFullYear()
-    let mydata = JSON.stringify({"month":cm,"year":cy,"date":dtt.value,"creator":creator.value})
+    let mydata = JSON.stringify({"month":mnt.value,"year":yer.value,"date":dtt.value,"creator":creator.value})
     fetch("../../Utils/payrollGenUtils.php", {
     method: 'POST',
     body: mydata,
@@ -234,10 +274,10 @@
                     <td >${"# "+Number(item.monthlySalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
                     <td >${item.deduction}</td>
                     <td >${item.salaryAdvance}</td>
+                    <td >${item.commission}</td>
                     <td >${"# "+Number(item.amountPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
                     <td>${dateFormat(item.date)}</td>                 
                     `;
-                    // <td >${item.commission}</td>
                   prlt.appendChild(list);
   
           })
@@ -248,7 +288,7 @@
                 child2 = par.lastElementChild;
             }
           
-            par.innerText = "Generate PayRoll For This Month";
+            par.innerText = "Generate PayRoll ";
           
         }else if(data.statusCode == 404){
             errmsg.innerText = data.msg;
@@ -259,7 +299,7 @@
                 child3 = par.lastElementChild;
             }
           
-            par.innerText = "Generate PayRoll For This Month";
+            par.innerText = "Generate PayRoll";
          
         }else{
             window.location = window.location.origin + "/Rampp/View/Accounts/createPayRoll.php?fail=" + data.msg;
@@ -279,60 +319,61 @@ function deductionFunc(tag){
     method: 'POST',
     body: mydata,
     headers: {"Content-Type": "application/json; charset=utf-8"}
-    }).then(res=>res.json()).then(function(data) {
-        staffTag.value = tag
-        let amtss = data.deduction
-        let sal = data.sal
+    }).then(res=>res.text()).then(function(data) {
+      console.log(data)
+        // staffTag.value = tag
+        // let amtss = data.deduction
+        // let sal = data.sal
 
-        let ded = []
-        for (let index = 0; index < amtss.length; index++) {        
-            ded.push(Number(amtss[index].amount))
-        }
-        let sv = []
-        for (let index = 0; index < sal.length; index++) {        
-            sv.push(Number(sal[index].amount))
-        }
+        // let ded = []
+        // for (let index = 0; index < amtss.length; index++) {        
+        //     ded.push(Number(amtss[index].amount))
+        // }
+        // let sv = []
+        // for (let index = 0; index < sal.length; index++) {        
+        //     sv.push(Number(sal[index].amount))
+        // }
         
-        let d = ded.length == 0?0:ded.reduce((prev,curr)=> prev + curr) 
-        let s = sv.length == 0?0:sv.reduce((prev,curr)=> prev + curr)
-        let tsd = Number(d) + Number(s)
-        let limit = Number(data.month) - tsd
+        // let d = ded.length == 0?0:ded.reduce((prev,curr)=> prev + curr) 
+        // let s = sv.length == 0?0:sv.reduce((prev,curr)=> prev + curr)
+        // let tsd = Number(d) + Number(s)
+        // let limit = Number(data.month) - tsd
 
-        amtd.setAttribute("max",`${limit}`)
+        // amtd.setAttribute("max",`${limit}`)
 
-        let child = tbbd.lastElementChild; 
-        while (child) {
-            tbbd.removeChild(child);
-            child = tbbd.lastElementChild;
-        }
+        // let child = tbbd.lastElementChild; 
+        // while (child) {
+        //     tbbd.removeChild(child);
+        //     child = tbbd.lastElementChild;
+        // }
 
       
 
-          if (amtss.length == 0) {
-            let list = document.createElement("tr");
-            list.innerHTML = `
-                <td colspan="5" class="text-center">No Records</td>
-            `;
-            tbbd.appendChild(list);
-          }else{
-            amtss.forEach(function(item,ind) {
+        //   if (amtss.length == 0) {
+        //     let list = document.createElement("tr");
+        //     list.innerHTML = `
+        //         <td colspan="5" class="text-center">No Records</td>
+        //     `;
+        //     tbbd.appendChild(list);
+        //   }else{
+        //     amtss.forEach(function(item,ind) {
               
-                let list = document.createElement("tr");
+        //         let list = document.createElement("tr");
       
-                list.innerHTML = `             
-                    <td >${ind+1}</td>
-                    <td >${item.firstName+" "+ item.lastName}</td>
-                    <td >${"# "+Number(item.monthlySalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
-                    <td >${item.deduction}</td>
-                    <td >${item.salaryAdvance}</td>
-                    <td >${"# "+Number(item.amountPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
-                    <td>${dateFormat(item.date)}</td>                 
-                    `;
-                    tbbd.appendChild(list); 
-                    // <td >${item.commission}</td>
-            })
+        //         list.innerHTML = `             
+        //             <td >${ind+1}</td>
+        //             <td >${item.firstName+" "+ item.lastName}</td>
+        //             <td >${"# "+Number(item.monthlySalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
+        //             <td >${item.deduction}</td>
+        //             <td >${item.salaryAdvance}</td>
+        //             <td >${item.commission}</td>
+        //             <td >${"# "+Number(item.amountPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
+        //             <td>${dateFormat(item.date)}</td>                 
+        //             `;
+        //             tbbd.appendChild(list); 
+        //     })
 
-          }
+        //   }
     //   console.log("response",data,amtss)
     }).catch(err=>{
       if (err) {

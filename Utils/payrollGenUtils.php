@@ -13,7 +13,7 @@
      $jsonData5 = $post["creator"];
         
      $items4 = array();
-     $query = "SELECT * FROM payroll WHERE MONTH(date) = '$jsonData2' AND YEAR(date) = '$jsonData3' ";
+     $query = "SELECT * FROM payroll WHERE monthFor = '$jsonData2' AND yearFor= '$jsonData3'";
      $results = mysqli_query($conn,$query);
      
      while($row = mysqli_fetch_array($results)){
@@ -50,6 +50,17 @@
                 $items2[] = $row;
             }
 
+            $items3 = array();
+            $query = "SELECT * FROM orders WHERE sellerid = '$stafId' AND MONTH(orderdate) = '$jsonData2' AND YEAR(orderdate) = '$jsonData3' ";
+            $results = mysqli_query($conn,$query);
+            
+            while($row = mysqli_fetch_array($results)){
+                $items3[] = $row;
+            }
+   
+            $commissionAd = count($items3);
+          $precent = $value["staffincentive"]/100;
+          $commission1 =$precent*$commissionAd; 
    
             $salAd = 0;
             foreach ($items1 as $index => $value1) { 
@@ -63,9 +74,10 @@
 
             $pMonth = $value["premonth"];
             $dd = $salAd +$deduc;
-            $payable = $pMonth - $dd;
+            $payable = $pMonth - $dd ;
+            $pay = $payable + $commission1;
 
-           $postData[] = array("sn"=>$index+1,"firstName"=>$value["fname"],"lastName"=>$value["lname"],"monthlySalary"=>$value["premonth"],"deduction"=>$deduc,"salaryAdvance"=>$salAd,"commission"=>$value["staffincentive"],"amountPayable"=>$payable,"date"=>$jsonData4);
+           $postData[] = array("sn"=>$index+1,"firstName"=>$value["fname"],"lastName"=>$value["lname"],"monthlySalary"=>$value["premonth"],"deduction"=>$deduc,"salaryAdvance"=>$salAd,"commission"=>$commission1,"amountPayable"=>$pay,"date"=>$jsonData4,"monthFor"=>$jsonData2,"yearFor"=>$jsonData3);
        }
        $query = "INSERT INTO payrollinfo (`date`,`createdby`)VALUES ('$jsonData4','$jsonData5')";
        $results = mysqli_query($conn,$query);

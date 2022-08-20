@@ -5,11 +5,16 @@
 
   
     $conn = conString1();
+    // $jsonData1 = $post["dateTo"];
+    // $jsonData2 = $post["dateFrom"];
+
     $jsonData1 = $post["dateTo"];
     $jsonData2 = $post["dateFrom"];
+    $formattedfdate = date("Y-m-d", strtotime($jsonData2));
+    $formattedtdate = date("Y-m-d", strtotime($jsonData1));
 
     $items1 = array();
-    $query = "SELECT * FROM expenses WHERE date >='$jsonData1' AND date <= '$jsonData2'";
+    $query = "SELECT * FROM expenses WHERE date BETWEEN '$formattedfdate' AND '$formattedtdate' ORDER BY date";
 
     $results = mysqli_query($conn, $query);
 
@@ -19,7 +24,7 @@
 
 
     $items2 = array();
-    $query ="SELECT * FROM orderditems WHERE dateOrderd >= '$jsonData1' AND dateOrderd <= '$jsonData2'";
+    $query ="SELECT * FROM orderditems WHERE dateOrderd BETWEEN '$formattedfdate' AND '$formattedtdate' ORDER BY dateOrderd";
     $results = mysqli_query($conn,$query);
     
     while($row = mysqli_fetch_array($results)){

@@ -33,6 +33,7 @@
         $userName = $_POST["username"];
         $password = $_POST["password"];
         $previlage = $_POST["role"];
+        $staffTag = $_POST["staffTag"];
 
         // print_r($_POST);
 
@@ -43,7 +44,68 @@
 
         $allowed = array("jpg","jpeg","png","svg");
 
-        if ($fileError == 0 || $fileError2 == 0 ) {
+        if ($fileError == 0 && $fileError2 != 0) {
+            if (in_array($actualFileExt,$allowed)) {
+                if ($fileSize < 10000000) {
+
+                    $newFileName = uniqid("",true).".".$actualFileExt;
+
+                  
+                    $destination = "../Upload/".$newFileName;
+            
+                    move_uploaded_file($fileTempName,$destination);
+
+
+                    // save item to DB
+                
+                    $query = "INSERT INTO users (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `profilepic`) VALUES ('$firstName', '$lastName', '$userName', '$password', '$previlage', '$email', '$address', '$phone', '$sex','$office', '$destination')";
+
+                    $results = mysqli_query($conn, $query);
+                    $noofrows = mysqli_affected_rows($conn);
+            
+                    if ($noofrows == 1) {
+                        header("Location: ../View/HrManagement/addUser.php?msg='Registration Successful'");
+                    } else {
+                        header("Location: ../View/HrManagement/addUser.php?fail= Error:" . mysqli_error($conn));
+                    }
+
+                }else{
+                     header("Location: ../View/HrManagement/addUser.php?fail='File too large'");
+                }
+            }else{
+                header("Location: ../View/HrManagement/addUser.php?fail='file extension not supported'");
+            }
+        }elseif($fileError != 0 && $fileError2 == 0){
+            if (in_array($actualFileExt,$allowed)) {
+                if ($fileSize2 < 10000000) {
+
+                    $newFileName2 = uniqid("",true).".".$actualFileExt2;
+
+                  
+                    $destination2 = "../Upload/".$newFileName2;
+            
+                    move_uploaded_file($fileTempName2,$destination2);
+
+                    // save item to DB
+           
+                    $query = "INSERT INTO users (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `signature`) VALUES ('$firstName', '$lastName', '$userName', '$password', '$previlage', '$email', '$address', '$phone', '$sex','$office', '$destination2')";
+
+                    $results = mysqli_query($conn, $query);
+                    $noofrows = mysqli_affected_rows($conn);
+            
+                    if ($noofrows == 1) {
+                        header("Location: ../View/HrManagement/addUser.php?msg='Registration Successful'");
+                    } else {
+                        header("Location: ../View/HrManagement/addUser.php?fail= Error:" . mysqli_error($conn));
+                    }
+
+                }else{
+                     header("Location: ../View/HrManagement/addUser.php?fail='File too large'");
+                }
+            }else{
+                header("Location: ../View/HrManagement/addUser.php?fail='file extension not supported'");
+            }
+        }elseif($fileError == 0 || $fileError2 == 0 ){
             if (in_array($actualFileExt,$allowed)) {
                 if ($fileSize < 10000000 || $fileSize2 < 10000000) {
 
@@ -58,7 +120,17 @@
                     move_uploaded_file($fileTempName2,$destination2);
 
                     // save item to DB
-                    $genControll->userRegistration($conn,$firstName,$lastName,$email,$phone,$address,$office,$destination,$sex,$destination2,$userName,$password,$previlage);
+         
+                    $query = "INSERT INTO users (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `signature`,`profilepic`) VALUES ('$firstName', '$lastName', '$userName', '$password', '$previlage', '$email', '$address', '$phone', '$sex','$office', '$destination2','$destination')";
+
+                    $results = mysqli_query($conn, $query);
+                    $noofrows = mysqli_affected_rows($conn);
+            
+                    if ($noofrows == 1) {
+                        header("Location: ../View/HrManagement/addUser.php?msg='Registration Successful'");
+                    } else {
+                        header("Location: ../View/HrManagement/addUser.php?fail= Error:" . mysqli_error($conn));
+                    }
 
                 }else{
                      header("Location: ../View/HrManagement/addUser.php?fail='File too large'");
@@ -66,8 +138,19 @@
             }else{
                 header("Location: ../View/HrManagement/addUser.php?fail='file extension not supported'");
             }
-        }else {
-            header("Location: ../View/HrManagement/addUser.php?fail='somthing went wrong'");
+        }else{
+
+    
+            $query = "INSERT INTO users (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `staffTag`) VALUES ('$firstName', '$lastName', '$userName', '$password', '$previlage', '$email', '$address', '$phone', '$sex','$office','$staffTag' )";
+
+            $results = mysqli_query($conn, $query);
+            $noofrows = mysqli_affected_rows($conn);
+    
+            if ($noofrows == 1) {
+                header("Location: ../View/HrManagement/addUser.php?msg='Registration Successful'");
+            } else {
+                header("Location: ../View/HrManagement/addUser.php?fail= Error:" . mysqli_error($conn));
+            }
         }
  
 

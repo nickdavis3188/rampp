@@ -14,7 +14,7 @@
         $sex = $_POST['sex'];
         $phone = $_POST['phone'];
         $address = $_POST['address'];
-        $department = $_POST['department'];
+        $department = $_POST['dept'];
         $staffTag = $_POST['staffTag'];
         $insentive = $_POST['insentive'];
         $paymonth = $_POST['paymonth'];

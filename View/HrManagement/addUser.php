@@ -6,6 +6,17 @@
      $title = "Home";
      $nav = "";
      include("../../Utils/sidebarUtils.php");
+     include("../../Utils/sidebarUtils.php");
+      
+     require("../../Controller/generalController.php");
+     include("../../Env/env.php");
+     require("../../Connection/dbConnection.php");
+   
+
+     $conn = conString1();
+
+     $UserUtils = new GeneralController();
+     $data3 = $UserUtils->staffT($conn);
       
 ?>
 <!-- HEADER -->
@@ -100,11 +111,11 @@
                         </div>                     
                     </div>
          
-                    <div class="form-group row">
+                    <div class="form-group row ">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Designation</label>
-                                <select name="office" class="form-control form-control" id="exampleFormControlSelect1">
+                                <select name="office" class="form-control form-control" id="exampleFormControlSelect1" onchange="desig(this)" >
                                     <option value="">__select__</option>
                                     <option value="Supervisor">Supervisor</option>
                                     <option value="Managing Director">Managing Director</option>
@@ -128,6 +139,7 @@
                         </div>
                                        
                     </div>
+                    
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -142,7 +154,7 @@
                             </div>
                         </div>                   
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row pp">
                       <div class="col-sm-6">
                             <div class="mb-3 form-group">
                               <label for="formFile" class="form-label">Signature</label>
@@ -156,6 +168,25 @@
                             </div>    
                         </div>                
                     </div>
+
+                    <div class="form-group row d-none dd">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1">SELECT STAFF</label>
+                            <select name="staffTag"  class="form-control form-control ib" id="exampleFormControlSelect1">
+                              <option selected value="">__SELECT STAFF__</option>
+                              <?php
+                                 foreach ($data3 as $index => $value1) {                              
+                              ?>
+                                 <option value="<?php echo $value1["stafftag"] ?>"><?php echo $value1["fname"]." ".$value1["fname"]?></option>
+                              <?php
+                                 }
+                              ?>
+                            
+                            </select>
+                          </div>    
+                        </div>      
+                      </div>
 
                     <button name="submit" type="submit" class="btn btn-primary me-2" style="background:#02679a;color:white;" onClick="loading(this)">Submit</button>
                     <button class="btn btn-light">Cancel</button>
@@ -241,6 +272,22 @@
  }
 ?>
 <!-- SCRIPT -->
+<script>
+    function desig(inp){
+    if (inp.value == "Staff") {
+      let staffOption = document.querySelector(".dd");
+      let ppOption = document.querySelector(".pp"); 
+      staffOption.classList.remove("d-none")
+      ppOption.classList.add("d-none")
+      
+    }else{
+      let staffOption2 = document.querySelector(".dd"); 
+      let ppOption = document.querySelector(".pp"); 
+      staffOption2.classList.add("d-none")
+      ppOption.classList.remove("d-none")
+    }
+  }
+</script>
 <?php  
  }
  else

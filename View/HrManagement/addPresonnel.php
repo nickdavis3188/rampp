@@ -126,11 +126,11 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label for="exampleFormControlSelect1">Department</label>
-                            <select name="id" class="form-control form-control" id="exampleFormControlSelect1">
+                            <select name="dept" class="form-control form-control" id="exampleFormControlSelect1">
                               <?php
                                     foreach ($data as $index => $value) {                                  
                                   ?>
-                                  <option value="<?php echo $value['id']?>"><?php echo $value['name']?></option>
+                                  <option value="<?php echo $value['name']?>"><?php echo $value['name']?></option>
                                   <?php
                                     }
                                 ?>

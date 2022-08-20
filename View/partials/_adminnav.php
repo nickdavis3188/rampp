@@ -246,6 +246,7 @@
                   <div class="pr-2 sidesecond" id="ui-basicC" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["auditReport"]?>">Gen Audit</a></li>                  
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["custom"]?>">Custom Audit</a></li>                  
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["auditView22"]?>">View Audit</a></li>                  
                     </ul>                                               
                   </div>
