@@ -244,6 +244,7 @@
                 </li>
                 <!--  -->
                 <li class="nav-item"> <a class="nav-link size" href="<?php echo $accounts["sd"]?>">SalaryAdvance/Deductions</a></li>
+                 <li class="nav-item"> <a class="nav-link size" href="<?php echo $accounts["debtReport"]?>">DebtReport</a></li>
               </ul>
             </div>
           </li>

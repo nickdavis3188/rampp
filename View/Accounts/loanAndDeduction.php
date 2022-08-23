@@ -157,7 +157,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">SalaryAdvance / Deduction</h4>
+                  <h4 class="font-weight-bold mb-0">Loan / Deduction</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -205,7 +205,7 @@ i{
               <?php if($_SESSION['privilege'] == "Admin")
               {
                 ?>
-              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="SalaryAdvance">
+              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Loan">
                 <i class="ti-credit-card btn-icon-append dropbtn" data-bs-toggle="modal" data-bs-target="#salaryAdvanceView" onClick="salaryAdvanceFunc('<?php echo $value["stafftag"] ?>')"></i>
               </span>
               <span ata-bs-toggle="tooltip"  data-bs-placement="left" title="Deduction">
@@ -262,21 +262,33 @@ i{
                             <input name="issuerId" type="number" class="form-control" id="exampleInputUsername1" value="<?php echo $_SESSION['id'] ?>" hidden>
                             <input name="staffTag" type="number" class="form-control staffTag" id="exampleInputUsername1" hidden>
                             <div class="form-group row">
-                                <div class="col-12">
+                                <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputUsername1">Anount</label>
-                                        <input name="amount" type="number" class="form-control amtd" id="exampleInputUsername1" >
+                                        <label for="exampleInputUsername1">Deduction Type</label>
+                                        <select required name="type" class="form-control form-control ty" id="exampleFormControlSelect1" onchange="typeChange(this)">
+                                          <option value="">__Sellect__</option>
+                                          <option value="Damage">Damage</option>
+                                          <option value="LoanRepay">Loan repay</option>
+                                        </select>
                                     </div>    
                                 </div>
-                                <div class="col-12">
+                                <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputUsername1">Reson</label>
-                                        <textarea name="reason" class="form-control rsnd" id="exampleInputUsername1" rows="4"></textarea>
+                                        <label for="exampleInputUsername1">Anount</label>
+                                        <input required name="amount" type="number" class="form-control amtd" id="exampleInputUsername1" >
                                     </div>    
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                  <div class="col-12">
+                                      <div class="form-group">
+                                          <label for="exampleInputUsername1">Reson</label>
+                                          <textarea required name="reason" class="form-control rsnd" id="exampleInputUsername1" rows="4"></textarea>
+                                      </div>    
+                                  </div>
                                 </div>
                                                 
                                 <button name="diddu" type="submit" class="btn btn-primary me-2" style="background:#02679a;color:white;" onClick="savingRecord(this)">Submit</button>
-                            </div>
                         </form>
                         <br>
                         <div class="container-flued">
@@ -289,6 +301,7 @@ i{
                                             <th>StaffTag</th>
                                             <th>Date</th>
                                             <th>Amount</th>
+                                            <th>Type</th>
                                             <th>Reason</th>
                                             <th>issuer</th>                                 
                                         </tr>
@@ -314,7 +327,7 @@ i{
         <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header gbgn">
-            <h5 class="modal-title" id="exampleModalLabel">SalaryAdvance</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Loan</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body gbgn">
@@ -339,7 +352,7 @@ i{
                         </form>
                         <br>
                         <div class="container-flued">
-                            <h6>Salary Advance History</h6>
+                            <h6>Loan History</h6>
                             <div class="table-responsive" style=" max-height:300px;">
                                 <table class="table table-hover" >
                                     <thead>
@@ -624,6 +637,59 @@ function savingRecord(par) {
     })
  }
 
+ function typeChange(e){
+    if (e.value == "LoanRepay") {
+      let amts = document.querySelector(".amtd"); 
+      let staffTag = document.querySelector(".staffTag"); 
+      let mydata = JSON.stringify({ "stafftag":staffTag.value})
+      fetch("../../Utils/getSingleStaffUtils.php", {
+        method: 'POST',
+        body: mydata,
+        headers: {"Content-Type": "application/json; charset=utf-8"}
+      }).then(res=>res.json()).then(function(data) {
+        console.log(data);
+        let am = data.deptAmount;
+        if (am == null|| am == 0) {
+          amts.removeAttribute("max")      
+        }else{
+          amts.max = am
+        }
+      })
+      // amts.setAttribute("max",'0')
+    }else{
+      let staffTag = document.querySelector(".staffTag"); 
+      let cm= new Date().getMonth()+1
+      let cy= new Date().getFullYear()
+      let mydata = JSON.stringify({ "stafftag":staffTag.value,"month":cm,"year":cy })
+      fetch("../../Utils/salaryAdvanceUtils.php", {
+        method: 'POST',
+        body: mydata,
+        headers: {"Content-Type": "application/json; charset=utf-8"}
+      }).then(res=>res.json()).then(function(data) {
+        let amtss = data.deduction
+        let sal = data.sal
+
+        let ded = []
+        for (let index = 0; index < amtss.length; index++) {        
+            ded.push(Number(amtss[index].amount))
+        }
+        let sv = []
+        for (let index = 0; index < sal.length; index++) {        
+            sv.push(Number(sal[index].amount))
+        }
+        let d = ded.length == 0?0:ded.reduce((prev,curr)=> prev + curr) 
+        let s = sv.length == 0?0:sv.reduce((prev,curr)=> prev + curr)
+        let tsd = Number(d) + Number(s)
+        let limit = Number(data.month) - tsd
+        let amts = document.querySelector(".amtd"); 
+        amts.max =`${limit}`
+        
+        // amts.setAttribute("max",`${limit}`)
+      })
+
+    }
+ }
+
   function salaryAdvanceFunc(tag){
     let amts = document.querySelector(".amts"); 
     let tbbs = document.querySelector(".tbbs"); 
@@ -654,7 +720,7 @@ function savingRecord(par) {
         let tsd = Number(d) + Number(s)
         let limit = Number(data.month) - tsd
 
-        amts.setAttribute("max",`${limit}`)
+        // amts.setAttribute("max",`${limit}`)
 
         let child = tbbs.lastElementChild; 
         while (child) {
@@ -736,7 +802,7 @@ function savingRecord(par) {
         let tsd = Number(d) + Number(s)
         let limit = Number(data.month) - tsd
 
-        amtd.setAttribute("max",`${limit}`)
+        // amtd.setAttribute("max",`${limit}`)
 
         let child = tbbd.lastElementChild; 
         while (child) {
@@ -771,6 +837,7 @@ function savingRecord(par) {
                           <td>${item.staffId}</td>
                           <td>${dateFormat(item.date)}</td>
                           <td>${"# "+Number(item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
+                          <td>${item.type}</td>
                           <td>${item.reason}</td>
                           <td>${item.issuerId}</td>
               

@@ -30,10 +30,11 @@
      $insentive = $items[0]['staffincentive'];
      $month = $items[0]['premonth'];
      $annum = $items[0]['perannum'];
+     $deptAmount= $items[0]['deptAmount'];
    
 
     //  print_r($firstname."\n".$lastname."\n".$address."\n".$phone."\n".$phsexone."\n".$department);
-     echo json_encode(array("firstname" =>$firstname ,"lastname"=>$lastname,"department"=>$department,"address"=>$address,"phone"=>$phone,"sex"=>$sex,"stafftag"=>$stafftag,"insentive"=>$insentive,"month"=>$month,"annum"=>$annum));
+     echo json_encode(array("firstname" =>$firstname ,"lastname"=>$lastname,"department"=>$department,"address"=>$address,"phone"=>$phone,"sex"=>$sex,"stafftag"=>$stafftag,"insentive"=>$insentive,"month"=>$month,"annum"=>$annum,"deptAmount"=>$deptAmount));
     //  echo $items;
 
 ?>

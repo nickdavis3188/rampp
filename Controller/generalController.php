@@ -744,7 +744,7 @@ class GeneralController
 
         $items = array();
 
-        $query = "SELECT fname,lname,sex,dept,stafftag FROM staff";
+        $query = "SELECT * FROM staff";
         $results = mysqli_query($conn, $query);
 
         while ($row = mysqli_fetch_array($results)) {

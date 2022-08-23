@@ -23,5 +23,5 @@
 
     $salesReport = array("dailyReport"=>"../SalesReport/dailyReport.php","monthlyReport"=>"../SalesReport/monthlyReport.php","annualReport"=>"../SalesReport/annualReport.php","productReport"=>"../SalesReport/productReport.php","dateRange"=>"../SalesReport/dateRange.php");
 
-    $accounts = array("addExpenses"=>"../Accounts/expenses.php","viewExpenses"=>"../Accounts/viewExpenses","sd"=>"../Accounts/salaryAdvanceAndDeduction.php","payRoll"=>"../Accounts/createPayRoll.php","viewPayroll"=>"../Accounts/viewPayroll.php","payrolAp1"=>"../Accounts/payroleApprovel1.php","payrolAp2"=>"../Accounts/payrollApproval2.php","payrolAp3"=>"../Accounts/payrollApproval3.php","auditReport"=>"../Accounts/auditReport.php","auditView22"=>"../Accounts/viewAuditReport.php","custom"=>"../Accounts/customAudit.php")
+    $accounts = array("addExpenses"=>"../Accounts/expenses.php","viewExpenses"=>"../Accounts/viewExpenses","sd"=>"../Accounts/loanAndDeduction.php","payRoll"=>"../Accounts/createPayRoll.php","viewPayroll"=>"../Accounts/viewPayroll.php","payrolAp1"=>"../Accounts/payroleApprovel1.php","payrolAp2"=>"../Accounts/payrollApproval2.php","payrolAp3"=>"../Accounts/payrollApproval3.php","auditReport"=>"../Accounts/auditReport.php","auditView22"=>"../Accounts/viewAuditReport.php","custom"=>"../Accounts/customAudit.php","debtReport"=>"../Accounts/deptorsReport.php")
  ?>
