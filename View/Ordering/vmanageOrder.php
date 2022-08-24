@@ -498,7 +498,7 @@ i{
         function(){
             window.location.reload();
         }
-        , 3000000);
+        , 11000);
 </script>
 
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
