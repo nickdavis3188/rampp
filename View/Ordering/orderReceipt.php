@@ -257,7 +257,7 @@
                 // if (data.status =='success') {
                 //   console.log("Done")                 
                 // }else{
-                //   window.location = window.location.origin+"/Rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
+                //   window.location = window.location.origin+"/rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
                 // }
             })
            
@@ -272,7 +272,7 @@
                 // if (data.status = "success") {
                 //     console.log("Done")                   
                 // }else{
-                //   window.location = window.location.origin+"/Rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
+                //   window.location = window.location.origin+"/rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
                 // }
             })         
       }
@@ -288,13 +288,13 @@
   function bill(id){
     let payM = document.querySelector(".payM"); 
     let orno = document.querySelector(".orno"); 
-    window.open(window.location.origin+"/Rampp/View/bill.php?id="+Number(id), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
+    window.open(window.location.origin+"/rampp/View/bill.php?id="+Number(id), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
    }
   function printReceipt(){
     let payM = document.querySelector(".payM"); 
     let orno = document.querySelector(".orno"); 
     let sidd = document.querySelector(".sidd"); 
-    window.open(window.location.origin+"/Rampp/View/receipt.php?id="+Number(orno.value)+"&pay="+payM.value+"&sid="+sidd.value+"", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
+    window.open(window.location.origin+"/rampp/View/receipt.php?id="+Number(orno.value)+"&pay="+payM.value+"&sid="+sidd.value+"", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
    }
     setInterval(
         function(){

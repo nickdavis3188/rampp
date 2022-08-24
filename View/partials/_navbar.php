@@ -18,7 +18,7 @@
         </ul>
         <ul class="navbar-nav navbar-nav-right">
           <?php
-            if ($_SERVER['REQUEST_URI'] == '/Rampp/View/RecordSales/recordSales.php') {
+            if ($_SERVER['REQUEST_URI'] == '/rampp/View/RecordSales/recordSales.php') {
             ?>
             <li class="nav-item dropdown">
               <a class="nav-link count-indicator dropdown-toggle bel22" id="notificationDropdown" href="#" data-bs-toggle="dropdown" onclick="changeIndicator()">

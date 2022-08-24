@@ -434,7 +434,7 @@ i{
 <script>
 // function printP(ins){
 //   let ggd = ins.getAttribute("gg")
-//   window.open(window.location.origin+"/Rampp/View/prinFRequisition.html"+ggd, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
+//   window.open(window.location.origin+"/rampp/View/prinFRequisition.html"+ggd, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
 // }
 
 function viewFunc(tag){
@@ -456,7 +456,8 @@ function viewFunc(tag){
         var mm = String(today.getMonth() + 1).padStart(2, '0'); 
         var yyyy = today.getFullYear();
     
-        today = mm + '/' + dd + '/' + yyyy;
+        // today = mm + '/' + dd + '/' + yyyy;
+          today = dd + '/' + mm + '/' + yyyy;
         return today
         
     }

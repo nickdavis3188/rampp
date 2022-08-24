@@ -487,9 +487,9 @@ if (isset($_SESSION['validuser'])) {
           // console.log(data)
           // status"=>"success","message"
           if (data.status == "success") {
-            window.location = window.location.origin + "/Rampp/View/Procurement/lpocreate.php?msg=" + data.message;
+            window.location = window.location.origin + "/rampp/View/Procurement/lpocreate.php?msg=" + data.message;
           } else {
-            window.location = window.location.origin + "/Rampp/View/Procurement/lpocreate.php?fail=" + data.message;
+            window.location = window.location.origin + "/rampp/View/Procurement/lpocreate.php?fail=" + data.message;
           }
         })
 

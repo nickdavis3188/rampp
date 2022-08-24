@@ -614,7 +614,8 @@ if (isset($_SESSION['validuser'])) {
             var mm = String(today.getMonth() + 1).padStart(2, '0');
             var yyyy = today.getFullYear();
 
-            today = mm + '/' + dd + '/' + yyyy;
+            // today = mm + '/' + dd + '/' + yyyy;
+              today = dd + '/' + mm + '/' + yyyy;
             return today
           }
 
@@ -692,7 +693,7 @@ if (isset($_SESSION['validuser'])) {
 
       function printP(ins) {
         let reqno = document.querySelector(".reqid");
-        window.open(window.location.origin + "/Rampp/View/comparativeTablePrint.html?reqno=" + Number(reqno.innerText), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=1600,height=800")
+        window.open(window.location.origin + "/rampp/View/comparativeTablePrint.html?reqno=" + Number(reqno.innerText), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=1600,height=800")
       }
     </script>
 

@@ -255,7 +255,8 @@
             var mm = String(today.getMonth() + 1).padStart(2, '0'); 
             var yyyy = today.getFullYear();
 
-            today = mm + '/' + dd + '/' + yyyy;
+            // today = mm + '/' + dd + '/' + yyyy;
+            today = dd + '/' + mm + '/' + yyyy;
             return today
           }
             let child = prlt.lastElementChild; 
@@ -302,7 +303,7 @@
             par.innerText = "Generate PayRoll";
          
         }else{
-            window.location = window.location.origin + "/Rampp/View/Accounts/createPayRoll.php?fail=" + data.msg;
+            window.location = window.location.origin + "/rampp/View/Accounts/createPayRoll.php?fail=" + data.msg;
         }
     })
  }

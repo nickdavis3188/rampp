@@ -254,7 +254,7 @@
               // if (data.status =='success'){
               //       console.log("Done")                   
               //   }else{
-              //     window.location = window.location.origin+"/Rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
+              //     window.location = window.location.origin+"/rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
               //   }
             })
            
@@ -269,7 +269,7 @@
                 // if (data.status = "success") {
                 //     console.log("Done")                   
                 // }else{
-                //   window.location = window.location.origin+"/Rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
+                //   window.location = window.location.origin+"/rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
                 // }
             })         
       }

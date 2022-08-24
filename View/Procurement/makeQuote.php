@@ -399,7 +399,8 @@ i{
               var mm = String(today.getMonth() + 1).padStart(2, '0'); 
               var yyyy = today.getFullYear();
 
-              today = mm + '/' + dd + '/' + yyyy;
+              //today = mm + '/' + dd + '/' + yyyy;
+                today = dd + '/' + mm + '/' + yyyy;
               return today
             }
         let mydata = JSON.stringify({"pRegNo":par.get("reqno"),"venId":par.get("id")})
@@ -510,15 +511,15 @@ i{
        
         if (data.status == "success" ) {
           // pa.disabled =true;
-          window.location = window.location.origin+"/Rampp/View/Procurement/enterVendorQuote.php?msg= Submit Successful";
+          window.location = window.location.origin+"/rampp/View/Procurement/enterVendorQuote.php?msg= Submit Successful";
         } else {
-          window.location = window.location.origin+"/Rampp/View/Procurement/enterVendorQuote.php?fail="+data.message;
+          window.location = window.location.origin+"/rampp/View/Procurement/enterVendorQuote.php?fail="+data.message;
         }
         console.log(data)
       }).catch(err=>{
             if (err) {
              
-              window.location = window.location.origin+"/Rampp/View/Procurement/enterVendorQuote.php?fail="+err;
+              window.location = window.location.origin+"/rampp/View/Procurement/enterVendorQuote.php?fail="+err;
            
             }
         })

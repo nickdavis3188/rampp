@@ -236,7 +236,7 @@
                     child = ele.lastElementChild;
                 }
             
-            window.location = window.location.origin+"/Rampp/View/Procurement/enterVendorQuote.php?fail=Error"+err;
+            window.location = window.location.origin+"/rampp/View/Procurement/enterVendorQuote.php?fail=Error"+err;
             // alert("Error:"+err)
             }
         })
@@ -261,7 +261,7 @@
       par.appendChild(newSpan);
       // let vendorname =
       // console.log(ele3.value)
-      // window.location = window.location.origin+"/Rampp/View/Procurement/createLpo.php?id="+ele3.value+"&reqno="+reqno1.value;
+      // window.location = window.location.origin+"/rampp/View/Procurement/createLpo.php?id="+ele3.value+"&reqno="+reqno1.value;
       
     } else {
       

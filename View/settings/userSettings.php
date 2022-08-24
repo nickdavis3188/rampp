@@ -245,7 +245,7 @@
     profit.value =  parseFloat(Number(sellingPrice.value - costPrice.value ).toFixed(2)) 
   }
   function modify(){
-    window.location = window.location.origin+"/Rampp/View/settings/userSettings.php?modify=1";
+    window.location = window.location.origin+"/rampp/View/settings/userSettings.php?modify=1";
   }
 </script>
 <!-- SCRIPT -->
