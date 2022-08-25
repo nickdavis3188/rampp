@@ -405,7 +405,7 @@ function addItem(btn) {
               quantity:Qty.value,
               description:Qty.value +" "+ unit.value,
               amount:(Number(data.data[0].sellingprice)*Number(Qty.value)).toFixed(2),
-              prepTime:data.data[0].preparationtime,
+              prepTime:data.data[0].preparationtime* Number(Qty.value),
               orderId:orderInfo.orderId,
               prepAt:data.data[0].prepAt,
               dateOrderd:datee.value,
