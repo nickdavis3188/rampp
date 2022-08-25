@@ -26,10 +26,9 @@
           <li class="nav-item">
             <a class="nav-link" href= <?php echo($record_sales) ?>>
               <i class="ti-pencil-alt menu-icon"></i>
-              <span class="menu-title">Record Sales</span>
+              <span class="menu-title">Place Order</span>
             </a>
           </li>
-<!-- dropdown -->
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic2">
               <i class="ti-folder menu-icon"></i>
@@ -72,8 +71,8 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link size"  href= <?php echo($purchaseRequisition["createRequisition"])  ?>>Create Requisition</a></li>
                 <li class="nav-item"> <a class="nav-link size" href= <?php echo($purchaseRequisition["viewDeleteRequisition"])  ?>>View/Delete Requisition</a></li>
-                <!-- <li class="nav-item"> <a class="nav-link size"  href= <?php echo($purchaseRequisition["approvalBySupervisor"])  ?>>Approval By Supervisor</a></li> -->
-                <!-- <li class="nav-item"> <a class="nav-link size" href= <?php echo($purchaseRequisition["approvalByMan"])  ?>>Approval By Manager</a></li> -->
+                <li class="nav-item"> <a class="nav-link size"  href= <?php echo($purchaseRequisition["approvalBySupervisor"])  ?>>Approval By Supervisor</a></li>
+                <li class="nav-item"> <a class="nav-link size" href= <?php echo($purchaseRequisition["approvalByMan"])  ?>>Approval By Manager</a></li>
                 <li class="nav-item"> <a class="nav-link size" href= <?php echo($purchaseRequisition["approvalByMd"])  ?>>Approval By MD</a></li>
               </ul>
             </div>
@@ -90,8 +89,8 @@
               <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link size"  href= <?php echo($FundRequisision["createRequisition"])  ?>>Create Requisition</a></li>
               <li class="nav-item"> <a class="nav-link size" href= <?php echo($FundRequisision["viewDeleteRequisition"])  ?>>View/Delete Requisition</a></li>
-              <!-- <li class="nav-item"> <a class="nav-link size"  href= <?php echo($FundRequisision["approvalBySupervisor"])  ?>>Approval By Supervisor</a></li> -->
-              <!-- <li class="nav-item"> <a class="nav-link size" href= <?php echo($FundRequisision["approvalByman"])  ?>>Approval By Manager</a></li> -->
+              <li class="nav-item"> <a class="nav-link size"  href= <?php echo($FundRequisision["approvalBySupervisor"])  ?>>Approval By Supervisor</a></li>
+              <li class="nav-item"> <a class="nav-link size" href= <?php echo($FundRequisision["approvalByman"])  ?>>Approval By Manager</a></li>
               <li class="nav-item"> <a class="nav-link size" href= <?php echo($FundRequisision["approvalByMd"])  ?>>Approval By MD</a></li>
               </ul>
             </div>
@@ -132,8 +131,8 @@
                   <div class="pr-2 sidesecond" id="ui-basic8" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["comparitiveTable"]["genComparitiveTable"]) ?>">View/Create Comparative Table</a></li>
-                      <!-- <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["comparitiveTable"]["supApprove"]) ?>">Approval By Supervisor</a></li>                    -->
-                      <!-- <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["comparitiveTable"]["manApprove"]) ?>">Approval By Manager</a></li>                    -->
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["comparitiveTable"]["supApprove"]) ?>">Approval By Supervisor</a></li>                   
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["comparitiveTable"]["manApprove"]) ?>">Approval By Manager</a></li>                   
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["comparitiveTable"]["mandApprove"]) ?>">Approval By MD</a></li>                   
                     </ul>
                   </div>
@@ -150,8 +149,8 @@
                     <ul class=" list" style="list-style-type:none;">
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["lpo"]["createLpo"]) ?>">Create LPO</a></li>
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["lpo"]["viewDeleteLpo"]) ?>">View/Delete LPO</a></li>
-                      <!-- <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["lpo"]["supApprovee"]) ?>">Approval By Supervisor</a></li> -->
-                      <!-- <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["lpo"]["manApprove"]) ?>">Approval By Maneger</a></li> -->
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["lpo"]["supApprovee"]) ?>">Approval By Supervisor</a></li>
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["lpo"]["manApprove"]) ?>">Approval By Maneger</a></li>
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["lpo"]["manDApprove"]) ?>">Approval By MD</a></li>
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["lpo"]["sendLpo"]) ?>">Send LPO</a></li>
                     </ul>
@@ -171,8 +170,10 @@
             </a>
             <div class="collapse" id="ui-basic66">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link size" href="#">New Order</a></li>
-                <li class="nav-item"> <a class="nav-link size" href="#">View/Manage Order</a></li>             
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $ordering["kitchen"]?>">Kitchen Order</a></li>
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $ordering["bar"]?>">Bar Order</a></li>
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $ordering["view"]?>">View/Manage Order</a></li>             
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $ordering["receipt"]?>">Bill/Receipt</a></li>
               </ul>
             </div>
           </li>
@@ -185,8 +186,11 @@
             </a>
             <div class="collapse" id="ui-basic77">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link size" href="#">View Sales Report</a></li>
-                <li class="nav-item"> <a class="nav-link size" href="#">Product Sales Report</a></li>             
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $salesReport["dailyReport"]?>">Daily Sales Report</a></li>
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $salesReport["monthlyReport"]?>">Monthly Sales Report</a></li>
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $salesReport["annualReport"]?>">Annual Sales Report</a></li>
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $salesReport["dateRange"]?>">Date Range</a></li>             
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $salesReport["productReport"]?>">Product Sales Report</a></li>             
               </ul>
             </div>
           </li>
@@ -209,8 +213,8 @@
                   </p>
                   <div class="pr-2 sidesecond" id="ui-basicA" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">Add Expenses</a></li>
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="#">View Expenses</a></li>
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["addExpenses"]?>">Add Expenses</a></li>
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["viewExpenses"]?>">View Expenses</a></li>
                     </ul>
                   </div>
                 </li>
@@ -224,7 +228,11 @@
                   </p>
                   <div class="pr-2 sidesecond" id="ui-basicB" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
-                    <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["payrolAp3"]?>">Approval By MAND</a></li>                     
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["payRoll"]?>">Create Payroll</a></li>
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["viewPayroll"]?>">View Payroll</a></li>
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["payrolAp1"]?>">Approval By SUP</a></li>                     
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["payrolAp2"]?>">Approval By MAN</a></li>                     
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["payrolAp3"]?>">Approval By MAND</a></li>                     
                     </ul>
                   </div>
                 </li>
@@ -238,12 +246,13 @@
                   <div class="pr-2 sidesecond" id="ui-basicC" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["auditReport"]?>">Gen Audit</a></li>                  
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["custom"]?>">Custom Audit</a></li>                  
                       <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo $accounts["auditView22"]?>">View Audit</a></li>                  
                     </ul>                                               
                   </div>
                 </li>
                 <!--  -->
-                <li class="nav-item"> <a class="nav-link size" href="<?php echo $accounts["sd"]?>">SalaryAdvance/Deductions</a></li>
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $accounts["sd"]?>">Loan/Deductions</a></li>
                 <li class="nav-item"> <a class="nav-link size" href="<?php echo $accounts["debtReport"]?>">DebtReport</a></li>
               </ul>
             </div>

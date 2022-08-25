@@ -110,7 +110,10 @@
                             </div>
                         </div>                     
                     </div>
-         
+                    
+    
+    
+    
                     <div class="form-group row ">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -133,7 +136,10 @@
                               <option value="Supervisor">Supervisor</option>
                               <option value="Managing Director">Managing Director</option>
                               <option value="Manager">Manager</option>
-                              <option value="Staff">Staff</option>
+                              <option value="Accountant">Accountant</option>
+                              <option value="SelsePerson">SelsePerson</option>
+                              <option value="Bar">Bar</option>
+                              <option value="Kitchen">Kitchen</option>
                             </select>
                           </div>    
                         </div>
