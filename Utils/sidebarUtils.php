@@ -16,5 +16,7 @@
         $nav = "../partials/_barnav.php";
     }elseif ($_SESSION['privilege']=="Kitchen") {
         $nav = "../partials/_kitchennav.php";
+    }elseif ($_SESSION['privilege']=="Porter") {
+        $nav = "../partials/_porternav.php";
     }
 ?>

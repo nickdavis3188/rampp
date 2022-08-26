@@ -140,6 +140,7 @@
                               <option value="SelsePerson">SelsePerson</option>
                               <option value="Bar">Bar</option>
                               <option value="Kitchen">Kitchen</option>
+                              <option value="Porter">Porter</option>
                             </select>
                           </div>    
                         </div>
