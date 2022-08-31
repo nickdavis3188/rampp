@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 18, 2022 at 03:16 PM
+-- Generation Time: Aug 31, 2022 at 09:44 PM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.0
 
@@ -64,14 +64,14 @@ CREATE TABLE IF NOT EXISTS `customaudit` (
   `salesProfit` int(100) NOT NULL,
   `date` date NOT NULL DEFAULT '1111-11-11',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customaudit`
 --
 
 INSERT INTO `customaudit` (`id`, `expensesCapital`, `expensesRecurrent`, `expensesReinvestment`, `stockCostValue`, `stockSellingValue`, `stockProfit`, `totalBar`, `totalKitchen`, `salesProfit`, `date`) VALUES
-(1, 0, 0, 0, 308, 1099, 791, 518, 840, 931, '2022-08-18');
+(3, 0, 0, 1000, 220, 785, 565, 370, 600, 665, '2022-08-20');
 
 -- --------------------------------------------------------
 
@@ -193,15 +193,18 @@ CREATE TABLE IF NOT EXISTS `deductions` (
   `reason` varchar(300) NOT NULL,
   `date` date NOT NULL DEFAULT '1111-11-11',
   `issuerId` int(10) NOT NULL,
+  `type` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `deductions`
 --
 
-INSERT INTO `deductions` (`id`, `staffId`, `amount`, `reason`, `date`, `issuerId`) VALUES
-(1, 1998, 200, 'Braking of kichen utensles (2 plates)', '2022-08-10', 1);
+INSERT INTO `deductions` (`id`, `staffId`, `amount`, `reason`, `date`, `issuerId`, `type`) VALUES
+(1, 1998, 200, 'Braking of kichen utensles (2 plates)', '2022-08-10', 1, NULL),
+(2, 5481, 500, 'two glass cup damaged', '2022-08-23', 1, 'Damage'),
+(5, 5481, 5000, 'Parthly loan repay', '2022-08-23', 1, 'LoanRepay');
 
 -- --------------------------------------------------------
 
@@ -342,6 +345,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `salable` int(11) NOT NULL,
   `prepAt` varchar(100) NOT NULL,
   `oderingunit` varchar(200) NOT NULL,
+  `numberSold` int(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `productname` (`productname`)
 ) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
@@ -350,14 +354,14 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`, `prepAt`, `oderingunit`) VALUES
-('Funiture', 'Saivite ', 50, 10, 1000, 0, 'noTime', 14, 0, 1, 'none', 'none'),
-('Drink', ' Malt', 71, 10, 270, 300, '1', 13, 570, 2, 'Bar', 'Bottle'),
-('Noodle ', ' spak', 49, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate '),
-('Funiture', 'Tabless', 5, 0, 10500, 0, 'noTime', 10, 0, 1, 'none', 'none'),
-('Soup', ' Ewedu', 46, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate '),
-('Funiture', 'Chair ', 50, 0, 10200, 0, 'noTime', 12, 0, 1, 'none', 'none'),
-('Drink', ' Pepsi', 42, 10, 170, 200, '1', 15, 370, 2, 'Bar', 'Bottle');
+INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`, `prepAt`, `oderingunit`, `numberSold`) VALUES
+('Funiture', 'Saivite ', 50, 10, 1000, 0, 'noTime', 14, 0, 1, 'none', 'none', 0),
+('Drink', ' Malt', 65, 10, 270, 300, '1', 13, 570, 2, 'Bar', 'Bottle', 1),
+('Noodle ', ' spak', 43, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate ', 3),
+('Funiture', 'Tabless', 5, 0, 10500, 0, 'noTime', 10, 0, 1, 'none', 'none', 0),
+('Soup', ' Ewedu', 38, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate ', 2),
+('Funiture', 'Chair ', 50, 0, 10200, 0, 'noTime', 12, 0, 1, 'none', 'none', 0),
+('Drink', ' Pepsi', 35, 10, 170, 200, '1', 15, 370, 2, 'Bar', 'Bottle', 2);
 
 -- --------------------------------------------------------
 
@@ -417,7 +421,26 @@ INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `i
 (15, '2022-08-03', 0, 2, 'Ordered', 0, 2),
 (13, '2022-08-03', 0, 2, 'Ordered', 0, 1),
 (15, '2022-08-04', 0, 2, 'Ordered', 0, 2),
-(9, '2022-08-04', 0, 2, 'Ordered', 0, 1);
+(9, '2022-08-04', 0, 2, 'Ordered', 0, 1),
+(15, '2022-08-24', 0, 2, 'Ordered', 0, 2),
+(13, '2022-08-24', 0, 2, 'Ordered', 0, 1),
+(9, '2022-08-24', 0, 2, 'Ordered', 0, 1),
+(15, '2022-08-25', 0, 2, 'Ordered', 0, 1),
+(13, '2022-08-25', 0, 2, 'Ordered', 0, 1),
+(11, '2022-08-25', 0, 2, 'Ordered', 0, 1),
+(11, '2022-08-25', 0, 2, 'Ordered', 0, 2),
+(13, '2022-08-25', 0, 2, 'Ordered', 0, 1),
+(11, '2022-08-25', 0, 2, 'Ordered', 0, 2),
+(13, '2022-08-25', 0, 2, 'Ordered', 0, 1),
+(15, '2022-08-25', 0, 2, 'Ordered', 0, 2),
+(13, '2022-08-25', 0, 2, 'Ordered', 0, 1),
+(9, '2022-08-25', 0, 2, 'Ordered', 0, 2),
+(11, '2022-08-25', 0, 2, 'Ordered', 0, 1),
+(11, '2022-08-31', 0, 2, 'Ordered', 0, 2),
+(15, '2022-08-31', 0, 2, 'Ordered', 0, 2),
+(9, '2022-08-31', 0, 2, 'Ordered', 0, 1),
+(13, '2022-08-31', 0, 2, 'Ordered', 0, 1),
+(9, '2022-08-31', 0, 2, 'Ordered', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -614,8 +637,27 @@ CREATE TABLE IF NOT EXISTS `orderditems` (
 --
 
 INSERT INTO `orderditems` (`productname`, `price`, `quantity`, `amount`, `preptime`, `orderid`, `productcat`, `sn`, `finish`, `prepAt`, `description`, `dateOrderd`, `productId`, `profit`, `costprice`, `sellingprice`) VALUES
-(' Pepsi', 370, 2, 740, 1, 32, 'Drink', 1, 0, 'Bar', '2 Bottle', '2022-08-04', 15, 400, 170, 370),
-(' spak', 1200, 1, 1200, 2, 32, 'Noodle ', 2, 0, 'Kitchen', '1 Plate ', '2022-08-04', 9, 930, 270, 1200);
+(' Pepsi', 370, 2, 740, 1, 32, 'Drink', 1, 1, 'Bar', '2 Bottle', '2022-08-04', 15, 400, 170, 370),
+(' spak', 1200, 1, 1200, 2, 32, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-08-04', 9, 930, 270, 1200),
+(' Pepsi', 370, 2, 740, 1, 33, 'Drink', 1, 0, 'Bar', '2 Bottle', '2022-08-24', 15, 400, 170, 370),
+(' Malt', 570, 1, 570, 1, 33, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-24', 13, 300, 270, 570),
+(' spak', 1200, 1, 1200, 2, 33, 'Noodle ', 3, 0, 'Kitchen', '1 Plate ', '2022-08-24', 9, 930, 270, 1200),
+(' Pepsi', 370, 1, 370, 1, 34, 'Drink', 1, 0, 'Bar', '1 Bottle', '2022-08-25', 15, 200, 170, 370),
+(' Malt', 570, 1, 570, 1, 34, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-25', 13, 300, 270, 570),
+(' Ewedu', 1400, 1, 1400, 2, 34, 'Soup', 3, 0, 'Kitchen', '1 Plate ', '2022-08-25', 11, 400, 1000, 1400),
+(' Ewedu', 1400, 2, 2800, 2, 35, 'Soup', 1, 0, 'Kitchen', '2 Plate ', '2022-08-25', 11, 800, 1000, 1400),
+(' Malt', 570, 1, 570, 1, 35, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-25', 13, 300, 270, 570),
+(' Ewedu', 1400, 2, 2800, 4, 36, 'Soup', 1, 0, 'Kitchen', '2 Plate ', '2022-08-25', 11, 800, 1000, 1400),
+(' Malt', 570, 1, 570, 1, 36, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-25', 13, 300, 270, 570),
+(' Pepsi', 370, 2, 740, 2, 37, 'Drink', 1, 0, 'Bar', '2 Bottle', '2022-08-25', 15, 400, 170, 370),
+(' Malt', 570, 1, 570, 1, 37, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-25', 13, 300, 270, 570),
+(' spak', 1200, 2, 2400, 4, 37, 'Noodle ', 3, 0, 'Kitchen', '2 Plate ', '2022-08-25', 9, 1860, 270, 1200),
+(' Ewedu', 1400, 1, 1400, 2, 37, 'Soup', 4, 0, 'Kitchen', '1 Plate ', '2022-08-25', 11, 400, 1000, 1400),
+(' Ewedu', 1400, 2, 2800, 4, 38, 'Soup', 1, 0, 'Kitchen', '2 Plate ', '2022-08-31', 11, 800, 1000, 1400),
+(' Pepsi', 370, 2, 740, 2, 38, 'Drink', 2, 0, 'Bar', '2 Bottle', '2022-08-31', 15, 400, 170, 370),
+(' spak', 1200, 1, 1200, 2, 39, 'Noodle ', 1, 0, 'Kitchen', '1 Plate ', '2022-08-31', 9, 930, 270, 1200),
+(' Malt', 570, 1, 570, 1, 40, 'Drink', 1, 0, 'Bar', '1 Bottle', '2022-08-31', 13, 300, 270, 570),
+(' spak', 1200, 2, 2400, 4, 40, 'Noodle ', 2, 0, 'Kitchen', '2 Plate ', '2022-08-31', 9, 1860, 270, 1200);
 
 -- --------------------------------------------------------
 
@@ -649,7 +691,7 @@ INSERT INTO `orderingunit` (`unit`, `id`) VALUES
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
-  `sellerid` int(10) NOT NULL,
+  `sellerid` int(10) DEFAULT NULL,
   `orderid` int(10) NOT NULL,
   `totaltime` int(30) NOT NULL,
   `totalammount` int(200) NOT NULL,
@@ -675,7 +717,15 @@ CREATE TABLE IF NOT EXISTS `orders` (
 --
 
 INSERT INTO `orders` (`sellerid`, `orderid`, `totaltime`, `totalammount`, `status`, `orderdate`, `odertime`, `hr`, `min`, `ampm`, `br`, `kch`, `receipt`, `k`, `b`, `bill`, `kt`, `bt`, `totalProfit`) VALUES
-(1, 32, 3, 1940, 0, '2022-08-04', '11:57 am ', 11, 57, 'am', 1, 1, 0, 0, 0, 0, 2, 1, 1330);
+(1, 32, 3, 1940, 1, '2022-08-04', '11:57 am ', 11, 57, 'am', 1, 1, 0, 1, 1, 0, 2, 1, 1330),
+(0, 33, 4, 2510, 0, '2022-08-24', '10:57 pm ', 10, 57, 'pm', 1, 1, 0, 0, 0, 0, 2, 11, 1630),
+(0, 34, 4, 2340, 0, '2022-08-25', '4:54 am ', 4, 54, 'am', 1, 1, 0, 0, 0, 0, 2, 11, 900),
+(0, 35, 3, 3370, 0, '2022-08-25', '5:09 am ', 5, 9, 'am', 1, 1, 0, 0, 0, 0, 2, 1, 1100),
+(0, 36, 5, 3370, 0, '2022-08-25', '5:28 am ', 5, 28, 'am', 1, 1, 0, 0, 0, 0, 4, 1, 1100),
+(0, 37, 9, 5110, 0, '2022-08-25', '5:51 am ', 5, 51, 'am', 1, 1, 0, 0, 0, 0, 6, 3, 2960),
+(0, 38, 6, 3540, 0, '2022-08-31', '10:28 pm ', 10, 28, 'pm', 1, 1, 0, 0, 0, 0, 4, 2, 1200),
+(0, 39, 2, 1200, 0, '2022-08-31', '10:31 pm ', 10, 31, 'pm', 0, 1, 0, 0, 0, 0, 2, 0, 930),
+(0, 40, 5, 2970, 0, '2022-08-31', '10:33 pm ', 10, 33, 'pm', 1, 1, 0, 0, 0, 0, 4, 1, 2160);
 
 -- --------------------------------------------------------
 
@@ -706,15 +756,18 @@ CREATE TABLE IF NOT EXISTS `payroll` (
   `salaryAdvance` int(100) NOT NULL,
   `commission` int(100) NOT NULL,
   `amountPayable` int(200) NOT NULL,
-  `date` date NOT NULL DEFAULT '1111-11-11'
+  `date` date NOT NULL DEFAULT '1111-11-11',
+  `monthFor` int(10) NOT NULL,
+  `yearFor` int(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payroll`
 --
 
-INSERT INTO `payroll` (`sn`, `firstName`, `lastName`, `monthlySalary`, `deduction`, `salaryAdvance`, `commission`, `amountPayable`, `date`) VALUES
-(1, 'John', ' doe', 20000, 200, 10000, 3, 9800, '2022-08-12');
+INSERT INTO `payroll` (`sn`, `firstName`, `lastName`, `monthlySalary`, `deduction`, `salaryAdvance`, `commission`, `amountPayable`, `date`, `monthFor`, `yearFor`) VALUES
+(1, 'John', ' doe', 20000, 200, 10000, 0, 9800, '2022-08-20', 8, 2022),
+(2, 'Vera', ' Davis', 9000, 0, 0, 0, 9000, '2022-08-20', 8, 2022);
 
 -- --------------------------------------------------------
 
@@ -740,14 +793,14 @@ CREATE TABLE IF NOT EXISTS `payrollinfo` (
   `approveDate2` date NOT NULL DEFAULT '1111-11-11',
   `approveDate3` date NOT NULL DEFAULT '1111-11-11',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payrollinfo`
 --
 
 INSERT INTO `payrollinfo` (`id`, `date`, `createdby`, `approve1`, `approve2`, `approve3`, `remark1`, `remark2`, `remark3`, `sgnature1`, `sgnature2`, `sgnature3`, `approveDate1`, `approveDate2`, `approveDate3`) VALUES
-(8, '2022-08-12', 1, 2, 2, 2, 'Good to go', 'Well Done', 'Ok, pls the accountant should send me the excel sheet thanks.', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '2022-08-12', '2022-08-12', '2022-08-12');
+(14, '2022-08-20', 1, 2, 2, 2, 'go ahead', 'ok', 'pls send me the excel sheet ', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '2022-08-20', '2022-08-20', '2022-08-20');
 
 -- --------------------------------------------------------
 
@@ -992,15 +1045,17 @@ CREATE TABLE IF NOT EXISTS `salaryadvance` (
   `amount` int(100) NOT NULL,
   `date` date NOT NULL DEFAULT '1111-11-11',
   `issuerId` int(10) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `salaryadvance`
 --
 
-INSERT INTO `salaryadvance` (`id`, `staffId`, `amount`, `date`, `issuerId`) VALUES
-(1, 1998, 10000, '2022-08-10', 1);
+INSERT INTO `salaryadvance` (`id`, `staffId`, `amount`, `date`, `issuerId`, `name`) VALUES
+(1, 1998, 10000, '2022-08-10', 1, NULL),
+(2, 5481, 20000, '2022-08-22', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1178,6 +1233,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `staffincentive` int(10) NOT NULL,
   `premonth` int(200) NOT NULL,
   `perannum` int(200) NOT NULL,
+  `deptAmount` int(200) DEFAULT '0',
   PRIMARY KEY (`stafftag`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -1185,8 +1241,10 @@ CREATE TABLE IF NOT EXISTS `staff` (
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`fname`, `lname`, `sex`, `address`, `phone`, `dept`, `stafftag`, `staffincentive`, `premonth`, `perannum`) VALUES
-('John', ' doe', 'male', 'USA', '98773848', '', '1998', 3, 20000, 240000);
+INSERT INTO `staff` (`fname`, `lname`, `sex`, `address`, `phone`, `dept`, `stafftag`, `staffincentive`, `premonth`, `perannum`, `deptAmount`) VALUES
+('John', ' doe', 'male', 'USA', '98773848', 'Driver', '1998', 3, 20000, 240000, NULL),
+('Vera', ' Davis', 'female', 'qwert fghg', '12345678908', 'Cook', '9238', 3, 9000, 108000, NULL),
+('Danni', ' Joe', 'male', 'CGbar', '13256573', 'Cook', '5481', 2, 40000, 480000, 15000);
 
 -- --------------------------------------------------------
 
@@ -1206,24 +1264,28 @@ CREATE TABLE IF NOT EXISTS `users` (
   `phone` varchar(16) NOT NULL,
   `sex` varchar(10) NOT NULL,
   `designation` varchar(200) NOT NULL,
-  `profilepic` varchar(200) NOT NULL,
-  `signature` varchar(200) NOT NULL,
+  `profilepic` varchar(200) DEFAULT NULL,
+  `signature` varchar(200) DEFAULT NULL,
   `id` int(200) NOT NULL AUTO_INCREMENT,
+  `staffTag` int(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uname` (`uname`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `profilepic`, `signature`, `id`) VALUES
-('nick', 'davis', 'adnindavis', 'davis3188', 'Admin', 'admindavis@gmail.com', 'C.G. bar', '09036103607', 'male', 'manager', '', '', 1),
-('victor', 'joe', 'victty', 'victor12345', 'Admin', 'vict@gmail.com', 'GRA', '93680877977', 'male', 'manager', '../Upload/629496a9685d63.12393436.jpg', '../Upload/629496a9685b95.08288872.jpg', 2),
-('Nick', 'Dann', 'dann', 'dann123', 'Admin', 'nickdann@email.com', 'USA', '345281353546', 'male', 'supervisor', '../Upload/62975c0161d9d1.74152793.jpg', '../Upload/62975c01432fc2.68271303.jpeg', 3),
-('Joe', 'Lu', 'joelu', 'joelu123', 'Supervisor', 'joelu1@gmail.com', 'CANADA', '23545367842', 'male', 'Supervisor', '../Upload/62b2f22ada0ba0.26121542.', '../Upload/62b2f22ac5b1d3.95862652.png', 4),
-('Davis', 'Sa', 'davissa', 'davissa123', 'Manager', 'davissa@gmail.com', 'USA', '03889584', 'male', 'Manager', '../Upload/62b2f29123e897.29334946.', '../Upload/62b2f29123e749.48953053.png', 5),
-('Nick', 'do', 'nickdo', 'nickdo123', 'Managing Director', 'nickdo@gmail.com', 'UK', '848739822', 'male', 'Managing Director', '../Upload/62b2f2d43a04a7.54870956.', '../Upload/62b2f2d43a0354.47316097.png', 6);
+INSERT INTO `users` (`fname`, `lname`, `uname`, `pword`, `privilege`, `email`, `address`, `phone`, `sex`, `designation`, `profilepic`, `signature`, `id`, `staffTag`) VALUES
+('nick', 'davis', 'adnindavis', 'davis3188', 'Admin', 'admindavis@gmail.com', 'C.G. bar', '09036103607', 'male', 'manager', '', '', 1, NULL),
+('victor', 'joe', 'victty', 'victor12345', 'Admin', 'vict@gmail.com', 'GRA', '93680877977', 'male', 'manager', '../Upload/629496a9685d63.12393436.jpg', '../Upload/629496a9685b95.08288872.jpg', 2, NULL),
+('Nick', 'Dann', 'dann', 'dann123', 'Admin', 'nickdann@email.com', 'USA', '345281353546', 'male', 'supervisor', '../Upload/62975c0161d9d1.74152793.jpg', '../Upload/62975c01432fc2.68271303.jpeg', 3, NULL),
+('Joe', 'Lu', 'joelu', 'joelu123', 'Supervisor', 'joelu1@gmail.com', 'CANADA', '23545367842', 'male', 'Supervisor', '../Upload/62b2f22ada0ba0.26121542.', '../Upload/62b2f22ac5b1d3.95862652.png', 4, NULL),
+('Davis', 'Sa', 'davissa', 'davissa123', 'Manager', 'davissa@gmail.com', 'USA', '03889584', 'male', 'Manager', '../Upload/62b2f29123e897.29334946.', '../Upload/62b2f29123e749.48953053.png', 5, NULL),
+('Nick', 'do', 'nickdo', 'nickdo123', 'Managing Director', 'nickdo@gmail.com', 'UK', '848739822', 'male', 'Managing Director', '../Upload/62b2f2d43a04a7.54870956.', '../Upload/62b2f2d43a0354.47316097.png', 6, NULL),
+('Vera', 'davis', 'vera', 'vera123', 'Staff', 'veradavis@gmail.com', 'qwert fghg', '1234567', 'female', 'Staff', NULL, NULL, 10, 9238),
+('emmanue', 'Davis', 'emmanuel', 'emmanuel123', 'Supervisor', 'emmanueldavis@gmail.com', 'qwert fghg', '12345678', 'male', 'Supervisor', '../Upload/6300e3863edda7.39518000.jpg', NULL, 11, NULL),
+('john', 'john', 'johnjohn', 'john123', 'Staff', 'johnjohn@gmail.com', 'dfdefdf fdef', '124567', 'male', 'Staff', NULL, NULL, 9, 1998);
 
 -- --------------------------------------------------------
 

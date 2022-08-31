@@ -223,12 +223,10 @@
                           <td><?php echo "#".number_format($value["sellingprice"],2,".",",") ?></td>
                           <td><?php echo $value["numberSold"] ?></td>
                         </tr>
-                        <?php
-                         
+                        <?php                         
                             }
                           }
-                          ?>  
-                    
+                          ?>                      
                       </tbody>
                     </table>
                   </div>
@@ -236,9 +234,7 @@
               </div>
             </div>				
           </div>
-
          <!--BODY -->
-          
             <div class="modal fade" id="restockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered ">
                 <h4 class="card-title"></h4>
