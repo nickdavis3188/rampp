@@ -33,6 +33,7 @@
       $reduceBy = $value->quantity;
       $productId = $value->productId;
       $dateOrderd = $value->dateOrderd;
+      $qtySold = $value->quantity;
 
         $items = array();
     
@@ -46,7 +47,8 @@
         if (count($items) >= 1) {
         
             $reducedAmount = $items[0]["quantityadded"] - $reduceBy;
-                
+            $numberSold = $items[0]["numberSold"] + $qtySold;
+
             $query = "INSERT INTO inventryhistory
             (`inid`,`date`,`restock`,`reduce`,`reason`,`increasby`,`reduceby`) VALUES
              ('$productId','$dateOrderd','0','2','Ordered','0','$reduceBy')";
@@ -56,7 +58,7 @@
             if($noofrows==1)
             {
                
-                $query = "UPDATE inventory SET quantityadded= '$reducedAmount' WHERE id='$productId'";
+                $query = "UPDATE inventory SET quantityadded= '$reducedAmount', numberSold='$numberSold' WHERE id='$productId'";
                 $results = mysqli_query($conn,$query);
                 $noofrows = mysqli_affected_rows($conn);
                 if ($noofrows == 1)

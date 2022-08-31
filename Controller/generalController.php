@@ -449,6 +449,21 @@ class GeneralController
         }
         return $items;
     }
+    function getAllInventory1($conn)
+    {
+
+        $items = array();
+
+        $query = "SELECT * FROM  inventory WHERE numberSold > 1 ORDER BY numberSold DESC LIMIT 5 ";
+        
+        $results = mysqli_query($conn, $query);
+
+        while ($row = mysqli_fetch_array($results)) {
+            $items[] = $row;
+        }
+        return $items;
+    }
+
     // str_slice(string $str, int $start [, int $end])
     function str_slice()
     {

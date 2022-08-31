@@ -15,6 +15,7 @@
 
      $dashData = new GeneralController();
      $data = $dashData->getAllInventory($conn);
+     $data1 = $dashData->getAllInventory1($conn);
 ?>
 <!-- HEADER -->
 <body>
@@ -112,15 +113,9 @@
                           <p class="card-title mb-0">Low In Stock Products</p>
                         </div>
                         <div>
-                          <!-- <button type="button" class="btn btn-outline-info btn-icon-text">
-                            Export
-                            <i class="ti-export btn-icon-append"></i>                                                                              
-                          </button> -->
-                           
                         </div>
                       </div>
-                    </div>
-                   
+                    </div>   
                   </div>
                   <div class="table-responsive">
                     <table class="table table-hover">
@@ -182,60 +177,58 @@
                             }
                             }
                           ?>  
-                        <!-- <tr>
-                          <td>2</td>
-                          <td>Drink</td>
-                          <td>Pepsi</td>
-                          <td>23</td>
-                          <td class="text-danger">50<i class="ti-arrow-down"></i></td>
-                          <td><label class="badge badge-warning"> Non Salable</label></td>
-                          <td><label class="text-center">
-                          <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Restock">
-                            <i style="color: #02679a;"  class="ti-plus btn-icon-append dropbtn " data-bs-toggle="modal" data-bs-target="#restockModal" onClick="restock2()"></i>
-                          </span>
-                          </label></td>
-                      
-                        </tr> -->
-                        <!-- <tr>
-                          <td>Messsy</td>
-                          <td>Flash</td>
-                          <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                        </tr>
+                    
+                      </tbody>
+                    </table>
+                  </div>
+                  <br><br><br><br>
+                  <!-- best sold -->
+                  <div class="row">
+                    <div class="col-md-12 grid-margin">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <p class="card-title mb-0">Best Sold Products</p>
+                        </div>
+                        <div>
+                        </div>
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Selling Price</th>
+                        <th>Quantity Sold</th>                  
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        if (count($data1) == 0) { 
+                        ?>
                         <tr>
-                          <td>John</td>
-                          <td>Premier</td>
-                          <td class="text-danger"> 35.00% <i class="ti-arrow-down"></i></td>
-                          <td><label class="badge badge-info">Fixed</label></td>
-                          <td><label class="badge badge-info">Fixed</label></td>
-                          <td><label class="badge badge-info">Fixed</label></td>
+                          <td colspan="8" class="text-center">NO DATA</td>
                         </tr>
+                        <?php
+                        }{
+                          foreach ($data1 as $index => $value) {
+                        ?>
                         <tr>
-                          <td>Peter</td>
-                          <td>After effects</td>
-                          <td class="text-success"> 82.00% <i class="ti-arrow-up"></i></td>
-                          <td><label class="badge badge-success">Completed</label></td>
-                          <td><label class="badge badge-success">Completed</label></td>
-                          <td><label class="badge badge-success">Completed</label></td>
+                          <td><?php echo $index +1 ?></td>
+                          <td><?php echo $value["productname"] ?></td>
+                          <td><?php echo $value["catname"] ?></td>
+                          <td><?php echo "#".number_format($value["sellingprice"],2,".",",") ?></td>
+                          <td><?php echo $value["numberSold"] ?></td>
                         </tr>
-                        <tr>
-                          <td>Dave</td>
-                          <td>53275535</td>
-                          <td class="text-success"> 98.05% <i class="ti-arrow-up"></i></td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                        </tr>
-                        <tr>
-                          <td>Messsy</td>
-                          <td>Flash</td>
-                          <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
-                          <td><label class="badge badge-info">Fixed</label></td>
-                          <td><label class="badge badge-info">Fixed</label></td>
-                          <td><label class="badge badge-info">Fixed</label></td>
-                        </tr> -->
+                        <?php
+                         
+                            }
+                          }
+                          ?>  
+                    
                       </tbody>
                     </table>
                   </div>
