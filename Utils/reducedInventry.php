@@ -27,10 +27,12 @@
         if (count($items) >= 1) {
         
             $reducedAmount = $items[0]["quantityadded"] - $itemNumber;
+            $amount = $items[0]["sellingprice"] * $itemNumber;         
+            $salable = $items[0]["salable"] ;         
                 
             $query = "INSERT INTO inventryhistory
-            (`inid`,`date`,`restock`,`reduce`,`reason`,`increasby`,`reduceby`) VALUES
-             ('$itemId','$date','0','$dec','$reason1','0','$itemNumber')";
+            (`inid`,`date`,`restock`,`reduce`,`reason`,`increasby`,`reduceby`,`type`,`price`) VALUES
+             ('$itemId','$date','0','$dec','$reason1','0','$itemNumber','$salable','$amount')";
             $results = mysqli_query($conn,$query);
             $noofrows = mysqli_affected_rows($conn);
     

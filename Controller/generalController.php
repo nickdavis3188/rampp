@@ -224,6 +224,21 @@ class GeneralController
 
         return $items;
     }
+
+    function getCustomers($conn)
+    {
+        $items = array();
+
+        $query = "SELECT * FROM customer WHERE status='0'";
+
+        $results = mysqli_query($conn, $query);
+
+        while ($row = mysqli_fetch_array($results)) {
+            $items[] = $row;
+        }
+
+        return $items;
+    }
     function getOrderdItem($conn)
     {
 
@@ -246,6 +261,21 @@ class GeneralController
         $items = array();
 
         $query = "SELECT * FROM inventory WHERE salable='2'";
+
+        $results = mysqli_query($conn, $query);
+
+        while ($row = mysqli_fetch_array($results)) {
+            $items[] = $row;
+        }
+
+        return $items;
+    }
+    function getNonResolvedOrder($conn,$staffTag)
+    {
+
+        $items = array();
+
+        $query = "SELECT * FROM customer WHERE status='0' AND sallerId='$staffTag'";
 
         $results = mysqli_query($conn, $query);
 
@@ -340,38 +370,82 @@ class GeneralController
         
     }
 
-    function getorderItemById($conn,$id)
-    {
-                 
-        $items = array();
-        $query ="SELECT * FROM  orderditems WHERE orderid ='$id'";
-        $results = mysqli_query($conn,$query);
-        
-        while($row = mysqli_fetch_array($results)){
-            $items[] = $row;
-        }
-        return $items;
-    }
-    
-    function getCompletedOrderById($conn)
+    function totalAmus($conn,$id)
     {
 
         $items3 = array();
                  
-        $query3 ="SELECT * FROM  orders WHERE status ='1' AND receipt='0'";
+        $query3 ="SELECT * FROM  orders WHERE customerId ='$id'";
         $results3 = mysqli_query($conn,$query3);
         
         while($row3 = mysqli_fetch_array($results3)){
            $items3[] = $row3;
        }
-        return $items3;
+
+       $ids = array();
+       for ($i=0; $i < count($items3); $i++) { 
+            $ids[] = $items3[$i]["totalammount"]; 
+       }
+       $tot = 0;
+       for ($v=0; $v < count($ids); $v++) { 
+            $tot += $ids[$v]; 
+       }
+
+       return $tot;
     }
+
+    function getorderItemById($conn,$id)
+    {
+        $items3 = array();
+                 
+        $query3 ="SELECT * FROM  orders WHERE customerId ='$id'";
+        $results3 = mysqli_query($conn,$query3);
+        
+        while($row3 = mysqli_fetch_array($results3)){
+           $items3[] = $row3;
+       }
+
+       $ids = array();
+       for ($i=0; $i < count($items3); $i++) { 
+            $ids[] = $items3[$i]["orderid"]; 
+       }
+
+       $allOrd = array();
+       for ($v=0; $v < count($ids); $v++) { 
+            $ords = $ids[$v];
+
+        //    $items = array();
+           $query ="SELECT * FROM  orderditems WHERE orderid ='$ords'";
+           $results = mysqli_query($conn,$query);
+           
+           while($row = mysqli_fetch_array($results)){
+               $allOrd[] = $row;
+           }
+       }
+        return $allOrd;
+    }
+    
+    function getCompletedOrderById($conn)
+    {
+
+        $items1 = array();
+
+        $query1 ="SELECT * FROM customer";
+        $results1 = mysqli_query($conn,$query1);
+        
+        while($row1 = mysqli_fetch_array($results1)){
+           $items1[] = $row1;
+        }
+
+        return $items1;
+    }
+
     function getorderById($conn,$id)
     {
 
         $items3 = array();
                  
-        $query3 ="SELECT * FROM  orders WHERE orderid ='$id'";
+        $query3 ="SELECT * FROM  customer WHERE customerId ='$id'";
         $results3 = mysqli_query($conn,$query3);
         
         while($row3 = mysqli_fetch_array($results3)){

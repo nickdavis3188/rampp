@@ -47,14 +47,14 @@
             </div>
           </div>
           
-         <!--BODY -->
+         <!--BODY card bgn  card-body -->
          <div class="row">
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bgn"  >
-                <div class="card-body">
+            <div class="col-md-4 grid-margin ">
+              <div class=""  style="border-top: #02679ab3 solid">
+                <div class="" >
                   <p class="card-title text-md-center text-xl-left">Category</p>
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0"><?php echo $dashData->getAllInventoryCat($conn) ?></h3>
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" style="color:#02679ab3 !important;"><?php echo $dashData->getAllInventoryCat($conn) ?></h3>
                     <i class="ti-layers-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                     <!-- <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i> -->
                   </div>  
@@ -62,24 +62,24 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bgn" >
-                <div class="card-body">
+            <div class="col-md-4 grid-margin ">
+              <div class="" style="border-top: #02679ab3 solid">
+                <div class="" style="border:black 1px;">
                   <p class="card-title text-md-center text-xl-left">Prouduct</p>
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0"><?php echo $dashData->getAllInventoryPro($conn) ?></h3>
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" style="color:#02679ab3 !important;"><?php echo $dashData->getAllInventoryPro($conn) ?></h3>
                     <i class="ti-archive icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
                   <!-- <p class="mb-0 mt-2 text-danger">0.47% <span class="text-black ms-1"><small>(30 days)</small></span></p> -->
                 </div>
               </div>
             </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bgn" >
-                <div class="card-body">
+            <div class="col-md-4 grid-margin ">
+              <div class="bt-2" style="border-top: #02679ab3 solid">
+                <div class="" style="border:black 1px;">
                   <p class="card-title text-md-center text-xl-left">Low In Stock</p>
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0"><?php echo $dashData->getAllInventoryLow($conn) ?></h3>
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" style="color:#02679ab3 !important;"><?php echo $dashData->getAllInventoryLow($conn) ?></h3>
                     <i class="ti-stats-down icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
                   <!-- <p class="mb-0 mt-2 text-success">64.00%<span class="text-black ms-1"><small>(30 days)</small></span></p> -->
@@ -101,10 +101,10 @@
           </div>
          
           <div class="row">
-				  
-				    <div class="col-12 grid-margin stretch-card">
-              <div class="card bgn" >
-                <div class="card-body">
+				  <!-- stretch-card card bgn card-body -->
+				    <div class="col-12 grid-margin ">
+              <div class="" >
+                <div class="">
                   
                   <div class="row">
                     <div class="col-md-12 grid-margin">
@@ -121,14 +121,14 @@
                     <table class="table table-hover">
                       <thead>
                       <tr>
-                        <th>S/N</th>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Selling Price</th>
-                        <th>Current Level</th>                  
-                        <th>Min Level</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">S/N</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Product</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Category</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Selling Price</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Current Level</th>                  
+                        <th style="background-color:#02679ab3 !important; color:white; ">Min Level</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Status</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Action</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -164,7 +164,7 @@
                       
                          ?>
                           <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Restock">
-                            <i style="color: #02679a;" class="ti-plus btn-icon-append dropbtn " data-bs-toggle="modal" data-bs-target="#restockModal" onClick="restock2('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
+                            <i style="color: #02679ab3;" class="ti-plus btn-icon-append dropbtn " data-bs-toggle="modal" data-bs-target="#restockModal" onClick="restock2('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
                           </span>
                           </label></td>
                           <?php                      
@@ -198,11 +198,11 @@
                     <table class="table table-hover">
                       <thead>
                       <tr>
-                        <th>S/N</th>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Selling Price</th>
-                        <th>Quantity Sold</th>                  
+                        <th style="background-color:#02679ab3 !important; color:white; ">S/N</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Product</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Category</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Selling Price</th>
+                        <th style="background-color:#02679ab3 !important; color:white; ">Quantity Sold</th>                  
                       </tr>
                       </thead>
                       <tbody>
@@ -241,7 +241,7 @@
                 <div class="modal-content ">
                 <form action="../../Utils/restockInventory.php" method="post">
                   <div class="modal-header gbgn">
-                    <p>Restock <Span id="itd" style="color:#02679a;"></Span></p>     
+                    <p>Restock <Span id="itd" style="color:#02679ab3;"></Span></p>     
                   </div>
                   <div class="modal-body gbgn">
                     <div class="form-group row">
@@ -266,7 +266,7 @@
                       <div class="col-sm-12">
                           <div class="form-group">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal" >Close</button>
-                                <button type="submit" name="restock" class="btn " onClick="loading33(this)"  style="background:#02679a;color:white;">Restock</button>  
+                                <button type="submit" name="restock" class="btn " onClick="loading33(this)"  style="background:#02679ab3;color:white;">Restock</button>  
 
                           </div>
                       </div>

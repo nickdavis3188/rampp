@@ -1,8 +1,8 @@
 <?php
-    function uploadArray($conn,$data){
+    function uploadArray($conn,$data,$id){
         
         foreach ($data as $index => $value) {     
-            $myArray[] =  array('productname'=>$value->productName,'price'=>$value->price,'quantity'=>$value->quantity,'amount'=>$value->amount,'preptime'=>$value->prepTime,'orderid'=>$value->orderId,"productcat"=>$value->productcat,"sn"=>$index+1,"prepAt"=>$value->prepAt,"description"=>$value->description,"finish"=>'0',"dateOrderd"=>$value->dateOrderd,"productId"=>$value->productId,"profit"=>$value->profit,"costprice"=>$value->costprice,"sellingprice"=>$value->sellingprice);
+            $myArray[] =  array('productname'=>$value->productName,'price'=>$value->price,'quantity'=>$value->quantity,'amount'=>$value->amount,'preptime'=>$value->prepTime,'orderid'=>$id,"productcat"=>$value->productcat,"sn"=>$index+1,"prepAt"=>$value->prepAt,"description"=>$value->description,"finish"=>'0',"dateOrderd"=>$value->dateOrderd,"productId"=>$value->productId,"profit"=>$value->profit,"costprice"=>$value->costprice,"sellingprice"=>$value->sellingprice,"unitOfMeasure"=>$value->unitOfMeasure);
         }
       
         $numCount = 0;

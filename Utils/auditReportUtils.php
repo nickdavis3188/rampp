@@ -30,7 +30,19 @@
     while($row = mysqli_fetch_array($results)){
         $items2[] = $row;
    }
+   
+    $items3 = array();
+    $query3 ="SELECT * FROM inventryhistory WHERE type='2'AND restock='0' AND date BETWEEN '$formattedfdate' AND '$formattedtdate' ORDER BY date";
+    $results3 = mysqli_query($conn,$query3);
+    
+    while($row = mysqli_fetch_array($results3)){
+        $items3[] = $row;
+   }
 
+   $lost = 0;
+   foreach ($items3 as $index => $value1) {
+        $lost += $value1["price"];
+    }
 
    $costPrice = 0;
    $sellingPrice = 0;
@@ -68,6 +80,6 @@
         }
    }
 
-    echo json_encode( array("status"=>"success","data"=>array("expenses"=>array("capital"=>$capital,"recurrent"=>$recurrent,"reinvestment"=>$reinvestment),"sales"=>array("bar"=>$bar,"kitchen"=>$kitchen,"profit"=>$profit),"stock"=>array("costValue"=>$costPrice,"sellingValue"=>$sellingPrice,"stockProfit"=>$profit2))));
+    echo json_encode( array("status"=>"success","data"=>array("expenses"=>array("capital"=>$capital,"recurrent"=>$recurrent,"reinvestment"=>$reinvestment),"sales"=>array("bar"=>$bar,"kitchen"=>$kitchen,"profit"=>$profit),"stock"=>array("costValue"=>$costPrice,"sellingValue"=>$sellingPrice,"stockProfit"=>$profit2),"lost"=>$lost)));
 ?>
 

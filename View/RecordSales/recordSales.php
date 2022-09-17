@@ -18,6 +18,8 @@
      $items = $UserUtils->getSalableItem($conn);
     $orderId = $UserUtils->getOrderId($conn);
     $orderingUnit = $UserUtils->getAllOrdringUnit($conn);
+    $staffTag = $_SESSION['staffTag'] ;
+    $ordernon= $UserUtils->getNonResolvedOrder($conn,$staffTag);
 
   
     
@@ -47,21 +49,40 @@
         </button>
           <br/>
           <br/>
+          <div>
+            <h4 class="font-weight-bold mb-0">Place Sale</h4>
+          </div>
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <h4 class="font-weight-bold mb-0">Place Sale</h4>
-                </div>
 
                 <div>
                   <h4 class="font-weight-bold mb-0 text-primary"><?php echo "OD_".$orderId ?></h4>
                 </div>
-                <!-- <div>
-                    <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                      Report
-                    </button>
-                </div> -->
+                <div class="nn">
+                  <div >
+                    <input class="form-control form-control-sm nc" id="exampleFormControlSelect1" type="text" placeholder="customer identity">
+                  </div>
+                </div>
+                <div>
+                   <!-- Default switch -->
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input exord" id="customSwitches" onchange="existOrder(this)">
+                    <label class="custom-control-label" for="customSwitches">Existing Order</label>
+                  </div>
+                </div>
+                <div class="dd d-none">
+                  <select style="width: 99px;" name="pname" class="form-control form-control-md orr" id="exampleFormControlSelect1" onchange="getPValue(this)">
+                  <option value="">_select_</option>
+                        <?php                         
+                          foreach ($ordernon as $index => $value) {                                                 
+                        ?>
+                        <option value="<?php echo $value['customerId']?>"><?php echo $value['customerName']?></option>
+                        <?php
+                          }
+                        ?>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -411,7 +432,8 @@ function addItem(btn) {
               dateOrderd:datee.value,
               profit:(Number(data.data[0].profit) * Number(Qty.value)),
               costprice:data.data[0].costprice,
-              sellingprice:data.data[0].sellingprice
+              sellingprice:data.data[0].sellingprice,
+              unitOfMeasure:unit.value
             }
 
             orderInfo.items.push(subIsem)
@@ -545,32 +567,72 @@ function addItem(btn) {
   }
     function submitOrder(btn){
       chkInternetStatus()
-      let tbodyy = document.querySelector(".tbodyy"); 
-      LoadingDisplay("fail",btn)      
-      let mydata = JSON.stringify({ "orderData":orderInfo })
-      fetch("../../Controller/orderController.php", {
-      method: 'POST',
-      body: mydata,
-      headers: {"Content-Type": "application/json; charset=utf-8"}
-      }).then(res=>res.text()).then(function(data){
-        // console.log(data)
-        if(data.status == "success"){
-          LoadingDisplay(data.status,btn)
-  
-          window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
-        }else{
+      let tbodyy = document.querySelector(".tbodyy");                          
+      let exord = document.querySelector(".exord");                          
+      let orr = document.querySelector(".orr"); 
+      let nc = document.querySelector(".nc"); 
       
-          window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;
+      if (exord.checked) {
+        if(orr.value == ""){
+          alert("Order Id Not Selected")
+        }else{
+          LoadingDisplay("fail",btn)      
+          let mydata = JSON.stringify({ "orderData":orderInfo,"ord":Number(orr.value)})
+          fetch("../../Utils/moreOrder.php", {
+          method: 'POST',
+          body: mydata,
+          headers: {"Content-Type": "application/json; charset=utf-8"}
+          }).then(res=>res.json()).then(function(data){
+            console.log(data)
+            if(data.status == "success"){
+              LoadingDisplay(data.status,btn)
+              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
+            }else{      
+              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;             
+            }   
+          }).catch(err=>{
+            if (err) {
+              LoadingDisplay("problem",btn)
+              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
+              // alert("Error:"+err)
+            }
+          })
+        }
+        
+      } else {
+        if (nc.value == "") {
+          alert("New customer identity not set")
+        }else{
+          LoadingDisplay("fail",btn)      
+          let mydata = JSON.stringify({ "orderData":orderInfo,"cn":nc.value })
+          fetch("../../Controller/orderController.php", {
+          method: 'POST',
+          body: mydata,
+          headers: {"Content-Type": "application/json; charset=utf-8"}
+          }).then(res=>res.json()).then(function(data){
+            console.log(data)
+            if(data.status == "success"){
+              LoadingDisplay(data.status,btn)
+    
+      
+              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
+            }else{
           
+              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;
+              
+            }
+      
+          }).catch(err=>{
+            if (err) {
+              LoadingDisplay("problem",btn)
+              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
+              // alert("Error:"+err)
+            }
+          })
+
         }
-  
-      }).catch(err=>{
-        if (err) {
-          LoadingDisplay("problem",btn)
-          window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
-          // alert("Error:"+err)
-        }
-      })
+        
+      }
    }
     
  function getPValue(pid) {
@@ -586,6 +648,30 @@ function addItem(btn) {
           mUnit.value =data[0][0].oderingunit?data[0][0].oderingunit:NaN
         })
  }
+
+ function existOrder(inp){
+    if (inp.checked) {
+      // console.log("Yes")
+      // console.log(inp.checked)
+      let saleableOption = document.querySelectorAll(".dd"); 
+      let newCustomerDiv = document.querySelectorAll(".nn"); 
+
+      newCustomerDiv.forEach((v)=>v.classList.add("d-none"))
+      saleableOption.forEach((v)=>v.classList.remove("d-none"))
+
+      console.log(saleableOption)
+      // saleableOption.classList.remove("d-none")
+    }else{
+      // console.log("No")
+      let saleableOption = document.querySelectorAll(".dd"); 
+      let newCustomerDiv = document.querySelectorAll(".nn"); 
+
+      saleableOption.forEach((b)=>b.classList.add("d-none"))
+      newCustomerDiv.forEach((v)=>v.classList.remove("d-none"))
+      console.log(saleableOption)
+      // saleableOption.classList.add("d-none")
+    }
+  }
 </script>
 
 <!-- SCRIPT -->

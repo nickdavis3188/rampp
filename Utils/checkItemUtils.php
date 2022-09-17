@@ -1,20 +1,17 @@
 <?php
-
-    // require __DIR__ . '/vendor/autoload.php';
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
-    $post = (array) json_decode(file_get_contents('php://input'),false);
     require('../vendor/autoload.php');
+    require("../Utils/updateCompleteOrderCountUtils.php");
+    $post = (array) json_decode(file_get_contents('php://input'),false);
     
-    
-
-   
      $conn = conString1();
+
      $jsonData = $post["orderId"];
      $jsonData2 = $post["prepAt"];
 
      $items = array();
-   
+    //  echo json_encode(array("status" =>"success"));
      $query ="UPDATE orderditems SET finish='1' WHERE orderid ='$jsonData' AND prepAt='$jsonData2'";
      $results = mysqli_query($conn,$query);
      $noofrows = mysqli_affected_rows($conn);
@@ -33,6 +30,8 @@
        $kch = $items3["0"]["kch"];
        $br = $items3["0"]["br"];
 
+      
+
        if ($kch == '1' && $br == '0') {
         $query ="UPDATE orders SET `status`='1',`k`='1' WHERE orderid ='$jsonData'";
         $results = mysqli_query($conn,$query);
@@ -50,10 +49,10 @@
                 $options
               );
             
-              $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1");
+              $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1","ord"=>"$jsonData");
               $pusher->trigger('my-channel', 'my-event', $data);
-             
-            echo json_encode(array("status" =>"success"));
+              customerComplete($conn,$jsonData);
+           
         }else{
             echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
         }
@@ -75,10 +74,10 @@
                     $options
                   );
                 
-                  $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1");
+                  $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1","ord"=>"$jsonData");
                   $pusher->trigger('my-channel', 'my-event', $data);
-                 
-                echo json_encode(array("status" =>"success"));
+                  customerComplete($conn,$jsonData);
+           
             }else{
                 echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
             }
@@ -113,7 +112,7 @@
                             $options
                           );
                         
-                          $data['message'] = array("signal"=>"1","c"=>"0","ff"=>"1");
+                          $data['message'] = array("signal"=>"1","c"=>"0","ff"=>"1","ord"=>"$jsonData");
                           $pusher->trigger('my-channel', 'my-event', $data);
                         echo json_encode(array("status" =>"success"));
                     }else{
@@ -138,7 +137,7 @@
                             $options
                           );
                         
-                          $data['message'] = array("signal"=>"1","c"=>"0","ff"=>"1");
+                          $data['message'] = array("signal"=>"1","c"=>"0","ff"=>"1","ord"=>"$jsonData");
                           $pusher->trigger('my-channel', 'my-event', $data);
                         echo json_encode(array("status" =>"success"));
                     }else{
@@ -164,9 +163,9 @@
                             $options
                           );
                         
-                          $data['message'] = array("signal"=>"1","c"=>"0","ff"=>"1");
+                          $data['message'] = array("signal"=>"1","c"=>"0","ff"=>"1","ord"=>"$jsonData");
                           $pusher->trigger('my-channel', 'my-event', $data);
-                        echo json_encode(array("status" =>"success"));
+                          customerComplete($conn,$jsonData);
                     }else{
                         echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
                     }
@@ -187,9 +186,9 @@
                             $options
                           );
                         
-                          $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1");
+                          $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1","ord"=>"$jsonData");
                           $pusher->trigger('my-channel', 'my-event', $data);
-                        echo json_encode(array("status" =>"success"));
+                          customerComplete($conn,$jsonData);
                     }else{
                         echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
                     }

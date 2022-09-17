@@ -330,6 +330,10 @@ function LoadingDisplay1(status,ele){
                 <p class="dt">Kitchen Items:&nbsp; <b>${"#"+Number(data.data.sales.kitchen).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
             </samp>
             <hr>
+            <samp><i style="color:#02679a;">Total Lost:</i> &nbsp;
+                <b><p class="dt">${"#"+Number(data.data.lost).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p></b>
+            </samp>
+            <hr>
             <samp><i style="color:#02679a;">Total Profit:</i> &nbsp;
                 <b><p class="dt">${"#"+Number(data.data.sales.profit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p></b>
             </samp>

@@ -10,7 +10,13 @@
     
       // print_r((empty($orderingUnit)?"empty":$orderingUnit)." ".$_POST['salable']);
       if (isset($_POST['salable'])) {
-         
+        $profilepic = $_FILES["productImg"];
+        $fileTempName = $_FILES["productImg"]["tmp_name"];
+        $fileSize = $_FILES["productImg"]["size"];
+        $fileError = $_FILES["productImg"]["error"];
+        $fileType = $_FILES["productImg"]["type"];
+        $fileName = $_FILES["productImg"]["name"];
+
           $catname = $_POST['catname'];
           $pname = $_POST['pname'];
           $qtyadded = $_POST['qtyadded'];
@@ -23,17 +29,50 @@
           $orderingUnit = $_POST['orderingUnit'];
         $salable = $_POST['salable'];
         
-        $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`,`prepAt`,`oderingunit`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','$salable','$PrepAt','$orderingUnit')";
-        $results = mysqli_query($conn,$query);
-        $noofrows = mysqli_affected_rows($conn);
-    
-        if($noofrows==1)
-        {
-            header("Location:  ../View/Inventory/addInventory.php?msg='Registration Successful");
-        }
-        else
-        {
-            header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysqli_error($conn));          
+        $fileExt = explode(".",$fileName);
+        $actualFileExt = strtolower(end($fileExt));
+
+        $allowed = array("jpg","jpeg","png","svg");
+
+        if ($fileError == 0 ) {
+            if (in_array($actualFileExt,$allowed)) {
+                if ($fileSize < 10000000) {
+
+                    $newFileName = uniqid("",true).".".$actualFileExt;
+
+                  
+                    $destination = "../Upload/".$newFileName;
+            
+                    move_uploaded_file($fileTempName,$destination);
+
+                    $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`,`prepAt`,`oderingunit`,`numberSold`,`productImg`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','$salable','$PrepAt','$orderingUnit','0','$destination')";
+                    $results = mysqli_query($conn,$query);
+                    $noofrows = mysqli_affected_rows($conn);
+                
+                    if($noofrows==1)
+                    {
+                        header("Location:  ../View/Inventory/addInventory.php?msg='Registration Successful");
+                    }
+                    else
+                    {
+                        header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysqli_error($conn));          
+                    }
+                }
+            }
+        }else{
+            $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`,`prepAt`,`oderingunit`,`numberSold`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','$salable','$PrepAt','$orderingUnit','0')";
+            $results = mysqli_query($conn,$query);
+            $noofrows = mysqli_affected_rows($conn);
+        
+            if($noofrows==1)
+            {
+                header("Location:  ../View/Inventory/addInventory.php?msg='Registration Successful");
+            }
+            else
+            {
+                header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysqli_error($conn));          
+            }
+
         }
     } else {
         // echo "Non salable";
@@ -44,8 +83,8 @@
         $minlevle = $_POST['minlevle'];
         // print_r($catname."-".$pname."-".$qtyadded."-".$costp);
         
-       $query2 = "INSERT INTO `inventory` (catname,productname,quantityadded,minnimumlevle,costprice,profit,preparationtime,sellingprice,salable,prepAt,oderingunit)
-       VALUES('$catname','$pname','$qtyadded','$minlevle','$costp','0','noTime','0','1','none','none')";
+       $query2 = "INSERT INTO `inventory` (catname,productname,quantityadded,minnimumlevle,costprice,profit,preparationtime,sellingprice,salable,prepAt,oderingunit,`numberSold`)
+       VALUES('$catname','$pname','$qtyadded','$minlevle','$costp','0','noTime','0','1','none','none','0')";
         $results = mysqli_query($conn,$query2);
         $noofrows = mysqli_affected_rows($conn);
         if($noofrows==1)

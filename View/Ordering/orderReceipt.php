@@ -51,6 +51,7 @@
             </div>
           </div>
          
+          <input hidden type="text" class="orid22">
          <!--BODY -->
          <div class="row">
          <div class="col-12 grid-margin ">
@@ -61,10 +62,10 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th class="text-center" width="20%">Order Id</th>
-                                <th class="text-center" width="30%">Order Description</th>
-                                <th class="text-center" width="25%">Status</th>
-                                <th class="text-left" width="25%">Action</th>
+                                <th class="text-center" width="25%">Customers Identity</th>
+                                <th class="text-center" width="25%">Order Status</th>
+                                <th class="text-center" width="25%">Orderd Date</th>
+                                <th class="text-center" width="25%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,43 +83,48 @@
                                 // print_r($value);
                           ?>
                               <tr>
-                                <td class="text-center"><?php echo $value['orderid'] ?></td>
+                                <td class="text-center"><?php echo $value['customerName'] ?></td>
+
                                 <td class="text-center">
-                                  <div class="row">
                                   <?php
-                                  $data =  $UserUtils->getAllOrderItems($conn,$value['orderid']);
-                                 
-                                      foreach ($data as $index => $value2) { 
-                                        $min = $value['min']+$value['totaltime'];
-                                        // echo $min;
-                                  ?>
-                                    <div class="col-12">
-                                      <p class="font-weight-bold mb-0"><?php echo $value2["description"]." of ". $value2['productname'] ?></p>
-                                    </div>
+                                      if( $value["completeCount"] == $value["orderCount"]) { 
+                                  ?>                                
+                                    <label class='badge badge-success'>Completed</label>                               
                                   <?php
-                                    }
+                                    }else{                                   
+                                    ?>
+                                      <label class='badge badge-secondary'>Pending</label>
+                               <?php
+                                    }                                                                  
                                   ?>
-                                  </div>
                                 </td>
-                                <td class="text-center"><label class='badge badge-success'>Completed</label></td>
-                                  <td class="text-left ">
+                                <td class="text-center"><?php echo date('d/m/Y',strtotime($value["date"])) ?></td>
+                                <td class="text-center">
                                   <?php
-                                    if ($value['bill'] == 0) {                                                                   
+                                      if( $value["completeCount"] == $value["orderCount"]) { 
+                                  ?>                                
+                                    <div class="">
+                                        <div class="">
+                                        <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Print Bill">
+                                          <i class="ti-ticket btn-icon-append dropbtn text-primary" data-bs-toggle="modal11" data-bs-target="#receptModal" onClick="bill('<?php echo $value["customerId"] ?>')"style="font-size:28px"></i>
+                                        </span>
+                                        ----
+                                         <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Print Receipt">
+                                            <i class="ti-receipt btn-icon-append dropbtn text-info" data-bs-toggle="modal" data-bs-target="#receptModal" onClick="receipt('<?php echo $value["customerId"] ?>')"style="font-size:28px"></i>
+                                          </span> 
+                                        </div>
+                                        <!-- <div class="">
+                                          
+                                        </div> -->
+                                    </div>                            
+                                  <?php
+                                    }else{                                   
+                                    ?>
+                                      
+                               <?php
+                                    }                                                                  
                                   ?>
-               
-                                    <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Print Bill">
-                                        <i class="ti-ticket btn-icon-append dropbtn text-secondary" data-bs-toggle="modal11" data-bs-target="#receptModal" onClick="bill('<?php echo $value["orderid"] ?>','<?php echo $value['sellerid']?>')"style="font-size:28px"></i>
-                                    </span>  
-                                    <?php                                
-                                    }else{
-                                  ?>                             
-                                    <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Print Receipt">
-                                        <i class="ti-receipt btn-icon-append dropbtn text-secondary" data-bs-toggle="modal" data-bs-target="#receptModal" onClick="receipt('<?php echo $value["orderid"] ?>','<?php echo $value['sellerid']?>')"style="font-size:28px"></i>
-                                    </span> 
-                                    <?php                                 
-                                    }
-                                  ?> 
-                                </td>
+                                </td>                             
                               </tr>
                               <?php
                               }
@@ -277,37 +283,33 @@
             })         
       }
     }
-    function receipt(it,sid){
-    let orno = document.querySelector(".orno"); 
-    let sidd = document.querySelector(".sidd"); 
-    orno.value = it;
-    sidd.value = sid;
-    
+    function receipt(id){
+    let orno = document.querySelector(".orid22"); 
+    orno.value = id;
+   
    }
 
   function bill(id){
-    let payM = document.querySelector(".payM"); 
-    let orno = document.querySelector(".orno"); 
     window.open(window.location.origin+"/rampp/View/bill.php?id="+Number(id), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
-   }
+  }
+
   function printReceipt(){
+    let orno = document.querySelector(".orid22"); 
     let payM = document.querySelector(".payM"); 
-    let orno = document.querySelector(".orno"); 
-    let sidd = document.querySelector(".sidd"); 
-    window.open(window.location.origin+"/rampp/View/receipt.php?id="+Number(orno.value)+"&pay="+payM.value+"&sid="+sidd.value+"", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
-   }
-    setInterval(
-        function(){
-            window.location.reload();
-        }
-        , 11000);
+    window.open(window.location.origin+"/rampp/View/receipt.php?id="+Number(ord.value)+"&pay="+payM.value+"", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700") 
+  } 
+    setInterval( 
+      function(){ 
+          window.location.reload(); 
+      } 
+      , 11000); 
 </script>
 <!-- SCRIPT -->
 <?php  
  }
  else
  {
-     header("Location: ../../index.php?message=loginNot");
-     exit;
+    header("Location: ../../index.php?message=loginNot");
+    exit;
  }
 ?>

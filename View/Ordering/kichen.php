@@ -109,7 +109,7 @@
                                         // echo $min;
                                   ?>
                                     <div class="col-12">
-                                      <p class="font-weight-bold mb-0"><?php echo $value2["description"]." of ". $value2['productname'] ?></p>
+                                    <p class="font-weight-bold mb-0"><?php echo $value2["	quantity"]."".$value2["unitOfMeasure"]." of ". $value2['productname'] ?></p>
                                     </div>
                                   <?php
                                     }

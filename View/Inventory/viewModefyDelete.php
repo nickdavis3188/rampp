@@ -205,22 +205,11 @@ i{
                 <i class="ti-menu-alt btn-icon-append dropbtn " style="color:#02679a;" data-bs-toggle="modal" data-bs-target="#viewModal" onClick="viewFunc('<?php echo $value['id'] ?>')"></i>
               </span>
               <?php
-              if($_SESSION['privilege'] == "Admin")
+              if($_SESSION['privilege'] == "Admin" || $_SESSION['privilege'] == "Supervisor"|| $_SESSION['privilege'] == "Manager"|| $_SESSION['privilege'] == "Managing Director")
               {
-                if ( $value["salable"] ==  2) {
+
               ?>
-              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Edit">
-                <i class="ti-pencil-alt btn-icon-append dropbtn" data-bs-toggle="modal" data-bs-target="#editModal" onClick="editFunc('<?php echo $value['id'] ?>')"></i>
-              </span>
-              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Restock">
-                <i class="ti-plus btn-icon-append dropbtn text-warning" data-bs-toggle="modal" data-bs-target="#restockModal" onClick="restock2('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
-              </span>
-              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Delete">
-                <i class="ti-trash btn-icon-append dropbtn text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick="restock('<?php echo $value['id'] ?>')"></i>
-              </span>
-              <?php
-              }else{          
-              ?>
+             
                <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Edit">
                 <i class="ti-pencil-alt btn-icon-append dropbtn" data-bs-toggle="modal" data-bs-target="#editModal" onClick="editFunc('<?php echo $value['id'] ?>')"></i>
               </span>
@@ -235,7 +224,7 @@ i{
               </span>
 
               <?php
-              }
+  
               }
               ?>
 

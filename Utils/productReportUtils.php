@@ -10,10 +10,12 @@
      $jsonData2 = $post["dateFrom"];
      $jsonData3 = $post["pId"];
     
+     $formattedfdate = date("Y-m-d", strtotime($jsonData2));
+     $formattedtdate = date("Y-m-d", strtotime($jsonData1));
      
      $items = array();
 
-        $query = "SELECT * FROM orderditems WHERE productId = '$jsonData3' AND dateOrderd BETWEEN '$jsonData1' AND '$jsonData2'";
+        $query = "SELECT * FROM orderditems WHERE productId = '$jsonData3' AND dateOrderd BETWEEN '$formattedfdate' AND '$formattedtdate' ORDER BY dateOrderd";
 
         $results = mysqli_query($conn, $query);
 

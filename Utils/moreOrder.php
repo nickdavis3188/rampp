@@ -10,7 +10,7 @@
     $conn = conString1();
    
     $jsonData = $post["orderData"];
-    $cIdentity = mysqli_real_escape_string($conn,$post["cn"]);
+    $cIdentity = $post["ord"];
 
     $sellerid =$jsonData->sellerId;
     $orderid = $jsonData->orderId;
@@ -30,32 +30,20 @@
 
     //items
     $orderItems = $jsonData->items;
-    function emitEvent(){
-        $options = array(
-            'cluster' => 'eu',
-            'useTLS' => true
-        );
-        $pusher = new Pusher\Pusher(
-            '6635d1fe09ee5548385f',
-            '94187085362faba7043f',
-            '1438712',
-            $options
-        );
-        
-        $data['message'] = array("signal"=>"1","c"=>"2","ff"=>"1","ord"=>"0");
-        $pusher->trigger('my-channel', 'my-event', $data);
+
+    $items44 = array();
+    $query ="SELECT * FROM customer WHERE customerId='$cIdentity'";
+    $results = mysqli_query($conn,$query);
+
+    while($row = mysqli_fetch_array($results)){
+        $items44[] = $row;
     }
 
-    $orderCount = 1;
-    $completeCount = 0;
-    $status = 0;
-    $query1 = "INSERT INTO customer (`customerName`,`orderCount`,`completeCount`,`status`,`sallerId`,`date`,`time`) VALUES ('$cIdentity','$orderCount','$completeCount','$status','$sellerid','$orderdate','$odertime')";
+    $ordCount = $items44[0]["orderCount"] + 1;
 
-    $results = mysqli_query($conn,$query1);
+    $query3 = "UPDATE customer SET orderCount = '$ordCount' WHERE customerId='$cIdentity'";
+    $results = mysqli_query($conn,$query3);
     $noofrows = mysqli_affected_rows($conn);
-    if($noofrows==1)
-    {
-
     
 
     foreach ($orderItems as $index => $value) {    
@@ -109,18 +97,9 @@
           echo json_encode(array("status" =>"fail","msg"=>"Erro: Item Not Found"));
         }
     }
-   
-   
-    $items44 = array();
-    $query ="SELECT * FROM customer WHERE customerName='$cIdentity'";
-    $results = mysqli_query($conn,$query);
 
-    while($row = mysqli_fetch_array($results)){
-        $items44[] = $row;
-    }
-    $cId = $items44[0]["customerId"];
 
-$query1 = "INSERT INTO orders (`sellerid`,`orderid`,`totaltime`,`totalammount`,`status`,`orderdate`,`odertime`,`hr`,`min`,`ampm`,`br`,`kch`,`k`,`b`,`receipt`,`bill`,`kt`,`bt`,`totalProfit`,`customerId`) VALUES ('$sellerid',' $orderid','$totaltime','$totalammount','0','$orderdate','$odertime ','$hr','$min','$ampm','$br','$kch','0','0','0','0','$kt','$bt','$totalProfit','$cId')";
+$query1 = "INSERT INTO orders (`sellerid`,`orderid`,`totaltime`,`totalammount`,`status`,`orderdate`,`odertime`,`hr`,`min`,`ampm`,`br`,`kch`,`k`,`b`,`receipt`,`bill`,`kt`,`bt`,`totalProfit`,`customerId`) VALUES ('$sellerid',' $orderid','$totaltime','$totalammount','0','$orderdate','$odertime ','$hr','$min','$ampm','$br','$kch','0','0','0','0','$kt','$bt','$totalProfit','$cIdentity')";
 
     $results = mysqli_query($conn,$query1);
     $noofrows = mysqli_affected_rows($conn);
@@ -130,15 +109,12 @@ $query1 = "INSERT INTO orders (`sellerid`,`orderid`,`totaltime`,`totalammount`,`
         $res = uploadArray($conn,$orderItems,$orderid);
         if ($res == "true") {
            if ($br == 1 && $kch == 1) {
-
-                emitEvent();
                  echo json_encode(array("status" =>"success" )); 
-
            }elseif($br == 1 && $kch == 0){
-                emitEvent();
+
               echo json_encode(array("status" =>"success" )); 
            }elseif($br == 0 && $kch == 1){
-              emitEvent();
+
               echo json_encode(array("status" =>"success" )); 
            }
          
@@ -152,5 +128,4 @@ $query1 = "INSERT INTO orders (`sellerid`,`orderid`,`totaltime`,`totalammount`,`
     {     
         echo json_encode(array("status" =>"fail","msg"=>"Erro: ".mysqli_error($conn)));
     }
-}
 ?>

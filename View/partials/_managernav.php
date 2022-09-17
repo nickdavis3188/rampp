@@ -175,6 +175,7 @@
                 <li class="nav-item"> <a class="nav-link size" href="<?php echo $ordering["bar"]?>">Bar Order</a></li>
                 <li class="nav-item"> <a class="nav-link size" href="<?php echo $ordering["view"]?>">View/Manage Order</a></li>             
                 <li class="nav-item"> <a class="nav-link size" href="<?php echo $ordering["receipt"]?>">Bill/Receipt</a></li>
+                <li class="nav-item"> <a class="nav-link size" href="<?php echo $ordering["editOrder"]?>">Edit Order</a></li>
               </ul>
             </div>
           </li>

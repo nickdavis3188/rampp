@@ -38,8 +38,9 @@
         // print_r($_POST);
 
         $fileExt = explode(".",$fileName);
-        $fileExt2 = explode(".",$fileName2);
         $actualFileExt = strtolower(end($fileExt));
+        
+        $fileExt2 = explode(".",$fileName2);
         $actualFileExt2 = strtolower(end($fileExt2));
 
         $allowed = array("jpg","jpeg","png","svg");

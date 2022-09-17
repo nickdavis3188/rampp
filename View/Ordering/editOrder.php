@@ -15,7 +15,7 @@
       $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data1 = $UserUtils->getAllOrderedItem($conn);
+      $data1 = $UserUtils->getCustomers($conn);
       // print_r($data1);
       // $data = $UserUtils-> getAllDepartment();
 ?>
@@ -158,7 +158,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">Manage Order</h4>
+                  <h4 class="font-weight-bold mb-0">Edit Order</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -174,83 +174,46 @@ i{
     <br/>
 
  
-<!-- <button onclick="playSound('../../sound/start.wav');">start</button>  
-<button onclick="playSound('../../sound/remove.wav');">remove</button>  
-<button onclick="playSound('../../sound/back.wav');">back</button>   -->
 
     <div class="container-flued">
-      <div class="table-responsive">
-        <table id="data-table-basic" class="customers">
+            <form >
+                       
+              <div class="form-group row">
+                  <div class="col-sm-6">
+                      <label for="exampleFormControlSelect1">Select Customer</label>
+                      <select  name="pname" class="form-control form-control-lg cusId" id="exampleFormControlSelect1">
+                        <option value="">_select_</option>
+                            <?php                         
+                            foreach ($data1 as $index => $value) {                                                 
+                            ?>
+                                <option value="<?php echo $value['customerId']?>"><?php echo $value['customerName']?></option>
+                            <?php
+                            }
+                            ?>
+                  </select>
+                    </div>
+                          
+                  
+                  <div class="col-sm-6" style="padding-top: 30px;">
+                    <button type="button" class= "btn  text-white bg-pry btn-block" style="background-color: #02679a;" onclick="getItem(this)">
+                      get all order
+                    </button>                                                       
+                  </div>                                                  
+              </div>
+            </form>
+            <div class="table-responsive">
+            <table class="table table-hover">
           <thead>
               <tr>
                   <th class="text-center">S/N</th>
                   <th class="text-center">Order Number</th>
-                  <th class="text-center">OrderDate</th>
-                  <th class="text-center">Orderd At</th>
-                  <th>Status</th>
+                  <th class="text-center">Product Name</th>
+                  <th class="text-center">Qty</th>
+                  <th class="text-center">M Unit</th>
                   <th style="padding-left: 80px;">Action</th>
               </tr>
           </thead>
-          <tbody>
-            <?php
-                     
-                      
-              foreach ($data1 as $index => $value) { 
-                if ($value['receipt'] == 0) {                                
-                  $retVal2 = "";
-                  $deleteBtn = false;
-                  if ($value['br'] == 0 && $value['kch']==1) {
-                    $retVal2 = ($value["status"] == "1"? "<label class='badge badge-success'>Completed</label>" :"<label class='badge badge-secondary'>Pending</label>") ; 
-                    $deleteBtn = ($value["status"] == "1"?true:false);
-                  } elseif($value['br'] == 1 && $value['kch'] == 0){
-                    $retVal2 = ($value["status"] == "1"? "<label class='badge badge-success'>Completed</label>" :"<label class='badge badge-secondary'>Pending</label>") ; 
-                    $deleteBtn = ($value["status"] == "1"?true:false);
-                  }else if($value['br'] == 1 && $value['kch'] == 1){
-                    if ($value['k'] == 1 && $value['b'] == 1 && $value['status'] == 1) {
-                      $retVal2 = "<label class='badge badge-success'>Completed</label>";
-                      $deleteBtn = true;
-                    }elseif($value['k'] == 1 || $value['b'] == 1 && $value['status'] == 0){
-                      
-                      $retVal2 = "<label class='badge badge-warning'>Progressing</label>";
-                      $deleteBtn = true;
-                    }else{
-                      $retVal2 = "<label class='badge badge-secondary'>Pending</label>";
-                      $deleteBtn = false;
-                    }
-                  }
-
-            ?>
-                <tr>
-                  <td class="text-left"><?php echo $index + 1 ?></td>
-                  <td class="text-left"><?php echo $value['orderid']; ?></td>
-                  <td class="text-left"><?php echo date('d/m/Y',strtotime($value["orderdate"])) ?></td>
-                  <td class="text-left"><?php echo $value["odertime"]; ?></td>
-                  <td><?php echo $retVal2 ?></td>
-                  <td>
-                  <div class="dropdown ">
-                    <div class="d-flex justify-content-between align-items-center">
-                    <span data-bs-toggle="tooltip" data-bs-placement="left"  title="View">
-                      <i class="ti-menu-alt btn-icon-append dropbtn " style="color:#02679a;" data-bs-toggle="modal" data-bs-target="#viewModal" onclick="listItem(<?php echo $value['orderid']; ?>)"></i>
-                    </span>
-                  <?php
-                    if (!$deleteBtn) {
-                  ?>
-                    <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Delete">
-                      <i class="ti-trash btn-icon-append dropbtn text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick="deleteId('<?php echo $value["orderid"] ?>','')"></i>
-                    </span>
-                    <?php
-                    }
-                    ?>
-                  
-                    </div>                               
-                  </div>
-                  </td>
-              </tr> 
-        <?php
-         }
-          }
-        ?>           
-              
+          <tbody class="ttb">                       
           </tbody>
                        
                   </table>
@@ -273,7 +236,7 @@ i{
 
 
 <!-- Modal -->
-         <a href="../../sound/"></a>
+      
  <!-- Modal -->
     <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -324,7 +287,7 @@ i{
     </div>
 
                     <!-- /////////////////////// -->
-
+<!-- 
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content ">
@@ -344,10 +307,75 @@ i{
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <br/>
     <!-- Data Table area End-->
-             
+    <div class="modal fade" id="reduceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <h4 class="card-title"></h4>
+    <div class="modal-content ">
+    <form action="../../Utils/reduceOrderUtils.php" method="post">
+      <div class="modal-header gbgn">
+        <p>Reduce <Span id="itdr" style="color:#02679a;"></Span></p>
+        
+      </div>
+      <div class="modal-body gbgn">
+        <div class="form-group row">
+          <input name="oderItemid" type="hidden" class="form-control orItid" id="exampleInputUsername1" >
+          <input name="oderid" type="hidden" class="form-control orid" id="exampleInputUsername1" >
+          <input name="inventryid" type="hidden" class="form-control invid" id="exampleInputUsername1" >
+          <input name="date" type="hidden" class="form-control " id="exampleInputUsername1" value="<?php echo date('Y-m-d');?>">
+          <div class="form-group row">
+              <div class="col-sm-6">
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Quantity Reduced</label>
+                      <input name="qtyrem" type="number" class="form-control rd" id="exampleInputUsername1" required>
+                  </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Reason</label>
+                      <input name="reason" type="text" class="form-control delid2" id="exampleInputUsername1" >
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">      
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" >Close</button>
+                <button type="submit" name="restock" class="btn " onClick="loading44(this)"  style="background:#02679a;color:white;">Reduce</button>  
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content ">
+      <div class="modal-header gbgn">
+      </div>
+      <div class="modal-body gbgn">
+        Are you sure you want to delete this ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal" >Close</button>
+        <form action="../../Utils/removeOrderUtil.php" method="post">
+          <input name="oderItemid" type="hidden" class="form-control orderItemid" id="exampleInputUsername1" >
+          <input name="oderid" type="hidden" class="form-control orderid" id="exampleInputUsername1" >
+          <input name="inventryid" type="hidden" class="form-control inventryid" id="exampleInputUsername1" >
+          <input name="date" type="hidden" class="form-control " id="exampleInputUsername1" value="<?php echo date('Y-m-d');?>">
+          <!-- <input name="id" type="hidden" class="form-control delid1" id="exampleInputUsername1" > -->
+          <button type="submit" name="deleteInventory" class="btn btn-danger" data-bs-dismiss="modal" >Delete</button>
+        </form>
+     
+      </div>
+    </div>
+  </div>
+</div>
                   
 
          
@@ -443,7 +471,26 @@ i{
 
 
 <script>
- 
+ function loading44(btn) {
+      var rd = document.querySelector('.rd')
+      if (rd.value != "") {
+        console.log("B Iam clicked",btn)
+          var child = btn.lastElementChild; 
+          while (child) {
+              btn.removeChild(child);
+              child = btn.lastElementChild;
+          }
+  
+          btn.innerText = "Reducing ..."
+          let newSpan = document.createElement("span");
+          newSpan.classList.add("spinner-border")
+          newSpan.classList.add("spinner-border-sm")
+  
+          btn.appendChild(newSpan);
+        
+      }
+
+    }
    function displayHtml(obj,ele){
 
         let child = ele.lastElementChild; 
@@ -456,11 +503,28 @@ i{
 
                 let list = document.createElement("tr");
                 list.innerHTML = `     
+                        <td class="text-center">${ind+1}</td>
+                        <td class="text-center">${item.orderid}</td>
                         <td class="text-center">${item.productname}</td>
-                        <td class="text-center">${item.productcat}</td>
-                        <td class="text-center">${item.description}</i></td>
+                        <td class="text-center">${item.quantity}</td>
+                        <td class="text-center">${item.unitOfMeasure}</i></td>
                         <td class="text-center">${item.prepAt}</i></td>
-                        <td class="text-center">${item.finish == 1?`<label class='badge badge-success'>Completed</label>`:`<label class='badge badge-warning'>Progressing</label>`}</i></td>
+                        <td class="text-center">
+                            <div class="dropdown ">
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                    <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Reduce">
+                                        <i class="ti-minus btn-icon-append dropbtn text-secondary" data-bs-toggle="modal" data-bs-target="#reduceModal" onClick="reduce2('${Number(item.orderid)}','${item.productId}','${item.id}')"></i>
+                                    </span>
+
+                                    <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Delete">
+                                        <i class="ti-trash btn-icon-append dropbtn text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick="deleteId1('${Number(item.orderid)}','${item.productId}','${item.id}')"></i>
+                                    </span>
+
+                                </div>                               
+                            </div>
+                        </td>
+             
                         `;
                         ele.appendChild(list);
                         
@@ -469,88 +533,69 @@ i{
         })
     }
 
-    function listItem(orId,className,spinName){
-        let body = document.querySelector(".ttb"); 
-        let spin = document.querySelector("#spin"); 
 
-        let mydata = JSON.stringify({ "productId":orId })
-        fetch("../../Utils/orderdItemsUtils.php", {
+  function reduce2(oid,inid,id){
+    let orid = document.querySelector(".orid"); 
+    let invid = document.querySelector(".invid"); 
+    let orItid = document.querySelector(".orItid"); 
+    orid.value = oid;
+    invid.value = inid;
+    orItid.value = id;
+    // console.log(oid,inid,id);
+  }
+  function deleteId1(oid,inid,id){
+    let orid = document.querySelector(".orderid"); 
+    let invid = document.querySelector(".inventryid"); 
+    let orItid = document.querySelector(".orderItemid"); 
+    orid.value = oid;
+    invid.value = inid;
+    orItid.value = id;
+    // console.log(oid,inid,id);
+  }
+  
+function clearEle(k){
+    let child = k.lastElementChild; 
+        while (child) {
+            k.removeChild(child);
+            child = k.lastElementChild;
+        }
+}
+  function getItem(k){
+    let cusId = document.querySelector(".cusId"); 
+    let body = document.querySelector(".ttb"); 
+ 
+    if(cusId.value == ""){
+        alert("customer not selected");
+    }else{
+
+        clearEle(k);
+
+        k.innerHTML = `<span  class="spinner-border spinner-border-sm text-primary" id="spin"></span> `
+        // 
+        let mydata = JSON.stringify({ "cusId":cusId.value})
+        fetch("../../Utils/getSingleCustomerOrderUtils.php", {
         method: 'POST',  
         body: mydata,
         headers: {"Content-Type": "application/json; charset=utf-8"}
         }).then(res=>res.json()).then(function(data){
-            // console.log(data)
             if (data.status == "success") {
-                spin.classList.add("d-none");
-                displayHtml(data.data,body)
+                clearEle(k)
+                k.innerText = " get all order";
+                console.log(data)
+                displayHtml(data.data.sort((a,b)=>a.orderid - b.orderid),body)
+            
             }
-        })
-    }
+        });
 
-  function deleteId(par){
-    let myid = document.querySelector(".lpo"); 
-    myid.value = par
+    } 
+        
+
+    
   }
-  
+
 </script>
 
-<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-  <script>
-    function playSound(url) {
-      const audio = new Audio(url);
-      audio.play();
-    }
-    // Enable pusher logging - don't include this in production
-    // Pusher.logToConsole = true;
 
-    var pusher = new Pusher('6635d1fe09ee5548385f', {
-      cluster: 'eu'
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-     
-      if(data.message.ff == 1){
-        if(data.message.c == 0){
-          playSound("../../sound/start.wav")
-           setInterval(
-              function(){
-                  window.location.reload();
-              }
-              , 2000);
-        }else if(data.message.c == 1){
-          playSound("../../sound/back.wav");
-
-          // let mydata = JSON.stringify({ "orderId":data.ord })
-          // fetch("../../Utils/updateCompleteOrderCountUtils.php",{
-          // method: 'POST',
-          // body: mydata,
-          // headers: {"Content-Type": "application/json; charset=utf-8"}
-          // }).then(res=>res.json()).then(function(data){
-          //     console.log(data)
-          //     if (data.status) {
-                setInterval(
-                  function(){
-                      window.location.reload();
-                  }
-               , 2000);
-          //     } else {
-          //       // console.log(data)
-          //     }
-          // });
-
-      
-        }else{
-          playSound("../../sound/select.wav");
-          setInterval(
-                function(){
-                    window.location.reload();
-                }
-              , 2000);  
-        }
-    }
-    });
-  </script>
 
 <!-- SCRIPT -->
 <?php 

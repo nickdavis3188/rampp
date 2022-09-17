@@ -16,6 +16,7 @@
      $totalKitchen = $post["totalKitchen"];
      $salesProfit = $post["salesProfit"];
      $date = $post["date"];
+     $lost = $post["lost"];
 
      
      
@@ -42,7 +43,7 @@
                 }
             }
 
-            $query = "INSERT INTO  customAudit (`expensesCapital`, `expensesRecurrent` ,`expensesReinvestment`, `stockCostValue`,`stockSellingValue`,`stockProfit`,`totalBar`,`totalKitchen`,`salesProfit`,`date`)VALUES ('$expensesCapital','$expensesRecurrent','$expensesReinvestment','$stockCostValue','$stockSellingValue','$stockProfit','$totalBar','$totalKitchen','$salesProfit','$date')";
+            $query = "INSERT INTO  customAudit (`expensesCapital`, `expensesRecurrent` ,`expensesReinvestment`, `stockCostValue`,`stockSellingValue`,`stockProfit`,`totalBar`,`totalKitchen`,`salesProfit`,`date`,`lost`)VALUES ('$expensesCapital','$expensesRecurrent','$expensesReinvestment','$stockCostValue','$stockSellingValue','$stockProfit','$totalBar','$totalKitchen','$salesProfit','$date','$lost')";
             $results = mysqli_query($conn,$query);
             $noofrows = mysqli_affected_rows($conn); 
             if($noofrows==1)
@@ -50,7 +51,7 @@
                 echo json_encode( array("status"=>"success","msg"=>"done"));
             }
         }else{
-            $query = "INSERT INTO  customAudit (`expensesCapital`, `expensesRecurrent` ,`expensesReinvestment`, `stockCostValue`,`stockSellingValue`,`stockProfit`,`totalBar`,`totalKitchen`,`salesProfit`)VALUES ('$expensesCapital','$expensesRecurrent','$expensesReinvestment','$stockCostValue','$stockSellingValue','$stockProfit','$totalBar','$totalKitchen','$salesProfit')";
+            $query = "INSERT INTO  customAudit (`expensesCapital`, `expensesRecurrent` ,`expensesReinvestment`, `stockCostValue`,`stockSellingValue`,`stockProfit`,`totalBar`,`totalKitchen`,`salesProfit`,`lost`)VALUES ('$expensesCapital','$expensesRecurrent','$expensesReinvestment','$stockCostValue','$stockSellingValue','$stockProfit','$totalBar','$totalKitchen','$salesProfit','$lost')";
             $results = mysqli_query($conn,$query);
             $noofrows = mysqli_affected_rows($conn); 
             if($noofrows==1)

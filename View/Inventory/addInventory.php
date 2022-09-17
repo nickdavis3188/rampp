@@ -62,8 +62,8 @@
               <div class="" >
                 <div class="">
                   <!-- <h4 class="card-title">New Product form</h4> -->
-                
-                  <form class="forms-sample" action="../../Controller/inventoryController.php" method="post">
+                 
+                  <form class="forms-sample" action="../../Controller/inventoryController.php" method="post" enctype="multipart/form-data">
                       <div class="form-group row">
                         <div class="col-sm-6">
                           <div class="form-group">
@@ -178,7 +178,13 @@
                                   <option value="Bar">Bar</option>                         
                                 </select>
                             </div> 
-                          </div>                        
+                          </div>  
+                          <div class="col-sm-6">
+                            <div class="mb-3 form-group">
+                              <label for="formFile" class="form-label">Product Img</label>
+                              <input name="productImg" class="form-control" type="file" id="formFile"style="background:#02679a;color:white;">
+                            </div>    
+                        </div>                       
                         </div>
                       
                     </div>

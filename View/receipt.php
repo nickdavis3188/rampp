@@ -12,9 +12,14 @@ $UserUtils = new GeneralController();
 
     $id =$_REQUEST['id'];
 
-    $query ="UPDATE orders SET `receipt`='1' WHERE orderid ='$id'";
+    $query ="UPDATE orders SET `receipt`='1' WHERE customerId ='$id'";
     $results = mysqli_query($conn,$query);
     $noofrows = mysqli_affected_rows($conn);
+
+    $query = "DELETE FROM customer WHERE customerId ='$id'";
+    $results = mysqli_query($conn,$query);
+    $noofrows = mysqli_affected_rows($conn);
+    
 
 ?>
 <head>
@@ -189,7 +194,7 @@ $UserUtils = new GeneralController();
             ?>
             <tr>
                 <td><?php echo $value['productname']?></td>
-                <td><?php echo $value['description']?></td>
+                <td><p class="font-weight-bold mb-0"><?php echo $value["quantity"]."".$value["unitOfMeasure"]."" ?></p></td>
                 <td class="pricec"><?php echo "#".number_format($value['price'],2,".",",") ?></td>
                 <td class="pricec"><?php echo "#".number_format($value['amount'],2,".",",") ?></td>
             </tr>
@@ -208,9 +213,12 @@ $UserUtils = new GeneralController();
                 <td colspan="3" class="sum-up">Dis</td>
                 <td class="pricec">#10.00</td>
             </tr> -->
+            <?php
+            $tott = $UserUtils->totalAmus($conn,$_REQUEST['id']);
+        ?>
             <tr>
                 <th colspan="3" class="total text">Total</th>
-                <th class="total pricec"><?php echo "#".number_format($data2[0]['totalammount'],2,".",",")  ?></th>
+                <th class="total pricec"><?php echo "#".number_format($tott,2,".",",")  ?></th>
             </tr>
         </tbody>
     </table>

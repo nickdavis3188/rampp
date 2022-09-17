@@ -101,6 +101,10 @@
                           <p class="dt">Kitchen Items</b><?php echo "#".number_format($data[0]['totalKitchen'],2,'.',',' )  ?></p>
                       </samp>
                       <hr>
+                      <samp><i style="color:#02679a;">Total Lost:</i> &nbsp;
+                          <b><p class="dt"><?php echo "#".number_format($data[0]['lost'],2,'.',',' ) ?></p></b>
+                      </samp>
+                      <hr>
                       <samp><i style="color:#02679a;">Total Profit:</i> &nbsp;
                           <b><p class="dt"></p><?php echo "#".number_format($data[0]['salesProfit'],2,'.',',' ) ?></b>
                       </samp>
@@ -241,6 +245,10 @@
             <samp><i style="color:#02679a;">Total Sales</i> &nbsp;
                 <p class="dt">Bar Items:&nbsp; <b>${"#"+Number(data.msg[0].totalBar).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
                 <p class="dt">Kitchen Items:&nbsp; <b>${"#"+Number(data.msg[0].totalKitchen).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
+            </samp>
+            <hr>
+            <samp><i style="color:#02679a;">Total Lost:</i> &nbsp;
+                <b><p class="dt">${"#"+Number(data.data.lost).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p></b>
             </samp>
             <hr>
             <samp><i style="color:#02679a;">Total Profit:</i> &nbsp;

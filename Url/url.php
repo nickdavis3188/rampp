@@ -19,7 +19,7 @@
     
     $Procurment = array("vendor"=>array("addVendor"=>"../Procurement/addVendor.php","manageVendor"=>"../Procurement/manageVendor.php","addvendorQuote"=>"../Procurement/enterVendorQuote.php","manageVendorQuate"=>"../Procurement/viewVendorQuote.php"),"comparitiveTable"=>array("genComparitiveTable"=>"../Procurement/genComparitiveTable.php","supApprove"=>"../Procurement/compApproveBySup.php","manApprove"=>"../Procurement/compApproveByMan.php","mandApprove"=>"../Procurement/compApproveByManD.php"),"lpo"=>array("createLpo"=>"../Procurement/lpocreate.php","viewDeleteLpo"=>"../Procurement/viewDeleteLpo.php","supApprovee"=>"../Procurement/lpoSupApprove.php","manApprove"=>"../Procurement/lpoManApproval.php","manDApprove"=>"../Procurement/lpoManDApprove.php","sendLpo"=>"../Procurement/sendLpo1.php"));
 
-    $ordering = array("kitchen"=>"../Ordering/kichen.php","bar"=>"../Ordering/bar.php","view"=>"../Ordering/vmanageOrder.php","receipt"=>"../Ordering/orderReceipt.php");
+    $ordering = array("kitchen"=>"../Ordering/kichen.php","bar"=>"../Ordering/bar.php","view"=>"../Ordering/vmanageOrder.php","receipt"=>"../Ordering/orderReceipt.php","editOrder"=>"../Ordering/editOrder.php");
 
     $salesReport = array("dailyReport"=>"../SalesReport/dailyReport.php","monthlyReport"=>"../SalesReport/monthlyReport.php","annualReport"=>"../SalesReport/annualReport.php","productReport"=>"../SalesReport/productReport.php","dateRange"=>"../SalesReport/dateRange.php");
 
