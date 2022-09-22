@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 31, 2022 at 09:44 PM
+-- Generation Time: Sep 17, 2022 at 02:20 PM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.0
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `catname` varchar(200) NOT NULL,
   `id` int(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
@@ -42,7 +42,8 @@ INSERT INTO `category` (`catname`, `id`) VALUES
 ('Drink', 2),
 ('Funiture', 5),
 ('Soup', 6),
-('Noodle ', 7);
+('Noodle ', 7),
+('Utensil  ', 8);
 
 -- --------------------------------------------------------
 
@@ -63,15 +64,42 @@ CREATE TABLE IF NOT EXISTS `customaudit` (
   `totalKitchen` int(100) NOT NULL,
   `salesProfit` int(100) NOT NULL,
   `date` date NOT NULL DEFAULT '1111-11-11',
+  `lost` int(70) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customaudit`
 --
 
-INSERT INTO `customaudit` (`id`, `expensesCapital`, `expensesRecurrent`, `expensesReinvestment`, `stockCostValue`, `stockSellingValue`, `stockProfit`, `totalBar`, `totalKitchen`, `salesProfit`, `date`) VALUES
-(3, 0, 0, 1000, 220, 785, 565, 370, 600, 665, '2022-08-20');
+INSERT INTO `customaudit` (`id`, `expensesCapital`, `expensesRecurrent`, `expensesReinvestment`, `stockCostValue`, `stockSellingValue`, `stockProfit`, `totalBar`, `totalKitchen`, `salesProfit`, `date`, `lost`) VALUES
+(6, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2022-09-03', 1710);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE IF NOT EXISTS `customer` (
+  `customerId` int(11) NOT NULL AUTO_INCREMENT,
+  `customerName` varchar(100) DEFAULT NULL,
+  `orderCount` int(100) NOT NULL,
+  `completeCount` int(100) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `sallerId` int(70) NOT NULL,
+  `date` date NOT NULL DEFAULT '1111-11-11',
+  `time` varchar(30) NOT NULL,
+  PRIMARY KEY (`customerId`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`customerId`, `customerName`, `orderCount`, `completeCount`, `status`, `sallerId`, `date`, `time`) VALUES
+(3, 'davis T1', 4, 4, 0, 0, '2022-09-16', '1:32 am');
 
 -- --------------------------------------------------------
 
@@ -346,22 +374,26 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `prepAt` varchar(100) NOT NULL,
   `oderingunit` varchar(200) NOT NULL,
   `numberSold` int(100) NOT NULL,
+  `productImg` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `productname` (`productname`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`, `prepAt`, `oderingunit`, `numberSold`) VALUES
-('Funiture', 'Saivite ', 50, 10, 1000, 0, 'noTime', 14, 0, 1, 'none', 'none', 0),
-('Drink', ' Malt', 65, 10, 270, 300, '1', 13, 570, 2, 'Bar', 'Bottle', 1),
-('Noodle ', ' spak', 43, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate ', 3),
-('Funiture', 'Tabless', 5, 0, 10500, 0, 'noTime', 10, 0, 1, 'none', 'none', 0),
-('Soup', ' Ewedu', 38, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate ', 2),
-('Funiture', 'Chair ', 50, 0, 10200, 0, 'noTime', 12, 0, 1, 'none', 'none', 0),
-('Drink', ' Pepsi', 35, 10, 170, 200, '1', 15, 370, 2, 'Bar', 'Bottle', 2);
+INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`, `prepAt`, `oderingunit`, `numberSold`, `productImg`) VALUES
+('Funiture', 'Saivite ', 50, 10, 1000, 0, 'noTime', 14, 0, 1, 'none', 'none', 0, NULL),
+('Drink', ' Malt', 53, 10, 270, 300, '1', 13, 570, 2, 'Bar', 'Bottle', 12, NULL),
+('Noodle ', ' spak', 25, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate ', 23, NULL),
+('Funiture', 'Tabless', 5, 0, 10500, 0, 'noTime', 10, 0, 1, 'none', 'none', 0, NULL),
+('Soup', ' Ewedu', 25, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate ', 15, NULL),
+('Funiture', 'Chair ', 50, 0, 10200, 0, 'noTime', 12, 0, 1, 'none', 'none', 0, NULL),
+('Drink', ' Pepsi', 24, 10, 170, 200, '1', 15, 370, 2, 'Bar', 'Bottle', 13, NULL),
+('Funiture', ' Jagua', 20, 5, 250, 50, '1', 16, 300, 2, 'Bar', 'Bottle', 0, '../Upload/6325cf7e92fed2.36419457.jpeg'),
+('Drink', ' Vinnes', 50, 5, 200, 50, '1', 17, 250, 2, 'Bar', 'Bottle', 0, NULL),
+('Utensil  ', 'Spoon ', 20, 0, 2000, 0, 'noTime', 18, 0, 1, 'none', 'none', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -377,70 +409,114 @@ CREATE TABLE IF NOT EXISTS `inventryhistory` (
   `reduce` int(10) NOT NULL,
   `reason` varchar(200) NOT NULL,
   `increasby` int(200) NOT NULL,
-  `reduceby` int(200) NOT NULL
+  `reduceby` int(200) NOT NULL,
+  `type` int(4) DEFAULT NULL,
+  `price` int(30) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `inventryhistory`
 --
 
-INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `increasby`, `reduceby`) VALUES
-(6, '2022-06-16', 2, 0, '', 10, 0),
-(6, '2022-06-19', 2, 0, '', 10, 0),
-(7, '2022-06-19', 0, 2, 'its too much', 0, 5),
-(6, '2022-06-21', 2, 0, 'its too much', 10, 0),
-(7, '2022-06-21', 0, 2, 'its too much', 0, 1),
-(6, '2022-06-21', 2, 0, '', 50, 0),
-(7, '2022-06-21', 2, 0, '', 50, 0),
-(7, '2022-06-21', 0, 2, '', 0, 4),
-(7, '2022-06-22', 0, 2, '', 0, 0),
-(7, '2022-06-22', 0, 2, 'it\'s too much', 0, 10),
-(6, '2022-06-22', 2, 0, 'it\'s too low', 10, 0),
-(7, '2022-06-22', 0, 2, 'it\'s too much', 0, 10),
-(6, '2022-06-28', 2, 0, 'it was too low', 40, 0),
-(7, '2022-06-30', 0, 2, 'it\'s too much ', 0, 3),
-(6, '2022-07-01', 2, 0, '', 1, 0),
-(7, '2022-07-01', 0, 2, 'I just feel like doing this', 0, 1),
-(13, '2022-08-01', 0, 2, 'Ordered', 0, 2),
-(11, '2022-08-01', 0, 2, 'Ordered', 0, 2),
-(11, '2022-08-02', 0, 2, 'Ordered', 0, 2),
-(13, '2022-08-02', 0, 2, 'Ordered', 0, 2),
-(15, '2022-08-02', 0, 2, 'Ordered', 0, 2),
-(11, '2022-08-02', 0, 2, 'Ordered', 0, 2),
-(11, '2022-08-02', 0, 2, 'Ordered', 0, 1),
-(15, '2022-08-02', 0, 2, 'Ordered', 0, 3),
-(13, '2022-08-02', 0, 2, 'Ordered', 0, 2),
-(13, '2022-08-03', 2, 0, 'Deleted Order', 2, 0),
-(11, '2022-08-03', 2, 0, 'Deleted Order', 1, 0),
-(15, '2022-08-03', 2, 0, 'Deleted Order', 3, 0),
-(11, '2022-08-03', 2, 0, 'Deleted Order', 2, 0),
-(13, '2022-08-03', 2, 0, 'Deleted Order', 2, 0),
-(15, '2022-08-03', 0, 2, 'Ordered', 0, 2),
-(11, '2022-08-03', 0, 2, 'Ordered', 0, 2),
-(11, '2022-08-03', 0, 2, 'Ordered', 0, 2),
-(15, '2022-08-03', 0, 2, 'Ordered', 0, 2),
-(13, '2022-08-03', 0, 2, 'Ordered', 0, 1),
-(15, '2022-08-04', 0, 2, 'Ordered', 0, 2),
-(9, '2022-08-04', 0, 2, 'Ordered', 0, 1),
-(15, '2022-08-24', 0, 2, 'Ordered', 0, 2),
-(13, '2022-08-24', 0, 2, 'Ordered', 0, 1),
-(9, '2022-08-24', 0, 2, 'Ordered', 0, 1),
-(15, '2022-08-25', 0, 2, 'Ordered', 0, 1),
-(13, '2022-08-25', 0, 2, 'Ordered', 0, 1),
-(11, '2022-08-25', 0, 2, 'Ordered', 0, 1),
-(11, '2022-08-25', 0, 2, 'Ordered', 0, 2),
-(13, '2022-08-25', 0, 2, 'Ordered', 0, 1),
-(11, '2022-08-25', 0, 2, 'Ordered', 0, 2),
-(13, '2022-08-25', 0, 2, 'Ordered', 0, 1),
-(15, '2022-08-25', 0, 2, 'Ordered', 0, 2),
-(13, '2022-08-25', 0, 2, 'Ordered', 0, 1),
-(9, '2022-08-25', 0, 2, 'Ordered', 0, 2),
-(11, '2022-08-25', 0, 2, 'Ordered', 0, 1),
-(11, '2022-08-31', 0, 2, 'Ordered', 0, 2),
-(15, '2022-08-31', 0, 2, 'Ordered', 0, 2),
-(9, '2022-08-31', 0, 2, 'Ordered', 0, 1),
-(13, '2022-08-31', 0, 2, 'Ordered', 0, 1),
-(9, '2022-08-31', 0, 2, 'Ordered', 0, 2);
+INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `increasby`, `reduceby`, `type`, `price`) VALUES
+(6, '2022-06-16', 2, 0, '', 10, 0, 0, 0),
+(6, '2022-06-19', 2, 0, '', 10, 0, 0, 0),
+(7, '2022-06-19', 0, 2, 'its too much', 0, 5, 1, 0),
+(6, '2022-06-21', 2, 0, 'its too much', 10, 0, 0, 0),
+(7, '2022-06-21', 0, 2, 'its too much', 0, 1, 1, 0),
+(6, '2022-06-21', 2, 0, '', 50, 0, 0, 0),
+(7, '2022-06-21', 2, 0, '', 50, 0, 0, 0),
+(7, '2022-06-21', 0, 2, '', 0, 4, 1, 0),
+(7, '2022-06-22', 0, 2, '', 0, 0, 1, 0),
+(7, '2022-06-22', 0, 2, 'it\'s too much', 0, 10, 1, 0),
+(6, '2022-06-22', 2, 0, 'it\'s too low', 10, 0, 0, 0),
+(7, '2022-06-22', 0, 2, 'it\'s too much', 0, 10, 1, 0),
+(6, '2022-06-28', 2, 0, 'it was too low', 40, 0, 0, 0),
+(7, '2022-06-30', 0, 2, 'it\'s too much ', 0, 3, 1, 0),
+(6, '2022-07-01', 2, 0, '', 1, 0, 0, 0),
+(7, '2022-07-01', 0, 2, 'I just feel like doing this', 0, 1, 1, 0),
+(13, '2022-08-01', 0, 2, 'Ordered', 0, 2, 1, 0),
+(11, '2022-08-01', 0, 2, 'Ordered', 0, 2, 1, 0),
+(11, '2022-08-02', 0, 2, 'Ordered', 0, 2, 1, 0),
+(13, '2022-08-02', 0, 2, 'Ordered', 0, 2, 1, 0),
+(15, '2022-08-02', 0, 2, 'Ordered', 0, 2, 1, 0),
+(11, '2022-08-02', 0, 2, 'Ordered', 0, 2, 1, 0),
+(11, '2022-08-02', 0, 2, 'Ordered', 0, 1, 1, 0),
+(15, '2022-08-02', 0, 2, 'Ordered', 0, 3, 1, 0),
+(13, '2022-08-02', 0, 2, 'Ordered', 0, 2, 1, 0),
+(13, '2022-08-03', 2, 0, 'Deleted Order', 2, 0, 0, 0),
+(11, '2022-08-03', 2, 0, 'Deleted Order', 1, 0, 0, 0),
+(15, '2022-08-03', 2, 0, 'Deleted Order', 3, 0, 0, 0),
+(11, '2022-08-03', 2, 0, 'Deleted Order', 2, 0, 0, 0),
+(13, '2022-08-03', 2, 0, 'Deleted Order', 2, 0, 0, 0),
+(15, '2022-08-03', 0, 2, 'Ordered', 0, 2, 1, 0),
+(11, '2022-08-03', 0, 2, 'Ordered', 0, 2, 1, 0),
+(11, '2022-08-03', 0, 2, 'Ordered', 0, 2, 1, 0),
+(15, '2022-08-03', 0, 2, 'Ordered', 0, 2, 1, 0),
+(13, '2022-08-03', 0, 2, 'Ordered', 0, 1, 1, 0),
+(15, '2022-08-04', 0, 2, 'Ordered', 0, 2, 1, 0),
+(9, '2022-08-04', 0, 2, 'Ordered', 0, 1, 1, 0),
+(15, '2022-08-24', 0, 2, 'Ordered', 0, 2, 1, 0),
+(13, '2022-08-24', 0, 2, 'Ordered', 0, 1, 1, 0),
+(9, '2022-08-24', 0, 2, 'Ordered', 0, 1, 1, 0),
+(15, '2022-08-25', 0, 2, 'Ordered', 0, 1, 1, 0),
+(13, '2022-08-25', 0, 2, 'Ordered', 0, 1, 1, 0),
+(11, '2022-08-25', 0, 2, 'Ordered', 0, 1, 1, 0),
+(11, '2022-08-25', 0, 2, 'Ordered', 0, 2, 1, 0),
+(13, '2022-08-25', 0, 2, 'Ordered', 0, 1, 1, 0),
+(11, '2022-08-25', 0, 2, 'Ordered', 0, 2, 1, 0),
+(13, '2022-08-25', 0, 2, 'Ordered', 0, 1, 1, 0),
+(15, '2022-08-25', 0, 2, 'Ordered', 0, 2, 1, 0),
+(13, '2022-08-25', 0, 2, 'Ordered', 0, 1, 1, 0),
+(9, '2022-08-25', 0, 2, 'Ordered', 0, 2, 1, 0),
+(11, '2022-08-25', 0, 2, 'Ordered', 0, 1, 1, 0),
+(11, '2022-08-31', 0, 2, 'Ordered', 0, 2, 1, 0),
+(15, '2022-08-31', 0, 2, 'Ordered', 0, 2, 1, 0),
+(9, '2022-08-31', 0, 2, 'Ordered', 0, 1, 1, 0),
+(13, '2022-08-31', 0, 2, 'Ordered', 0, 1, 1, 0),
+(9, '2022-08-31', 0, 2, 'Ordered', 0, 2, 1, 0),
+(13, '2022-09-03', 0, 2, 'damage', 0, 1, 2, 570),
+(13, '2022-09-03', 0, 2, 'damage', 0, 2, 2, 1140),
+(11, '2022-09-07', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(15, '2022-09-07', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-09-07', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(13, '2022-09-07', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-09-07', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(9, '2022-09-07', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-09-07', 0, 2, 'Ordered', 0, 3, NULL, NULL),
+(13, '2022-09-07', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(11, '2022-09-07', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(13, '2022-09-07', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(15, '2022-09-07', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(13, '2022-09-07', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(15, '2022-09-07', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-09-07', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(15, '2022-09-07', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(9, '2022-09-08', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(9, '2022-09-08', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(13, '2022-09-08', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-09-08', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-09-08', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(9, '2022-09-08', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(15, '2022-09-08', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(11, '2022-09-08', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-09-08', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(15, '2022-09-08', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-09-13', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(15, '2022-09-13', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-09-13', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-09-13', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-09-16', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(15, '2022-09-16', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-09-16', 0, 2, 'Ordered', 0, 3, NULL, NULL),
+(13, '2022-09-16', 0, 2, 'Ordered', 0, 3, NULL, NULL),
+(9, '2022-09-16', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(13, '2022-09-16', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(15, '2022-09-16', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-09-16', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(13, '2022-09-16', 2, 0, 'order reduction', 2, 0, 2, 1140),
+(9, '2022-09-16', 2, 0, 'order reduction', 1, 0, 2, 1200),
+(9, '2022-09-16', 2, 0, 'rejected order', 1, 0, 2, 1200);
 
 -- --------------------------------------------------------
 
@@ -629,35 +705,24 @@ CREATE TABLE IF NOT EXISTS `orderditems` (
   `productId` int(100) NOT NULL,
   `profit` int(100) NOT NULL,
   `costprice` int(100) DEFAULT NULL,
-  `sellingprice` int(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `sellingprice` int(100) DEFAULT NULL,
+  `unitOfMeasure` varchar(70) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orderditems`
 --
 
-INSERT INTO `orderditems` (`productname`, `price`, `quantity`, `amount`, `preptime`, `orderid`, `productcat`, `sn`, `finish`, `prepAt`, `description`, `dateOrderd`, `productId`, `profit`, `costprice`, `sellingprice`) VALUES
-(' Pepsi', 370, 2, 740, 1, 32, 'Drink', 1, 1, 'Bar', '2 Bottle', '2022-08-04', 15, 400, 170, 370),
-(' spak', 1200, 1, 1200, 2, 32, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-08-04', 9, 930, 270, 1200),
-(' Pepsi', 370, 2, 740, 1, 33, 'Drink', 1, 0, 'Bar', '2 Bottle', '2022-08-24', 15, 400, 170, 370),
-(' Malt', 570, 1, 570, 1, 33, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-24', 13, 300, 270, 570),
-(' spak', 1200, 1, 1200, 2, 33, 'Noodle ', 3, 0, 'Kitchen', '1 Plate ', '2022-08-24', 9, 930, 270, 1200),
-(' Pepsi', 370, 1, 370, 1, 34, 'Drink', 1, 0, 'Bar', '1 Bottle', '2022-08-25', 15, 200, 170, 370),
-(' Malt', 570, 1, 570, 1, 34, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-25', 13, 300, 270, 570),
-(' Ewedu', 1400, 1, 1400, 2, 34, 'Soup', 3, 0, 'Kitchen', '1 Plate ', '2022-08-25', 11, 400, 1000, 1400),
-(' Ewedu', 1400, 2, 2800, 2, 35, 'Soup', 1, 0, 'Kitchen', '2 Plate ', '2022-08-25', 11, 800, 1000, 1400),
-(' Malt', 570, 1, 570, 1, 35, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-25', 13, 300, 270, 570),
-(' Ewedu', 1400, 2, 2800, 4, 36, 'Soup', 1, 0, 'Kitchen', '2 Plate ', '2022-08-25', 11, 800, 1000, 1400),
-(' Malt', 570, 1, 570, 1, 36, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-25', 13, 300, 270, 570),
-(' Pepsi', 370, 2, 740, 2, 37, 'Drink', 1, 0, 'Bar', '2 Bottle', '2022-08-25', 15, 400, 170, 370),
-(' Malt', 570, 1, 570, 1, 37, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-08-25', 13, 300, 270, 570),
-(' spak', 1200, 2, 2400, 4, 37, 'Noodle ', 3, 0, 'Kitchen', '2 Plate ', '2022-08-25', 9, 1860, 270, 1200),
-(' Ewedu', 1400, 1, 1400, 2, 37, 'Soup', 4, 0, 'Kitchen', '1 Plate ', '2022-08-25', 11, 400, 1000, 1400),
-(' Ewedu', 1400, 2, 2800, 4, 38, 'Soup', 1, 0, 'Kitchen', '2 Plate ', '2022-08-31', 11, 800, 1000, 1400),
-(' Pepsi', 370, 2, 740, 2, 38, 'Drink', 2, 0, 'Bar', '2 Bottle', '2022-08-31', 15, 400, 170, 370),
-(' spak', 1200, 1, 1200, 2, 39, 'Noodle ', 1, 0, 'Kitchen', '1 Plate ', '2022-08-31', 9, 930, 270, 1200),
-(' Malt', 570, 1, 570, 1, 40, 'Drink', 1, 0, 'Bar', '1 Bottle', '2022-08-31', 13, 300, 270, 570),
-(' spak', 1200, 2, 2400, 4, 40, 'Noodle ', 2, 0, 'Kitchen', '2 Plate ', '2022-08-31', 9, 1860, 270, 1200);
+INSERT INTO `orderditems` (`productname`, `price`, `quantity`, `amount`, `preptime`, `orderid`, `productcat`, `sn`, `finish`, `prepAt`, `description`, `dateOrderd`, `productId`, `profit`, `costprice`, `sellingprice`, `unitOfMeasure`, `id`) VALUES
+(' Pepsi', 370, 1, 370, 1, 51, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-16', 15, 200, 170, 370, 'Bottle', 1),
+(' Ewedu', 1400, 3, 4200, 6, 52, 'Soup', 1, 1, 'Kitchen', '3 Plate ', '2022-09-16', 11, 1200, 1000, 1400, 'Plate', 2),
+(' Malt', 570, 1, 570, 3, 52, 'Drink', 2, 1, 'Bar', '3 Bottle', '2022-09-16', 13, 300, 270, 570, 'Bottle', 3),
+(' spak', 1200, 1, 1200, 4, 53, 'Noodle ', 1, 1, 'Kitchen', '2 Plate ', '2022-09-16', 9, 930, 270, 1200, 'Plate', 4),
+(' Malt', 570, 1, 570, 1, 53, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-16', 13, 300, 270, 570, 'Bottle', 5),
+(' Pepsi', 370, 1, 370, 1, 54, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-16', 15, 200, 170, 370, 'Bottle', 6),
+(' spak', 1200, 1, 1200, 2, 54, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-09-16', 9, 930, 270, 1200, 'Plate', 7);
 
 -- --------------------------------------------------------
 
@@ -709,23 +774,19 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `bill` int(10) NOT NULL,
   `kt` int(100) NOT NULL,
   `bt` int(100) NOT NULL,
-  `totalProfit` int(100) NOT NULL
+  `totalProfit` int(100) NOT NULL,
+  `customerId` int(70) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`sellerid`, `orderid`, `totaltime`, `totalammount`, `status`, `orderdate`, `odertime`, `hr`, `min`, `ampm`, `br`, `kch`, `receipt`, `k`, `b`, `bill`, `kt`, `bt`, `totalProfit`) VALUES
-(1, 32, 3, 1940, 1, '2022-08-04', '11:57 am ', 11, 57, 'am', 1, 1, 0, 1, 1, 0, 2, 1, 1330),
-(0, 33, 4, 2510, 0, '2022-08-24', '10:57 pm ', 10, 57, 'pm', 1, 1, 0, 0, 0, 0, 2, 11, 1630),
-(0, 34, 4, 2340, 0, '2022-08-25', '4:54 am ', 4, 54, 'am', 1, 1, 0, 0, 0, 0, 2, 11, 900),
-(0, 35, 3, 3370, 0, '2022-08-25', '5:09 am ', 5, 9, 'am', 1, 1, 0, 0, 0, 0, 2, 1, 1100),
-(0, 36, 5, 3370, 0, '2022-08-25', '5:28 am ', 5, 28, 'am', 1, 1, 0, 0, 0, 0, 4, 1, 1100),
-(0, 37, 9, 5110, 0, '2022-08-25', '5:51 am ', 5, 51, 'am', 1, 1, 0, 0, 0, 0, 6, 3, 2960),
-(0, 38, 6, 3540, 0, '2022-08-31', '10:28 pm ', 10, 28, 'pm', 1, 1, 0, 0, 0, 0, 4, 2, 1200),
-(0, 39, 2, 1200, 0, '2022-08-31', '10:31 pm ', 10, 31, 'pm', 0, 1, 0, 0, 0, 0, 2, 0, 930),
-(0, 40, 5, 2970, 0, '2022-08-31', '10:33 pm ', 10, 33, 'pm', 1, 1, 0, 0, 0, 0, 4, 1, 2160);
+INSERT INTO `orders` (`sellerid`, `orderid`, `totaltime`, `totalammount`, `status`, `orderdate`, `odertime`, `hr`, `min`, `ampm`, `br`, `kch`, `receipt`, `k`, `b`, `bill`, `kt`, `bt`, `totalProfit`, `customerId`) VALUES
+(0, 54, 3, 1570, 1, '2022-09-16', '2:41 am ', 2, 41, 'am', 1, 1, 0, 1, 1, 3, 2, 1, 1130, 3),
+(0, 53, 5, 1770, 1, '2022-09-16', '2:36 am ', 2, 36, 'am', 1, 1, 0, 1, 1, 3, 4, 1, 1230, 3),
+(0, 52, 9, 5910, 1, '2022-09-16', '2:19 am ', 2, 19, 'am', 1, 1, 0, 1, 1, 3, 6, 3, 2100, 3),
+(0, 51, 3, 370, 1, '2022-09-16', '1:32 am ', 1, 32, 'am', 1, 1, 0, 1, 1, 3, 2, 1, 200, 3);
 
 -- --------------------------------------------------------
 
