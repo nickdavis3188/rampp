@@ -609,8 +609,8 @@ function addItem(btn) {
           method: 'POST',
           body: mydata,
           headers: {"Content-Type": "application/json; charset=utf-8"}
-          }).then(res=>res.json()).then(function(data){
-            console.log(data)
+          }).then(res=>res.text()).then(function(data){
+            // console.log(data)
             if(data.status == "success"){
               LoadingDisplay(data.status,btn)
     

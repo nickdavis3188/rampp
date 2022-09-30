@@ -7,11 +7,11 @@
     
      $conn = conString1();
 
-     $jsonData = $post["productId"];
+     $jsonData = $post["Subcategory"];
 
      $items = array();
 
-        $query = "SELECT * FROM inventory WHERE id='$jsonData'";
+        $query = "SELECT * FROM inventory WHERE subCategory='$jsonData' ";
         
         $results = mysqli_query($conn, $query);
 
@@ -19,6 +19,7 @@
             $items[] = $row;
         }
         if (count($items) > 0) {
+
             $returnArray = array();
             foreach ($items as $index => $value) {
                 $returnArray[] = array("productId"=>$value["id"],"productName"=>$value["productname"],"productDescription"=>$value["description"],"salingPrice"=>$value["sellingprice"],"productCategory"=>$value["catname"],"preparationTime"=>$value["preparationtime"],"img"=>$value["productImg"]);
@@ -27,6 +28,6 @@
             echo json_encode( array("status"=>"success","data"=>$returnArray));
         }else{
             header('Content-Type:application/json; charset-utf-8',true,404);
-            echo json_encode( array("status"=>"fail","msg"=>"No Data","data"=>array()));     
+            echo json_encode( array("status"=>"fail","msg"=>"No Data","data"=>array()));   
         }
 ?>

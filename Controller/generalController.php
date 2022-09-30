@@ -361,6 +361,19 @@ class GeneralController
         }
         return $items;
     }
+    function getAllSubCategory($conn)
+    {
+
+        $items = array();
+
+        $query = "SELECT * FROM subcategory";
+        $results = mysqli_query($conn, $query);
+
+        while ($row = mysqli_fetch_array($results)) {
+            $items[] = $row;
+        }
+        return $items;
+    }
 
     function check_in_array(array $array, $callback)
     {
@@ -393,7 +406,17 @@ class GeneralController
 
        return $tot;
     }
-
+    function deleteCustomer($conn,$id){
+        $query = "DELETE FROM customer WHERE customerId ='$id'";
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
+        if ($noofrows == 1)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
     function getorderItemById($conn,$id)
     {
         $items3 = array();

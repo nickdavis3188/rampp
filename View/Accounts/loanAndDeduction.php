@@ -825,7 +825,7 @@ function savingRecord(par) {
           if (amtss.length == 0) {
             let list = document.createElement("tr");
             list.innerHTML = `
-                <td colspan="5" class="text-center">No Records</td>
+                <td colspan="7" class="text-center">No Records</td>
             `;
             tbbd.appendChild(list);
           }else{

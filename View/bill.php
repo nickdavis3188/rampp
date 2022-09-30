@@ -168,6 +168,7 @@ $UserUtils = new GeneralController();
    
      ?>
     </header>
+    <b><h2>Type: Bill</h2></b>
     <p>Receipt No : <?php echo $_REQUEST['id'] ?></p>
     <table class="bill-details">
         <tbody>

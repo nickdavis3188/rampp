@@ -342,17 +342,20 @@ function LoadingDisplay1(status,ele){
                 <p class="dt">Capital Expenditure:&nbsp; <b>${"#"+Number(data.data.expenses.capital).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
                 <p class="dt">Recurrent Expenditure:&nbsp; <b>${"#"+Number(data.data.expenses.recurrent).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
                 <p class="dt">Reinvestment:&nbsp; <b>${"#"+Number(data.data.expenses.reinvestment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
+                <p class="dt">Total :&nbsp; <b>${"#"+(Number(data.data.expenses.capital)+Number(data.data.expenses.recurrent)+Number(data.data.expenses.reinvestment)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
             </samp>
             <hr>
             <samp><i style="color:#02679a;">Total Stock Value</i> &nbsp;
                 <p class="dt">Stock cost value:&nbsp; <b>${"#"+Number(data.data.stock.costValue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
                 <p class="dt">Stock selling value:&nbsp; <b>${"#"+Number(data.data.stock.sellingValue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
                 <p class="dt">Stock profit:&nbsp; <b>${"#"+Number(data.data.stock.stockProfit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
+                <p class="dt">Total :&nbsp; <b>${"#"+(Number(data.data.stock.costValue)+Number(data.data.stock.sellingValue)+Number(data.data.stock.stockProfit)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
             </samp>
             <hr>
             <samp><i style="color:#02679a;">Total Sales</i> &nbsp;
                 <p class="dt">Bar Items:&nbsp; <b>${"#"+Number(data.data.sales.bar).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
                 <p class="dt">Kitchen Items:&nbsp; <b>${"#"+Number(data.data.sales.kitchen).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
+                <p class="dt">Total :&nbsp; <b>${"#"+(Number(data.data.sales.bar)+Number(data.data.sales.kitchen)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></p>
             </samp>
             <hr>
             <samp><i style="color:#02679a;">Total Lost:</i> &nbsp;

@@ -182,6 +182,7 @@ i{
                   <th>S/N</th>
                   <th>Product Name</th>
                   <th>Product Catigory</th>
+                  <th>Product Type</th>
                   <th>Qty</th>
                   <th>Minimum Levle</th>
                   <th style="padding-left: 80px;">Action</th>
@@ -190,12 +191,13 @@ i{
           <tbody>
             <?php
                foreach ($data as $index => $value) {
-            
+              
             ?>
           <tr>
             <td><?php echo $index +1 ?></td>
             <td><?php echo $value["productname"] ?></td>
             <td><?php echo $value["catname"] ?></td>
+            <td><?php echo ($value["salable"] < 2)?"Non Salable":"Salable" ?></td>
             <td><?php echo $value["quantityadded"] ?></td>
             <td><?php echo $value["minnimumlevle"] ?></td>
             <td>

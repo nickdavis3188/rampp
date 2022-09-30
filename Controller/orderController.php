@@ -30,7 +30,7 @@
 
     //items
     $orderItems = $jsonData->items;
-    function emitEvent(){
+    function emitEvent($k,$b){
         $options = array(
             'cluster' => 'eu',
             'useTLS' => true
@@ -42,7 +42,7 @@
             $options
         );
         
-        $data['message'] = array("signal"=>"1","c"=>"2","ff"=>"1","ord"=>"0");
+        $data['message'] = array("signal"=>"1","c"=>"2","ff"=>"1","ord"=>"0","kkk"=>$k,"bbb"=>$b);
         $pusher->trigger('my-channel', 'my-event', $data);
     }
 
@@ -131,18 +131,17 @@ $query1 = "INSERT INTO orders (`sellerid`,`orderid`,`totaltime`,`totalammount`,`
         if ($res == "true") {
            if ($br == 1 && $kch == 1) {
 
-                emitEvent();
+                emitEvent(1,1);
                  echo json_encode(array("status" =>"success" )); 
 
            }elseif($br == 1 && $kch == 0){
-                emitEvent();
+                emitEvent(0,1);
               echo json_encode(array("status" =>"success" )); 
            }elseif($br == 0 && $kch == 1){
-              emitEvent();
+              emitEvent(1,0);
               echo json_encode(array("status" =>"success" )); 
            }
-         
-                 
+                         
        }else {
            echo json_encode(array("status" =>"fail","msg"=>"Erro".mysqli_error($conn) ));
        }

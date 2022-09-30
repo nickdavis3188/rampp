@@ -1,16 +1,18 @@
 <?php
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
-    require('../vendor/autoload.php');
-    require("../Utils/updateCompleteOrderCountUtils.php");
+
+    header('Access-Control-Allow-Origin: *');
     $post = (array) json_decode(file_get_contents('php://input'),false);
     
      $conn = conString1();
 
      $jsonData = $post["category"];
+
+     $dd = implode(',',$jsonData);
      $items = array();
 
-        $query = "SELECT * FROM inventory WHERE catname ='$jsonData'";
+        $query = "SELECT * FROM inventory WHERE catname IN ('$dd') ";
         
         $results = mysqli_query($conn, $query);
 
@@ -18,8 +20,15 @@
             $items[] = $row;
         }
         if (count($items) > 0) {
-            echo json_encode( array("status"=>"success","data"=>$items));
+
+            $returnArray = array();
+            foreach ($items as $index => $value) {
+                $returnArray[] = array("productId"=>$value["id"],"productName"=>$value["productname"],"productDescription"=>$value["description"],"salingPrice"=>$value["sellingprice"],"productCategory"=>$value["catname"],"preparationTime"=>$value["preparationtime"],"img"=>$value["productImg"]);
+            }
+            header('Content-Type:application/json; charset-utf-8',true,200);
+            echo json_encode( array("status"=>"success","data"=>$returnArray));
         }else{
-            echo json_encode( array("status"=>"fail","msg"=>mysqli_error($conn)));   
+            header('Content-Type:application/json; charset-utf-8',true,404);
+            echo json_encode( array("status"=>"fail","msg"=>"No Data","data"=>array()));     
         }
 ?>

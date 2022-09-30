@@ -182,6 +182,7 @@ i{
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Sex</th>
+                  <th>Role</th>
                   <th>Designation</th>
                   <th style="padding-left: 80px;">Action</th>
               </tr>
@@ -196,6 +197,7 @@ i{
             <td><?php echo $value["fname"] ?></td>
             <td><?php echo $value["lname"] ?></td>
             <td><?php echo $value["sex"] ?></td>
+            <td><?php echo $value["privilege"] ?></td>
             <td><?php echo $value["designation"] ?></td>
             <td>
             <div class="dropdown ">

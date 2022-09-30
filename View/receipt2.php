@@ -9,13 +9,17 @@ require("../Connection/dbConnection.php");
 $conn = conString1();
 
 $UserUtils = new GeneralController();
-$id = $_REQUEST['id'];
 
-$query ="UPDATE orders SET `receipt`='1' WHERE customerId ='$id'";
-$results = mysqli_query($conn,$query);
-$noofrows = mysqli_affected_rows($conn);
-if ($noofrows >= 1)
-{}
+    $id =$_REQUEST['id'];
+
+    $query ="UPDATE orders SET `receipt`='1' WHERE customerId ='$id'";
+    $results = mysqli_query($conn,$query);
+    $noofrows = mysqli_affected_rows($conn);
+
+    $query = "DELETE FROM customer WHERE customerId ='$id'";
+    $results = mysqli_query($conn,$query);
+    $noofrows = mysqli_affected_rows($conn);
+    
 
 ?>
 <head>
@@ -152,20 +156,19 @@ if ($noofrows >= 1)
     <br><br><br><br><br>
     <header>
      <h2>RAMPP</h2>
-
      <?php
     
-    $data2 = $UserUtils->getorderById($conn,$_REQUEST['id']);
-    
+     $data2 = $UserUtils->getorderById($conn,$_REQUEST['id']);
+   
      ?>
     </header>
-    <b><h2>Type: Receipt</h2></b>
     <p>Receipt No : <?php echo $_REQUEST['id'] ?></p>
+    <!-- <p>Saler Id : <?php echo $_REQUEST['sid'] ?></p> -->
     <table class="bill-details">
         <tbody>
             <tr>
-                <td>Date : <span class="dt"><?php echo date('d/m/Y',strtotime( $data2[0]['date'])) ?></span></td>
-                <td>Time : <span class="tm"><?php echo $data2[0]['time'] ?></span></td>
+                <td>Date : <span class="dt"><?php echo date('d/m/Y',strtotime( $data2[0]['orderdate'])) ?></span></td>
+                <td>Time : <span class="tm"><?php echo $data2[0]['odertime'] ?></span></td>
             </tr>
             <tr>
                 <th class="center-align" colspan="2"><span class="receipt">Original Receipt</span></th>
@@ -185,8 +188,7 @@ if ($noofrows >= 1)
        
         <tbody>
             <?php
-                $UserUtils->deleteCustomer($conn,$_REQUEST['id']);
-                $data = $UserUtils->getorderItemById($conn,$_REQUEST['id']);
+             $data = $UserUtils->getorderItemById($conn,$_REQUEST['id']);
            
              foreach ($data as $index => $value) { 
             ?>
@@ -213,16 +215,14 @@ if ($noofrows >= 1)
             </tr> -->
             <?php
             $tott = $UserUtils->totalAmus($conn,$_REQUEST['id']);
-           
         ?>
             <tr>
                 <th colspan="3" class="total text">Total</th>
-                <th class="total pricec"><?php echo "#".number_format($tott,2,".",",")?></th>
+                <th class="total pricec"><?php echo "#".number_format($tott,2,".",",")  ?></th>
             </tr>
         </tbody>
     </table>
     <section>
-      
         <p>
             Paid by : <span class="pm"><?php echo $_REQUEST['pay']?></span>
         </p>
@@ -233,9 +233,6 @@ if ($noofrows >= 1)
     <footer style="text-align:center">
         <p>www.Ramp.com</p>
     </footer>
-    <?php
-
-    ?>
     <script>
     window.print();
     </script>

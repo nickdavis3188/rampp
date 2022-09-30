@@ -109,7 +109,7 @@
                                         // echo $min;
                                   ?>
                                     <div class="col-12">
-                                    <p class="font-weight-bold mb-0"><?php echo $value2["	quantity"]."".$value2["unitOfMeasure"]." of ". $value2['productname'] ?></p>
+                                    <p class="font-weight-bold mb-0"><?php echo $value2["quantity"]."".$value2["unitOfMeasure"]." of ". $value2['productname'] ?></p>
                                     </div>
                                   <?php
                                     }
@@ -275,11 +275,7 @@
       }
     }
 
-    setInterval(
-        function(){
-            window.location.reload();
-        }
-        , 11000);
+    
 </script>
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
   <script>
@@ -298,9 +294,14 @@
     channel.bind('my-event', function(data) {
      
       if(data.message.ff == 0){
-        if(data.message.kch == 1){
+        if(data.message.kk == 1){
           playSound("../../sound/select.wav")
-        }
+          setInterval(
+            function(){
+              window.location.reload();
+            }
+          , 11000);
+          }
       }
     });
   </script>

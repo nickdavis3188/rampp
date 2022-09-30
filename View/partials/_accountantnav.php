@@ -114,7 +114,7 @@
                   </p>
                   <div class="pr-2 sidesecond" id="ui-basic8" style="background-color:white;display:none">
                     <ul class=" list" style="list-style-type:none;">
-                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["comparitiveTable"]["genComparitiveTable"]) ?>">View/Create Comparative Table</a></li>
+                      <li class="nav-item"> <a style="font-size:11.2px" class="nav-link" href="<?php echo($Procurment["comparitiveTable"]["genComparitiveTable"]) ?>">View/Edit Table</a></li>
                                    
                     </ul>
                   </div>

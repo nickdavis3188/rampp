@@ -163,7 +163,7 @@
                         <input name="orderid" type="hidden" class="form-control orno" id="exampleInputUsername1">
                         <input name="sid" type="hidden" class="form-control sidd" id="exampleInputUsername1">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal" >Close</button>
-                        <button type="submit" name="delete" class="btn" data-bs-dismiss="modal" style="background:#02679a;color:white;" onclick="printReceipt()">Print Receipt</button>    
+                        <button type="submit" name="delete" class="btn" data-bs-dismiss="modal" style="background:#02679a;color:white;" onclick="printReceipt(this)" >Print Receipt</button>    
                       </div>
                   </div>
               </div>
@@ -293,16 +293,17 @@
     window.open(window.location.origin+"/rampp/View/bill.php?id="+Number(id), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
   }
 
-  function printReceipt(){
+  function printReceipt(r){
+    // console.log(r,"hello")
     let orno = document.querySelector(".orid22"); 
     let payM = document.querySelector(".payM"); 
-    window.open(window.location.origin+"/rampp/View/receipt.php?id="+Number(ord.value)+"&pay="+payM.value+"", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700") 
+    window.open(window.location.origin+"/rampp/View/receipt.php?id="+Number(orno.value)+"&pay="+payM.value+"","_blank","toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700") 
   } 
     setInterval( 
       function(){ 
           window.location.reload(); 
       } 
-      , 11000); 
+      , 110000); 
 </script>
 <!-- SCRIPT -->
 <?php  

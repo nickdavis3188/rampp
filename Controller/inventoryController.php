@@ -19,6 +19,8 @@
 
           $catname = $_POST['catname'];
           $pname = $_POST['pname'];
+          $subCate = $_POST['subCate'];
+          $description = mysqli_real_escape_string($conn,$_POST['description']);
           $qtyadded = $_POST['qtyadded'];
           $minlevle = $_POST['minlevle'];
           $costp = $_POST['costp'];
@@ -45,7 +47,7 @@
             
                     move_uploaded_file($fileTempName,$destination);
 
-                    $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`,`prepAt`,`oderingunit`,`numberSold`,`productImg`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','$salable','$PrepAt','$orderingUnit','0','$destination')";
+                    $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`,`prepAt`,`oderingunit`,`numberSold`,`productImg`,`subCategory`,`description`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','$salable','$PrepAt','$orderingUnit','0','$destination','$subCate','$description')";
                     $results = mysqli_query($conn,$query);
                     $noofrows = mysqli_affected_rows($conn);
                 
@@ -60,7 +62,7 @@
                 }
             }
         }else{
-            $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`,`prepAt`,`oderingunit`,`numberSold`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','$salable','$PrepAt','$orderingUnit','0')";
+            $query = "INSERT INTO inventory (`catname`, `productname` ,`quantityadded`, `minnimumlevle`,`costprice`,`profit`, `preparationtime`,`sellingprice`,`salable`,`prepAt`,`oderingunit`,`numberSold`,`subCategory`,`description`)VALUES ('$catname',' $pname','$qtyadded','$minlevle','$costp','$profit','$preptime','$sallingp','$salable','$PrepAt','$orderingUnit','0','$subCate','$description')";
             $results = mysqli_query($conn,$query);
             $noofrows = mysqli_affected_rows($conn);
         
@@ -81,10 +83,12 @@
         $qtyadded = $_POST['qtyadded'];
         $costp = $_POST['costp'];
         $minlevle = $_POST['minlevle'];
+        $subCate = $_POST['subCate'];
+        $description = mysqli_real_escape_string($conn,$_POST['description']);
         // print_r($catname."-".$pname."-".$qtyadded."-".$costp);
         
-       $query2 = "INSERT INTO `inventory` (catname,productname,quantityadded,minnimumlevle,costprice,profit,preparationtime,sellingprice,salable,prepAt,oderingunit,`numberSold`)
-       VALUES('$catname','$pname','$qtyadded','$minlevle','$costp','0','noTime','0','1','none','none','0')";
+       $query2 = "INSERT INTO `inventory` (catname,productname,quantityadded,minnimumlevle,costprice,profit,preparationtime,sellingprice,salable,prepAt,oderingunit,`numberSold`,`subCategory`,`description`)
+       VALUES('$catname','$pname','$qtyadded','$minlevle','$costp','0','noTime','0','1','none','none','0','$subCate','$description')";
         $results = mysqli_query($conn,$query2);
         $noofrows = mysqli_affected_rows($conn);
         if($noofrows==1)
@@ -97,13 +101,13 @@
             header("Location: ../View/Inventory/addInventory.php?fail= Error:".mysqli_error($conn));          
         }
        
-    }
-    
+    }   
 
   }elseif(isset($_POST["category"])){
     $catname = $_POST['catname'];
+    $type = ($_POST['type'] == "true")?1:0;
 
-    $query = "INSERT INTO category (`catname`)VALUES ('$catname')";
+    $query = "INSERT INTO category (`catname`,`type`)VALUES ('$catname','$type')";
     $results = mysqli_query($conn,$query);
     $noofrows = mysqli_affected_rows($conn);
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    click to send request
+    <button onclick="sendRequest()">send</button>
+
+    <script>
+        function sendRequest() {
+            let mydata = JSON.stringify({"cat":["hello","world"]})
+            fetch("./testing.php", {
+            method: 'Post',
+            body: mydata,
+            headers: {"Content-Type": "application/json; charset=utf-8"}
+            }).then(res=>res.json()).then(function(data){
+              console.log(data)
+            })   
+        }
+    </script>
+</body>
+</html>

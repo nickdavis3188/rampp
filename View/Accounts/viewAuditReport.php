@@ -88,17 +88,20 @@
                           <p class="dt">Capital Expenditure:&nbsp; <b><?php echo "#".number_format($data[0]['expensesCapital'],2,'.',',')  ?></b></p>
                           <p class="dt">Recurrent Expenditure:&nbsp; <b><?php echo "#".number_format($data[0]['expensesRecurrent'],2,'.',',')  ?></b></p>
                           <p class="dt">Reinvestment:&nbsp; <b><?php echo "#".number_format($data[0]['expensesReinvestment'],2,'.',',')  ?></b></p>
+                          <p class="dt">Total:&nbsp; <b><?php echo "#".number_format(($data[0]['expensesCapital'] + $data[0]['expensesRecurrent']+ $data[0]['expensesReinvestment']),2,'.',',')  ?></b></p>
                       </samp>
                       <hr>
                       <samp><i style="color:#02679a;">Total Stock Value</i> &nbsp;
                           <p class="dt">Stock cost value:&nbsp; <b><?php echo "#".number_format($data[0]['stockCostValue'],2,'.',',' ) ?></b></p>
                           <p class="dt">Stock selling value:&nbsp; <b><?php echo "#".number_format($data[0]['stockSellingValue'],2,'.',',' )  ?></b></p>
                           <p class="dt">Stock profit:&nbsp; <b><?php echo "#".number_format($data[0]['stockProfit'],2,'.',',' )  ?></b></p>
+                          <p class="dt">Total:&nbsp; <b><?php echo "#".number_format(($data[0]['stockCostValue'] + $data[0]['stockSellingValue'] + $data[0]['stockProfit']),2,'.',',' )  ?></b></p>
                       </samp>
                       <hr>
                       <samp><i style="color:#02679a;">Total Sales</i> &nbsp;
                           <p class="dt">Bar Items:&nbsp; <b><?php echo "#".number_format($data[0]['totalBar'],2,'.',',' )  ?></b></p>
-                          <p class="dt">Kitchen Items</b><?php echo "#".number_format($data[0]['totalKitchen'],2,'.',',' )  ?></p>
+                          <p class="dt">Kitchen Items: &nbsp;</b><?php echo "#".number_format($data[0]['totalKitchen'],2,'.',',' )  ?></p>
+                          <p class="dt">Total: &nbsp;</b><?php echo "#".number_format(($data[0]['totalBar']+$data[0]['totalKitchen']),2,'.',',' )  ?></p>
                       </samp>
                       <hr>
                       <samp><i style="color:#02679a;">Total Lost:</i> &nbsp;
@@ -110,7 +113,7 @@
                       </samp>
                       <hr>
                         </div>
-                    </div>                      
+                    </div> 
                   </div>
                 <?php
                   }

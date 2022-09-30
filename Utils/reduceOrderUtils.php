@@ -61,6 +61,8 @@
                     $amu = $items3["0"]["price"] * $qty;
                     $prof = $profit * $qty;
 
+                    
+
 
                     $query = "UPDATE orderditems SET profit ='$prof', amount='$amu', quantity='$qty' WHERE id='$oderItemid '";
                     $results = mysqli_query($conn,$query);
