@@ -67,6 +67,7 @@
                           <div class="form-group">
                               <label for="exampleInputUsername1">Select Requisition</label>
                               <select class="form-control form-control-lg reqno" id="exampleFormControlSelect1">
+                                <option>__SELECT_PURCHASE_REQUISITION__</option>
                                   <?php
                                   foreach ($data as $index => $value) {  
                                     

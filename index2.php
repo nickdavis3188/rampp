@@ -7,7 +7,8 @@
         //     $deduc += $value1["amount"];
         // }
         // echo $deduc;
-        $dd = date("Y-m-d",strtotime("2022-08-09"));
+
+        $dd = date("Y-m-d",strtotime("04/10/2022"));
 //       echo  date("Y", strtotime($dd));
       echo $dd
 ?>

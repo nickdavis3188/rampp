@@ -535,7 +535,8 @@ if (isset($_SESSION['validuser'])) {
             }
           });
 
-
+          console.log('uniqueVen',uniqueVen);
+          console.log('lpoArr',lpoArr);
           let mydata = JSON.stringify({
             "chepItem": lpoArr,
             "uniqVen": uniqueVen
@@ -547,6 +548,7 @@ if (isset($_SESSION['validuser'])) {
               "Content-Type": "application/json; charset=utf-8"
             }
           }).then(res => res.json()).then(function(data) {
+            console.log(data);
             if (data.status == "data") {
 
               let currentvenDatalength = lpoArr.length
@@ -596,8 +598,8 @@ if (isset($_SESSION['validuser'])) {
                   headers: {
                     "Content-Type": "application/json; charset=utf-8"
                   }
-                }).then(res => res.json()).then(function(data55) {
-                  // console.log("sendNot",data55)             
+                }).then(res => res.text()).then(function(data55) {
+                  console.log("sendNot",data55)             
                 })
 
               }

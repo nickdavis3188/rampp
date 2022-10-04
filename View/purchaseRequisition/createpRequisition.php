@@ -470,6 +470,7 @@
             body: mydata,
             headers: {"Content-Type": "application/json; charset=utf-8"}
             }).then(res=>res.json()).then(function(data) {
+              // console.log(data);
               if(data.status == "success"){
                 LoadingDisplay(data.status,btn)
                 RequisitionNumber2.value = "";
@@ -487,7 +488,7 @@
                 window.location = window.location.origin+"/rampp/View/purchaseRequisition/createpRequisition.php?fail=Error"+data.msg;
                
               }
-              console.log("respones",data)
+              // console.log("respones",data)
             }).catch(err=>{
               if (err) {
                 LoadingDisplay("problem",btn)

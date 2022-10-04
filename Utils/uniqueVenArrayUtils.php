@@ -3,7 +3,7 @@
         
         
         foreach ($data as $index => $value) {     
-            $myArray[] =  array('purchaseId' =>$value->purchaseId,'vendorId'=>$value->vendorId,'venname'=>$value->venname,"discount"=>$value->discount,"vat"=>$value->vat,"grandtotal"=>$value->grandtotal,"lpocreated"=>"No","approvesup"=>"Pending","approveman"=>"Pending","approvemand"=>"Pending","remsup"=>"","remman"=>"","remmand"=>"","sigsup"=>"","sigman"=>"","sigmand"=>"","mountwords"=>"","lpodate"=>"","lpono"=>"","disc"=>"","vt"=>"");
+            $myArray[] =  array('purchaseId' =>$value->purchaseId,'vendorId'=>$value->vendorId,'venname'=>$value->venname,"discount"=>$value->discount,"vat"=>$value->vat,"grandtotal"=>$value->grandtotal,"lpocreated"=>"No","approvesup"=>"Pending","approveman"=>"Pending","approvemand"=>"Pending","remsup"=>"","remman"=>"","remmand"=>"","sigsup"=>"","sigman"=>"","sigmand"=>"","mountwords"=>"","lpodate"=>"1111-11-11","lpono"=>"0","disc"=>"0","vt"=>"0","mandate"=>"","manddate"=>"","supdate"=>"","subtotal"=>"0","lposent"=>"0");
         }
     
         $numCount = 0;

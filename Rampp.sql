@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 03, 2022 at 10:37 AM
+-- Generation Time: Oct 04, 2022 at 11:29 AM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.0
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `rampp`
 --
-CREATE DATABASE IF NOT EXISTS `rampp` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `rampp`;
 
 -- --------------------------------------------------------
 
@@ -96,7 +94,15 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `date` date NOT NULL DEFAULT '1111-11-11',
   `time` varchar(30) NOT NULL,
   PRIMARY KEY (`customerId`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`customerId`, `customerName`, `orderCount`, `completeCount`, `status`, `sallerId`, `date`, `time`) VALUES
+(12, 'joety', 1, 0, 0, 0, '2022-10-04', '2:50 am'),
+(13, 'samm', 1, 0, 0, 0, '2022-10-04', '3:01 am');
 
 -- --------------------------------------------------------
 
@@ -306,9 +312,9 @@ CREATE TABLE IF NOT EXISTS `fundrequisition` (
   `supsig` varchar(200) NOT NULL,
   `to` varchar(200) NOT NULL,
   `reqfrom` varchar(200) NOT NULL,
-  `supdate` date NOT NULL,
-  `manddate` date NOT NULL,
-  `mandate` date NOT NULL,
+  `supdate` varchar(200) NOT NULL,
+  `manddate` varchar(200) NOT NULL,
+  `mandate` varchar(200) NOT NULL,
   PRIMARY KEY (`fregno`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -318,7 +324,9 @@ CREATE TABLE IF NOT EXISTS `fundrequisition` (
 
 INSERT INTO `fundrequisition` (`fregno`, `from`, `datecreated`, `ammount`, `ammountword`, `subject`, `file`, `justification`, `manstatus`, `mandsatus`, `supstatus`, `manremark`, `mandremark`, `supremark`, `mansig`, `mandsig`, `supsig`, `to`, `reqfrom`, `supdate`, `manddate`, `mandate`) VALUES
 (2, 'nick davis', '2022-06-23', 50000, 'fifty thousand nira only', 'restock', '', 'to buy new items', 'approve', 'approve', 'approve', 'too much', 'nice plan', 'ok', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '../Upload/62b2f22ac5b1d3.95862652.png', 'you', 'adnindavis', '2022-06-23', '2022-06-23', '2022-06-23'),
-(1, 'nick davis', '2022-06-23', 60000, 'sixty thousand nira only', ' to replace the broken jar', '../Upload/62b43d87c42ab1.40116584.pdf', 'Background/Justification', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', 'you', 'adnindavis', '0000-00-00', '0000-00-00', '0000-00-00');
+(3, 'nick davis', '2022-06-23', 60000, 'sixty thousand nira only', ' to replace the broken jar', '../Upload/62b43d87c42ab1.40116584.pdf', 'Background/Justification', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', 'you', 'adnindavis', '0000-00-00', '0000-00-00', '0000-00-00'),
+(4, 'nick davis', '2022-10-04', 50000, 'Fifty thousand naira only', 'school fees', '', 'the money is for school fees', 'approve', 'approve', 'approve', 'nice', 'good', 'ok', '', '', '', 'manager', 'adnindavis', '2022-10-04', '2022-10-04', '2022-10-04'),
+(5, 'nick davis', '2022-10-04', 10000, 'Ten thousand naira only', 'Transportation', '../Upload/633c14cbc52036.08860968.jpeg', 'movement to school', 'approve', 'approve', 'approve', 'nice', 'good', 'ok', '', '', '', 'manager', 'adnindavis', '2022-10-04', '2022-10-04', '2022-10-04');
 
 -- --------------------------------------------------------
 
@@ -385,16 +393,16 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`, `prepAt`, `oderingunit`, `numberSold`, `productImg`, `subCategory`, `description`) VALUES
 ('Funiture', 'Saivite ', 50, 10, 1000, 0, 'noTime', 14, 0, 1, 'none', 'none', 0, NULL, '', ''),
 ('Drink', ' Malt', 50, 10, 270, 300, '1', 13, 570, 2, 'Bar', 'Bottle', 15, NULL, '', ''),
-('Noodle ', ' spak', 24, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate ', 24, NULL, '', ''),
+('Noodle ', ' spak', 23, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate ', 25, NULL, '', ''),
 ('Funiture', 'Tabless', 5, 0, 10500, 0, 'noTime', 10, 0, 1, 'none', 'none', 0, NULL, '', ''),
-('Soup', ' Ewedu', 23, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate ', 17, NULL, '', ''),
+('Soup', ' Ewedu', 22, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate ', 18, NULL, '', ''),
 ('Funiture', 'Chair ', 50, 0, 10200, 0, 'noTime', 12, 0, 1, 'none', 'none', 0, NULL, '', ''),
 ('Drink', ' Pepsi', 21, 10, 170, 200, '1', 15, 370, 2, 'Bar', 'Bottle', 16, NULL, '', ''),
-('Funiture', ' Jagua', 17, 5, 250, 50, '1', 16, 300, 2, 'Bar', 'Bottle', 3, '../Upload/6325cf7e92fed2.36419457.jpeg', '', ''),
+('Funiture', ' Jagua', 15, 5, 250, 50, '1', 16, 300, 2, 'Bar', 'Bottle', 5, '../Upload/6325cf7e92fed2.36419457.jpeg', '', ''),
 ('Drink', ' Vinnes', 50, 5, 200, 50, '1', 17, 250, 2, 'Bar', 'Bottle', 0, NULL, '', ''),
 ('Utensil  ', 'Spoon ', 20, 0, 2000, 0, 'noTime', 18, 0, 1, 'none', 'none', 0, NULL, '', ''),
 ('Drink', ' Mirinda', 20, 5, 250, 50, '1', 19, 300, 2, 'Bar', 'Bottle', 0, '../Upload/633337acbe84d3.68608896.jpeg', 'Soft Drink', 'soft drink for everyone'),
-('Drink', ' Fanta', 20, 5, 250, 50, '1', 20, 300, 2, 'Bar', 'Bottle', 0, '../Upload/63333bb2849240.34861504.png', 'Soft Drink', '');
+('Drink', ' Fanta', 19, 5, 250, 50, '1', 20, 300, 2, 'Bar', 'Bottle', 1, '../Upload/63333bb2849240.34861504.png', 'Soft Drink', '');
 
 -- --------------------------------------------------------
 
@@ -527,7 +535,11 @@ INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `i
 (15, '2022-09-28', 0, 2, 'Ordered', 0, 1, NULL, NULL),
 (15, '2022-09-28', 0, 2, 'Ordered', 0, 1, NULL, NULL),
 (11, '2022-09-28', 0, 2, 'Ordered', 0, 1, NULL, NULL),
-(15, '2022-09-28', 0, 2, 'Ordered', 0, 1, NULL, NULL);
+(15, '2022-09-28', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-10-04', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(20, '2022-10-04', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(16, '2022-10-04', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(9, '2022-10-04', 0, 2, 'Ordered', 0, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -557,7 +569,21 @@ INSERT INTO `lowerpricelpo` (`purchaseId`, `vendorId`, `itemName`, `itemDescript
 (3456, 9, 'shoe', 'adidas', 3, '', 500, 1, 'BUNN REGENCY'),
 (3457, 6, 'Belt', 'rollex', 3, 'pic', 800, 3, 'MAC MORRIS INTL CO LTD'),
 (3457, 9, 'T-shirt', 'Gooshe', 4, 'lng', 3000, 2, 'BUNN REGENCY'),
-(3457, 9, 'Shoe', 'Adidas', 3, 'par', 6000, 1, 'BUNN REGENCY');
+(3457, 9, 'Shoe', 'Adidas', 3, 'par', 6000, 1, 'BUNN REGENCY'),
+(3459, 6, 'book', 'statistic textbook', 1, 'pic', 2500, 1, 'MAC MORRIS INTL CO LTD'),
+(3459, 6, 'matras', 'six spring bed', 1, 'pic', 1500, 2, 'MAC MORRIS INTL CO LTD'),
+(3460, 13, 'laptop', '8gb ram of any type', 1, 'pic', 285000, 1, 'NAS AUTO LINK '),
+(3460, 8, 'mouse', 'wireless mouse', 1, 'pic', 1500, 2, 'WOERKA NIG CO LTD'),
+(3461, 6, 'Phone', 'android ', 1, 'pic', 65000, 1, 'MAC MORRIS INTL CO LTD'),
+(3461, 6, 'T-shirt', 'blue tShirt', 3, 'pic', 2500, 2, 'MAC MORRIS INTL CO LTD'),
+(3462, 6, 'pen', 'big', 10, 'pic', 70, 1, 'MAC MORRIS INTL CO LTD'),
+(3462, 6, 'note book', 'hard cover', 7, 'pic', 500, 2, 'MAC MORRIS INTL CO LTD'),
+(3463, 27, 'bag', 'cross bag', 1, 'pic', 3400, 1, 'ABDULRAJIF SALIU'),
+(3463, 9, 'trouser', 'genes trouser', 5, 'pic', 2500, 2, 'BUNN REGENCY'),
+(3464, 6, 'Milo', 'tea', 2, 'can', 1200, 1, 'MAC MORRIS INTL CO LTD'),
+(3464, 6, 'clipper', 'canon clipper for barbing', 1, 'pic', 6400, 2, 'MAC MORRIS INTL CO LTD'),
+(3465, 6, 'shoe', 'school shoe', 2, 'pair', 3200, 1, 'MAC MORRIS INTL CO LTD'),
+(3465, 9, 'shirt', 'school shirt', 2, 'pic', 3000, 2, 'BUNN REGENCY');
 
 -- --------------------------------------------------------
 
@@ -588,12 +614,11 @@ CREATE TABLE IF NOT EXISTS `lpouniquevendor` (
   `lpodate` date NOT NULL,
   `disc` int(100) NOT NULL,
   `vt` int(100) NOT NULL,
-  `mandate` date NOT NULL,
-  `manddate` date NOT NULL,
-  `supdate` date NOT NULL,
+  `mandate` varchar(200) NOT NULL,
+  `manddate` varchar(200) NOT NULL,
+  `supdate` varchar(200) NOT NULL,
   `subtotal` int(200) NOT NULL,
-  `lposent` int(10) NOT NULL,
-  UNIQUE KEY `lpono` (`lpono`)
+  `lposent` int(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -603,7 +628,9 @@ CREATE TABLE IF NOT EXISTS `lpouniquevendor` (
 INSERT INTO `lpouniquevendor` (`purchaseId`, `vendorId`, `venname`, `discount`, `vat`, `grandtotal`, `lpocreated`, `approvesup`, `approveman`, `approvemand`, `remsup`, `remman`, `remmand`, `sigsup`, `sigman`, `sigmand`, `mountwords`, `lpono`, `lpodate`, `disc`, `vt`, `mandate`, `manddate`, `supdate`, `subtotal`, `lposent`) VALUES
 (3456, 9, 'BUNN REGENCY', 60, '72', 1512, 'Yes', 'approve', 'approve', 'approve', 'good to go', 'nice', 'move on', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'One thousand five hundred and twelve Naira', 3913, '2022-06-26', 4, 5, '2022-06-26', '2022-06-26', '2022-06-26', 1500, 0),
 (3456, 8, 'WOERKA NIG CO LTD', 60, '147', 3087, 'Yes', 'approve', 'approve', 'approve', 'go on', 'nice one', 'ok', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', 'three thousand eighty seven naira only', 8482, '2022-06-28', 2, 5, '2022-06-28', '2022-06-28', '2022-06-28', 3000, 0),
-(3457, 9, 'BUNN REGENCY', 600, '2250', 31650, 'Yes', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', 'thirty one thousand six hundred and fifty naira only', 3382, '2022-07-03', 2, 5, '0000-00-00', '0000-00-00', '0000-00-00', 30000, 0);
+(3457, 9, 'BUNN REGENCY', 600, '2250', 31650, 'Yes', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', 'thirty one thousand six hundred and fifty naira only', 3382, '2022-07-03', 2, 5, '0000-00-00', '0000-00-00', '0000-00-00', 30000, 0),
+(3465, 6, 'MAC MORRIS INTL CO LTD', 1280, '384', 5504, 'Yes', 'approve', 'approve', 'approve', 'ok', 'good', 'nice', '', '', '', 'Five thousand five hundred and four', 8483, '2022-10-04', 20, 5, '2022-10-04', '2022-10-04', '2022-10-04', 6400, 0),
+(3465, 9, 'BUNN REGENCY', 600, '405', 5805, 'Yes', 'approve', 'approve', 'approve', 'ok', 'good', 'good', '', '', '', 'Five thousand eight hundred and five', 8484, '2022-10-04', 10, 5, '2022-10-04', '2022-10-04', '2022-10-04', 6000, 0);
 
 -- --------------------------------------------------------
 
@@ -720,7 +747,7 @@ CREATE TABLE IF NOT EXISTS `orderditems` (
   `unitOfMeasure` varchar(70) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orderditems`
@@ -743,7 +770,11 @@ INSERT INTO `orderditems` (`productname`, `price`, `quantity`, `amount`, `prepti
 (' Pepsi', 370, 1, 370, 1, 60, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 15),
 (' Pepsi', 370, 1, 370, 1, 61, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 16),
 (' Ewedu', 1400, 1, 1400, 2, 62, 'Soup', 1, 1, 'Kitchen', '1 Plate ', '2022-09-28', 11, 400, 1000, 1400, 'Plate ', 17),
-(' Pepsi', 370, 1, 370, 1, 62, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 18);
+(' Pepsi', 370, 1, 370, 1, 62, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 18),
+(' Ewedu', 1400, 1, 1400, 2, 63, 'Soup', 1, 0, 'Kitchen', '1 Plate ', '2022-10-04', 11, 400, 1000, 1400, 'Plate ', 19),
+(' Fanta', 300, 1, 300, 1, 63, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-10-04', 20, 50, 250, 300, 'Bottle', 20),
+(' Jagua', 300, 2, 600, 2, 64, 'Funiture', 1, 0, 'Bar', '2 Bottle', '2022-10-04', 16, 100, 250, 300, 'Bottle', 21),
+(' spak', 1200, 1, 1200, 2, 64, 'Noodle ', 2, 0, 'Kitchen', '1 Plate ', '2022-10-04', 9, 930, 270, 1200, 'Plate ', 22);
 
 -- --------------------------------------------------------
 
@@ -804,6 +835,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
 --
 
 INSERT INTO `orders` (`sellerid`, `orderid`, `totaltime`, `totalammount`, `status`, `orderdate`, `odertime`, `hr`, `min`, `ampm`, `br`, `kch`, `receipt`, `k`, `b`, `bill`, `kt`, `bt`, `totalProfit`, `customerId`) VALUES
+(0, 64, 4, 1800, 0, '2022-10-04', '3:01 am ', 3, 1, 'am', 1, 1, 0, 0, 0, 0, 2, 2, 1030, 13),
+(0, 63, 3, 1700, 0, '2022-10-04', '2:50 am ', 2, 50, 'am', 1, 1, 0, 0, 0, 0, 2, 1, 450, 12),
 (0, 62, 3, 1770, 1, '2022-09-28', '7:06 pm ', 7, 6, 'pm', 1, 1, 1, 1, 1, 0, 2, 1, 600, 11),
 (0, 61, 1, 370, 1, '2022-09-28', '6:03 pm ', 6, 3, 'pm', 1, 0, 1, 0, 1, 0, 0, 1, 200, 10),
 (0, 60, 1, 370, 1, '2022-09-28', '5:16 pm ', 5, 16, 'pm', 1, 0, 1, 0, 1, 1, 0, 1, 200, 9),
@@ -926,7 +959,21 @@ INSERT INTO `preqitem` (`itemname`, `description`, `unitprice`, `qty`, `subtotal
 ('Shoe ', 'Addidas', 9500, 2, 19000, 3458, 'pr'),
 ('T-shirt', 'Field make', 4600, 3, 13800, 3458, 'pic'),
 ('Trouser ', 'Jeans ', 3000, 3, 9000, 3458, 'pic'),
-('Inner Wears ', 'singlet and boxers ', 2600, 3, 7800, 3458, 'pak');
+('Inner Wears ', 'singlet and boxers ', 2600, 3, 7800, 3458, 'pak'),
+('book', 'statistic textbook', 3000, 1, 3000, 3459, 'pic'),
+('matras', 'six spring bed', 20000, 1, 20000, 3459, 'pic'),
+('laptop', '8gb ram of any type', 280000, 1, 280000, 3460, 'pic'),
+('mouse', 'wireless mouse', 2000, 1, 2000, 3460, 'pic'),
+('Phone', 'android ', 70000, 1, 70000, 3461, 'pic'),
+('T-shirt', 'blue tShirt', 3700, 3, 11100, 3461, 'pic'),
+('pen', 'big', 100, 10, 1000, 3462, 'pic'),
+('note book', 'hard cover', 570, 7, 3990, 3462, 'pic'),
+('bag', 'cross bag', 7000, 1, 7000, 3463, 'pic'),
+('trouser', 'genes trouser', 4000, 5, 20000, 3463, 'pic'),
+('Milo', 'tea', 1700, 2, 3400, 3464, 'can'),
+('clipper', 'canon clipper for barbing', 7000, 1, 7000, 3464, 'pic'),
+('shoe', 'school shoe', 9000, 2, 18000, 3465, 'pair'),
+('shirt', 'school shirt', 2400, 2, 4800, 3465, 'pic');
 
 -- --------------------------------------------------------
 
@@ -955,7 +1002,28 @@ INSERT INTO `prequisitionconfirm` (`pregno`, `vendorid`, `for`, `vname`, `from`,
 (3456, '12', 'saturday stuff', 'PROMPT MULTI LINK VENTURES', 'nick davis', '2022-06-01', 0),
 (3456, '9', 'saturday stuff', 'BUNN REGENCY', 'nick davis', '2022-06-01', 0),
 (3457, '6', 'December Budget', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-06-22', 0),
-(3457, '9', 'December Budget', 'BUNN REGENCY', 'nick davis', '2022-06-22', 0);
+(3457, '9', 'December Budget', 'BUNN REGENCY', 'nick davis', '2022-06-22', 0),
+(3459, '6', 'school2', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
+(3459, '9', 'school2', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
+(3460, '10', 'school33', 'SILVERBURTON NIGERIA LTD', 'nick davis', '2022-04-10', 0),
+(3460, '13', 'school33', 'NAS AUTO LINK', 'nick davis', '2022-04-10', 0),
+(3460, '8', 'school33', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0),
+(3461, '6', 'school44', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
+(3461, '9', 'school44', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
+(3461, '8', 'school44', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0),
+(3462, '6', 'school55', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
+(3462, '26', 'school55', 'SHAAYAU SHEHU', 'nick davis', '2022-04-10', 0),
+(3462, '9', 'school55', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
+(3463, '6', 'school66', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
+(3463, '9', 'school66', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
+(3463, '27', 'school66', 'ABDULRAJIF SALIU', 'nick davis', '2022-04-10', 0),
+(3464, '9', 'school77', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
+(3464, '6', 'school77', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
+(3464, '13', 'school77', 'NAS AUTO LINK', 'nick davis', '2022-04-10', 0),
+(3464, '8', 'school77', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0),
+(3465, '9', 'school11', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
+(3465, '8', 'school11', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0),
+(3465, '6', 'school11', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0);
 
 -- --------------------------------------------------------
 
@@ -974,7 +1042,7 @@ CREATE TABLE IF NOT EXISTS `prequisitioninfo` (
   `supapprove` varchar(30) NOT NULL,
   `manapprove` varchar(30) NOT NULL,
   `mandapprove` varchar(30) NOT NULL,
-  `manremark` varchar(300) NOT NULL,
+  `manremark` varchar(300) NOT NULL DEFAULT '',
   `mandremark` varchar(300) NOT NULL,
   `supremark` varchar(300) NOT NULL,
   `mansig` varchar(200) NOT NULL,
@@ -1008,7 +1076,14 @@ CREATE TABLE IF NOT EXISTS `prequisitioninfo` (
 INSERT INTO `prequisitioninfo` (`preqno`, `from`, `subject`, `date`, `summary`, `total`, `supapprove`, `manapprove`, `mandapprove`, `manremark`, `mandremark`, `supremark`, `mansig`, `mandsig`, `supsig`, `reqfrom`, `compappsup`, `compappman`, `compappmand`, `compremsup`, `compremman`, `compremmand`, `csupsig`, `cmansig`, `cmandsig`, `supdate`, `mandate`, `manddate`, `quoted`, `csupapprove`, `supcappdate`, `mandcappdate`, `mancappdate`) VALUES
 (3456, 'nick davis', 'saturday stuff', '2022-06-01', 'for clube', 45000, 'approve', 'approve', 'approve', '', '', '', '', '', '', 'adnindavis', 'approve', 'approve', 'approve', '', '', '', '', '', '', '0000-00-00', '0000-00-00', '0000-00-00', 4, 'approve', '0000-00-00', '0000-00-00', '0000-00-00'),
 (3457, 'nick davis', 'December Budget', '2022-06-22', 'to restock my wordrob ', 30000, 'approve', 'approve', 'approve', 'good collection', 'good stuff', 'nice items', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '../Upload/62b2f22ac5b1d3.95862652.png', 'adnindavis', 'approve', 'approve', 'approve', 'fegrgreg', 'hellouh', 'jtjtjjrrr', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '2022-06-22', '2022-06-22', '2022-06-22', 2, '', '2022-06-25', '2022-06-25', '2022-06-25'),
-(3458, 'nick davis', 'My Personal needs', '2022-06-27', 'This are just for my personal needs', 49600, 'approve', 'approve', 'decline', 'Good', 'this is crazy ', 'Nice', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '../Upload/62b2f22ac5b1d3.95862652.png', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-06-27', '2022-06-27', '2022-06-27', 0, '', '0000-00-00', '0000-00-00', '0000-00-00');
+(3458, 'nick davis', 'My Personal needs', '2022-06-27', 'This are just for my personal needs', 49600, 'approve', 'approve', 'decline', 'Good', 'this is crazy ', 'Nice', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '../Upload/62b2f22ac5b1d3.95862652.png', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-06-27', '2022-06-27', '2022-06-27', 0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+(3459, 'nick davis', 'school2', '2022-10-04', 'things to be used in school', 23000, 'approve', 'approve', 'approve', 'nice', 'go', 'ok', '', '', '', 'adnindavis', 'approve', 'approve', 'approve', 'ok', 'nice', 'go', '', '', '', '2022-10-04', '2022-10-04', '2022-10-04', 2, '', '2022-10-04', '2022-10-04', '2022-10-04'),
+(3460, 'nick davis', 'school33', '2022-10-04', 'For school final project', 282000, 'approve', 'approve', 'approve', 'Keep going', 'hope this will be enough ', 'do it', '', '', '', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-10-04', '2022-10-04', '2022-10-04', 3, '', '1111-11-11', '1111-11-11', '1111-11-01'),
+(3461, 'nick davis', 'school44', '2022-10-04', 'used in school', 81100, 'approve', 'approve', 'approve', 'ok', 'go', 'nice', '', '', '', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-10-04', '2022-10-04', '2022-10-04', 3, '', '1111-11-11', '1111-11-11', '1111-11-01'),
+(3462, 'nick davis', 'school55', '2022-10-04', 'for school', 4990, 'approve', 'approve', 'approve', 'good', 'nice', 'go', '', '', '', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-10-04', '2022-10-04', '2022-10-04', 3, '', '1111-11-11', '1111-11-11', '1111-11-01'),
+(3463, 'nick davis', 'school66', '2022-10-04', 'for school', 27000, 'approve', 'approve', 'approve', 'nice', 'ok', 'good', '', '', '', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-10-04', '2022-10-04', '2022-10-04', 3, '', '1111-11-11', '1111-11-11', '1111-11-01'),
+(3464, 'nick davis', 'school77', '2022-10-04', 'for school', 10400, 'approve', 'approve', 'approve', 'nice', 'good', 'ok', '', '', '', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-10-04', '2022-10-04', '2022-10-04', 3, '', '1111-11-11', '1111-11-11', '1111-11-01'),
+(3465, 'nick davis', 'school11', '2022-10-04', 'for school', 22800, 'approve', 'approve', 'approve', 'nice', 'good', 'ok', '', '', '', 'adnindavis', 'Pending', 'Pending', 'Pending', '', '', '', '', '', '', '2022-10-04', '2022-10-04', '2022-10-04', 3, '', '1111-11-11', '1111-11-11', '1111-11-01');
 
 -- --------------------------------------------------------
 
@@ -1436,7 +1511,47 @@ INSERT INTO `vedorquote` (`purchaseId`, `vendorId`, `itemName`, `itemDescription
 (3457, 6, 'Belt', 'rollex', 3, 'pic', 800, 3, 'MAC MORRIS INTL CO LTD'),
 (3457, 9, 'Shoe', 'Adidas', 3, 'par', 6000, 1, 'BUNN REGENCY'),
 (3457, 9, 'T-shirt', 'Gooshe', 4, 'lng', 3000, 2, 'BUNN REGENCY'),
-(3457, 9, 'Belt', 'rollex', 3, 'pic', 1200, 3, 'BUNN REGENCY');
+(3457, 9, 'Belt', 'rollex', 3, 'pic', 1200, 3, 'BUNN REGENCY'),
+(3459, 6, 'book', 'statistic textbook', 1, 'pic', 2500, 1, 'MAC MORRIS INTL CO LTD'),
+(3459, 6, 'matras', 'six spring bed', 1, 'pic', 1500, 2, 'MAC MORRIS INTL CO LTD'),
+(3459, 9, 'book', 'statistic textbook', 1, 'pic', 2700, 1, 'BUNN REGENCY'),
+(3459, 9, 'matras', 'six spring bed', 1, 'pic', 12200, 2, 'BUNN REGENCY'),
+(3460, 10, 'laptop', '8gb ram of any type', 1, 'pic', 700000, 1, 'SILVERBURTON NIGERIA LTD'),
+(3460, 10, 'mouse', 'wireless mouse', 1, 'pic', 3500, 2, 'SILVERBURTON NIGERIA LTD'),
+(3460, 13, 'laptop', '8gb ram of any type', 1, 'pic', 285000, 1, 'NAS AUTO LINK '),
+(3460, 13, 'mouse', 'wireless mouse', 1, 'pic', 1800, 2, 'NAS AUTO LINK '),
+(3460, 8, 'laptop', '8gb ram of any type', 1, 'pic', 300000, 1, 'WOERKA NIG CO LTD'),
+(3460, 8, 'mouse', 'wireless mouse', 1, 'pic', 1500, 2, 'WOERKA NIG CO LTD'),
+(3461, 6, 'Phone', 'android ', 1, 'pic', 65000, 1, 'MAC MORRIS INTL CO LTD'),
+(3461, 6, 'T-shirt', 'blue tShirt', 3, 'pic', 2500, 2, 'MAC MORRIS INTL CO LTD'),
+(3461, 9, 'Phone', 'android ', 1, 'pic', 66000, 1, 'BUNN REGENCY'),
+(3461, 9, 'T-shirt', 'blue tShirt', 3, 'pic', 3200, 2, 'BUNN REGENCY'),
+(3461, 8, 'Phone', 'android ', 1, 'pic', 70000, 1, 'WOERKA NIG CO LTD'),
+(3461, 8, 'T-shirt', 'blue tShirt', 3, 'pic', 2500, 2, 'WOERKA NIG CO LTD'),
+(3462, 6, 'pen', 'big', 10, 'pic', 70, 1, 'MAC MORRIS INTL CO LTD'),
+(3462, 6, 'note book', 'hard cover', 7, 'pic', 500, 2, 'MAC MORRIS INTL CO LTD'),
+(3462, 26, 'pen', 'big', 10, 'pic', 90, 1, 'SHAAYAU SHEHU'),
+(3462, 26, 'note book', 'hard cover', 7, 'pic', 550, 2, 'SHAAYAU SHEHU'),
+(3462, 9, 'pen', 'big', 10, 'pic', 80, 1, 'BUNN REGENCY'),
+(3462, 9, 'note book', 'hard cover', 7, 'pic', 850, 2, 'BUNN REGENCY'),
+(3463, 6, 'bag', 'cross bag', 1, 'pic', 6500, 1, 'MAC MORRIS INTL CO LTD'),
+(3463, 6, 'trouser', 'genes trouser', 5, 'pic', 5300, 2, 'MAC MORRIS INTL CO LTD'),
+(3463, 9, 'bag', 'cross bag', 1, 'pic', 4800, 1, 'BUNN REGENCY'),
+(3463, 9, 'trouser', 'genes trouser', 5, 'pic', 2500, 2, 'BUNN REGENCY'),
+(3463, 27, 'bag', 'cross bag', 1, 'pic', 3400, 1, 'ABDULRAJIF SALIU'),
+(3463, 27, 'trouser', 'genes trouser', 5, 'pic', 2500, 2, 'ABDULRAJIF SALIU'),
+(3464, 9, 'Milo', 'tea', 2, 'can', 1800, 1, 'BUNN REGENCY'),
+(3464, 9, 'clipper', 'canon clipper for barbing', 1, 'pic', 6500, 2, 'BUNN REGENCY'),
+(3464, 6, 'Milo', 'tea', 2, 'can', 1200, 1, 'MAC MORRIS INTL CO LTD'),
+(3464, 6, 'clipper', 'canon clipper for barbing', 1, 'pic', 6400, 2, 'MAC MORRIS INTL CO LTD'),
+(3464, 8, 'Milo', 'tea', 2, 'can', 0, 1, 'WOERKA NIG CO LTD'),
+(3464, 8, 'clipper', 'canon clipper for barbing', 1, 'pic', 6400, 2, 'WOERKA NIG CO LTD'),
+(3465, 9, 'shoe', 'school shoe', 2, 'pair', 7000, 1, 'BUNN REGENCY'),
+(3465, 9, 'shirt', 'school shirt', 2, 'pic', 3000, 2, 'BUNN REGENCY'),
+(3465, 8, 'shoe', 'school shoe', 2, 'pair', 11000, 1, 'WOERKA NIG CO LTD'),
+(3465, 8, 'shirt', 'school shirt', 2, 'pic', 3500, 2, 'WOERKA NIG CO LTD'),
+(3465, 6, 'shoe', 'school shoe', 2, 'pair', 3200, 1, 'MAC MORRIS INTL CO LTD'),
+(3465, 6, 'shirt', 'school shirt', 2, 'pic', 3000, 2, 'MAC MORRIS INTL CO LTD');
 
 -- --------------------------------------------------------
 

@@ -341,7 +341,7 @@ class GeneralController
             $items[] = $row;
         }
         if (count($items) == 0) {
-            return 001;
+            return 1;
         } else {
             $privNum =  $items[count($items) - 1]["fregno"] + 1;
             return $privNum;
@@ -508,7 +508,7 @@ class GeneralController
 
         $items = array();
 
-        $query = "SELECT * FROM prequisitioninfo WHERE csupapprove <> 'approve' AND mandapprove = 'approve'";
+        $query = "SELECT * FROM prequisitioninfo WHERE compappmand <> 'approve' AND mandapprove = 'approve'";
         $results = mysqli_query($conn, $query);
 
         while ($row = mysqli_fetch_array($results)) {

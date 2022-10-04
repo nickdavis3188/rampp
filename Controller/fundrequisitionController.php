@@ -52,8 +52,8 @@
                     // print_r();
                     // print_r("$destination<br/>$reqno<br/>$from<br/>$dateCreate<br/>$amount<br/>$amountword<br/>$subject<br/>$justification<br/>$toO<br/>$uname");
                     $query = "INSERT INTO fundrequisition
-                    (`fregno`, `from` ,`datecreated`, `ammount`,`ammountword`,`subject`, `file`, `justification`, `manstatus`,`mandsatus`,`supstatus`,`to`,`reqfrom`)VALUES
-                    ('$reqno','$from','$dateCreate','$amount','$amountword','$subject','$destination','$justification','Pending','Pending','Pending','$toO','$uname')";
+                    (`fregno`, `from` ,`datecreated`, `ammount`,`ammountword`,`subject`, `file`, `justification`, `manstatus`,`mandsatus`,`supstatus`,`to`,`reqfrom`,`manremark`,`mandremark`,`supremark`,`mansig`,`mandsig`,`supsig`,`supdate`,`manddate`,`mandate`)VALUES
+                    ('$reqno','$from','$dateCreate','$amount','$amountword','$subject','$destination','$justification','Pending','Pending','Pending','$toO','$uname','','','','','','','','','')";
                     $results = mysqli_query($conn,$query);
                     $noofrows = mysqli_affected_rows($conn);
             
@@ -89,8 +89,8 @@
             $uname= $_SESSION['userName'];
     
             $query = "INSERT INTO fundrequisition
-            (`fregno`, `from` ,`datecreated`, `ammount`,`ammountword`,`subject`, `file`, `justification`, `manstatus`,`mandsatus`,`supstatus`,`to`,`reqfrom`)VALUES
-            ('$reqno','$from','$dateCreate','$amount','$amountword','$subject','','$justification','Pending','Pending','Pending','$toO','$uname')";
+            (`fregno`, `from` ,`datecreated`, `ammount`,`ammountword`,`subject`, `file`, `justification`, `manstatus`,`mandsatus`,`supstatus`,`to`,`reqfrom`,`manremark`,`mandremark`,`supremark`,`mansig`,`mandsig`,`supsig`,`supdate`,`manddate`,`mandate`)VALUES
+            ('$reqno','$from','$dateCreate','$amount','$amountword','$subject','','$justification','Pending','Pending','Pending','$toO','$uname','','','','','','','','','')";
             $results = mysqli_query($conn,$query);
             $noofrows = mysqli_affected_rows($conn);
     

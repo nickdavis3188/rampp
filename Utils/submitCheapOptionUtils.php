@@ -24,7 +24,7 @@
 
        $items3 = array();
       $query3 ="SELECT * FROM lpouniquevendor  WHERE purchaseId ='$pid ' ";
-      $results2 = mysqli_query($conn,$query3);
+      $results3 = mysqli_query($conn,$query3);
       
       while($row3 = mysqli_fetch_array($results3)){
          $items3[] = $row3;
