@@ -291,19 +291,20 @@
     });
 
     var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-     
-      if(data.message.ff == 0){
-        if(data.message.bb == 1){
-          playSound("../../sound/select.wav")
-          setInterval(
-            function(){
-                window.location.reload();
+    setInterval(
+      function(){
+          channel.bind('my-event', function(data) {
+          if(data.message.ff == 0){
+            if(data.message.bb == 1){
+              playSound("../../sound/select.wav")
+              window.location.reload();
             }
-          , 11000);
+          }else{
+            window.location.reload();
           }
+        });
       }
-    });
+      , 10000);
   </script>
 <!-- SCRIPT -->
 <?php  

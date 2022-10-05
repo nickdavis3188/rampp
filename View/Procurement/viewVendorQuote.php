@@ -171,7 +171,9 @@ i{
       
     <br/>
 
-
+<?php
+  // print_r($data1);
+?>
     <div class="container-flued">
       <div class="table-responsive">
         <table id="data-table-basic" class="customers">
@@ -187,6 +189,8 @@ i{
           </thead>
           <tbody>
             <?php
+
+            
                foreach ($data1 as $index => $value) {           
             ?>
           <tr>
@@ -201,10 +205,15 @@ i{
               <span data-bs-toggle="tooltip" data-bs-placement="left"  title="View">
                 <i class="ti-menu-alt btn-icon-append dropbtn " style="color:#02679a;" data-bs-toggle="modal" data-bs-target="#viewModal" onClick="viewFunc('<?php echo $value["vendorid"] ?>','<?php echo $value["pregno"] ?>')"></i>
               </span>
-         
+         <?php
+              if ($value["ca"] != 1) {    
+         ?>
               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Delete">
                 <i class="ti-trash btn-icon-append dropbtn text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick="deleteId('<?php echo $value["vendorid"] ?>')"></i>
               </span>
+              <?php
+              }
+         ?>
             
               </div>                               
             </div>
@@ -487,8 +496,8 @@ i{
       var mm = String(today.getMonth() + 1).padStart(2, '0'); 
       var yyyy = today.getFullYear();
 
-      // today = mm + '/' + dd + '/' + yyyy;
-        today = dd + '/' + mm + '/' + yyyy;
+      today = mm + '/' + dd + '/' + yyyy;
+        // today = dd + '/' + mm + '/' + yyyy;
       return today
     }
     let mydata = JSON.stringify({ "venid":tag,"pregNo":tag2 })

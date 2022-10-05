@@ -838,6 +838,19 @@ class GeneralController
         }
         return $items;
     }
+    function updateVendorQ($conn,$prno){
+        $query = "UPDATE `prequisitionconfirm`  SET ca='1' WHERE `pregno` ='$prno'";
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
+        if ($noofrows == 1)
+        {
+            return true;  
+        }
+        else
+        {
+            return false;
+        }
+    }
     function vendorQuoteTableDisplay($conn)
     {
 

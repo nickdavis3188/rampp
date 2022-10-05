@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 04, 2022 at 11:29 AM
+-- Generation Time: Oct 05, 2022 at 09:32 AM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.0
 
@@ -68,14 +68,14 @@ CREATE TABLE IF NOT EXISTS `customaudit` (
   `date` date NOT NULL DEFAULT '1111-11-11',
   `lost` int(70) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customaudit`
 --
 
 INSERT INTO `customaudit` (`id`, `expensesCapital`, `expensesRecurrent`, `expensesReinvestment`, `stockCostValue`, `stockSellingValue`, `stockProfit`, `totalBar`, `totalKitchen`, `salesProfit`, `date`, `lost`) VALUES
-(6, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2022-09-03', 1710);
+(7, 0, 0, 0, 1602, 3146, 1544, 1300, 2640, 1784, '2022-10-05', 1710);
 
 -- --------------------------------------------------------
 
@@ -989,41 +989,42 @@ CREATE TABLE IF NOT EXISTS `prequisitionconfirm` (
   `vname` varchar(200) NOT NULL,
   `from` varchar(200) NOT NULL,
   `date` date NOT NULL,
-  `lpo` int(20) NOT NULL
+  `lpo` int(20) NOT NULL,
+  `ca` tinyint(1) DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `prequisitionconfirm`
 --
 
-INSERT INTO `prequisitionconfirm` (`pregno`, `vendorid`, `for`, `vname`, `from`, `date`, `lpo`) VALUES
-(3456, '6', 'saturday stuff', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-06-01', 0),
-(3456, '8', 'saturday stuff', 'WOERKA NIG CO LTD', 'nick davis', '2022-06-01', 0),
-(3456, '12', 'saturday stuff', 'PROMPT MULTI LINK VENTURES', 'nick davis', '2022-06-01', 0),
-(3456, '9', 'saturday stuff', 'BUNN REGENCY', 'nick davis', '2022-06-01', 0),
-(3457, '6', 'December Budget', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-06-22', 0),
-(3457, '9', 'December Budget', 'BUNN REGENCY', 'nick davis', '2022-06-22', 0),
-(3459, '6', 'school2', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
-(3459, '9', 'school2', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
-(3460, '10', 'school33', 'SILVERBURTON NIGERIA LTD', 'nick davis', '2022-04-10', 0),
-(3460, '13', 'school33', 'NAS AUTO LINK', 'nick davis', '2022-04-10', 0),
-(3460, '8', 'school33', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0),
-(3461, '6', 'school44', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
-(3461, '9', 'school44', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
-(3461, '8', 'school44', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0),
-(3462, '6', 'school55', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
-(3462, '26', 'school55', 'SHAAYAU SHEHU', 'nick davis', '2022-04-10', 0),
-(3462, '9', 'school55', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
-(3463, '6', 'school66', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
-(3463, '9', 'school66', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
-(3463, '27', 'school66', 'ABDULRAJIF SALIU', 'nick davis', '2022-04-10', 0),
-(3464, '9', 'school77', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
-(3464, '6', 'school77', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0),
-(3464, '13', 'school77', 'NAS AUTO LINK', 'nick davis', '2022-04-10', 0),
-(3464, '8', 'school77', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0),
-(3465, '9', 'school11', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0),
-(3465, '8', 'school11', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0),
-(3465, '6', 'school11', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0);
+INSERT INTO `prequisitionconfirm` (`pregno`, `vendorid`, `for`, `vname`, `from`, `date`, `lpo`, `ca`) VALUES
+(3456, '6', 'saturday stuff', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-06-01', 0, NULL),
+(3456, '8', 'saturday stuff', 'WOERKA NIG CO LTD', 'nick davis', '2022-06-01', 0, NULL),
+(3456, '12', 'saturday stuff', 'PROMPT MULTI LINK VENTURES', 'nick davis', '2022-06-01', 0, NULL),
+(3456, '9', 'saturday stuff', 'BUNN REGENCY', 'nick davis', '2022-06-01', 0, NULL),
+(3457, '6', 'December Budget', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-06-22', 0, NULL),
+(3457, '9', 'December Budget', 'BUNN REGENCY', 'nick davis', '2022-06-22', 0, NULL),
+(3459, '6', 'school2', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0, NULL),
+(3459, '9', 'school2', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0, NULL),
+(3460, '10', 'school33', 'SILVERBURTON NIGERIA LTD', 'nick davis', '2022-04-10', 0, NULL),
+(3460, '13', 'school33', 'NAS AUTO LINK', 'nick davis', '2022-04-10', 0, NULL),
+(3460, '8', 'school33', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0, NULL),
+(3461, '6', 'school44', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0, NULL),
+(3461, '9', 'school44', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0, NULL),
+(3461, '8', 'school44', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0, NULL),
+(3462, '6', 'school55', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0, NULL),
+(3462, '26', 'school55', 'SHAAYAU SHEHU', 'nick davis', '2022-04-10', 0, NULL),
+(3462, '9', 'school55', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0, NULL),
+(3463, '6', 'school66', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0, 1),
+(3463, '9', 'school66', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0, 1),
+(3463, '27', 'school66', 'ABDULRAJIF SALIU', 'nick davis', '2022-04-10', 0, 1),
+(3464, '9', 'school77', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0, 1),
+(3464, '6', 'school77', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0, 1),
+(3464, '13', 'school77', 'NAS AUTO LINK', 'nick davis', '2022-04-10', 0, 1),
+(3464, '8', 'school77', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0, 1),
+(3465, '9', 'school11', 'BUNN REGENCY', 'nick davis', '2022-04-10', 0, 1),
+(3465, '8', 'school11', 'WOERKA NIG CO LTD', 'nick davis', '2022-04-10', 0, 1),
+(3465, '6', 'school11', 'MAC MORRIS INTL CO LTD', 'nick davis', '2022-04-10', 0, 1);
 
 -- --------------------------------------------------------
 

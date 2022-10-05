@@ -2,11 +2,12 @@
     session_start();
 //  function usersTableDisplay(){
     include("../Env/env.php");
+    require("./generalController.php");
     require("../Connection/dbConnection.php");
-
-
     $conn = conString1();
+    $UserUtils = new GeneralController();
 
+ 
     if (isset( $_SESSION['userName'])) {
 
         // echo  $_SESSION['userName'];
@@ -27,17 +28,19 @@
                 $items11[] = $row11;
             }
             $sigman11 = $items11[0]['signature'];
-           
+            
             if ($items11[0]['signature']) {
                 $query = "UPDATE `prequisitioninfo`  SET compappman='$status',compremman='$remark',cmansig='$sigman11',mancappdate='$date' WHERE `preqno` ='$prno'";
                 $results = mysqli_query($conn,$query);
                 $noofrows = mysqli_affected_rows($conn);
                 if ($noofrows == 1)
                 {
+               
                     header("Location: ../View/Procurement/compApproveByMan.php?msg= Approve Successful");        
                 }
                 else
                 {
+                  
                     header("Location: ../View/Procurement/compApproveByMan.php?fail= Error:".mysqli_error($conn)); 
                 }
             } else {
@@ -46,6 +49,7 @@
                 $noofrows = mysqli_affected_rows($conn);
                 if ($noofrows == 1)
                 {
+                  
                     header("Location: ../View/Procurement/compApproveByMan.php?msg= Approve Successful");        
                 }
                 else
@@ -77,6 +81,7 @@
                 $noofrows1 = mysqli_affected_rows($conn);
                 if ($noofrows1 == 1)
                 {
+              
                     header("Location: ../View/Procurement/compApproveByManD.php?msg= Approve Successful");        
                 }
                 else
@@ -91,6 +96,7 @@
                 $noofrows1 = mysqli_affected_rows($conn);
                 if ($noofrows1 == 1)
                 {
+                  
                     header("Location: ../View/Procurement/compApproveByManD.php?msg= Approve Successful");        
                 }
                 else
@@ -123,6 +129,7 @@
                 $noofrows2 = mysqli_affected_rows($conn);
                 if ($noofrows2 == 1)
                 {
+                    $UserUtils->updateVendorQ($conn,$prno);
                     header("Location: ../View/Procurement/compApproveBySup.php?msg= Approve Successful");        
                 }
                 else
@@ -136,6 +143,7 @@
                 $noofrows2 = mysqli_affected_rows($conn);
                 if ($noofrows2 == 1)
                 {
+                    $UserUtils->updateVendorQ($conn,$prno);
                     header("Location: ../View/Procurement/compApproveBySup.php?msg= Approve Successful");        
                 }
                 else

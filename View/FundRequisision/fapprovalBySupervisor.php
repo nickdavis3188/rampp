@@ -156,7 +156,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">View/ Modify/ Delete New Personnel Record</h4>
+                  <h4 class="font-weight-bold mb-0">Approval By Supervisor</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -327,7 +327,7 @@ i{
                                         <div class="col-12">
                                           <div class="form-group">
                                             <label for="exampleFormControlSelect1">Approve Or Decline</label>
-                                            <select name="approval" class="form-control form-control" id="exampleFormControlSelect1">
+                                            <select required name="approval" class="form-control form-control" id="exampleFormControlSelect1">
                                               <option value="">__Sellect__</option>
                                               <option value="approve">Approve</option>
                                               <option value="decline">Decline</option>
@@ -337,7 +337,7 @@ i{
                                         <div class="col-12">
                                           <div class="form-group">
                                             <label for="exampleTextarea1">Remark (optional)</label>
-                                            <textarea name="remark" class="form-control summ" id="exampleTextarea1" rows="2"></textarea>
+                                            <textarea required name="remark" class="form-control summ" id="exampleTextarea1" rows="2"></textarea>
                                           </div> 
                                         </div>
                                     </div>

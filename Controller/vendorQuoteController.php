@@ -23,7 +23,7 @@
    //   print_r($jsonData1."VID");
    //   print_r($jsonData2."PiD");
        
-     $query = "INSERT INTO prequisitionconfirm (`pregno`, `vendorid`,`for`,`vname`,`from`,`date`,`lpo`)VALUES ('$jsonData2','$jsonData1','$jsonData3','$jsonData4','$jsonData5','$dd','0')";
+     $query = "INSERT INTO prequisitionconfirm (`pregno`, `vendorid`,`for`,`vname`,`from`,`date`,`lpo`,`ca`)VALUES ('$jsonData2','$jsonData1','$jsonData3','$jsonData4','$jsonData5','$dd','0','0')";
      $results = mysqli_query($conn,$query);
      $noofrows = mysqli_affected_rows($conn);
 

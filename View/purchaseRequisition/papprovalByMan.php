@@ -349,7 +349,7 @@ i{
                                           <div class="col-12">
                                             <div class="form-group">
                                               <label for="exampleFormControlSelect1">Approve Or Decline</label>
-                                              <select name="approval" class="form-control form-control" id="exampleFormControlSelect1">
+                                              <select required name="approval" class="form-control form-control" id="exampleFormControlSelect1">
                                                 <option value="">__Sellect__</option>
                                                 <option value="approve">Approve</option>
                                                 <option value="decline">Decline</option>
@@ -359,7 +359,7 @@ i{
                                           <div class="col-12">
                                             <div class="form-group">
                                               <label for="exampleTextarea1">Remark (optional)</label>
-                                              <textarea name="remark" class="form-control summ" id="exampleTextarea1" rows="2"></textarea>
+                                              <textarea required name="remark" class="form-control summ" id="exampleTextarea1" rows="2"></textarea>
                                             </div> 
                                           </div>
                                       </div>
