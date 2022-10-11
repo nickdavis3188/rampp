@@ -2,6 +2,7 @@
 //  function usersTableDisplay(){
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
+    require("./completeOrderUtils.php");
 
   
     $conn = conString1();
@@ -15,8 +16,9 @@
         $date = $_POST["date"];
         $reason = $_POST["reason"];
         $reason1 = mysqli_real_escape_string($conn,$reason);
+        // $type = $_POST["type"];
         $dec = 2;
-
+        // if()
         $items = array();
     
         $query ="SELECT * FROM inventory WHERE id='$itemId'";
@@ -58,17 +60,17 @@
                     }
 
                     $qty = $items3["0"]["quantity"] - $itemNumber ; 
+                    $location = $items3["0"]["location"]; 
+                    $productId = $items3["0"]["productId"]; 
                     $amu = $items3["0"]["price"] * $qty;
                     $prof = $profit * $qty;
-
-                    
-
 
                     $query = "UPDATE orderditems SET profit ='$prof', amount='$amu', quantity='$qty' WHERE id='$oderItemid '";
                     $results = mysqli_query($conn,$query);
                     $noofrows = mysqli_affected_rows($conn);
                    
-                   
+                    reduceLocationInventry($conn,$productId,$itemNumber,$location);
+
                     $items4 = array();
                 
                     $query4 ="SELECT * FROM  orderditems WHERE orderid ='$oderid'";
@@ -78,6 +80,18 @@
                         $items4[] = $row4;
                     }
 
+                    //
+                    $items5 = array();
+                
+                    $query5 ="SELECT * FROM  orders WHERE orderid ='$oderid'";
+                    $results5 = mysqli_query($conn,$query5);
+                    
+                    while($row5 = mysqli_fetch_array($results5)){
+                        $items5[] = $row5;
+                    }
+                    $locationName = $items5["0"]["locationName"]; 
+                    //
+                    
                     $totAm = 0;
                     $totalAmu = array();
                     for ($i=0; $i < count($items4); $i++) { 
@@ -99,7 +113,11 @@
                         $totPr += $totalProf[$t];
                     }
 
-                    $query = "UPDATE orders SET totalammount ='$totAm', totalProfit='$totPr' WHERE orderid ='$oderid'";
+                    $fivePercent = 0.05;
+                    $fivePercentOfTotal = $totAm * $fivePercent;
+
+                    $sch = ($locationName == "Reception 1"||$locationName == "Reception 2")?$fivePercentOfTotal:0;
+                    $query = "UPDATE orders SET totalammount ='$totAm', totalProfit='$totPr', serviceCharge='$sch' WHERE orderid ='$oderid'";
                     $results = mysqli_query($conn,$query);
                     $noofrows = mysqli_affected_rows($conn);
 

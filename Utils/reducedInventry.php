@@ -22,7 +22,7 @@
 
         while($row = mysqli_fetch_array($results)){
             $items[] = $row;
-        }
+        }       
         
         if (count($items) >= 1) {
         

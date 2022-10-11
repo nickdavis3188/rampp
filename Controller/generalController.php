@@ -285,7 +285,44 @@ class GeneralController
 
         return $items;
     }
+    function getLocation($conn)
+    {
+        $items = array();
 
+        $query = "SELECT * FROM salesLocation";
+
+        $results = mysqli_query($conn, $query);
+
+        while ($row = mysqli_fetch_array($results)) {
+            $items[] = $row;
+        }
+
+        return $items;
+    }
+    function updateLocationItemAfterSales($conn,$lId,$pId){
+        $items2 = array();
+    
+        $query2 ="SELECT * FROM locationproduct WHERE locationId='$lId' AND productId='$pId'";
+        $results2 = mysqli_query($conn,$query2);
+
+        while($row2 = mysqli_fetch_array($results2)){
+            $items2[] = $row2;
+        }
+        // 
+        $qty2 = $items2[0]["quantityAdded"] + 1;
+        $itId = $items2[0]["lpId"];
+        $query = "UPDATE locationproduct SET quantityAdded= '$qty2' WHERE lpId='$itId'";
+        $results = mysqli_query($conn,$query);
+        $noofrows = mysqli_affected_rows($conn);
+        if ($noofrows == 1)
+        {       
+           return "true";    
+        }
+        else
+        {
+          return "false";
+        }  
+    }
     function getrqNo($conn)
     {
 
@@ -404,8 +441,10 @@ class GeneralController
             $tot += $ids[$v]; 
        }
 
-       return $tot;
+       return ($tot+$items3[0]['serviceCharge']);
     }
+    
+
     function deleteCustomer($conn,$id){
         $query = "DELETE FROM customer WHERE customerId ='$id'";
         $results = mysqli_query($conn,$query);
@@ -416,6 +455,24 @@ class GeneralController
         }else{
             return false;
         }
+    }
+    function orderById($conn,$id){
+        $items3 = array();
+                 
+        $query3 ="SELECT * FROM  orders WHERE customerId ='$id'";
+        $results3 = mysqli_query($conn,$query3);
+        
+        while($row3 = mysqli_fetch_array($results3)){
+           $items3[] = $row3;
+        }
+        
+        // $ids = array();
+        $count = 0;
+        for ($i=0; $i < count($items3); $i++) { 
+            //  $ids[] = $items3[$i]["serviceCharge"]; 
+             $count = $count + $items3[$i]["serviceCharge"]; 
+        }
+       return $count;
     }
     function getorderItemById($conn,$id)
     {
@@ -437,7 +494,7 @@ class GeneralController
        for ($v=0; $v < count($ids); $v++) { 
             $ords = $ids[$v];
 
-        //    $items = array();
+            //    $items = array();
            $query ="SELECT * FROM  orderditems WHERE orderid ='$ords'";
            $results = mysqli_query($conn,$query);
            

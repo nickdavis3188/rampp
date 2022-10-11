@@ -61,11 +61,12 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th class="text-center" width="20%">Order Number</th>
-                                <th class="text-center" width="30%">Order Description</th>
-                                <th class="text-center" width="25%">Order Time</th>
-                                <th class="text-center" width="25%">Due Time</th>
-                                <th class="text-left" width="25%">Action</th>
+                            <th class="text-center" width="10%">Order Id</th>
+                                <th class="text-center" width="25%">Order Items</th>
+                                <th class="text-center" width="25%">Order Description</th>
+                                <th class="text-center" width="15%">Time</th>
+                                <th class="text-center" width="15%">Due Time</th>
+                                <th class="text-left" width="10%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,6 +117,7 @@
                                   ?>
                                   </div>
                                 </td>
+                                <td class="text-center"><?php echo $value['hasKechenDisc'] == 1?$value["kechenDisc"]:"" ?></td>
                                 <td class="text-center"><?php echo $value['odertime']?> &nbsp;&nbsp; <?php echo "".$value['hr'].":".$min." ".$value['ampm']?> </td>
                                 <?php
                                 $h = date("h")+1;

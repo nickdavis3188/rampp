@@ -62,9 +62,10 @@
                         <thead>
                             <tr>
                                 <th class="text-center" width="10%">Order Id</th>
-                                <th class="text-center" width="30%">Order Description</th>
-                                <th class="text-center" width="25%">Time</th>
-                                <th class="text-center" width="25%">Due Time</th>
+                                <th class="text-center" width="25%">Order Items</th>
+                                <th class="text-center" width="25%">Order Description</th>
+                                <th class="text-center" width="15%">Time</th>
+                                <th class="text-center" width="15%">Due Time</th>
                                 <th class="text-left" width="10%">Action</th>
                             </tr>
                         </thead>
@@ -118,6 +119,7 @@
                                     ?>
                                     </div>
                                   </td>
+                                  <td class="text-center"><?php echo $value['hasBarDisc'] == 1?$value["barDisc"]:"" ?></td>
                                   <td class="text-center"><?php echo $value['odertime']?> &nbsp;&nbsp; <?php echo "".$value['hr'].":".$min." ".$value['ampm']?> </td>
                                   <?php
                                    $h = date("h")+1;
@@ -126,6 +128,7 @@
                                    $ts = "$h:$m";
                                    $hr = $value['hr'];
                                    $ot = "$hr:$min";
+  
                                    $dd = date("h:i",strtotime($ts));
                                    $ee = date("h:i",strtotime($ot));
     

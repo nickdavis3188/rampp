@@ -20,6 +20,7 @@
     $orderingUnit = $UserUtils->getAllOrdringUnit($conn);
     $staffTag = $_SESSION['staffTag'] ;
     $ordernon= $UserUtils->getNonResolvedOrder($conn,$staffTag);
+    $location= $UserUtils->getLocation($conn);
 
   
     
@@ -52,7 +53,62 @@
           <div>
             <h4 class="font-weight-bold mb-0">Place Sale</h4>
           </div>
+          <br><br>
           <div class="row">
+            <div class="col-md-12 grid-margin">
+              <!-- <div class="d-flex justify-content-start align-items-center"> -->
+                <div class="form-group row" >
+                  <div class="col-md-6">
+                    <label for="exampleFormControlSelect1">Sales Location</label>
+                      <select style="margin-bottom: 4px;" class="form-control form-control-lg loc" id="exampleFormControlSelect1" onchange="getLValue(this,'<?php echo $orderId ?>')">
+                      <option value="">__SELECT_LOCATION__</option>
+                        <?php                           
+                          foreach ($location as $index => $value) {                         
+                        ?>
+                        <option value="<?php echo $value['salesLocationName']?>"><?php echo $value['salesLocationName']?></option>
+                        <?php
+                          }
+                        ?>
+                    
+                      </select>
+                    </div>
+                    <hr>
+                    <div class="bb">
+                      <div class="alert alert-warning d-flex align-items-center" role="alert">
+                        <i class="ti-alert btn-icon-prepend" style="font-size:27px"></i>
+                        <div style="padding-left:10px;">
+                          Select sales location above to tide an order to it.
+                        </div>
+                      </div>
+                    </div>
+                    <script>
+                      function getLValue(ele,orderId) {
+                        let bb = document.querySelector(".bb"); 
+                        if (ele.value == "") {
+                          let child = bb.lastElementChild; 
+                          while (child) {
+                            bb.removeChild(child);
+                              child = bb.lastElementChild;
+                          }
+                          bb.innerHTML = `
+                            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                              <i class="ti-alert btn-icon-prepend" style="font-size:27px"></i>
+                              <div style="padding-left:10px;">
+                                Select sales location above to tide an order to it.
+                              </div>
+                            </div>
+                          `
+                        }else{
+                          bb.innerHTML =`
+                            <b><p style="color: #02679a;">Order ${orderId} will be sent to location <label style="background-color:red;height: 20px;padding-top: 0;" class='badge badge-secondary'>${ele.value}</label> </p></b> 
+                          `
+                        }
+
+                      }
+                    </script>
+                  </div>
+                <!-- </div> -->
+            </div>
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
 
@@ -85,6 +141,7 @@
                 </div>
               </div>
             </div>
+         
           </div>
      
          <!--BODY -->
@@ -100,11 +157,9 @@
                     <div class="col-md-3">
                     <label for="exampleFormControlSelect1">Select Product</label>
                       <select name="pname" class="form-control form-control-lg pname" id="exampleFormControlSelect1" onchange="getPValue(this)">
-                        <?php
-
-                            
-                          foreach ($items as $index => $value) {
-                                                      
+                      <option value="">__SELECT_ITEM__</option>
+                        <?php                    
+                          foreach ($items as $index => $value) {                                               
                         ?>
                         <option value="<?php echo $value['id']?>"><?php echo $value['productname']?></option>
                         <?php
@@ -120,6 +175,7 @@
                       <label for="exampleFormControlSelect1">UM</label>
                       <input class="form-control form-control-lg mUnit" id="exampleFormControlSelect1" type="text" >
                     </div>
+
                     <div class="col-sm-5" style="padding-top: 30px;">
                       <button type="button" class= "btn  text-white bg-pry btn-block" style="background-color: #02679a;" onclick="addItem(this)">
                         <i class="ti-plus btn-icon-prepend text-white"></i> Add
@@ -169,7 +225,68 @@
                   </table>
                   <br/>
                 </div>
+
                 <tfooter>
+                  <div class="form-group row">
+                    <div class="col-sm-6">                            
+                        <div class="form-check">
+                          <label class="form-check-label" style="background:#9a025d;color:white;margin-top: 70px;">
+                            <input value="2" name="salable" type="checkbox" class="form-check-input isBar"  style="background:#02679a;color:white;" onchange="barD(this)">
+                            Bar Description
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 d-none bds">
+                        <div class="form-group">
+                          <label for="exampleTextarea1">Description</label>
+                          <textarea class="form-control barDisc" id="exampleTextarea1" rows="4"></textarea>
+                        </div>              
+                    </div>
+                  </div>
+                  <script>
+                      function barD(inp){
+                        if (inp.checked) {
+                          let saleableOption = document.querySelectorAll(".bds"); 
+                          saleableOption.forEach((v)=>v.classList.remove("d-none"))
+
+                        }else{
+                          let saleableOption = document.querySelectorAll(".bds"); 
+                          saleableOption.forEach((b)=>b.classList.add("d-none"))
+                        }
+                      }
+
+                  </script>
+                  <div class="form-group row">
+                    <div class="col-sm-6">                            
+                        <div class="form-check">
+                          <label class="form-check-label" style="background:#045e72de;color:white;margin-top: 70px;">
+                            <input value="2" name="salable" type="checkbox" class="form-check-input isKitchen"  style="background:#02679a;color:white;" onchange="kitchenD(this)">
+                            Kitchen Description
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 kds d-none">
+                        <div class="form-group">
+                          <label for="exampleTextarea1">Description</label>
+                          <textarea class="form-control kitchenDic" id="exampleTextarea1" rows="4"></textarea>
+                        </div>    
+                    </div>
+                  </div>
+                  <script>
+                      function kitchenD(inp){
+                        if (inp.checked) {
+                          let saleableOption = document.querySelectorAll(".kds"); 
+                          saleableOption.forEach((v)=>v.classList.remove("d-none"))
+
+                        }else{
+                          let saleableOption = document.querySelectorAll(".kds"); 
+                          saleableOption.forEach((b)=>b.classList.add("d-none"))
+                        }
+                      }
+                  </script>
+                </tfooter>
+                <tfooter>
+
                 <button type="button" class="btn  btn-icon-text  btn-block text-white br-pry" style="background-color: #02679a;" onclick="submitOrder(this)">
                   <i class="ti-shopping-cart btn-icon-append"></i>                          
                   Make Order
@@ -275,6 +392,12 @@
     "kt":0,
     "bt":0,
     "totalProfit":0,
+    "locationName":"",
+    "hasBarDesc":0,
+    "hasKitchen":0,
+    "barDesc":"",
+    "kitchenDesc":"",
+    "serviceCharge":0,
     "items":[]
   }
 
@@ -393,106 +516,119 @@ function addItem(btn) {
   let orid = document.querySelector(".orid"); 
   let uid = document.querySelector(".uid"); 
   let datee = document.querySelector(".datee"); 
+
+  let loc = document.querySelector(".loc"); 
+  let kitchenDic = document.querySelector(".kitchenDic"); 
+  let barDisc = document.querySelector(".barDisc"); 
+  let isBar = document.querySelector(".isBar"); 
+  let isKitchen = document.querySelector(".isKitchen"); 
+
   chkInternetStatus()
   if(pname.value == "" || Qty.value == ""){
     alert("please confirm your input")  
   }else{
-       LoadingDisplay1("fail",btn)
-      //  console.log("I AM CLICKED",orid,uid)
-       var child = tbodyy.lastElementChild; 
-       while (child) {
-       tbodyy.removeChild(child);
-           child = tbodyy.lastElementChild;
-       }
+    if (loc.value == "") {
+      alert("Sales Location Not Selected")
+    }else{
+      LoadingDisplay1("fail",btn)
+     //  console.log("I AM CLICKED",orid,uid)
+      var child = tbodyy.lastElementChild; 
+      while (child) {
+      tbodyy.removeChild(child);
+          child = tbodyy.lastElementChild;
+      }
 
-       orderInfo.sellerId = Number(uid.value);
-       orderInfo.orderId = Number(orid.value);
-       let mydata = JSON.stringify({ "productId":pname.value})
-        fetch("../../Utils/orderUtils.php",{
-        method: 'POST',
-        body: mydata,
-        headers: {"Content-Type": "application/json; charset=utf-8"}
-        }).then(res=>res.json()).then(function(data) {
-          if(data.status == "success"){
-          
-            // console.log(data.data)
-
-            let subIsem = {
-              // sn:orderInfo.items.length+1,
-              productId:data.data[0].id,
-              productName:data.data[0].productname,
-              productcat:data.data[0].catname,
-              price:data.data[0].sellingprice,
-              quantity:Qty.value,
-              description:Qty.value +" "+ unit.value,
-              amount:(Number(data.data[0].sellingprice)*Number(Qty.value)).toFixed(2),
-              prepTime:data.data[0].preparationtime* Number(Qty.value),
-              orderId:orderInfo.orderId,
-              prepAt:data.data[0].prepAt,
-              dateOrderd:datee.value,
-              profit:(Number(data.data[0].profit) * Number(Qty.value)),
-              costprice:data.data[0].costprice,
-              sellingprice:data.data[0].sellingprice,
-              unitOfMeasure:unit.value
-            }
-
-            orderInfo.items.push(subIsem)
-            displayHtml1(orderInfo.items,tbodyy)
-            let total = 0
-            let totalMin = 0
-            for (let items = 0; items < orderInfo.items.length; items++) {
-              total+= Number(orderInfo.items[items].amount);
-              totalMin+= Number(orderInfo.items[items].prepTime);
-            }
-
-            let prof = []
-            for (let index = 0; index < orderInfo.items.length; index++) {       
-              prof.push(Number(orderInfo.items[index].profit)) 
-            }
-            orderInfo.totalProfit = prof.reduce((p,c)=>p+c,0);
+      orderInfo.sellerId = Number(uid.value);
+      orderInfo.orderId = Number(orid.value);
+      let mydata = JSON.stringify({ "productId":pname.value})
+       fetch("../../Utils/orderUtils.php",{
+       method: 'POST',
+       body: mydata,
+       headers: {"Content-Type": "application/json; charset=utf-8"}
+       }).then(res=>res.json()).then(function(data) {
+         if(data.status == "success"){
+         
+           let subIsem = {
+             // sn:orderInfo.items.length+1,
+             productId:data.data[0].id,
+             productName:data.data[0].productname,
+             productcat:data.data[0].catname,
+             price:data.data[0].sellingprice,
+             quantity:Qty.value,
+             description:Qty.value +" "+ unit.value,
+             amount:(Number(data.data[0].sellingprice)*Number(Qty.value)).toFixed(2),
+             prepTime:data.data[0].preparationtime* Number(Qty.value),
+             orderId:orderInfo.orderId,
+             prepAt:data.data[0].prepAt,
+             dateOrderd:datee.value,
+             profit:(Number(data.data[0].profit) * Number(Qty.value)),
+             costprice:data.data[0].costprice,
+             sellingprice:data.data[0].sellingprice,
+             unitOfMeasure:unit.value,
+             locationName:loc.value,
             
-            let ordat = []
-            for (let index = 0; index < orderInfo.items.length; index++) {       
-              ordat.push(orderInfo.items[index].prepAt)        
-            }
+           }
 
-            let ktt = []
-            for (let index = 0; index < orderInfo.items.length; index++) {   
-              if(orderInfo.items[index].prepAt == "Kitchen"){
-                ktt.push(orderInfo.items[index].prepTime)
-              }    
-            }
+           orderInfo.items.push(subIsem)
+           displayHtml1(orderInfo.items,tbodyy)
+           let total = 0
+           let totalMin = 0
+           for (let items = 0; items < orderInfo.items.length; items++) {
+             total+= Number(orderInfo.items[items].amount);
+             totalMin+= Number(orderInfo.items[items].prepTime);
+           }
 
-            orderInfo.kt = ktt.reduce((e,a)=>e+a,0);
+           let prof = []
+           for (let index = 0; index < orderInfo.items.length; index++) {       
+             prof.push(Number(orderInfo.items[index].profit)) 
+           }
+           orderInfo.totalProfit = prof.reduce((p,c)=>p+c,0);
+           
+           let ordat = []
+           for (let index = 0; index < orderInfo.items.length; index++) {       
+             ordat.push(orderInfo.items[index].prepAt)        
+           }
 
-            let btt = []
-            for (let index = 0; index < orderInfo.items.length; index++) {   
-              if(orderInfo.items[index].prepAt == "Bar"){
-                btt.push(orderInfo.items[index].prepTime)
-              }    
-            }
-            orderInfo.bt = btt.reduce((e,a)=>e+a,0);
+           let ktt = []
+           for (let index = 0; index < orderInfo.items.length; index++) {   
+             if(orderInfo.items[index].prepAt == "Kitchen"){
+               ktt.push(orderInfo.items[index].prepTime)
+             }    
+           }
 
-            let dd = new Date()
-            ammount.innerText = "#"+Number(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-            min.innerText = totalMin+"min" 
-            orderInfo.br = ordat.includes("Bar")?1:0
-            orderInfo.kch = ordat.includes("Kitchen")?1:0
-            orderInfo.totalamount = Number(total)
-            orderInfo.totaltime = totalMin
-            orderInfo.orderdate = datee.value
-            orderInfo.orderTime = formatAMPM(new Date).strTime;
-            let hrIndex = formatAMPM(new Date).strTime.indexOf(":");
-            let hrrr = formatAMPM(new Date).strTime.slice(0,hrIndex);
-            orderInfo.hr = hrrr;
-            let len = formatAMPM(new Date).strTime.length
-            let mint = formatAMPM(new Date).strTime.slice(hrIndex+1,len-3)
-            orderInfo.min = mint
-            orderInfo.ampm = formatAMPM(new Date).ampm
-            Qty.value = "";
-            LoadingDisplay1("success",btn)
-          }
-        })
+           orderInfo.kt = ktt.reduce((e,a)=>e+a,0);
+
+           let btt = []
+           for (let index = 0; index < orderInfo.items.length; index++) {   
+             if(orderInfo.items[index].prepAt == "Bar"){
+               btt.push(orderInfo.items[index].prepTime)
+             }    
+           }
+           orderInfo.bt = btt.reduce((e,a)=>e+a,0);
+
+           let dd = new Date()
+           ammount.innerText = "#"+Number(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+           min.innerText = totalMin+"min" 
+           orderInfo.br = ordat.includes("Bar")?1:0
+           orderInfo.kch = ordat.includes("Kitchen")?1:0
+           orderInfo.totalamount = Number(total)
+           orderInfo.totaltime = totalMin
+           orderInfo.orderdate = datee.value
+           orderInfo.orderTime = formatAMPM(new Date).strTime;
+           let hrIndex = formatAMPM(new Date).strTime.indexOf(":");
+           let hrrr = formatAMPM(new Date).strTime.slice(0,hrIndex);
+           orderInfo.hr = hrrr;
+           let len = formatAMPM(new Date).strTime.length
+           let mint = formatAMPM(new Date).strTime.slice(hrIndex+1,len-3)
+           orderInfo.min = mint
+           orderInfo.ampm = formatAMPM(new Date).ampm
+           Qty.value = "";
+
+           LoadingDisplay1("success",btn)
+         }
+       })
+
+    }
 
      }
   }
@@ -565,70 +701,123 @@ function addItem(btn) {
         ele.appendChild(newI);
     }
   }
+  function checkInput(  loc,
+                        isBar,
+                        barDisc,
+                        isKitchen,
+                        kitchenDic) {
+    let errText = "";
+    if (loc.value == "") {
+        errText = "Location Not Selected";
+    }else if(isBar.checked && barDisc.value == ""){
+      errText = "Bar description is required";
+    }else if(isKitchen.checked && kitchenDic.value == ""){
+      errText = "Kitchen description is required";
+    }else{
+      errText = "";
+    }
+    return errText;
+  }
+
     function submitOrder(btn){
       chkInternetStatus()
       let tbodyy = document.querySelector(".tbodyy");                          
       let exord = document.querySelector(".exord");                          
       let orr = document.querySelector(".orr"); 
       let nc = document.querySelector(".nc"); 
+
+      let loc = document.querySelector(".loc"); 
+      let kitchenDic = document.querySelector(".kitchenDic"); 
+      let barDisc = document.querySelector(".barDisc"); 
+      let isBar = document.querySelector(".isBar"); 
+      let isKitchen = document.querySelector(".isKitchen"); 
       
+      orderInfo.hasBarDesc = isBar.checked?1:0;
+      orderInfo.hasKitchen = isKitchen.checked?1:0;
+      orderInfo.barDesc = isBar.checked?barDisc.value:"";
+      orderInfo.kitchenDesc = isKitchen.checked?kitchenDic.value:"";
+      orderInfo.locationName = loc.value;
+      let fivePecent = 0.05;
+      let fivePercentOfTotal = orderInfo.totalamount * fivePecent;
+      orderInfo.serviceCharge = loc.value == "Reception 1"||loc.value == "Reception 2"?fivePercentOfTotal:0;
+
       if (exord.checked) {
         if(orr.value == ""){
           alert("Order Id Not Selected")
         }else{
-          LoadingDisplay("fail",btn)      
-          let mydata = JSON.stringify({ "orderData":orderInfo,"ord":Number(orr.value)})
-          fetch("../../Utils/moreOrder.php", {
-          method: 'POST',
-          body: mydata,
-          headers: {"Content-Type": "application/json; charset=utf-8"}
-          }).then(res=>res.json()).then(function(data){
-            console.log(data)
-            if(data.status == "success"){
-              LoadingDisplay(data.status,btn)
-              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
-            }else{      
-              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;             
-            }   
-          }).catch(err=>{
-            if (err) {
-              LoadingDisplay("problem",btn)
-              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
-              // alert("Error:"+err)
-            }
-          })
+        let cc =  checkInput(  loc,
+                        isBar,
+                        barDisc,
+                        isKitchen,
+                        kitchenDic);
+          if (cc == "") {
+            LoadingDisplay("fail",btn)      
+            let mydata = JSON.stringify({ "orderData":orderInfo,"ord":Number(orr.value)})
+            fetch("../../Utils/moreOrder.php", {
+            method: 'POST',
+            body: mydata,
+            headers: {"Content-Type": "application/json; charset=utf-8"}
+            }).then(res=>res.json()).then(function(data){
+              console.log(data)
+              if(data.status == "success"){
+                LoadingDisplay(data.status,btn)
+                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
+              }else{      
+                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;             
+              }   
+            }).catch(err=>{
+              if (err) {
+                LoadingDisplay("problem",btn)
+                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
+                // alert("Error:"+err)
+              }
+            })
+            
+          }else{
+            alert(cc)
+          }
         }
         
       } else {
         if (nc.value == "") {
           alert("New customer identity not set")
         }else{
-          LoadingDisplay("fail",btn)      
-          let mydata = JSON.stringify({ "orderData":orderInfo,"cn":nc.value })
-          fetch("../../Controller/orderController.php", {
-          method: 'POST',
-          body: mydata,
-          headers: {"Content-Type": "application/json; charset=utf-8"}
-          }).then(res=>res.json()).then(function(data){
-            console.log(data)
-            if(data.status == "success"){
-              LoadingDisplay(data.status,btn)
-    
+          let dd = checkInput(  loc,
+                        isBar,
+                        barDisc,
+                        isKitchen,
+                        kitchenDic) ;
+          if (dd == "") {
+            LoadingDisplay("fail",btn)      
+            let mydata = JSON.stringify({ "orderData":orderInfo,"cn":nc.value })
+            fetch("../../Controller/orderController.php", {
+            method: 'POST',
+            body: mydata,
+            headers: {"Content-Type": "application/json; charset=utf-8"}
+            }).then(res=>res.json()).then(function(data){
+              console.log(data)
+              if(data.status == "success"){
+                LoadingDisplay(data.status,btn)
       
-              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
-            }else{
-          
-              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;
-              
-            }
-      
-          }).catch(err=>{
-            if (err) {
-              LoadingDisplay("problem",btn)
-              window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
-              // alert("Error:"+err)
-            }
-          })
+        
+                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
+              }else{
+            
+                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;
+                
+              }
+        
+            }).catch(err=>{
+              if (err) {
+                LoadingDisplay("problem",btn)
+                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
+                // alert("Error:"+err)
+              }
+            })
+            
+          }else{
+            alert(dd)
+          }
 
         }
         

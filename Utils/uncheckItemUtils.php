@@ -2,7 +2,8 @@
 
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
-    require('../vendor/autoload.php');
+    // require('../vendor/autoload.php');
+    require('./updateCompleteOrderCountUtils.php');
     $post = (array) json_decode(file_get_contents('php://input'),false);
  
   
@@ -23,6 +24,7 @@
             $noofrows = mysqli_affected_rows($conn);
             if ($noofrows == 1)
             {
+                customerUnComplete($conn,$jsonData);
                 echo json_encode(array("status" =>"success"));
             }else{
                 echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
@@ -33,6 +35,7 @@
             $noofrows = mysqli_affected_rows($conn);
             if ($noofrows == 1)
             {
+                customerUnComplete($conn,$jsonData);
                 echo json_encode(array("status" =>"success"));
             }else{
                 echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));

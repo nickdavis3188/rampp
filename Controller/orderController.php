@@ -4,6 +4,7 @@
     include("../Utils/arrayItem22Utils.php");
     include("../Env/env.php");
     require("../Connection/dbConnection.php");
+    require('../Utils/completeOrderUtils.php');
     require('../vendor/autoload.php');
 
     
@@ -25,6 +26,12 @@
     $kch = $jsonData->kch;
     $kt = $jsonData->kt;
     $bt = $jsonData->bt;
+    $locationName = $jsonData->locationName;
+    $hasBarDesc = $jsonData->hasBarDesc;
+    $hasKitchen = $jsonData->hasKitchen;
+    $serviceCharge = $jsonData->serviceCharge;
+    $barDesc = mysqli_real_escape_string($conn,$jsonData->barDesc);
+    $kitchenDesc = mysqli_real_escape_string($conn,$jsonData->kitchenDesc);
 
     $totalProfit = $jsonData->totalProfit;
 
@@ -63,6 +70,7 @@
       $reduceBy = $value->quantity;
       $productId = $value->productId;
       $dateOrderd = $value->dateOrderd;
+      $locationName = $value->locationName;
       $qtySold = $value->quantity;
 
         $items = array();
@@ -93,7 +101,7 @@
                 $noofrows = mysqli_affected_rows($conn);
                 if ($noofrows == 1)
                 {
-                     
+                    reduceLocationInventry($conn,$productId,$qtySold,$locationName);
                 }
                 else
                 {
@@ -120,7 +128,7 @@
     }
     $cId = $items44[0]["customerId"];
 
-$query1 = "INSERT INTO orders (`sellerid`,`orderid`,`totaltime`,`totalammount`,`status`,`orderdate`,`odertime`,`hr`,`min`,`ampm`,`br`,`kch`,`k`,`b`,`receipt`,`bill`,`kt`,`bt`,`totalProfit`,`customerId`) VALUES ('$sellerid',' $orderid','$totaltime','$totalammount','0','$orderdate','$odertime ','$hr','$min','$ampm','$br','$kch','0','0','0','0','$kt','$bt','$totalProfit','$cId')";
+$query1 = "INSERT INTO orders (`sellerid`,`orderid`,`totaltime`,`totalammount`,`status`,`orderdate`,`odertime`,`hr`,`min`,`ampm`,`br`,`kch`,`k`,`b`,`receipt`,`bill`,`kt`,`bt`,`totalProfit`,`customerId`,`hasKechenDisc`,`hasBarDisc`,`kechenDisc`,`barDisc`,`locationName`,`serviceCharge`) VALUES ('$sellerid',' $orderid','$totaltime','$totalammount','0','$orderdate','$odertime ','$hr','$min','$ampm','$br','$kch','0','0','0','0','$kt','$bt','$totalProfit','$cId','$hasKitchen','$hasBarDesc','$kitchenDesc','$barDesc','$locationName','$serviceCharge')";
 
     $results = mysqli_query($conn,$query1);
     $noofrows = mysqli_affected_rows($conn);

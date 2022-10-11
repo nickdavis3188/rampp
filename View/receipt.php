@@ -4,6 +4,7 @@
 
 require("../Controller/generalController.php");
 require("../Connection/dbConnection.php");
+require("../Utils/completeOrderUtils.php");
 
 
 $conn = conString1();
@@ -159,7 +160,7 @@ if ($noofrows >= 1)
     
      ?>
     </header>
-    <b><h2>Type: Receipt</h2></b>
+    <b><p>Type: Receipt</p></b>
     <p>Receipt No : <?php echo $_REQUEST['id'] ?></p>
     <table class="bill-details">
         <tbody>
@@ -187,6 +188,8 @@ if ($noofrows >= 1)
             <?php
                 $UserUtils->deleteCustomer($conn,$_REQUEST['id']);
                 $data = $UserUtils->getorderItemById($conn,$_REQUEST['id']);
+                $serviceCharge = $UserUtils->orderById($conn,$_REQUEST['id']);
+                // completeOrder($conn,$data);
            
              foreach ($data as $index => $value) { 
             ?>
@@ -199,6 +202,10 @@ if ($noofrows >= 1)
            <?php
              }
            ?>
+            <tr>
+                <td colspan="3" class="sum-up line">Service charge</td>
+                <td class="line pricec"><?php echo "#".number_format($serviceCharge,2,".",",") ?></td>
+            </tr>
             <!-- <tr>
                 <td colspan="3" class="sum-up line">Subtotal</td>
                 <td class="line pricec">#12112.00</td>

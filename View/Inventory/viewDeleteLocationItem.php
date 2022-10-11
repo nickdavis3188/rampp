@@ -14,8 +14,6 @@
       $conn = conString1();
 
       $UserUtils = new GeneralController();
-      $data = $UserUtils-> inventoryTableDisplay($conn);
-      $cati = $UserUtils-> getAllCategory($conn);
       $location= $UserUtils->getLocation($conn);
       
 ?>
@@ -158,7 +156,7 @@ i{
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">Manage Inventory</h4>
+                  <h4 class="font-weight-bold mb-0">View and manage location product</h4>
                 </div>
                 <!-- <div>
                     <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -180,65 +178,26 @@ i{
           <thead>
               <tr>
                   <th>S/N</th>
-                  <th>Product Name</th>
-                  <th>Product Catigory</th>
-                  <th>Product Type</th>
-                  <th>Qty</th>
-                  <th>Minimum Levle</th>
+                  <th>Location</th>
+                  <th>Products</th>
                   <th style="padding-left: 80px;">Action</th>
               </tr>
           </thead>
           <tbody>
             <?php
-               foreach ($data as $index => $value) {
+               foreach ($location as $index => $value) {
               
             ?>
           <tr>
             <td><?php echo $index +1 ?></td>
-            <td><?php echo $value["productname"] ?></td>
-            <td><?php echo $value["catname"] ?></td>
-            <td><?php echo ($value["salable"] < 2)?"Non Salable":"Salable" ?></td>
-            <td><?php echo $value["quantityadded"] ?></td>
-            <td><?php echo $value["minnimumlevle"] ?></td>
+            <td><?php echo $value["salesLocationName"] ?></td>
+            <td><?php echo $value["productQty"] ?></td>
             <td>
             <div class="dropdown ">
               <div class="d-flex justify-content-between align-items-center">
-              <span data-bs-toggle="tooltip" data-bs-placement="left"  title="View">
-                <i class="ti-menu-alt btn-icon-append dropbtn " style="color:#02679a;" data-bs-toggle="modal" data-bs-target="#viewModal" onClick="viewFunc('<?php echo $value['id'] ?>')"></i>
-              </span>
-              <?php
-              if($_SESSION['privilege'] == "Admin" || $_SESSION['privilege'] == "Supervisor"|| $_SESSION['privilege'] == "Manager"|| $_SESSION['privilege'] == "Managing Director")
-              {
-
-              ?>
-             
-               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Edit">
-                <i class="ti-pencil-alt btn-icon-append dropbtn" data-bs-toggle="modal" data-bs-target="#editModal" onClick="editFunc('<?php echo $value['id'] ?>')"></i>
-              </span>
-              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Restock">
-                <i class="ti-plus btn-icon-append dropbtn text-warning" data-bs-toggle="modal" data-bs-target="#restockModal" onClick="restock2('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
-              </span>
-              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Reduce">
-                <i class="ti-minus btn-icon-append dropbtn text-secondary" data-bs-toggle="modal" data-bs-target="#reduceModal" onClick="reduce2('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
-              </span>
-              <?php
-                if ($value["catname"] == "Drink") {        
-              ?>
-               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Send to location">
-                 <i  class="ti-location-arrow btn-icon-append dropbtn" data-bs-toggle="modal" data-bs-target="#moveToLocation" onClick="sendTo('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
-               </span>
-              <?php           
-                }
-              ?>
-              <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Delete">
-                <i class="ti-trash btn-icon-append dropbtn text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick="deleteId1('<?php echo $value['id'] ?>')"></i>
-              </span>
-
-              <?php
-  
-              }
-              ?>
-
+                <span data-bs-toggle="tooltip" data-bs-placement="left"  title="View">
+                    <i class="ti-menu-alt btn-icon-append dropbtn " style="color:#02679a;" data-bs-toggle="modal" data-bs-target="#viewModal" onClick="viewFunc('<?php echo $value['salesLocationId'] ?>')"></i>
+                </span>
               </div>                               
             </div>
             </td>
@@ -293,76 +252,31 @@ i{
 			</div> -->
 			<div class="col-12">
 				<div class="about-text go-to">
-					<h3 class="dark-color">Product Info</h3>
-					<br/>
-					<div class="row about-list">
-						<div class="col-md-6">
-							<div class="media">
-								<label>Category Name: &nbsp;&nbsp;&nbsp;</label>
-								<p class="cnv" style="color:#02679a;"></p>
-							</div>
-							<div class="media">
-								<label>Product Name:&nbsp;&nbsp;&nbsp; </label>
-								<p class="pnv" style="color:#02679a;"></p>
-							</div>
-							<div class="media">
-								<label> Quantity In Stock:&nbsp;&nbsp;&nbsp; </label>
-								<p class="qtyv" style="color:#02679a;"></p>
-							</div>
-							<div class="media">
-								<label>Minimum Levle:&nbsp;&nbsp;&nbsp; </label>
-								<p class="minv" style="color:#02679a;"></p>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="media">
-								<label>Cost Price:&nbsp;&nbsp;&nbsp; </label>
-								<p class="cpv" style="color:#02679a;"></p>
-							</div>
-							<div class="media">
-								<label>Selling Price:&nbsp;&nbsp;&nbsp; </label>
-								<p class="spv" style="color:#02679a;"></p>
-							</div>
-							<div class="media">
-								<label>Profit:&nbsp;&nbsp;&nbsp; </label>
-								<p class="pftv" style="color:#02679a;"></p>
-							</div>
-							<div class="media">
-								<label>Preparation Time:&nbsp;&nbsp;&nbsp; </label>
-								<p class="ptv" style="color:#02679a;"></p>
-							</div>
-						</div>        
-					</div>
+					
+                    <div class="history-holder">
+                        <h6>Product</h6>
+                        <div style="max-height:300px; overflow-y:auto;">
 
-          <br>
-          <br>
-          <br>
-          <div class="history-holder">
-            <h6>Product History</h6>
-            <div style="max-height:300px; overflow-y:auto;">
-
-              <!-- body -->
-              <div class="table-responsive">
-                    <table class="table table-hover">
-                      <thead>
-                      <tr>
-                        <th>S/N</th>
-                        <th>Product Id</th>
-                        <th>Reason</th>
-                        <th>Qty</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                      </tr>
-                      </thead>
-                      <tbody class="tbb">
-                                      
-                      </tbody>
-                    </table>
-                  </div>
-              
-              <!-- body -->
-            </div>
-          </div>
+                        <!-- body -->
+                        <div class="table-responsive">
+                                <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>Product</th>
+                                    <th>Qty</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="tbb">
+                                                
+                                </tbody>
+                                </table>
+                            </div>
+                        
+                        <!-- body -->
+                        </div>
+                    </div>
          <br>
          <br>
          <br>
@@ -771,31 +685,15 @@ i{
 <script>
 
  function viewFunc(id){
-  let catname = document.querySelector(".cnv"); 
-    let prudname = document.querySelector(".pnv"); 
-    let qty = document.querySelector(".qtyv"); 
-    let minimumL = document.querySelector(".minv"); 
-    let costPrice = document.querySelector(".cpv");  
-    let sellingPrice = document.querySelector(".spv"); 
-    let profit = document.querySelector(".pftv"); 
-    let timeP = document.querySelector(".ptv"); 
+  
     let his = document.querySelector(".tbb"); 
 
     let mydata = JSON.stringify({ "id":id })
-    fetch("../../Utils/getSingleInventoryUtils.php", {
+    fetch("../../Utils/getLocationItem.php", {
     method: 'POST',
     body: mydata,
     headers: {"Content-Type": "application/json; charset=utf-8"}
     }).then(res=>res.json()).then(function(data) {
-      
-      catname.innerText = data[0].catname
-      prudname.innerText = data[0].productname
-      qty.innerText = data[0].quantityadded
-      minimumL.innerText = data[0].minnimumlevle
-      costPrice.innerText = "# "+Number(data[0].costprice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-      sellingPrice.innerText = "# "+Number(data[0].sellingprice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-      profit.innerText = "# "+Number(data[0].profit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-      timeP.innerText = data[0].preparationtime+" Minutes"
       
       // console.log("response",data[1])
    
@@ -805,40 +703,26 @@ i{
           his.removeChild(child);
             child = his.lastElementChild;
         }
-
-        const dateFormat = (date)=>{
-            var today = new Date(date);
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-            var yyyy = today.getFullYear();
-
-            // today = mm + '/' + dd + '/' + yyyy;
-              today = dd + '/' + mm + '/' + yyyy;
-            return today
-          }
-
-        if (data[1].length == 0) {
-          his.innerHTML = `<td class="text-center" colspan='6'>NO PRODUCT HISTORY</td>`;
+        if(data.length == 0){
+          his.innerHTML = `<td class="text-center" colspan='4'>NO PRODUCT</td>`;
         }else{
-          data[1].forEach(function(item,ind) {
-          
-              let statCheck = item.restock == 2?item.restock:item.reduceby
-              let statCheck2 = item.restock == 2?`<td><label class="badge badge-success">Restock</label></td>`:`<td><label class="badge badge-danger">Reduce</label></td>`
+          data.forEach(function(item,ind) {
               let list = document.createElement("tr");
   
               list.innerHTML = `
               
                   <td class=" text-left" >${ind+1}</td>
-                  <td class=" text-left" >${item.inid}</td>
-                  <td class=" text-left" >${item.reason	}</td>
-                  <td class=" text-left" >${statCheck}</td>
-                  <td class=" text-left" >${dateFormat(item.date)}</td>  
-                  ${statCheck2}
+                  <td class=" text-left" >${item.productName}</td>
+                  <td class=" text-left" >${item.quantityAdded}</td>
+                  <td class=" text-left" >
+                
+                    <button class="btn btn-danger" onClick="deleteFromLocation(${item.productId},${item.locationId},'${item.productName}')">Remove</button>
+                  
                   </td> 
+                  
               `;
-              his.appendChild(list);
+              his.appendChild(list)   
           })
-
         }
     // 
 
@@ -850,6 +734,33 @@ i{
       }
     })
  }
+
+function deleteFromLocation(pId,lId,pn){
+    console.log(pId,lId)
+   let retVal =  confirm(`Are you sure you want to remove ${pn} from this location?`)
+   if (retVal == true) {
+      let mydata = JSON.stringify({ "productId":pId,"locationId":lId})
+      fetch("../../Utils/removeLocationItemUtils.php", {
+      method: 'POST',
+      body: mydata,
+      headers: {"Content-Type": "application/json; charset=utf-8"}
+      }).then(res=>res.json()).then(function(data) {
+        if (data.status == "success") {
+          window.location = window.location.origin+"/rampp/View/Inventory/viewDeleteLocationItem.php?msg=Product successfully removed from the specified location";
+        } else {
+          window.location = window.location.origin+"/rampp/View/Inventory/viewDeleteLocationItem.php?fail="+data.msg;
+        }
+      }).catch(err=>{
+        if (err) {
+          alert("Error:"+err)
+          console.log("error",err)
+        }
+      })
+   } else {
+    console.log("hello Not OK")
+   }
+}
+
   function editFunc(id){
     let catname = document.querySelector(".cn"); 
     let prudname = document.querySelector(".pn"); 

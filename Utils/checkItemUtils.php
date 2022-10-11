@@ -38,31 +38,8 @@
         $noofrows = mysqli_affected_rows($conn);
         if ($noofrows == 1)
         {            
-            $options = array(
-                'cluster' => 'eu',
-                'useTLS' => true
-              );
-              $pusher = new Pusher\Pusher(
-                '6635d1fe09ee5548385f',
-                '94187085362faba7043f',
-                '1438712',
-                $options
-              );
-            
-              $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1","ord"=>"$jsonData");
-              $pusher->trigger('my-channel', 'my-event', $data);
-              customerComplete($conn,$jsonData);
-           
-        }else{
-            echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
-        }
-
-       }else if($kch == '0' && $br == '1'){
-            $query ="UPDATE orders SET `status`='1',`b`='1' WHERE orderid ='$jsonData'";
-            $results = mysqli_query($conn,$query);
-            $noofrows = mysqli_affected_rows($conn);
-            if ($noofrows == 1)
-            {
+            $retV = customerComplete($conn,$jsonData);
+            if ($retV) {
                 $options = array(
                     'cluster' => 'eu',
                     'useTLS' => true
@@ -76,7 +53,40 @@
                 
                   $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1","ord"=>"$jsonData");
                   $pusher->trigger('my-channel', 'my-event', $data);
-                  customerComplete($conn,$jsonData);
+                  echo json_encode(array("status" =>"success"));
+            }else{
+                echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
+            }   
+           
+        }else{
+            echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
+        }
+
+       }else if($kch == '0' && $br == '1'){
+            $query ="UPDATE orders SET `status`='1',`b`='1' WHERE orderid ='$jsonData'";
+            $results = mysqli_query($conn,$query);
+            $noofrows = mysqli_affected_rows($conn);
+            if ($noofrows == 1)
+            {
+                $retV = customerComplete($conn,$jsonData);
+                if ($retV) {
+                    $options = array(
+                        'cluster' => 'eu',
+                        'useTLS' => true
+                      );
+                      $pusher = new Pusher\Pusher(
+                        '6635d1fe09ee5548385f',
+                        '94187085362faba7043f',
+                        '1438712',
+                        $options
+                      );
+                    
+                      $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1","ord"=>"$jsonData");
+                      $pusher->trigger('my-channel', 'my-event', $data);
+                      echo json_encode(array("status" =>"success"));
+                }else{
+                    echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
+                }        
            
             }else{
                 echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
@@ -152,20 +162,26 @@
                     $noofrows = mysqli_affected_rows($conn);
                     if ($noofrows == 1)
                     {
-                        $options = array(
-                            'cluster' => 'eu',
-                            'useTLS' => true
-                          );
-                          $pusher = new Pusher\Pusher(
-                            '6635d1fe09ee5548385f',
-                            '94187085362faba7043f',
-                            '1438712',
-                            $options
-                          );
-                        
-                          $data['message'] = array("signal"=>"1","c"=>"0","ff"=>"1","ord"=>"$jsonData");
-                          $pusher->trigger('my-channel', 'my-event', $data);
-                          customerComplete($conn,$jsonData);
+                        $retV = customerComplete($conn,$jsonData);
+                        if ($retV) {
+                            $options = array(
+                                'cluster' => 'eu',
+                                'useTLS' => true
+                              );
+                              $pusher = new Pusher\Pusher(
+                                '6635d1fe09ee5548385f',
+                                '94187085362faba7043f',
+                                '1438712',
+                                $options
+                              );
+                            
+                              $data['message'] = array("signal"=>"1","c"=>"0","ff"=>"1","ord"=>"$jsonData");
+                              $pusher->trigger('my-channel', 'my-event', $data);
+                           
+                              echo json_encode(array("status" =>"success"));
+                        }else{
+                            echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
+                        }
                     }else{
                         echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
                     }
@@ -175,20 +191,26 @@
                     $noofrows = mysqli_affected_rows($conn);
                     if ($noofrows == 1)
                     {
-                        $options = array(
-                            'cluster' => 'eu',
-                            'useTLS' => true
-                          );
-                          $pusher = new Pusher\Pusher(
-                            '6635d1fe09ee5548385f',
-                            '94187085362faba7043f',
-                            '1438712',
-                            $options
-                          );
+                        $retV = customerComplete($conn,$jsonData);
+                        if ($retV) {
+                            $options = array(
+                                'cluster' => 'eu',
+                                'useTLS' => true
+                              );
+                              $pusher = new Pusher\Pusher(
+                                '6635d1fe09ee5548385f',
+                                '94187085362faba7043f',
+                                '1438712',
+                                $options
+                              );
+                            
+                              $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1","ord"=>"$jsonData");
+                              $pusher->trigger('my-channel', 'my-event', $data);
+                              echo json_encode(array("status" =>"success"));
+                        }else{
+                            echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
+                        }
                         
-                          $data['message'] = array("signal"=>"1","c"=>"1","ff"=>"1","ord"=>"$jsonData");
-                          $pusher->trigger('my-channel', 'my-event', $data);
-                          customerComplete($conn,$jsonData);
                     }else{
                         echo json_encode(array("status" =>"fail","msg"=>"Error: ".mysqli_error($conn)));
                     }

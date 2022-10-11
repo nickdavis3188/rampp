@@ -166,9 +166,9 @@ $UserUtils = new GeneralController();
     
      $data2 = $UserUtils->getorderById($conn,$_REQUEST['id']);
    
-     ?>
+     ?> 
     </header>
-    <b><h2>Type: Bill</h2></b>
+    <b><p>Type: Bill</p></b>
     <p>Receipt No : <?php echo $_REQUEST['id'] ?></p>
     <table class="bill-details">
         <tbody>
@@ -195,7 +195,8 @@ $UserUtils = new GeneralController();
         <tbody>
             <?php
              $data = $UserUtils->getorderItemById($conn,$_REQUEST['id']);
-           
+             $serviceCharge = $UserUtils->orderById($conn,$_REQUEST['id']);
+         
              foreach ($data as $index => $value) { 
             ?>
             <tr>
@@ -207,11 +208,11 @@ $UserUtils = new GeneralController();
            <?php
              }
            ?>
-            <!-- <tr>
-                <td colspan="3" class="sum-up line">Subtotal</td>
-                <td class="line pricec">#12112.00</td>
+             <tr>
+                <td colspan="3" class="sum-up line">Service charge</td>
+                <td class="line pricec"><?php echo "#".number_format($serviceCharge,2,".",",") ?></td>
             </tr>
-            <tr>
+           <!-- <tr>
                 <td colspan="3" class="sum-up">Vat</td>
                 <td class="pricec">#10.00</td>
             </tr>
