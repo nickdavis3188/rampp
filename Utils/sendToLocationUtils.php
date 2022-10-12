@@ -8,73 +8,27 @@
 
     if (isset($_POST['sendTo'])) {
 
-        $itemId = $_POST["productId"];
+        $productId = $_POST["productId"];
+        $productName = $_POST["productName"];
         $locationId = $_POST["location"];
         $quantity = $_POST["quantity"];
-        $productName = $_POST["productName"];
+        $locationName = $_POST["locationName"];
+        $reason = mysqli_real_escape_string($conn,$_POST["reason"]);
+        $date = $_POST["date"];
+        $sender = $_POST["userId"];
 
-        $items = array();
-    
-        $query ="SELECT * FROM locationproduct WHERE productId='$itemId' AND locationId='$locationId'";
+        $query = "INSERT INTO locationproductrequest (`locationId`,`quantity`,`reason`,`requestDate`,`sender`,`locationName`,`productName`,`productId`,`approval`,`decline`) VALUES('$locationId','$quantity','$reason','$date','$sender','$locationName','$productName','$productId','0','0')";
         $results = mysqli_query($conn,$query);
-
-        while($row = mysqli_fetch_array($results)){
-            $items[] = $row;
-        }
-      
-        
-        if (count($items) > 0) {
-            $qty = $items[0]["quantityAdded"] + $quantity;
-            $lpId = $items[0]["lpId"];
-            $query = "UPDATE locationproduct SET quantityAdded= '$qty' WHERE lpId='$lpId'";
-            $results = mysqli_query($conn,$query);
-            $noofrows = mysqli_affected_rows($conn);
-            if ($noofrows == 1)
-            {
-                header("Location: ../View/Inventory/viewModefyDelete.php?msg=Product Successfully restocked in the specified location");        
-            }
-            else
-            {
-                header("Location: ../View/Inventory/viewModefyDelete.php?fail= Error:".mysqli_error($conn)); 
-            }
-         
+        $noofrows = mysqli_affected_rows($conn); 
+        if($noofrows==1)
+        {
+            header("Location: ../View/Inventory/viewModefyDelete.php?msg=Product request Successfully sent"); 
         }else{
-            $query = "INSERT INTO locationproduct (`locationId`,`productId`,`productName`,`quantityAdded`) VALUES('$locationId','$itemId','$productName','$quantity')";
-            $results = mysqli_query($conn,$query);
-            $noofrows = mysqli_affected_rows($conn); 
-            if($noofrows==1)
-            {    
-                $items2 = array();
-    
-                $query2 ="SELECT * FROM salesLocation WHERE salesLocationId='$locationId'";
-                $results2 = mysqli_query($conn,$query2);
-        
-                while($row2 = mysqli_fetch_array($results2)){
-                    $items2[] = $row2;
-                }
-                // 
-                $qty2 = $items2[0]["productQty"] + 1;
-                $query = "UPDATE salesLocation SET productQty= '$qty2' WHERE salesLocationId='$locationId'";
-                $results = mysqli_query($conn,$query);
-                $noofrows = mysqli_affected_rows($conn);
-                if ($noofrows == 1)
-                {       
-                    header("Location: ../View/Inventory/viewModefyDelete.php?msg=Product Successfully moved to the specified location");      
-                }
-                else
-                {
-                    header("Location: ../View/Inventory/viewModefyDelete.php?fail= Error:".mysqli_error($conn)); 
-                }      
-            }
-            else
-            {
-                header("Location: ../View/Inventory/viewModefyDelete.php?fail= Error:".mysqli_error($conn));         
-            }
-       
+            header("Location: ../View/Inventory/viewModefyDelete.php?fail= Error:".mysqli_error($conn)); 
         }
            
        
         
     }
- 
+
 ?>

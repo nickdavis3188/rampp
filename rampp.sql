@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 10, 2022 at 01:59 PM
+-- Generation Time: Oct 12, 2022 at 05:38 PM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.0
 
@@ -578,7 +578,45 @@ CREATE TABLE IF NOT EXISTS `locationproduct` (
   `quantityAdded` int(100) DEFAULT NULL,
   `lpId` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`lpId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `locationproduct`
+--
+
+INSERT INTO `locationproduct` (`locationId`, `productId`, `productName`, `quantityAdded`, `lpId`) VALUES
+(2, 13, ' Malt', 10, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locationproductrequest`
+--
+
+DROP TABLE IF EXISTS `locationproductrequest`;
+CREATE TABLE IF NOT EXISTS `locationproductrequest` (
+  `requestId` int(11) NOT NULL AUTO_INCREMENT,
+  `locationId` int(10) DEFAULT NULL,
+  `quantity` int(100) DEFAULT NULL,
+  `reason` longtext,
+  `requestDate` date DEFAULT NULL,
+  `sender` int(10) DEFAULT NULL,
+  `locationName` longtext,
+  `productName` longtext,
+  `productId` int(40) DEFAULT NULL,
+  `approval` tinyint(4) DEFAULT '0',
+  `decline` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`requestId`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `locationproductrequest`
+--
+
+INSERT INTO `locationproductrequest` (`requestId`, `locationId`, `quantity`, `reason`, `requestDate`, `sender`, `locationName`, `productName`, `productId`, `approval`, `decline`) VALUES
+(1, 2, 10, 'Garden bar dose not have Malt to save to the customer, also to the people who have booked the drink in advance ', '2022-10-12', 1, 'Garden bar', ' Malt', 13, 1, 0),
+(2, 1, 10, 'Bush bar dose not have Pepsi', '2022-10-12', 1, 'Bush bar', ' Pepsi', 15, 0, 1),
+(3, 3, 20, ' Pool bar dose not have  Vinnes', '2022-10-12', 1, 'Pool bar', ' Vinnes', 17, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1407,7 +1445,7 @@ CREATE TABLE IF NOT EXISTS `saleslocation` (
 
 INSERT INTO `saleslocation` (`salesLocationId`, `salesLocationName`, `productQty`) VALUES
 (1, 'Bush bar', 0),
-(2, 'Garden bar', 0),
+(2, 'Garden bar', 1),
 (3, 'Pool bar', 0),
 (4, 'Reception 1', 0),
 (5, 'Reception 2', 0);

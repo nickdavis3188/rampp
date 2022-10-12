@@ -41,6 +41,8 @@
                 <li class="nav-item"> <a class="nav-link size" href= <?php echo($inventory["addInventory"])  ?>>Add Inventory</a></li>
                 <li class="nav-item"> <a class="nav-link size" href= <?php echo($inventory["viewModefyDelete"]) ?>>View/Modify/Delete</a></li>
                 <li class="nav-item"> <a class="nav-link size" href= <?php echo($inventory["locationView"]) ?>>View/Location/Items</a></li>
+                <li class="nav-item"> <a class="nav-link size" href= <?php echo($inventory["approveLocationRequest"]) ?>>Product Approval</a></li>
+                <li class="nav-item"> <a class="nav-link size" href= <?php echo($inventory["requestView"]) ?>>Request View</a></li>
               </ul>
             </div>
           </li>

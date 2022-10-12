@@ -22,5 +22,15 @@
       // $dt->add(new DateInterval("PT5M"));
       // $dt->format("Y-m-d g:i a");
       // echo $dd2;
+
+      $stat = "";
+      if ($value["approval"] == 0 &&$value["decline"] == 0  ) {
+        $stat = "<label class='badge badge-warning'>Pending</label>";
+      }elseif($value["approval"] == 1 &&$value["decline"] == 0 ){
+          $stat = "<label class='badge badge-success'>Approve</label>";
+      }else{
+        $stat = "<label class='badge badge-danger'>Decline</label>";
+      }
+      $retVal2 = $stat ;   
 ?>
 

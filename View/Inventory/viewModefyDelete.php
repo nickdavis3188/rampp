@@ -629,21 +629,24 @@ i{
   <div class="modal-dialog modal-dialog-centered ">
     <h4 class="card-title"></h4>
     <div class="modal-content ">
-    <form action="../../Utils/sendToLocationUtils.php" method="post">
+    <form class="fff" action="../../Utils/sendToLocationUtils.php" method="post">
+      <input name="date" hidden type="date" value="<?php echo date('Y-m-d');?>">
+      <input name="userId" hidden type="number" value="<?php echo $_SESSION['id'];?>">
       <div class="modal-header gbgn">
-        <p>Send <Span id="itdr22" style="color:#02679a;"></Span> to...</p>
+        <p>Send <Span id="itdr22" style="color:#ff0000;"></Span> to <Span id="itdr21" style="color:#ff0000;"></Span></p>
       </div>
       <div class="modal-body gbgn">
         <div class="form-group row">
 
           <input name="productId" type="hidden" class="form-control productId" id="exampleInputUsername1" >
           <input name="productName" type="hidden" class="form-control productName22" id="exampleInputUsername1" >
+          <input name="locationName" type="hidden" class="form-control locName" id="exampleInputUsername1" >
        
           <div class="form-group row">
               <div class="col-sm-6">
                   <div class="form-group">
                       <label for="exampleFormControlSelect1">Sales Location</label>
-                      <select required name="location" class="form-control form-control-lg loc" id="exampleFormControlSelect1">
+                      <select required name="location" class="form-control form-control-md loc" id="exampleFormControlSelect1" onchange="getLValue(this,)">
                       <option value="">__SELECT_LOCATION__</option>
                         <?php                           
                           foreach ($location as $index => $value) {                         
@@ -654,12 +657,35 @@ i{
                         ?>
                     
                       </select>
+                      <script>
+                      function getLValue(ele) {
+                        let bb = document.querySelector("#itdr21"); 
+                        let locName = document.querySelector(".locName"); 
+                        if (ele.value == "") {
+                          let child = bb.lastElementChild; 
+                          while (child) {
+                            bb.removeChild(child);
+                              child = bb.lastElementChild;
+                          }
+                          bb.innerText = "";                    
+                        }else{
+                          bb.innerText = ele.options[ele.options.selectedIndex].innerText;
+                          locName.value = ele.options[ele.options.selectedIndex].innerText;
+                        }
+                      }
+                    </script>
                   </div>
               </div>
               <div class="col-sm-6">
                   <div class="form-group">
                       <label for="exampleInputUsername1">Quantity</label>
-                      <input required name="quantity" type="number" class="form-control delid2" id="exampleInputUsername1" >
+                      <input required name="quantity" type="number" class="form-control qtyy" id="exampleInputUsername1" >
+                  </div>
+              </div>
+              <div class="col-sm-12">
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Reason</label>
+                      <input required name="reason" type="text" class="form-control reas" id="exampleInputUsername1" >
                   </div>
               </div>
           </div>
@@ -669,7 +695,30 @@ i{
                 <button type="submit" name="sendTo" class="btn " onClick="loading99(this)"  style="background:#02679a;color:white;">Send</button>  
             </div>
           </div>
-         
+         <script>
+           function loading99(btn) {
+            let loc = document.querySelector(".loc");
+            let qtyy = document.querySelector(".qtyy");
+            let reas = document.querySelector(".reas");
+            if (loc.value == ""|| qty.value == ""||reas.value =="") {
+              
+            } else {
+              var child = btn.lastElementChild; 
+              while (child) {
+                  btn.removeChild(child);
+                  child = btn.lastElementChild;
+              }
+  
+              btn.innerText = "Sending ..."
+              let newSpan = document.createElement("span");
+              newSpan.classList.add("spinner-border")
+              newSpan.classList.add("spinner-border-sm")
+  
+              btn.appendChild(newSpan);
+              
+            }  
+          }
+         </script>
         </div>
       </div>
     </form>
@@ -960,20 +1009,7 @@ function loading33(btn) {
       }
 
     }
-    function loading99(btn) {
-      var child = btn.lastElementChild; 
-      while (child) {
-          btn.removeChild(child);
-          child = btn.lastElementChild;
-      }
-
-      btn.innerText = "Sending ..."
-      let newSpan = document.createElement("span");
-      newSpan.classList.add("spinner-border")
-      newSpan.classList.add("spinner-border-sm")
-
-      btn.appendChild(newSpan);
-    }
+   
 </script>
 
 

@@ -1153,4 +1153,86 @@ class GeneralController
         }
         return $items;
     }
+
+    function pushToLocation(\mysqli $conn,$productId,$locationId,$quantity, $productName){
+        $items = array();
+        
+        $query ="SELECT * FROM locationproduct WHERE productId='$productId' AND locationId='$locationId'";
+        $results = mysqli_query($conn,$query);
+    
+        while($row = mysqli_fetch_array($results)){
+            $items[] = $row;
+        }
+      
+        
+        if (count($items) > 0) {
+            $qty = $items[0]["quantityAdded"] + $quantity;
+            $lpId = $items[0]["lpId"];
+            $query = "UPDATE locationproduct SET quantityAdded= '$qty' WHERE lpId='$lpId'";
+            $results = mysqli_query($conn,$query);
+            $noofrows = mysqli_affected_rows($conn);
+            if ($noofrows == 1)
+            {
+                return true;      
+            }
+            else
+            {
+                return false;
+            }
+         
+        }else{
+            $query = "INSERT INTO locationproduct (`locationId`,`productId`,`productName`,`quantityAdded`) VALUES('$locationId','$productId','$productName','$quantity')";
+            $results = mysqli_query($conn,$query);
+            $noofrows = mysqli_affected_rows($conn); 
+            if($noofrows==1)
+            {    
+                $items2 = array();
+    
+                $query2 ="SELECT * FROM salesLocation WHERE salesLocationId='$locationId'";
+                $results2 = mysqli_query($conn,$query2);
+        
+                while($row2 = mysqli_fetch_array($results2)){
+                    $items2[] = $row2;
+                }
+                // 
+                $qty2 = $items2[0]["productQty"] + 1;
+                $query = "UPDATE salesLocation SET productQty= '$qty2' WHERE salesLocationId='$locationId'";
+                $results = mysqli_query($conn,$query);
+                $noofrows = mysqli_affected_rows($conn);
+                if ($noofrows == 1)
+                {       
+                   return true;      
+                }
+                else
+                {
+                   return false;
+                }      
+            }
+            else
+            {
+                return false;        
+            }
+       
+        }
+     }
+     function getUnApprovedAndNonDecliedProductRequest($conn){
+        $items = array();
+        $query ="SELECT * FROM locationproductrequest WHERE approval='0' AND decline='0'";
+        $results = mysqli_query($conn,$query);
+    
+        while($row = mysqli_fetch_array($results)){
+            $items[] = $row;
+        }
+        return $items;
+     }
+     function getAllProductRequest($conn){
+        $items = array();
+        $query ="SELECT * FROM locationproductrequest";
+        $results = mysqli_query($conn,$query);
+    
+        while($row = mysqli_fetch_array($results)){
+            $items[] = $row;
+        }
+        return $items;
+     }
 }

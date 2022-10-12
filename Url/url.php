@@ -6,7 +6,7 @@
     $record_sales = "../RecordSales/recordSales.php";
 
     // inventory
-    $inventory = array("addInventory"=>"../Inventory/addInventory.php", "viewModefyDelete"=>"../Inventory/viewModefyDelete.php","locationView"=>"../Inventory/viewDeleteLocationItem.php");
+    $inventory = array("addInventory"=>"../Inventory/addInventory.php", "viewModefyDelete"=>"../Inventory/viewModefyDelete.php","locationView"=>"../Inventory/viewDeleteLocationItem.php","approveLocationRequest"=>"../Inventory/approveToLocation.php","requestView"=>"../Inventory/requestView.php");
 
     // Hr
     $hr = array("addPresonnel"=>"../HrManagement/addPresonnel.php","newUser"=>"../HrManagement/addUser.php", "viewModefyDelete"=>"../HrManagement/viewModefyDelete2.php","manageNewUser"=>"../HrManagement/viewModefyDeleteUser.php");
