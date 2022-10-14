@@ -23,14 +23,30 @@
       // $dt->format("Y-m-d g:i a");
       // echo $dd2;
 
-      $stat = "";
-      if ($value["approval"] == 0 &&$value["decline"] == 0  ) {
-        $stat = "<label class='badge badge-warning'>Pending</label>";
-      }elseif($value["approval"] == 1 &&$value["decline"] == 0 ){
-          $stat = "<label class='badge badge-success'>Approve</label>";
-      }else{
-        $stat = "<label class='badge badge-danger'>Decline</label>";
-      }
-      $retVal2 = $stat ;   
+      // $stat = "";
+      // if ($value["approval"] == 0 &&$value["decline"] == 0  ) {
+      //   $stat = "<label class='badge badge-warning'>Pending</label>";
+      // }elseif($value["approval"] == 1 &&$value["decline"] == 0 ){
+      //     $stat = "<label class='badge badge-success'>Approve</label>";
+      // }else{
+      //   $stat = "<label class='badge badge-danger'>Decline</label>";
+      // }
+      // $retVal2 = $stat ;   
 ?>
+<button onclick="Load()">Send</button>
+<script>
+  function Load(){
+    let mydata = JSON.stringify({ "category":["Drink"]})
+    window.fetch("./Utils/getProductByCategory.php",{
+    method: 'POST',
+    body: mydata,
+    headers: {"Content-Type": "application/json; charset=utf-8"}
+    }).then(res=>res.text()).then(function(data) {
+      console.log(data)
+      // if(data.status == "success"){
+      // }
+    })
+
+  }
+</script>
 

@@ -12,7 +12,7 @@
      $dd = implode(',',$jsonData);
      $items2 = array();
 
-    $query2 = "SELECT * FROM subcategory WHERE category IN ('$dd') ";
+    $query2 = "SELECT * FROM subcategory WHERE category IN('$dd')";
     
     $results2 = mysqli_query($conn, $query2);
 
@@ -28,9 +28,12 @@
 
      $items = array();
 
-        $query = "SELECT * FROM inventory WHERE catname IN ('$dd') ";
-        
+        $query = " CALL `getProductByCategory`(@p0); ";
+        $stm = $conn->prepare($query);
+        $stm->bind_param("@p0",$dd);
+        $stm->execute();
         $results = mysqli_query($conn, $query);
+        
 
         while ($row = mysqli_fetch_array($results)) {
             $items[] = $row;
