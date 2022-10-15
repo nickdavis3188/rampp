@@ -229,7 +229,7 @@
                     child = ele.lastElementChild;
                 }
             
-            window.location = window.location.origin+"/rampp/View/Procurement/enterVendorQuote.php?fail=Error"+err;
+            window.location = window.location.origin+"/View/Procurement/enterVendorQuote.php?fail=Error"+err;
             // alert("Error:"+err)
             }
         })
@@ -252,7 +252,7 @@
     par.appendChild(newSpan);
     // let vendorname =
     // console.log(ele3.value)
-    window.location = window.location.origin+"/rampp/View/Procurement/comparativeTable.php?reqno="+reqno1.value;
+    window.location = window.location.origin+"/View/Procurement/comparativeTable.php?reqno="+reqno1.value;
 
  }
 

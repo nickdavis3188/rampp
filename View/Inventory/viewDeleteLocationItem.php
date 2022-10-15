@@ -746,9 +746,9 @@ function deleteFromLocation(pId,lId,pn){
       headers: {"Content-Type": "application/json; charset=utf-8"}
       }).then(res=>res.json()).then(function(data) {
         if (data.status == "success") {
-          window.location = window.location.origin+"/rampp/View/Inventory/viewDeleteLocationItem.php?msg=Product successfully removed from the specified location";
+          window.location = window.location.origin+"/View/Inventory/viewDeleteLocationItem.php?msg=Product successfully removed from the specified location";
         } else {
-          window.location = window.location.origin+"/rampp/View/Inventory/viewDeleteLocationItem.php?fail="+data.msg;
+          window.location = window.location.origin+"/View/Inventory/viewDeleteLocationItem.php?fail="+data.msg;
         }
       }).catch(err=>{
         if (err) {

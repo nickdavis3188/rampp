@@ -511,15 +511,15 @@ i{
        
         if (data.status == "success" ) {
           // pa.disabled =true;
-          window.location = window.location.origin+"/rampp/View/Procurement/enterVendorQuote.php?msg= Submit Successful";
+          window.location = window.location.origin+"/View/Procurement/enterVendorQuote.php?msg= Submit Successful";
         } else {
-          window.location = window.location.origin+"/rampp/View/Procurement/enterVendorQuote.php?fail="+data.message;
+          window.location = window.location.origin+"/View/Procurement/enterVendorQuote.php?fail="+data.message;
         }
         console.log(data)
       }).catch(err=>{
             if (err) {
              
-              window.location = window.location.origin+"/rampp/View/Procurement/enterVendorQuote.php?fail="+err;
+              window.location = window.location.origin+"/View/Procurement/enterVendorQuote.php?fail="+err;
            
             }
         })

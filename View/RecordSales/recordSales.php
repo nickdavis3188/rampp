@@ -761,14 +761,14 @@ function addItem(btn) {
               console.log(data)
               if(data.status == "success"){
                 LoadingDisplay(data.status,btn)
-                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
+                window.location = window.location.origin+"/View/RecordSales/recordSales.php?msg=Successful";
               }else{      
-                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;             
+                window.location = window.location.origin+"/View/RecordSales/recordSales.php?fail=Error"+data.msg;             
               }   
             }).catch(err=>{
               if (err) {
                 LoadingDisplay("problem",btn)
-                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
+                window.location = window.location.origin+"/View/RecordSales/recordSales.php?fail=Error"+err;
                 // alert("Error:"+err)
               }
             })
@@ -800,17 +800,17 @@ function addItem(btn) {
                 LoadingDisplay(data.status,btn)
       
         
-                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?msg=Successful";
+                window.location = window.location.origin+"/View/RecordSales/recordSales.php?msg=Successful";
               }else{
             
-                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+data.msg;
+                window.location = window.location.origin+"/View/RecordSales/recordSales.php?fail=Error"+data.msg;
                 
               }
         
             }).catch(err=>{
               if (err) {
                 LoadingDisplay("problem",btn)
-                window.location = window.location.origin+"/rampp/View/RecordSales/recordSales.php?fail=Error"+err;
+                window.location = window.location.origin+"/View/RecordSales/recordSales.php?fail=Error"+err;
                 // alert("Error:"+err)
               }
             })

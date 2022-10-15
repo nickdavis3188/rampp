@@ -303,7 +303,7 @@
             par.innerText = "Generate PayRoll";
          
         }else{
-            window.location = window.location.origin + "/rampp/View/Accounts/createPayRoll.php?fail=" + data.msg;
+            window.location = window.location.origin + "/View/Accounts/createPayRoll.php?fail=" + data.msg;
         }
     })
  }

@@ -263,7 +263,7 @@
                 // if (data.status =='success') {
                 //   console.log("Done")                 
                 // }else{
-                //   window.location = window.location.origin+"/rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
+                //   window.location = window.location.origin+"/View/Ordering/bar.php?fail=Warning:"+data.msg;
                 // }
             })
            
@@ -278,7 +278,7 @@
                 // if (data.status = "success") {
                 //     console.log("Done")                   
                 // }else{
-                //   window.location = window.location.origin+"/rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
+                //   window.location = window.location.origin+"/View/Ordering/bar.php?fail=Warning:"+data.msg;
                 // }
             })         
       }
@@ -290,14 +290,14 @@
    }
 
   function bill(id){
-    window.open(window.location.origin+"/rampp/View/bill.php?id="+Number(id), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
+    window.open(window.location.origin+"/View/bill.php?id="+Number(id), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
   }
 
   function printReceipt(r){
     // console.log(r,"hello")
     let orno = document.querySelector(".orid22"); 
     let payM = document.querySelector(".payM"); 
-    window.open(window.location.origin+"/rampp/View/receipt.php?id="+Number(orno.value)+"&pay="+payM.value+"","_blank","toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700") 
+    window.open(window.location.origin+"/View/receipt.php?id="+Number(orno.value)+"&pay="+payM.value+"","_blank","toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700") 
   } 
     setInterval( 
       function(){ 

@@ -723,7 +723,7 @@ i{
   function printP(it){
      let vno =it.getAttribute("vid"); 
      let pno =it.getAttribute("pid"); 
-    window.open(window.location.origin+"/rampp/View/printLpo.html?v="+Number(vno)+"&p="+Number(pno), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
+    window.open(window.location.origin+"/View/printLpo.html?v="+Number(vno)+"&p="+Number(pno), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=700,width=700,height=700")
    }
 </script>
 

@@ -392,7 +392,7 @@
         
         if(ItemName.value == "" || Description.value == "" || UnitPrice.value == "" || Qty.value == ""){
         // alert("please confirm your input")
-        window.location = window.location.origin+"/rampp/View/purchaseRequisition/createpRequisition.php?fail=Warning: please confirm your input";
+        window.location = window.location.origin+"/View/purchaseRequisition/createpRequisition.php?fail=Warning: please confirm your input";
 
         
       }else{
@@ -452,7 +452,7 @@
         if(from2.value == "" || Subject2.value == "" || Date2.value == "" || Summary2.value == "" || RequisitionNumber2.value == ""){
         
           // alert("plese confirm your input")  
-          window.location = window.location.origin+"/rampp/View/purchaseRequisition/createpRequisition.php?fail=Warning: please confirm your input";
+          window.location = window.location.origin+"/View/purchaseRequisition/createpRequisition.php?fail=Warning: please confirm your input";
    
         }else{
       
@@ -481,18 +481,18 @@
           
 
                 clearItenListAndElements(tbodyEle,Maintotal)
-                window.location = window.location.origin+"/rampp/View/purchaseRequisition/createpRequisition.php?msg=Successful";
+                window.location = window.location.origin+"/View/purchaseRequisition/createpRequisition.php?msg=Successful";
               }else{
                 // console.log("response",data.msg)
                 clearItenListAndElements(tbodyEle,Maintotal)
-                window.location = window.location.origin+"/rampp/View/purchaseRequisition/createpRequisition.php?fail=Error"+data.msg;
+                window.location = window.location.origin+"/View/purchaseRequisition/createpRequisition.php?fail=Error"+data.msg;
                
               }
               // console.log("respones",data)
             }).catch(err=>{
               if (err) {
                 LoadingDisplay("problem",btn)
-                window.location = window.location.origin+"/rampp/View/purchaseRequisition/createpRequisition.php?fail=Error"+err;
+                window.location = window.location.origin+"/View/purchaseRequisition/createpRequisition.php?fail=Error"+err;
                 // alert("Error:"+err)
               }
             })
@@ -538,10 +538,10 @@
     }
 
     function noFunc(par) {
-      window.location = window.location.origin+"/rampp/View/purchaseRequisition/viewDeletepRequisition.php";
+      window.location = window.location.origin+"/View/purchaseRequisition/viewDeletepRequisition.php";
     }
 function yesFunc(par){
-  window.location = window.location.origin+"/rampp/View/purchaseRequisition/createpRequisition.php";
+  window.location = window.location.origin+"/View/purchaseRequisition/createpRequisition.php";
 }
       </script>
     </div> <!-- end of side nav -->
