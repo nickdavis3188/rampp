@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 12, 2022 at 05:38 PM
+-- Generation Time: Oct 24, 2022 at 09:31 AM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.0
 
@@ -20,6 +20,15 @@ SET time_zone = "+00:00";
 --
 -- Database: `rampp`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `getProductByCategory`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getProductByCategory` (IN `val` LONGTEXT)  SELECT * from `inventory` WHERE catname IN(val)$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -94,19 +103,22 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `date` date NOT NULL DEFAULT '1111-11-11',
   `time` varchar(30) NOT NULL,
   PRIMARY KEY (`customerId`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`customerId`, `customerName`, `orderCount`, `completeCount`, `status`, `sallerId`, `date`, `time`) VALUES
-(16, 'victor', 1, 1, 0, 0, '2022-10-10', '11:06 am'),
-(13, 'samm', 1, 1, 0, 0, '2022-10-04', '3:01 am'),
-(14, 'samm22', 1, 0, 0, 0, '2022-10-06', '10:01 am'),
-(15, 'me', 1, 1, 0, 0, '2022-10-07', '12:42 pm'),
-(17, 'Nick', 1, 1, 0, 0, '2022-10-10', '11:25 am'),
-(18, 'davis', 1, 1, 0, 0, '2022-10-10', '11:43 am');
+(16, 'victor', 1, 1, 0, 1, '2022-10-10', '11:06 am'),
+(13, 'samm', 2, 1, 0, 1, '2022-10-04', '3:01 am'),
+(14, 'samm22', 1, 0, 0, 1, '2022-10-06', '10:01 am'),
+(15, 'me', 1, 1, 0, 1, '2022-10-07', '12:42 pm'),
+(17, 'Nick', 1, 1, 0, 1, '2022-10-10', '11:25 am'),
+(18, 'davis', 2, 1, 0, 1, '2022-10-10', '11:43 am'),
+(20, 'jowe', 2, 0, 0, 1, '2022-10-20', '8:08 am'),
+(21, 'ldkf', 1, 0, 0, 1, '2022-10-20', '8:12 am'),
+(22, 'sammyt', 1, 0, 0, 1, '2022-10-20', '8:16 am');
 
 -- --------------------------------------------------------
 
@@ -397,13 +409,13 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 INSERT INTO `inventory` (`catname`, `productname`, `quantityadded`, `minnimumlevle`, `costprice`, `profit`, `preparationtime`, `id`, `sellingprice`, `salable`, `prepAt`, `oderingunit`, `numberSold`, `productImg`, `subCategory`, `description`) VALUES
 ('Funiture', 'Saivite ', 50, 10, 1000, 0, 'noTime', 14, 0, 1, 'none', 'none', 0, NULL, '', ''),
 ('Drink', ' Malt', 46, 10, 270, 300, '1', 13, 570, 2, 'Bar', 'Bottle', 20, NULL, '', ''),
-('Noodle ', ' spak', 14, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate ', 34, NULL, '', ''),
+('Noodle ', ' spak', 12, 9, 270, 930, '2', 9, 1200, 2, 'Kitchen', 'Plate ', 36, NULL, '', ''),
 ('Funiture', 'Tabless', 5, 0, 10500, 0, 'noTime', 10, 0, 1, 'none', 'none', 0, NULL, '', ''),
-('Soup', ' Ewedu', 21, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate ', 20, NULL, '', ''),
+('Soup', ' Ewedu', 16, 9, 1000, 400, '2', 11, 1400, 2, 'Kitchen', 'Plate ', 25, NULL, '', ''),
 ('Funiture', 'Chair ', 50, 0, 10200, 0, 'noTime', 12, 0, 1, 'none', 'none', 0, NULL, '', ''),
-('Drink', ' Pepsi', 19, 10, 170, 200, '1', 15, 370, 2, 'Bar', 'Bottle', 18, NULL, '', ''),
-('Funiture', ' Jagua', 13, 5, 250, 50, '1', 16, 300, 2, 'Bar', 'Bottle', 5, '../Upload/6325cf7e92fed2.36419457.jpeg', '', ''),
-('Drink', ' Vinnes', 50, 5, 200, 50, '1', 17, 250, 2, 'Bar', 'Bottle', 0, NULL, '', ''),
+('Drink', ' Pepsi', 14, 10, 170, 200, '1', 15, 370, 2, 'Bar', 'Bottle', 23, NULL, '', ''),
+('Funiture', ' Jagua', 12, 5, 250, 50, '1', 16, 300, 2, 'Bar', 'Bottle', 6, '../Upload/6325cf7e92fed2.36419457.jpeg', '', ''),
+('Drink', ' Vinnes', 49, 5, 200, 50, '1', 17, 250, 2, 'Bar', 'Bottle', 1, NULL, '', ''),
 ('Utensil  ', 'Spoon ', 20, 0, 2000, 0, 'noTime', 18, 0, 1, 'none', 'none', 0, NULL, '', ''),
 ('Drink', ' Mirinda', 20, 5, 250, 50, '1', 19, 300, 2, 'Bar', 'Bottle', 0, '../Upload/633337acbe84d3.68608896.jpeg', 'Soft Drink', 'soft drink for everyone'),
 ('Drink', ' Fanta', 18, 5, 250, 50, '1', 20, 300, 2, 'Bar', 'Bottle', 2, '../Upload/63333bb2849240.34861504.png', 'Soft Drink', '');
@@ -562,7 +574,18 @@ INSERT INTO `inventryhistory` (`inid`, `date`, `restock`, `reduce`, `reason`, `i
 (9, '2022-10-10', 2, 0, 'damage', 1, 0, 2, 1200),
 (13, '2022-10-10', 0, 2, 'Ordered', 0, 2, NULL, NULL),
 (9, '2022-10-10', 0, 2, 'Ordered', 0, 2, NULL, NULL),
-(13, '2022-10-10', 2, 0, 'damage', 1, 0, 2, 570);
+(13, '2022-10-10', 2, 0, 'damage', 1, 0, 2, 570),
+(15, '2022-10-19', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(17, '2022-10-19', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-10-19', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(16, '2022-10-20', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-10-20', 0, 2, 'Ordered', 0, 2, NULL, NULL),
+(11, '2022-10-20', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(15, '2022-10-20', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(15, '2022-10-20', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(11, '2022-10-20', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(15, '2022-10-24', 0, 2, 'Ordered', 0, 1, NULL, NULL),
+(9, '2022-10-24', 0, 2, 'Ordered', 0, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -578,14 +601,17 @@ CREATE TABLE IF NOT EXISTS `locationproduct` (
   `quantityAdded` int(100) DEFAULT NULL,
   `lpId` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`lpId`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `locationproduct`
 --
 
 INSERT INTO `locationproduct` (`locationId`, `productId`, `productName`, `quantityAdded`, `lpId`) VALUES
-(2, 13, ' Malt', 10, 1);
+(2, 13, ' Malt', 10, 1),
+(3, 15, ' Pepsi', 9, 2),
+(3, 17, ' Vinnes', 10, 3),
+(4, 13, ' Malt', 10, 4);
 
 -- --------------------------------------------------------
 
@@ -607,7 +633,7 @@ CREATE TABLE IF NOT EXISTS `locationproductrequest` (
   `approval` tinyint(4) DEFAULT '0',
   `decline` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`requestId`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `locationproductrequest`
@@ -616,7 +642,10 @@ CREATE TABLE IF NOT EXISTS `locationproductrequest` (
 INSERT INTO `locationproductrequest` (`requestId`, `locationId`, `quantity`, `reason`, `requestDate`, `sender`, `locationName`, `productName`, `productId`, `approval`, `decline`) VALUES
 (1, 2, 10, 'Garden bar dose not have Malt to save to the customer, also to the people who have booked the drink in advance ', '2022-10-12', 1, 'Garden bar', ' Malt', 13, 1, 0),
 (2, 1, 10, 'Bush bar dose not have Pepsi', '2022-10-12', 1, 'Bush bar', ' Pepsi', 15, 0, 1),
-(3, 3, 20, ' Pool bar dose not have  Vinnes', '2022-10-12', 1, 'Pool bar', ' Vinnes', 17, 0, 0);
+(3, 3, 20, ' Pool bar dose not have  Vinnes', '2022-10-12', 1, 'Pool bar', ' Vinnes', 17, 0, 0),
+(4, 3, 10, ' Pool bar dose not have  Pepsi', '2022-10-14', 1, 'Pool bar', ' Pepsi', 15, 1, 0),
+(5, 3, 10, ' Pool bar dose not have  Vinnes', '2022-10-14', 1, 'Pool bar', ' Vinnes', 17, 1, 0),
+(6, 4, 10, 'malt is needed in reception 1', '2022-10-19', 1, 'Reception 1', ' Malt', 13, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -824,47 +853,59 @@ CREATE TABLE IF NOT EXISTS `orderditems` (
   `unitOfMeasure` varchar(70) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `location` longtext,
+  `salesperson` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orderditems`
 --
 
-INSERT INTO `orderditems` (`productname`, `price`, `quantity`, `amount`, `preptime`, `orderid`, `productcat`, `sn`, `finish`, `prepAt`, `description`, `dateOrderd`, `productId`, `profit`, `costprice`, `sellingprice`, `unitOfMeasure`, `id`, `location`) VALUES
-(' Pepsi', 370, 1, 370, 1, 51, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-16', 15, 200, 170, 370, 'Bottle', 1, NULL),
-(' Ewedu', 1400, 3, 4200, 6, 52, 'Soup', 1, 1, 'Kitchen', '3 Plate ', '2022-09-16', 11, 1200, 1000, 1400, 'Plate', 2, NULL),
-(' Malt', 570, 1, 570, 3, 52, 'Drink', 2, 1, 'Bar', '3 Bottle', '2022-09-16', 13, 300, 270, 570, 'Bottle', 3, NULL),
-(' spak', 1200, 1, 1200, 4, 53, 'Noodle ', 1, 1, 'Kitchen', '2 Plate ', '2022-09-16', 9, 930, 270, 1200, 'Plate', 4, NULL),
-(' Malt', 570, 1, 570, 1, 53, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-16', 13, 300, 270, 570, 'Bottle', 5, NULL),
-(' Pepsi', 370, 1, 370, 1, 54, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-16', 15, 200, 170, 370, 'Bottle', 6, NULL),
-(' spak', 1200, 1, 1200, 2, 54, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-09-16', 9, 930, 270, 1200, 'Plate', 7, NULL),
-(' Malt', 570, 2, 1140, 2, 55, 'Drink', 1, 1, 'Bar', '2 Bottle', '2022-09-27', 13, 600, 270, 570, 'Bottle', 9, NULL),
-(' Jagua', 300, 2, 600, 2, 56, 'Funiture', 1, 1, 'Bar', '2 Bottle', '2022-09-27', 16, 100, 250, 300, 'Bottle', 10, NULL),
-(' Ewedu', 1400, 1, 1400, 2, 57, 'Soup', 1, 1, 'Kitchen', '1 Plate ', '2022-09-27', 11, 400, 1000, 1400, 'Plate ', 11, NULL),
-(' spak', 1200, 1, 1200, 2, 58, 'Noodle ', 1, 1, 'Kitchen', '1 Plate ', '2022-09-28', 9, 930, 270, 1200, 'Plate ', 12, NULL),
-(' Jagua', 300, 1, 300, 1, 59, 'Funiture', 1, 1, 'Bar', '1 Bottle', '2022-09-28', 16, 50, 250, 300, 'Bottle', 13, NULL),
-(' Malt', 570, 1, 570, 1, 59, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-28', 13, 300, 270, 570, 'Bottle', 14, NULL),
-(' Pepsi', 370, 1, 370, 1, 60, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 15, NULL),
-(' Pepsi', 370, 1, 370, 1, 61, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 16, NULL),
-(' Ewedu', 1400, 1, 1400, 2, 62, 'Soup', 1, 1, 'Kitchen', '1 Plate ', '2022-09-28', 11, 400, 1000, 1400, 'Plate ', 17, NULL),
-(' Pepsi', 370, 1, 370, 1, 62, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 18, NULL),
-(' Ewedu', 1400, 1, 1400, 2, 63, 'Soup', 1, 1, 'Kitchen', '1 Plate ', '2022-10-04', 11, 400, 1000, 1400, 'Plate ', 19, NULL),
-(' Fanta', 300, 1, 300, 1, 63, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-10-04', 20, 50, 250, 300, 'Bottle', 20, NULL),
-(' Jagua', 300, 2, 600, 2, 64, 'Funiture', 1, 1, 'Bar', '2 Bottle', '2022-10-04', 16, 100, 250, 300, 'Bottle', 21, NULL),
-(' spak', 1200, 1, 1200, 2, 64, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-10-04', 9, 930, 270, 1200, 'Plate ', 22, NULL),
-(' Pepsi', 370, 1, 370, 1, 65, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-10-06', 15, 200, 170, 370, 'Bottle', 23, 'Garden bar'),
-(' spak', 1200, 1, 1200, 2, 65, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-10-06', 9, 930, 270, 1200, 'Plate ', 24, 'Garden bar'),
-(' Malt', 570, 1, 570, 1, 66, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-10-07', 13, 300, 270, 570, 'Bottle', 25, 'Pool bar'),
-(' spak', 1200, 1, 1200, 4, 66, 'Noodle ', 2, 1, 'Kitchen', '2 Plate ', '2022-10-07', 9, 930, 270, 1200, 'Plate ', 26, 'Pool bar'),
-(' Malt', 570, 1, 570, 2, 67, 'Drink', 1, 1, 'Bar', '2 Bottle', '2022-10-10', 13, 300, 270, 570, 'Bottle', 27, 'Reception 1'),
-(' spak', 1200, 2, 2400, 4, 67, 'Noodle ', 2, 1, 'Kitchen', '2 Plate ', '2022-10-10', 9, 1860, 270, 1200, 'Plate ', 28, 'Reception 1'),
-(' Pepsi', 370, 1, 370, 1, 68, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-10-10', 15, 200, 170, 370, 'Bottle', 29, 'Reception 2'),
-(' Ewedu', 1400, 0, 0, 4, 68, 'Soup', 2, 1, 'Kitchen', '2 Plate ', '2022-10-10', 11, 0, 1000, 1400, 'Plate ', 30, 'Reception 2'),
-(' Fanta', 300, 0, 0, 1, 69, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-10-10', 20, 0, 250, 300, 'Bottle', 31, 'Reception 1'),
-(' spak', 1200, 1, 1200, 4, 69, 'Noodle ', 2, 1, 'Kitchen', '2 Plate ', '2022-10-10', 9, 930, 270, 1200, 'Plate ', 32, 'Reception 1'),
-(' Malt', 570, 1, 570, 2, 70, 'Drink', 1, 1, 'Bar', '2 Bottle', '2022-10-10', 13, 300, 270, 570, 'Bottle', 33, 'Reception 1'),
-(' spak', 1200, 2, 2400, 4, 70, 'Noodle ', 2, 1, 'Kitchen', '2 Plate ', '2022-10-10', 9, 1860, 270, 1200, 'Plate ', 34, 'Reception 1');
+INSERT INTO `orderditems` (`productname`, `price`, `quantity`, `amount`, `preptime`, `orderid`, `productcat`, `sn`, `finish`, `prepAt`, `description`, `dateOrderd`, `productId`, `profit`, `costprice`, `sellingprice`, `unitOfMeasure`, `id`, `location`, `salesperson`) VALUES
+(' Pepsi', 370, 1, 370, 1, 51, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-16', 15, 200, 170, 370, 'Bottle', 1, NULL, 'nick davis'),
+(' Ewedu', 1400, 3, 4200, 6, 52, 'Soup', 1, 1, 'Kitchen', '3 Plate ', '2022-09-16', 11, 1200, 1000, 1400, 'Plate', 2, NULL, 'nick davis'),
+(' Malt', 570, 1, 570, 3, 52, 'Drink', 2, 1, 'Bar', '3 Bottle', '2022-09-16', 13, 300, 270, 570, 'Bottle', 3, NULL, 'nick davis'),
+(' spak', 1200, 1, 1200, 4, 53, 'Noodle ', 1, 1, 'Kitchen', '2 Plate ', '2022-09-16', 9, 930, 270, 1200, 'Plate', 4, NULL, 'nick davis'),
+(' Malt', 570, 1, 570, 1, 53, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-16', 13, 300, 270, 570, 'Bottle', 5, NULL, 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 54, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-16', 15, 200, 170, 370, 'Bottle', 6, NULL, 'nick davis'),
+(' spak', 1200, 1, 1200, 2, 54, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-09-16', 9, 930, 270, 1200, 'Plate', 7, NULL, 'nick davis'),
+(' Malt', 570, 2, 1140, 2, 55, 'Drink', 1, 1, 'Bar', '2 Bottle', '2022-09-27', 13, 600, 270, 570, 'Bottle', 9, NULL, 'nick davis'),
+(' Jagua', 300, 2, 600, 2, 56, 'Funiture', 1, 1, 'Bar', '2 Bottle', '2022-09-27', 16, 100, 250, 300, 'Bottle', 10, NULL, 'nick davis'),
+(' Ewedu', 1400, 1, 1400, 2, 57, 'Soup', 1, 1, 'Kitchen', '1 Plate ', '2022-09-27', 11, 400, 1000, 1400, 'Plate ', 11, NULL, 'nick davis'),
+(' spak', 1200, 1, 1200, 2, 58, 'Noodle ', 1, 1, 'Kitchen', '1 Plate ', '2022-09-28', 9, 930, 270, 1200, 'Plate ', 12, NULL, 'nick davis'),
+(' Jagua', 300, 1, 300, 1, 59, 'Funiture', 1, 1, 'Bar', '1 Bottle', '2022-09-28', 16, 50, 250, 300, 'Bottle', 13, NULL, 'nick davis'),
+(' Malt', 570, 1, 570, 1, 59, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-28', 13, 300, 270, 570, 'Bottle', 14, NULL, 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 60, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 15, NULL, 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 61, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 16, NULL, 'nick davis'),
+(' Ewedu', 1400, 1, 1400, 2, 62, 'Soup', 1, 1, 'Kitchen', '1 Plate ', '2022-09-28', 11, 400, 1000, 1400, 'Plate ', 17, NULL, 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 62, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-09-28', 15, 200, 170, 370, 'Bottle', 18, NULL, 'nick davis'),
+(' Ewedu', 1400, 1, 1400, 2, 63, 'Soup', 1, 1, 'Kitchen', '1 Plate ', '2022-10-04', 11, 400, 1000, 1400, 'Plate ', 19, NULL, 'nick davis'),
+(' Fanta', 300, 1, 300, 1, 63, 'Drink', 2, 1, 'Bar', '1 Bottle', '2022-10-04', 20, 50, 250, 300, 'Bottle', 20, NULL, 'nick davis'),
+(' Jagua', 300, 2, 600, 2, 64, 'Funiture', 1, 1, 'Bar', '2 Bottle', '2022-10-04', 16, 100, 250, 300, 'Bottle', 21, NULL, 'nick davis'),
+(' spak', 1200, 1, 1200, 2, 64, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-10-04', 9, 930, 270, 1200, 'Plate ', 22, NULL, 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 65, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-10-06', 15, 200, 170, 370, 'Bottle', 23, 'Garden bar', 'nick davis'),
+(' spak', 1200, 1, 1200, 2, 65, 'Noodle ', 2, 1, 'Kitchen', '1 Plate ', '2022-10-06', 9, 930, 270, 1200, 'Plate ', 24, 'Garden bar', 'nick davis'),
+(' Malt', 570, 1, 570, 1, 66, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-10-07', 13, 300, 270, 570, 'Bottle', 25, 'Pool bar', 'nick davis'),
+(' spak', 1200, 1, 1200, 4, 66, 'Noodle ', 2, 1, 'Kitchen', '2 Plate ', '2022-10-07', 9, 930, 270, 1200, 'Plate ', 26, 'Pool bar', 'nick davis'),
+(' Malt', 570, 1, 570, 2, 67, 'Drink', 1, 1, 'Bar', '2 Bottle', '2022-10-10', 13, 300, 270, 570, 'Bottle', 27, 'Reception 1', 'nick davis'),
+(' spak', 1200, 2, 2400, 4, 67, 'Noodle ', 2, 1, 'Kitchen', '2 Plate ', '2022-10-10', 9, 1860, 270, 1200, 'Plate ', 28, 'Reception 1', 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 68, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-10-10', 15, 200, 170, 370, 'Bottle', 29, 'Reception 2', 'nick davis'),
+(' Ewedu', 1400, 0, 0, 4, 68, 'Soup', 2, 1, 'Kitchen', '2 Plate ', '2022-10-10', 11, 0, 1000, 1400, 'Plate ', 30, 'Reception 2', 'nick davis'),
+(' Fanta', 300, 0, 0, 1, 69, 'Drink', 1, 1, 'Bar', '1 Bottle', '2022-10-10', 20, 0, 250, 300, 'Bottle', 31, 'Reception 1', 'nick davis'),
+(' spak', 1200, 1, 1200, 4, 69, 'Noodle ', 2, 1, 'Kitchen', '2 Plate ', '2022-10-10', 9, 930, 270, 1200, 'Plate ', 32, 'Reception 1', 'nick davis'),
+(' Malt', 570, 1, 570, 2, 70, 'Drink', 1, 1, 'Bar', '2 Bottle', '2022-10-10', 13, 300, 270, 570, 'Bottle', 33, 'Reception 1', 'nick davis'),
+(' spak', 1200, 2, 2400, 4, 70, 'Noodle ', 2, 1, 'Kitchen', '2 Plate ', '2022-10-10', 9, 1860, 270, 1200, 'Plate ', 34, 'Reception 1', 'nick davis'),
+(' Pepsi', 370, 2, 740, 2, 71, 'Drink', 1, 0, 'Bar', '2 Bottle', '2022-10-19', 15, 400, 170, 370, 'Bottle', 35, 'Reception 1', 'nick davis'),
+(' Vinnes', 250, 1, 250, 1, 71, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-10-19', 17, 50, 200, 250, 'Bottle', 36, 'Reception 1', 'nick davis'),
+(' Ewedu', 1400, 1, 1400, 2, 71, 'Soup', 3, 0, 'Kitchen', '1 Plate ', '2022-10-19', 11, 400, 1000, 1400, 'Plate ', 37, 'Reception 1', 'nick davis'),
+(' Jagua', 300, 1, 300, 1, 72, 'Funiture', 1, 0, 'Bar', '1 Bottle', '2022-10-20', 16, 50, 250, 300, 'Bottle', 38, 'Garden bar', 'nick davis'),
+(' Ewedu', 1400, 2, 2800, 4, 72, 'Soup', 2, 0, 'Kitchen', '2 Plate ', '2022-10-20', 11, 800, 1000, 1400, 'Plate ', 39, 'Garden bar', 'nick davis'),
+(' Ewedu', 1400, 1, 1400, 2, 73, 'Soup', 1, 0, 'Kitchen', '1 Plate ', '2022-10-20', 11, 400, 1000, 1400, 'Plate ', 40, 'Garden bar', 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 73, 'Drink', 2, 0, 'Bar', '1 Bottle', '2022-10-20', 15, 200, 170, 370, 'Bottle', 41, 'Garden bar', 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 74, 'Drink', 1, 0, 'Bar', '1 Bottle', '2022-10-20', 15, 200, 170, 370, 'Bottle', 42, 'Garden bar', 'nick davis'),
+(' Ewedu', 1400, 1, 1400, 2, 74, 'Soup', 2, 0, 'Kitchen', '1 Plate ', '2022-10-20', 11, 400, 1000, 1400, 'Plate ', 43, 'Garden bar', 'nick davis'),
+(' Pepsi', 370, 1, 370, 1, 75, 'Drink', 1, 0, 'Bar', '1 Bottle', '2022-10-24', 15, 200, 170, 370, 'Bottle', 44, 'Pool bar', 'nick davis'),
+(' spak', 1200, 2, 2400, 4, 76, 'Noodle ', 1, 0, 'Kitchen', '2 Bottle', '2022-10-24', 9, 1860, 270, 1200, 'Bottle', 45, 'Pool bar', 'nick davis');
 
 -- --------------------------------------------------------
 
@@ -931,7 +972,6 @@ CREATE TABLE IF NOT EXISTS `orders` (
 --
 
 INSERT INTO `orders` (`sellerid`, `orderid`, `totaltime`, `totalammount`, `status`, `orderdate`, `odertime`, `hr`, `min`, `ampm`, `br`, `kch`, `receipt`, `k`, `b`, `bill`, `kt`, `bt`, `totalProfit`, `customerId`, `hasKechenDisc`, `hasBarDisc`, `kechenDisc`, `barDisc`, `locationName`, `serviceCharge`) VALUES
-(0, 64, 4, 1800, 1, '2022-10-04', '3:01 am ', 3, 1, 'am', 1, 1, 0, 1, 1, 0, 2, 2, 1030, 13, NULL, NULL, NULL, NULL, NULL, 0),
 (0, 63, 3, 1700, 1, '2022-10-04', '2:50 am ', 2, 50, 'am', 1, 1, 1, 1, 1, 2, 2, 1, 450, 12, NULL, NULL, NULL, NULL, NULL, 0),
 (0, 62, 3, 1770, 1, '2022-09-28', '7:06 pm ', 7, 6, 'pm', 1, 1, 1, 1, 1, 0, 2, 1, 600, 11, NULL, NULL, NULL, NULL, NULL, 0),
 (0, 61, 1, 370, 1, '2022-09-28', '6:03 pm ', 6, 3, 'pm', 1, 0, 1, 0, 1, 0, 0, 1, 200, 10, NULL, NULL, NULL, NULL, NULL, 0),
@@ -939,18 +979,21 @@ INSERT INTO `orders` (`sellerid`, `orderid`, `totaltime`, `totalammount`, `statu
 (0, 59, 2, 870, 1, '2022-09-28', '4:57 pm ', 4, 57, 'pm', 1, 0, 1, 0, 1, 0, 0, 2, 350, 8, NULL, NULL, NULL, NULL, NULL, 0),
 (0, 58, 2, 1200, 1, '2022-09-28', '4:45 pm ', 4, 45, 'pm', 0, 1, 1, 1, 0, 1, 2, 0, 930, 7, NULL, NULL, NULL, NULL, NULL, 0),
 (0, 57, 2, 1400, 1, '2022-09-27', '9:28 pm ', 9, 28, 'pm', 0, 1, 1, 1, 0, 3, 2, 0, 400, 6, NULL, NULL, NULL, NULL, NULL, 0),
-(0, 56, 2, 600, 1, '2022-09-27', '9:24 pm ', 9, 24, 'pm', 1, 0, 0, 0, 1, 0, 0, 2, 100, 5, NULL, NULL, NULL, NULL, NULL, 0),
 (0, 54, 3, 1570, 1, '2022-09-16', '2:41 am ', 2, 41, 'am', 1, 1, 1, 1, 1, 5, 2, 1, 1130, 3, NULL, NULL, NULL, NULL, NULL, 0),
 (0, 53, 5, 1770, 1, '2022-09-16', '2:36 am ', 2, 36, 'am', 1, 1, 1, 1, 1, 5, 4, 1, 1230, 3, NULL, NULL, NULL, NULL, NULL, 0),
 (0, 52, 9, 5910, 1, '2022-09-16', '2:19 am ', 2, 19, 'am', 1, 1, 1, 1, 1, 5, 6, 3, 2100, 3, NULL, NULL, NULL, NULL, NULL, 0),
-(0, 55, 2, 1140, 1, '2022-09-27', '9:17 pm ', 9, 17, 'pm', 1, 0, 0, 0, 1, 0, 0, 2, 600, 4, NULL, NULL, NULL, NULL, NULL, 0),
-(0, 51, 3, 370, 1, '2022-09-16', '1:32 am ', 1, 32, 'am', 1, 1, 0, 1, 1, 5, 2, 1, 200, 3, NULL, NULL, NULL, NULL, NULL, 0),
-(0, 65, 3, 1570, 1, '2022-10-06', '10:01 am ', 10, 1, 'am', 1, 1, 0, 1, 1, 0, 2, 1, 1130, 14, 0, 1, '', 'Prepsi not too cheld', 'Garden bar', 0),
-(0, 66, 5, 1770, 1, '2022-10-07', '12:42 pm ', 12, 42, 'pm', 1, 1, 0, 1, 1, 0, 4, 1, 1230, 15, 1, 1, 'spak with boild egg only no meat', 'cheeld can malt', 'Pool bar', 0),
-(0, 67, 6, 2970, 1, '2022-10-10', '11:06 am ', 11, 6, 'am', 1, 1, 0, 1, 1, 1, 4, 2, 2160, 16, 1, 1, 'food shoul not be cold', 'cool can malt drink', 'Reception 1', 177),
-(0, 68, 5, 370, 1, '2022-10-10', '11:25 am ', 11, 25, 'am', 1, 1, 0, 1, 1, 2, 4, 1, 200, 17, 1, 1, 'hot ewedu', 'malt not coold', 'Reception 2', 19),
-(0, 69, 5, 1200, 1, '2022-10-10', '11:43 am ', 11, 43, 'am', 1, 1, 0, 1, 1, 2, 4, 1, 930, 18, 1, 1, 'warm spak', 'one cool one not cool', 'Reception 1', 60),
-(0, 70, 6, 2970, 1, '2022-10-10', '12:15 pm ', 12, 15, 'pm', 1, 1, 1, 1, 1, 2, 4, 2, 2160, 19, 1, 1, 'warm', 'cool', 'Reception 1', 149);
+(1, 65, 3, 1570, 1, '2022-10-06', '10:01 am ', 10, 1, 'am', 1, 1, 0, 1, 1, 0, 2, 1, 1130, 14, 0, 1, '', 'Prepsi not too cheld', 'Garden bar', 0),
+(1, 66, 5, 1770, 1, '2022-10-07', '12:42 pm ', 12, 42, 'pm', 1, 1, 0, 1, 1, 0, 4, 1, 1230, 15, 1, 1, 'spak with boild egg only no meat', 'cheeld can malt', 'Pool bar', 0),
+(1, 72, 5, 3100, 0, '2022-10-20', '8:08 am ', 8, 8, 'am', 1, 1, 0, 0, 0, 0, 4, 1, 850, 20, 1, 1, 'heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irfheklk jjknf irfheklk jjknf irf', 'heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irfheklk jjknf irf heklk jjknf irfheklk jjknf irf heklk jjknf irf', 'Garden bar', 0),
+(1, 67, 6, 2970, 1, '2022-10-10', '11:06 am ', 11, 6, 'am', 1, 1, 0, 1, 1, 1, 4, 2, 2160, 16, 1, 1, 'food shoul not be cold', 'cool can malt drink', 'Reception 1', 177),
+(1, 68, 5, 370, 1, '2022-10-10', '11:25 am ', 11, 25, 'am', 1, 1, 0, 1, 1, 2, 4, 1, 200, 17, 1, 1, 'hot ewedu', 'malt not coold', 'Reception 2', 19),
+(1, 69, 5, 1200, 1, '2022-10-10', '11:43 am ', 11, 43, 'am', 1, 1, 0, 1, 1, 2, 4, 1, 930, 18, 1, 1, 'warm spak', 'one cool one not cool', 'Reception 1', 60),
+(1, 70, 6, 2970, 1, '2022-10-10', '12:15 pm ', 12, 15, 'pm', 1, 1, 1, 1, 1, 2, 4, 2, 2160, 19, 1, 1, 'warm', 'cool', 'Reception 1', 149),
+(1, 71, 5, 2390, 0, '2022-10-19', '1:40 pm ', 1, 40, 'pm', 1, 1, 0, 0, 0, 0, 2, 3, 850, 18, 1, 1, 'Pleas male this food to be so be microwaved,. the customer requested for a very warm food, lol they said the want to do a contest ', 'Pleas male this drink to be so cool,. the customer requested for a very cool drink, lol they said the want to do a contest ', 'Reception 1', 120),
+(1, 73, 3, 1770, 0, '2022-10-20', '8:12 am ', 8, 12, 'am', 1, 1, 0, 0, 0, 0, 2, 1, 600, 21, 1, 1, 'heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irfheklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf', 'heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irfheklk jjknf irfheklk jjknf irfheklk jjknf irfheklk jjknf irfheklk jjknf irf', 'Garden bar', 0),
+(1, 74, 3, 1770, 0, '2022-10-20', '8:16 am ', 8, 16, 'am', 1, 1, 0, 0, 0, 0, 2, 1, 600, 22, 1, 1, 'heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf', 'heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf heklk jjknf irf', 'Garden bar', 0),
+(1, 75, 1, 370, 0, '2022-10-24', '8:07 am ', 8, 7, 'am', 1, 0, 0, 0, 0, 0, 0, 1, 200, 13, 0, 1, '', 'cold drink', 'Pool bar', 0),
+(1, 76, 4, 2400, 0, '2022-10-24', '10:09 am ', 10, 9, 'am', 0, 1, 0, 0, 0, 0, 4, 0, 1860, 20, 0, 0, '', '', 'Pool bar', 0);
 
 -- --------------------------------------------------------
 
@@ -992,7 +1035,10 @@ CREATE TABLE IF NOT EXISTS `payroll` (
 
 INSERT INTO `payroll` (`sn`, `firstName`, `lastName`, `monthlySalary`, `deduction`, `salaryAdvance`, `commission`, `amountPayable`, `date`, `monthFor`, `yearFor`) VALUES
 (1, 'John', ' doe', 20000, 200, 10000, 0, 9800, '2022-08-20', 8, 2022),
-(2, 'Vera', ' Davis', 9000, 0, 0, 0, 9000, '2022-08-20', 8, 2022);
+(2, 'Vera', ' Davis', 9000, 0, 0, 0, 9000, '2022-08-20', 8, 2022),
+(1, 'John', ' doe', 20000, 0, 0, 0, 20000, '2022-10-24', 9, 2022),
+(2, 'Vera', ' Davis', 9000, 0, 0, 0, 9000, '2022-10-24', 9, 2022),
+(3, 'Danni', ' Joe', 40000, 0, 0, 0, 40000, '2022-10-24', 9, 2022);
 
 -- --------------------------------------------------------
 
@@ -1018,13 +1064,14 @@ CREATE TABLE IF NOT EXISTS `payrollinfo` (
   `approveDate2` date NOT NULL DEFAULT '1111-11-11',
   `approveDate3` date NOT NULL DEFAULT '1111-11-11',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payrollinfo`
 --
 
 INSERT INTO `payrollinfo` (`id`, `date`, `createdby`, `approve1`, `approve2`, `approve3`, `remark1`, `remark2`, `remark3`, `sgnature1`, `sgnature2`, `sgnature3`, `approveDate1`, `approveDate2`, `approveDate3`) VALUES
+(15, '2022-10-24', 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1111-11-11', '1111-11-11', '1111-11-11'),
 (14, '2022-08-20', 1, 2, 2, 2, 'go ahead', 'ok', 'pls send me the excel sheet ', '../Upload/62b2f22ac5b1d3.95862652.png', '../Upload/62b2f29123e749.48953053.png', '../Upload/62b2f2d43a0354.47316097.png', '2022-08-20', '2022-08-20', '2022-08-20');
 
 -- --------------------------------------------------------
@@ -1437,7 +1484,7 @@ CREATE TABLE IF NOT EXISTS `saleslocation` (
   `salesLocationName` longtext,
   `productQty` int(100) DEFAULT '0',
   PRIMARY KEY (`salesLocationId`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `saleslocation`
@@ -1446,8 +1493,8 @@ CREATE TABLE IF NOT EXISTS `saleslocation` (
 INSERT INTO `saleslocation` (`salesLocationId`, `salesLocationName`, `productQty`) VALUES
 (1, 'Bush bar', 0),
 (2, 'Garden bar', 1),
-(3, 'Pool bar', 0),
-(4, 'Reception 1', 0),
+(3, 'Pool bar', 2),
+(4, 'Reception 1', 1),
 (5, 'Reception 2', 0);
 
 -- --------------------------------------------------------
