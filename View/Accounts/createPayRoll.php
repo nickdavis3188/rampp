@@ -128,9 +128,7 @@
                             </tr>
                         </thead>
                         <tbody class="prlt">
-                            <!-- <tr>
-                                <td colspan="7" class="text-center">NO RECORDS</td>
-                            </tr> -->
+                            
                           
                         </tbody>
                     </table>
@@ -264,11 +262,13 @@
                 prlt.removeChild(child);
                 child = prlt.lastElementChild;
             }
-
+            let tot22 = 0;
             pdata.forEach(function(item,ind) {
+
+              tot22 = tot22+Number(item.amountPayable);
               
               let list = document.createElement("tr");
-  
+              
               list.innerHTML = `             
                     <td >${ind+1}</td>
                     <td >${item.firstName+" "+ item.lastName}</td>
@@ -277,11 +277,19 @@
                     <td >${item.salaryAdvance}</td>
                     <td >${item.commission}</td>
                     <td >${"# "+Number(item.amountPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
-                    <td>${dateFormat(item.date)}</td>                 
+                    <td>${dateFormat(item.date)}</td>                
                     `;
                   prlt.appendChild(list);
+
   
           })
+          let list2 = document.createElement("tr");
+          list2.innerHTML = `
+            <td colspan="6" class="text-right">Total Amount Payable</td>
+            <td class="text-left"><b>${"# "+tot22.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></td>
+            <td class="text-right"></td>
+          `
+          prlt.appendChild(list2);
 
           var child2 = par.lastElementChild; 
             while (child2) {

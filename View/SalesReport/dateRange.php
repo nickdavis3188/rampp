@@ -99,6 +99,7 @@
                     <tr>
                       <th class=' text-center ' >S/N</th>
                       <th class=' text-center ' >Date</th>
+                      <th class=' text-center ' >SalesPerson</th>
                       <th class=' text-center ' >Item Sold</th>
                       <th class=' text-center ' >Quantity Sold</th>
                       <th class=' text-center ' >Amount Sold</th>
@@ -107,11 +108,12 @@
                     </thead>
                     <tbody class="tbodyy">               
                       <tr>
-                        <th colspan="6" class=' text-center' style="color:#02679a;">NO ITEM SOLD</th>
+                        <th colspan="7" class=' text-center' style="color:#02679a;">NO ITEM SOLD</th>
                       </tr>
                     </tbody>
                    <tfooter>                    
                       <tr>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -124,6 +126,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>                       
                         <td></td>                       
                         <td class=' text-center amu'>#0.00</label></td>
                         <td class=' text-center proft'>#0.00</label></td>                    
@@ -231,7 +234,7 @@
     if (obj.length < 1) {
 
         let Thtml = `<tr>
-                <th colspan="6" class=' text-center' style="color:#02679a;">NO ITEM SOLD</th>
+                <th colspan="7" class=' text-center' style="color:#02679a;">NO ITEM SOLD</th>
                 </tr>`
         ele.innerHTML = Thtml
     }
@@ -242,7 +245,8 @@
       list.innerHTML = `
       
           <td class=" text-center" >${ind+1}</td>
-          <td class=" text-left" >${item.dateOrderd}</td>
+          <td class=" text-center" >${item.dateOrderd}</td>
+          <td class=" text-center" >${item.salesperson}</td>
           <td class=" text-center" >${item.productname}</td>
           <td class=" text-center" >${item.quantity}</td>                      
           <td class="text-center" >#${Number(item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>     

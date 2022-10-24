@@ -185,6 +185,7 @@ i{
               <tr>
                   <th class="text-center">S/N</th>
                   <th class="text-center">Order Number</th>
+                  <th class="text-center">Sales person</th>
                   <th class="text-center">Location</th>
                   <th class="text-center">OrderDate</th>
                   <th class="text-center">Orderd At</th>
@@ -224,6 +225,7 @@ i{
                 <tr>
                   <td class="text-left"><?php echo $index + 1 ?></td>
                   <td class="text-left"><?php echo $value['orderid']; ?></td>
+                  <td class="text-left"><?php echo $UserUtils->getUserbyId($conn,$value['sellerid'])[0]["fname"]; ?></td>
                   <td class="text-left"><?php echo $value['locationName']; ?></td>
                   <td class="text-left"><?php echo date('d/m/Y',strtotime($value["orderdate"])) ?></td>
                   <td class="text-left"><?php echo $value["odertime"]; ?></td>

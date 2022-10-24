@@ -18,7 +18,7 @@
      $items = $UserUtils->getSalableItem($conn);
     $orderId = $UserUtils->getOrderId($conn);
     $orderingUnit = $UserUtils->getAllOrdringUnit($conn);
-    $staffTag = $_SESSION['staffTag'] ;
+    $staffTag = $_SESSION['id'] ;
     $ordernon= $UserUtils->getNonResolvedOrder($conn,$staffTag);
     $location= $UserUtils->getLocation($conn);
 
@@ -151,7 +151,8 @@
             <form >
               
                 <input hidden type="text" class="orid" value="<?php echo $orderId ?>">
-                <input hidden type="text" class="uid" value="<?php echo $_SESSION['staffTag'] ?>">
+                <input hidden type="text" class="uid" value="<?php echo $_SESSION['id'] ?>">
+                <input hidden type="text" class="uName" value="<?php echo $_SESSION['firstName']." ".$_SESSION['lastName'] ?>">
                 <input hidden type="date" class="datee" value="<?php echo date('Y-m-d');?>">
                 <div class="form-group row">
                     <div class="col-md-3">
@@ -515,6 +516,7 @@ function addItem(btn) {
   let tbodyy = document.querySelector(".tbodyy"); 
   let orid = document.querySelector(".orid"); 
   let uid = document.querySelector(".uid"); 
+  let uName = document.querySelector(".uName"); 
   let datee = document.querySelector(".datee"); 
 
   let loc = document.querySelector(".loc"); 
@@ -566,6 +568,7 @@ function addItem(btn) {
              sellingprice:data.data[0].sellingprice,
              unitOfMeasure:unit.value,
              locationName:loc.value,
+             salesperson:uName.value
             
            }
 

@@ -224,7 +224,7 @@ i{
               <?php
                 if ($value["catname"] == "Drink") {        
               ?>
-               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Send to location">
+               <span ata-bs-toggle="tooltip" data-bs-placement="left" title="Request Product Transfer">
                  <i  class="ti-location-arrow btn-icon-append dropbtn" data-bs-toggle="modal" data-bs-target="#moveToLocation" onClick="sendTo('<?php echo $value['id'] ?>','<?php echo $value["productname"] ?>')"></i>
                </span>
               <?php           
@@ -338,11 +338,36 @@ i{
           <br>
           <br>
           <div class="history-holder">
+            <h6>Product Location</h6>
+            <div style="max-height:300px; overflow-y:auto;">
+
+              <!-- body -->
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Location</th>
+                        <th>Qty</th>
+                      </tr>
+                      </thead>
+                      <tbody class="tbbl">
+                                      
+                      </tbody>
+                    </table>
+                  </div>
+              
+              <!-- body -->
+            </div>
+          </div>
+         <br>
+          <br>
+          <div class="history-holder">
             <h6>Product History</h6>
             <div style="max-height:300px; overflow-y:auto;">
 
               <!-- body -->
-              <div class="table-responsive">
+                  <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
                       <tr>
@@ -829,6 +854,7 @@ i{
     let profit = document.querySelector(".pftv"); 
     let timeP = document.querySelector(".ptv"); 
     let his = document.querySelector(".tbb"); 
+    let tbbl = document.querySelector(".tbbl"); 
 
     let mydata = JSON.stringify({ "id":id })
     fetch("../../Utils/getSingleInventoryUtils.php", {
@@ -846,9 +872,33 @@ i{
       profit.innerText = "# "+Number(data[0].profit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
       timeP.innerText = data[0].preparationtime+" Minutes"
       
-      // console.log("response",data[1])
+      console.log("response",data[2])
    
        //  display history
+        let child1 = tbbl.lastElementChild; 
+        while (child1) {
+          tbbl.removeChild(child1);
+            child1 = tbbl.lastElementChild;
+        }
+        if (data[2].length == 0) {
+          tbbl.innerHTML = `<td class="text-center" colspan='3'>NOT MOVED TO ANY LOCATION</td>`;
+        }else{
+          data[2].forEach(function(item,ind) {
+              let list = document.createElement("tr");
+  
+              list.innerHTML = `
+              
+                  <td class=" text-left" >${ind+1}</td>
+                  <td class=" text-left" >${item.locationName}</td>
+                  <td class=" text-left" >${item.Qty}</td>
+                  </td> 
+              `;
+              tbbl.appendChild(list);
+          })
+
+        }
+
+
         let child = his.lastElementChild; 
         while (child) {
           his.removeChild(child);
@@ -871,7 +921,7 @@ i{
         }else{
           data[1].forEach(function(item,ind) {
           
-              let statCheck = item.restock == 2?item.restock:item.reduceby
+              let statCheck = item.restock == 2?item.increasby:item.reduceby
               let statCheck2 = item.restock == 2?`<td><label class="badge badge-success">Restock</label></td>`:`<td><label class="badge badge-danger">Reduce</label></td>`
               let list = document.createElement("tr");
   

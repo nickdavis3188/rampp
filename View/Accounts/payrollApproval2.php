@@ -534,9 +534,9 @@ function viewFunc(tag){
             prltv.removeChild(child);
             child = prltv.lastElementChild;
         }
-
+        let tot22 = 0;
         prls.forEach(function(item,ind) {
-              
+          tot22 = tot22+Number(item.amountPayable);
               let list = document.createElement("tr");
     
               list.innerHTML = `             
@@ -552,7 +552,13 @@ function viewFunc(tag){
                 prltv.appendChild(list); 
           })
             
-          
+          let list2 = document.createElement("tr");
+          list2.innerHTML = `
+            <td colspan="6" class="text-right">Total Amount Payable</td>
+            <td class="text-left"><b>${"# "+tot22.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</b></td>
+            <td class="text-right"></td>
+          `
+          prltv.appendChild(list2);
     
 
 

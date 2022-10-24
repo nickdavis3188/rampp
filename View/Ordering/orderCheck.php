@@ -51,7 +51,7 @@
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">Daily Sales Report</h4>
+                  <h4 class="font-weight-bold mb-0">Date Range</h4>
                 </div>
 
                 <!-- <div>
@@ -76,12 +76,17 @@
                 <input hidden type="text" class="uid" value="<?php echo $_SESSION['id'] ?>">
                 <input hidden type="date" class="datee" value="<?php echo date('Y-m-d');?>">
                 <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="exampleFormControlSelect1">Select Date</label>
-                        <input name="qty" type="date" class="form-control form-control-lg dt" >                
+                    <div class="col-sm-4">
+                        <label for="exampleFormControlSelect1">Select Date (From)</label>
+                        <input name="qty" type="date" class="form-control form-control-lg dtf" >                
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="exampleFormControlSelect1">Select Date (To)</label>
+                        <input name="qty" type="date" class="form-control form-control-lg dtt" >                
                     </div>
                     
-                    <div class="col-sm-6" style="padding-top: 30px;">
+                    <div class="col-sm-4" style="padding-top: 30px;">
                       <button type="button" class= "btn  text-white bg-pry btn-block" style="background-color: #02679a;" onclick="addItem(this)">
                         <i class="ti-search btn-icon-prepend text-white"></i> Search
                       </button>                                                       
@@ -93,40 +98,22 @@
                     <thead>
                     <tr>
                       <th class=' text-center ' >S/N</th>
+                      <th class=' text-center ' >OrderId</th>
                       <th class=' text-center ' >Date</th>
-                      <th class=' text-center ' >SalesPerson</th>
-                      <th class=' text-center ' >Item Sold</th>
-                      <th class=' text-center ' >Quantity Sold</th>
-                      <th class=' text-center ' >Amount Sold</th>
-                      <th class=' text-center ' >Profit</th>
+                      <th class=' text-center ' >Time Ordered</th>
+                      <th class=' text-center ' > Bar Duration</th>
+                      <th class=' text-center ' > Kitchen Duration</th>
+                      <th class=' text-center ' > Bar Completion Time</th>
+                      <th class=' text-center ' > Kitchen Completion Time</th>
+                      <th class=' text-center ' > Bar Status</th>
+                      <th class=' text-center ' > Kitchen Status</th>
                     </tr>
                     </thead>
                     <tbody class="tbodyy">               
                       <tr>
-                        <th colspan="7" class=' text-center' style="color:#02679a;">NO ITEM SOLD</th>
+                        <th colspan="10" class=' text-center' style="color:#02679a;">NO ORDER</th>
                       </tr>
                     </tbody>
-                   <tfooter>                    
-                      <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th class=' text-center ' style="color: #02679a;">Total Amount</th>
-                        <th class=' text-center ' style="color: #02679a;">Total Profit</th>                   
-                      </tr>
-                      
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>                       
-                        <td></td>                       
-                        <td class=' text-center amu'>#0.00</label></td>
-                        <td class=' text-center proft'>#0.00</label></td>                    
-                      </tr>   
-                  </tfooter>
                   </table>
                   <br/>
                 </div>
@@ -218,7 +205,16 @@
 <!-- SCRIPT -->
 
 <script>
- 
+    const dateFormat = (date)=>{
+      var today = new Date(date);
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+      var yyyy = today.getFullYear();
+
+      // today = mm + '/' + dd + '/' + yyyy;
+      today = dd + '/' + mm + '/' + yyyy;
+      return today
+    }
   function displayHtml1(obj,ele){
 
     let child = ele.lastElementChild; 
@@ -229,7 +225,7 @@
     if (obj.length < 1) {
 
         let Thtml = `<tr>
-                <th colspan="6" class=' text-center' style="color:#02679a;">NO ITEM SOLD</th>
+                <th colspan="10" class=' text-center' style="color:#02679a;">NO ORDER</th>
                 </tr>`
         ele.innerHTML = Thtml
     }
@@ -240,10 +236,9 @@
       list.innerHTML = `
       
           <td class=" text-center" >${ind+1}</td>
-          <td class=" text-center" >${item.dateOrderd}</td>
-          <td class=" text-center" >${item.salesperson}</td>
-          <td class=" text-center" >${item.productname}</td>
-          <td class=" text-center" >${item.quantity}</td>                      
+          <td class=" text-left" >${item.orderid}</td>
+          <td class=" text-center" >${dateFormat(item.orderdate)}</td>
+          <td class=" text-center" >${item.odertime }</td>                      
           <td class="text-center" >#${Number(item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>     
           <td class="text-center" >#${Number(item.profit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>     
       `;
@@ -251,7 +246,16 @@
     })
   }
 // next
-
+                    //     <th class=' text-center ' >S/N</th>
+                    //   <th class=' text-center ' >OrderId</th>
+                    //   <th class=' text-center ' >Date</th>
+                    //   <th class=' text-center ' >Time Ordered</th>
+                    //   <th class=' text-center ' > Bar Duration</th>
+                    //   <th class=' text-center ' > Kitchen Duration</th>
+                    //   <th class=' text-center ' > Bar Completion Time</th>
+                    //   <th class=' text-center ' > Kitchen Completion Time</th>
+                    //   <th class=' text-center ' > Bar Status</th>
+                    //   <th class=' text-center ' > Kitchen Status</th>
 
 // End dependencies
 
@@ -305,12 +309,13 @@ function LoadingDisplay1(status,ele){
 
 
 function addItem(btn) {
-  let dt = document.querySelector(".dt"); 
+  let dtf = document.querySelector(".dtf"); 
+  let dtt = document.querySelector(".dtt"); 
   let tbodyy = document.querySelector(".tbodyy"); 
   let proft = document.querySelector(".proft"); 
   let amu = document.querySelector(".amu"); 
   
-  if(dt.value == ""){
+  if(dtt.value == "" || dtf.value == ""){
     alert("please confirm your input")  
   }else{
        LoadingDisplay1("fail",btn)
@@ -322,8 +327,8 @@ function addItem(btn) {
        }
 
        
-       let mydata = JSON.stringify({ "date":dt.value})
-       fetch("../../Utils/dailyUtils.php",{
+       let mydata = JSON.stringify({ "dateFrom":dtf.value,"dateTo":dtt.value})
+       fetch("../../Utils/orderOverViewUtils.php",{
            method: 'POST',
            body: mydata,
            headers: {"Content-Type": "application/json; charset=utf-8"}

@@ -18,6 +18,7 @@
      $data = $UserUtils-> getAllCategory($conn);
      $data1 = $UserUtils-> getAllSubCategory($conn);
      $data2 = $UserUtils-> getAlloderingMeasurment($conn);
+     $location= $UserUtils->getLocation($conn);
 ?>
 <!-- HEADER -->
 <body>
@@ -202,58 +203,96 @@
               <button name="inventory" type="submit" class="btn btn-primary me-2" style="background:#02679a;color:white;" onClick="loading(this)">Submit</button>
               <button class="btn btn-light">Cancel</button>
             </form>
-
-            </div>
-            <div class="col-md-4"  style="border-left: solid;border-color:#dddce1;">
+                 <!--end  -->
+            <br><br><br>
+            <div class="col-6">
               <div class="">
-                <h4 class="card-title">New Category Form</h4>
+                <h4 class="card-title">Sales Location Form</h4>
                 
-                <form class="forms-sample"  action="../../Controller/inventoryController.php" method="post">
-                  <div class="form-group">
-                      <label for="exampleInputUsername1">Category Name</label>
-                      <input name="catname" type="text" class="form-control" id="exampleInputUsername1">
+                <form class="forms-sample"  action="../../Controller/locationController.php" method="post">
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Location Name</label>
+                      <input name="name" type="text" class="form-control" id="exampleInputUsername1">
                     </div>
-                    <div class="form-group ">
-                        <label for="exampleFormControlSelect1">Category Type</label>
-                        <select name="type"  class="form-control form-control" id="exampleFormControlSelect1">
-                            <option selected>__Select__</option>                         
-                            <option value="true">Salable</option>                         
-                            <option value="false">None Salable</option>                         
-                        </select>
-                    </div> 
-                    <button name="category" type="submit" class="btn btn-primary me-2" style="background:#02679a;color:white;" onClick="loading(this)">Submit</button>
+                
+                    <button name="location" type="submit" class="btn btn-primary me-2" style="background:#02679a;color:white;" onClick="loading(this)">Submit</button>
                     <button class="btn btn-light">Cancel</button>
                   </form>
                   <br/>
                   <hr/>
                   <br/>
-                  <h4 class="card-title">Delete Category</h4>
-                  <form class="forms-sample"  action="../../Controller/inventoryController.php" method="post">
+                  
+                  <h4 class="card-title">Delete Location</h4>
+                  <form class="forms-sample"  action="../../Controller/locationController.php" method="post">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Select Category</label>
+                      <label for="exampleFormControlSelect1">Select Location</label>
                       <select name="id" class="form-control form-control" id="exampleFormControlSelect1">
-                      <option value="">__Select Category__</option>
                       <?php
-                              foreach ($data as $index => $value) {
-                                
-                              
+                              foreach ($location as $index => $value) {                           
                             ?>
-                            <option value="<?php echo $value['id']?>"><?php echo $value['catname']?></option>
+                            <option value="<?php echo $value['salesLocationId']?>"><?php echo $value['salesLocationName']?></option>
                             <?php
                               }
                             ?>
                         </select>
                     </div>
-                  
-                    <button name="delcategory" type="submit" class="btn btn-danger me-2" style="background:#dc3545;color:white;" onClick="deleting(this)">Delete</button>
+                    <button name="delLocation" type="submit" class="btn btn-danger me-2" style="background:#dc3545;color:white;" onClick="deleting(this)">Delete</button>
                     <button class="btn btn-light">Cancel</button>
-                </form>
-                  <br/>         
+                  </form>
+
+                  <br/>             
               </div>
-            </div>                     
+            </div> 
+             <!--end  -->
             </div>
-            <div style="width:570px;height:auto;">
-            <br><br><br>
+            <div class="col-md-4"  style="border-left: solid;border-color:#dddce1;">
+              <div class="row">
+                <div class="col-12">
+                  <h4 class="card-title">New Category Form</h4>
+                  
+                  <form class="forms-sample"  action="../../Controller/inventoryController.php" method="post">
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Category Name</label>
+                        <input name="catname" type="text" class="form-control" id="exampleInputUsername1">
+                      </div>
+                      <div class="form-group ">
+                          <label for="exampleFormControlSelect1">Category Type</label>
+                          <select name="type"  class="form-control form-control" id="exampleFormControlSelect1">
+                              <option selected>__Select__</option>                         
+                              <option value="true">Salable</option>                         
+                              <option value="false">None Salable</option>                         
+                          </select>
+                      </div> 
+                      <button name="category" type="submit" class="btn btn-primary me-2" style="background:#02679a;color:white;" onClick="loading(this)">Submit</button>
+                      <button class="btn btn-light">Cancel</button>
+                    </form>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <h4 class="card-title">Delete Category</h4>
+                    <form class="forms-sample"  action="../../Controller/inventoryController.php" method="post">
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect1">Select Category</label>
+                        <select name="id" class="form-control form-control" id="exampleFormControlSelect1">
+                        <option value="">__Select Category__</option>
+                        <?php
+                                foreach ($data as $index => $value) {
+                                  
+                                
+                              ?>
+                              <option value="<?php echo $value['id']?>"><?php echo $value['catname']?></option>
+                              <?php
+                                }
+                              ?>
+                          </select>
+                      </div>
+                    
+                      <button name="delcategory" type="submit" class="btn btn-danger me-2" style="background:#dc3545;color:white;" onClick="deleting(this)">Delete</button>
+                      <button class="btn btn-light">Cancel</button>
+                  </form>
+                    <br/>         
+                </div>
+                <br><br><br>
             <div class="col-12">
               <div class="">
                 <h4 class="card-title">New Subcategory Form</h4>
@@ -304,7 +343,10 @@
 
                   <br/>             
               </div>
-            </div>  
+            </div> 
+<!-- rr -->
+              </div>
+            </div>                     
             </div>
           </div>
 

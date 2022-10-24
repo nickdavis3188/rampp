@@ -31,7 +31,7 @@
     function reduceLocationInventry(\mysqli $conn,$productId,$qty,$locationName){
         $items2 = array();
         
-        $query2 ="SELECT * FROM salesLocation WHERE salesLocationName='$locationName'";
+        $query2 ="SELECT * FROM saleslocation WHERE salesLocationName='$locationName'";
         $results2 = mysqli_query($conn,$query2);
     
         while($row2 = mysqli_fetch_array($results2)){

@@ -15,7 +15,7 @@
     { 
         $items2 = array();
     
-        $query2 ="SELECT * FROM salesLocation WHERE salesLocationId='$locationId'";
+        $query2 ="SELECT * FROM saleslocation WHERE salesLocationId='$locationId'";
         $results2 = mysqli_query($conn,$query2);
 
         while($row2 = mysqli_fetch_array($results2)){
@@ -23,7 +23,7 @@
         }
         // 
         $qty2 = $items2[0]["productQty"] - 1;
-        $query = "UPDATE salesLocation SET productQty= '$qty2' WHERE salesLocationId='$locationId'";
+        $query = "UPDATE saleslocation SET productQty= '$qty2' WHERE salesLocationId='$locationId'";
         $results = mysqli_query($conn,$query);
         $noofrows = mysqli_affected_rows($conn);
         if ($noofrows == 1)

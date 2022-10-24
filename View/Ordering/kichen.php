@@ -58,15 +58,16 @@
                 <div class="">
                 <!-- body -->
                 <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
+                    <table class=" table-hover">
+                        <thead style="background:#02679a;height: 60px;color: white;">
                             <tr>
-                            <th class="text-center" width="10%">Order Id</th>
-                                <th class="text-center" width="25%">Order Items</th>
-                                <th class="text-center" width="25%">Order Description</th>
-                                <th class="text-center" width="15%">Time</th>
-                                <th class="text-center" width="15%">Due Time</th>
-                                <th class="text-left" width="10%">Action</th>
+                            <th class="text-center" width="14.2%">Order Id</th>
+                                <th class="text-center" width="14.2%">Order Items</th>
+                                <th class="text-center" width="14.2%">Order Description</th>
+                                <th class="text-center" width="14.2%">Sales person</th>
+                                <th class="text-center" width="14.2%">Time</th>
+                                <th class="text-center" width="14.2%">Due Time</th>
+                                <th class="text-left" width="14.2%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -117,7 +118,8 @@
                                   ?>
                                   </div>
                                 </td>
-                                <td class="text-center"><?php echo $value['hasKechenDisc'] == 1?$value["kechenDisc"]:"" ?></td>
+                                <td class="text-center"><p><?php echo $value['hasKechenDisc'] == 1?$value["kechenDisc"]:"" ?></p></td>
+                                <td class="text-center"><?php print_r($UserUtils->getUserbyId($conn,$value['sellerid'])[0]["fname"])  ?></td>
                                 <td class="text-center"><?php echo $value['odertime']?> &nbsp;&nbsp; <?php echo "".$value['hr'].":".$min." ".$value['ampm']?> </td>
                                 <?php
                                 $h = date("h")+1;
@@ -240,6 +242,7 @@
  }
 ?>
 <!-- SCRIPT -->
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 <script>
    
 
@@ -251,13 +254,13 @@
             method: 'POST',
             body: mydata,
             headers: {"Content-Type": "application/json; charset=utf-8"}
-            }).then(res=>res.text()).then(function(data){
+            }).then(res=>res.json()).then(function(data){
                 console.log(data)
-                // if (data.status =='success') {
-                //   console.log("Done")                 
-                // }else{
-                //   window.location = window.location.origin+"/rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
-                // }
+                if (data.status =='success') {
+                  window.location.reload();               
+                }else{
+                  window.location = window.location.origin+"/rampp/View/Ordering/bar.php?fail=Warning:"+data.msg;
+                }
             })
            
         }else{
@@ -277,10 +280,6 @@
       }
     }
 
-    
-</script>
-<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-  <script>
     function playSound(url) {
       const audio = new Audio(url);
       audio.play();
@@ -293,20 +292,24 @@
     });
 
     var channel = pusher.subscribe('my-channel');
-    setInterval(
-      function(){      
-        channel.bind('my-event', function(data) {
-          if(data.message.ff == 0){
+    channel.bind('my-event', function(data) {
+        if(data.message.ff == 0){
             if(data.message.kk == 1){
-              playSound("../../sound/select.wav")  
-              window.location.reload();
+                const audio = new Audio("../../sound/select.wav");
+                audio.play();
+                audio.onended = function(){
+                   window.location.reload()
+                }
             }
-          }else{
-            window.location.reload();
-          }
-        });
-      }
-      , 10000);
+        }else{
+             const audio = new Audio("../../sound/select.wav");
+            audio.play();
+            audio.onended = function(){
+                window.location.reload()
+            }
+        }
+    });
+  
   </script>
 <!-- SCRIPT -->
 <?php  
